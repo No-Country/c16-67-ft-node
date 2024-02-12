@@ -1,0 +1,11 @@
+# Ignorar archivos generados por el proyecto
+node_modules
+
+# Ignorar archivos de configuración
+.env
+
+# Ignorar archivos de logs
+npm-debug.log
+
+# Ignorar archivos temporales
+tmp/
