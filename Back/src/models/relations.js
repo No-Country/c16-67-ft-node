@@ -1,7 +1,7 @@
 //importar todas las tablas aqui abajo
 const { User } = require('./Users')
 const { Publication } = require('./Publication');
-const { Comment } = require('./comment')
+const { Comment } = require('./Comment')
 
 
 

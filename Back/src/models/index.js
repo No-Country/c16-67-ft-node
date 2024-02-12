@@ -2,7 +2,7 @@
 
 const { User, UserSchema } = require('./Users')
 const { Publication, publicationSchema } = require('./Publication')
-const { Comment, commentSchema } = require("./comment")
+const { Comment, commentSchema } = require("./Comment")
 const setupRelations = require('./relations');
 
 
