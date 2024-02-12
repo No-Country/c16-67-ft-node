@@ -1,7 +1,7 @@
-const PublicationService = require('../services/publication');
+const PetService = require('../services/pet');
 const cloudinary = require('cloudinary').v2;
 
-const service = new PublicationService();
+const service = new PetService();
 
 
 const create = async(req,res) =>{
@@ -12,14 +12,14 @@ const create = async(req,res) =>{
         // Obtener la URL de la imagen cargada desde Cloudinary
         const imageUrl = result.secure_url;
 
-        let {userId, description, publication_date, image_url, type, status} = req.body
-        
+        let {userId, name, age, address, description, image_url, status} = req.body
         const response = await service.create({
             userId, 
+            name,
+            age,
+            address,
             description, 
-            publication_date, 
-            image_url: imageUrl,
-            type, 
+            image_url: imageUrl, 
             status
         });
         res.json({success: true, data: response});
@@ -65,15 +65,15 @@ const update = async (req,res) =>{
         const result = await cloudinary.uploader.upload(req.file.path);
         // Obtener la URL de la imagen cargada desde Cloudinary
         const imageUrl = result.secure_url;
-        
-        let {description, publication_date, image_url, type,status} = req.body
         const {id} = req.params;
-
-        const response= await service.update(id,{
+        
+        let { name, age, address, description, image_url, status} = req.body
+        const response = await service.update(id,{
+            name,
+            age,
+            address,
             description, 
-            publication_date, 
-            image_url: imageUrl,
-            type, 
+            image_url: imageUrl, 
             status
         });
         res.json(response);

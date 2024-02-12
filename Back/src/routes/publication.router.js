@@ -12,10 +12,10 @@ const upload = multer({ storage });
 router 
     .get('/', publicationController.get)
     .get('/:id', publicationController.getById)
-    .get('/post-user/:id', publicationController.getByIdUserPost)
+    .get('/post-user/:id', publicationController.getByIdFk)
     .post('/',upload.single('image'), publicationController.create)
     .put('/:id',upload.single('image'), publicationController.update)
-    .put('/deleted/:id', publicationController._delete)
+    .put('/deleted/:id', publicationController._deleted)
 
 
 module.exports = router;
