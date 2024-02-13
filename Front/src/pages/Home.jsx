@@ -6,11 +6,9 @@ export default function Home() {
   return (
     <>
       <HomeTab />
-      <div className="flex justify-end">
-        <div className="w-fit text-center mr-4">
-          <span className="material-symbols-outlined text-5xl text-slate-700">filter_alt</span>
-          <p>Filter</p>
-        </div>
+      <div className="fixed bg-slate-800 rounded-full text-white text-center mr-4 w-16 h-16 right-4 bottom-24 z-50">
+        <span className="material-symbols-outlined text-2xl">filter_alt</span>
+        <p className="text-sm">Filter</p>
       </div>
       <PetContainer />
     </>
