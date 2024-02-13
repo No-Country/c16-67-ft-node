@@ -4,7 +4,13 @@ const service = new UserService();
 
 const create = async (req,res) => {
     try {
-        const response = await service.create(req.body);
+        const {name,mail,image_url} = req.body
+        const response = await service.create({
+            name,
+            mail,
+            image_url,
+            status:true,
+        });
         res.json({success: true, data: response});
     } catch (error) {
         res.status(500).send({success: false, message: error.message});

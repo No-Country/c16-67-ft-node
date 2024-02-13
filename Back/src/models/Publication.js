@@ -25,6 +25,9 @@ const publicationSchema = {
     userId:{
         type:DataTypes.UUID,
         allowNull:false,
+    },petId:{
+        type:DataTypes.UUID,
+        allowNull:false,
     },
     type:{
         type:DataTypes.STRING(10),

@@ -29,21 +29,15 @@ const UserSchema = {
     type: DataTypes.STRING,
     field:'name'
   },
-  address:{
-    allowNull:false,
-    type:DataTypes.STRING,
-    field: 'address'
-  },
   mail:{
     allowNull: false,
     type:DataTypes.STRING,
     field:'mail'
   },
-  phone:{
-    allowNull: true,
-    type: DataTypes.STRING(20),
-    field: 'phone'
-  },
+  image_url:{
+    type: DataTypes.TEXT,
+    allowNull: false
+},
   status:{
     allowNull:false,
     type: DataTypes.BOOLEAN,

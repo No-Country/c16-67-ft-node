@@ -12,10 +12,11 @@ const create = async(req,res) =>{
         // Obtener la URL de la imagen cargada desde Cloudinary
         const imageUrl = result.secure_url;
 
-        let {userId, description, publication_date, image_url, type, status} = req.body
+        let {userId, petId, description, publication_date, image_url, type, status} = req.body
         
         const response = await service.create({
             userId, 
+            petId,
             description, 
             publication_date, 
             image_url: imageUrl,
