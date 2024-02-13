@@ -56,8 +56,8 @@ const update = async (req, res) => {
 
 const get = async (req, res) => {
     try {
-        const { name } = req.query;
-        const pets = await service.findByName(name);
+        const { name, age } = req.query;
+        const pets = await service.findPets(name, age);
         res.json(pets);
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
