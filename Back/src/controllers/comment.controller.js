@@ -1,27 +1,28 @@
-const PublicationService = require('../services/publication');
-const { handleGet, handleGetById, handleDeleted, getByIdFk } = require('./base.controller');
+const CommentService = require('../services/comment');
+const { handleGet, handleGetById, handleDeleted, getByIdFk} = require('./base.controller');
 
 const cloudinary = require('cloudinary').v2;
 
-const service = new PublicationService();
+const service = new CommentService();
 
 
 const create = async(req,res) =>{
     try {
-        // Subir la imagen a Cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path);
-        // Obtener la URL de la imagen cargada desde Cloudinary
-        const imageUrl = result.secure_url;
-        let {userId, petId, description, image_url, type} = req.body
-        
+        // // Subir la imagen a Cloudinary
+        // const result = await cloudinary.uploader.upload(req.file.path);
+        // // Obtener la URL de la imagen cargada desde Cloudinary
+        // const imageUrl = result.secure_url;
+
+        let {userId, petId, postId, comment, image_url} = req.body
         const response = await service.create({
             userId, 
             petId,
-            description,  
-            image_url: imageUrl,
-            type, 
+            postId,
+            comment,
+            image_url, 
             status:true
         });
+        console.log(response," LA DATA HECHA ")
         res.json({success: true, data: response});
     } catch (error) {
         res.status(500).send({success:false,message:error.message});
@@ -30,20 +31,17 @@ const create = async(req,res) =>{
 
 const update = async (req,res) =>{
     try {
-        // Subir la imagen a Cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path);
-        // Obtener la URL de la imagen cargada desde Cloudinary
-        const imageUrl = result.secure_url;
-        
-        let {description, publication_date, image_url, type,status} = req.body
+        // // Subir la imagen a Cloudinary
+        // const result = await cloudinary.uploader.upload(req.file.path);
+        // // Obtener la URL de la imagen cargada desde Cloudinary
+        // const imageUrl = result.secure_url;
         const {id} = req.params;
-
-        const response= await service.update(id,{
-            description, 
-            publication_date, 
-            image_url: imageUrl,
-            type, 
-            status
+        
+        let {comment, image_url} = req.body
+        const response = await service.update(id,{
+            comment,
+            image_url, 
+            status:true
         });
         res.json(response);
     } catch (error) {
@@ -71,6 +69,11 @@ const getByFkpetId = async (req, res) => {
     await getByIdFk(req, res, service.findFk.bind(service), id, "petId");
 };
 
+const getByFkpostId = async (req, res) => {
+    const { id } = req.params;
+    await getByIdFk(req, res, service.findFk.bind(service), id, "postId");
+};
+
 const _deleted = async (req, res) => {
     const { id } = req.params;
     const body = req.body;
@@ -78,5 +81,5 @@ const _deleted = async (req, res) => {
 };
 
 module.exports ={
-    create,get,getById,update,_deleted, getByFkuserId, getByFkpetId
+    create,get,getById,update,_deleted, getByFkuserId, getByFkpetId, getByFkpostId
 };

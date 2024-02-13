@@ -12,7 +12,8 @@ const upload = multer({ storage });
 router 
     .get('/', publicationController.get)
     .get('/:id', publicationController.getById)
-    .get('/post-user/:id', publicationController.getByIdFk)
+    .get('/userid/:id', publicationController.getByFkuserId)
+    .get('/petid/:id', publicationController.getByFkpetId)
     .post('/',upload.single('image'), publicationController.create)
     .put('/:id',upload.single('image'), publicationController.update)
     .put('/deleted/:id', publicationController._deleted)

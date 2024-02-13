@@ -12,7 +12,7 @@ const upload = multer({ storage });
 router 
     .get('/', petController.get)
     .get('/:id', petController.getById)
-    .get('/pets-user/:id', petController.getByIdFk)
+    .get('/userid/:id', petController.getByFkuserId)
     .post('/',upload.single('image'), petController.create)
     .put('/:id',upload.single('image'), petController.update)
     .put('/deleted/:id', petController._deleted)

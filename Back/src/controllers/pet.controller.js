@@ -1,18 +1,19 @@
 const PetService = require('../services/pet');
+const { handleGet, handleGetById, handleDeleted, getByIdFk} = require('./base.controller');
+
 const cloudinary = require('cloudinary').v2;
 
 const service = new PetService();
 
 
 const create = async(req,res) =>{
-
     try {
         // Subir la imagen a Cloudinary
         const result = await cloudinary.uploader.upload(req.file.path);
         // Obtener la URL de la imagen cargada desde Cloudinary
         const imageUrl = result.secure_url;
 
-        let {userId, name, age, address, description, image_url, status} = req.body
+        let {userId, name, age, address, description, image_url} = req.body
         const response = await service.create({
             userId, 
             name,
@@ -20,7 +21,7 @@ const create = async(req,res) =>{
             address,
             description, 
             image_url: imageUrl, 
-            status
+            status:true
         });
         res.json({success: true, data: response});
     } catch (error) {
@@ -28,39 +29,8 @@ const create = async(req,res) =>{
     }
 }
 
-const get = async (req,res) =>{
-    try {
-        const response = await service.find();
-        res.json(response);
-    } catch (error) {
-        res.status(500).send({success:false,message:error.message});
-    }
-}
-
-
-const getById = async (req,res) =>{
-    try {
-        const {id} = req.params;
-        const response = await service.findOne(id);
-        res.json(response);
-    } catch (error) {
-        res.status(500).send({success:false, message:error.message});
-    }
-}
-
-const getByIdFk = async (req,res) =>{
-    try {
-        const {id} = req.params;
-        const response = await service.findFkUser(id);
-        res.json(response);
-    } catch (error) {
-        res.status(500).send({success:false, message:error.message});
-    }
-}
-
 const update = async (req,res) =>{
     try {
-
         // Subir la imagen a Cloudinary
         const result = await cloudinary.uploader.upload(req.file.path);
         // Obtener la URL de la imagen cargada desde Cloudinary
@@ -82,17 +52,27 @@ const update = async (req,res) =>{
     }
 }
 
-const _deleted = async (req,res) =>{
-    try {
-        const {id} = req.params;
-        const body = req.body;
-        const response = await service.deleted(id,body);
-        res.json(response);
-    } catch (error) {
-        res.status(500).send({success:false,message:error.message});
-    }
-}
+
+const get = async (req, res) => {
+    await handleGet(req, res, service.find.bind(service));
+};
+
+const getById = async (req, res) => {
+    const { id } = req.params;
+    await handleGetById(req, res, service.findOne.bind(service), id);
+};
+
+const getByFkuserId = async (req, res) => {
+    const { id } = req.params;
+    await getByIdFk(req, res, service.findFk.bind(service), id, "userId");
+};
+
+const _deleted = async (req, res) => {
+    const { id } = req.params;
+    const body = req.body;
+    await handleDeleted(req, res, service.deleted.bind(service), id, body);
+};
 
 module.exports ={
-    create,get,getById,update,_deleted, getByIdFk
+    create,get,getById,update,_deleted, getByFkuserId
 };

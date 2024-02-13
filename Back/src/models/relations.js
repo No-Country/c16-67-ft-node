@@ -19,10 +19,8 @@ async function setupRelations() {
     await Publication.hasMany(Comment, { foreignKey: 'postId', as: 'comments' }); // Indica que una publicacion puede tener muchos comentarios
     await Comment.belongsTo(Publication, { foreignKey: 'postId', as: 'publication' });
 
-    await User.hasMany(Comment, { foreignKey: 'userId', as: 'comments' }); // Indica que un usuario puede tener/hacer muchos comentarios
-    await Comment.belongsTo(User, { foreignKey: 'userId', as: 'user' });
-    // Puedes agregar más relaciones aquí usando await
-    
+    await Pet.hasMany(Comment, { foreignKey: 'petId', as: 'petcomments' }); //indica que una mascota puede hacer muchos comentarios
+    await Comment.belongsTo(Pet, { foreignKey: 'petId', as: 'pet' });
 
 }
 

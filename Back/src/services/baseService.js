@@ -9,10 +9,10 @@ class BaseService {
         return this.model.findAll();
     }
 
-    async findFkUser(id){
+    async findFk(id, date){
         const res = await this.model.findAll({
             where: {
-                userId: id 
+                [date]: id 
             }
         });
         return res;

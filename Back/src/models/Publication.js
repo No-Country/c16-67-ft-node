@@ -9,7 +9,7 @@ class Publication extends Model {
             sequelize,
             tableName: PUBLICATION_TABLE,
             modelName: 'Publication',
-            timestamps: false
+            timestamps: true
         }
     }
 }
@@ -24,10 +24,11 @@ const publicationSchema = {
     },
     userId:{
         type:DataTypes.UUID,
-        allowNull:false,
-    },petId:{
+        allowNull:true,
+    },
+    petId:{
         type:DataTypes.UUID,
-        allowNull:false,
+        allowNull:true,
     },
     type:{
         type:DataTypes.STRING(10),
@@ -37,11 +38,6 @@ const publicationSchema = {
     description:{
         type:DataTypes.STRING(500),
         allowNull:false
-    },
-    publication_date:{
-        type:DataTypes.DATE,
-        allowNull:false,
-        field: 'age'
     },
     image_url:{
         type: DataTypes.TEXT,
