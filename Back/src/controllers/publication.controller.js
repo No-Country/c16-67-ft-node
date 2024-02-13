@@ -43,7 +43,7 @@ const update = async (req,res) =>{
             publication_date, 
             image_url: imageUrl,
             type, 
-            status
+            status: true,
         });
         res.json(response);
     } catch (error) {

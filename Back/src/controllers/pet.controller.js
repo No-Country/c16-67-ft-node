@@ -44,7 +44,7 @@ const update = async (req,res) =>{
             address,
             description, 
             image_url: imageUrl, 
-            status
+            status: true
         });
         res.json(response);
     } catch (error) {
