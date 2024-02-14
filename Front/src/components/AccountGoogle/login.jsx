@@ -6,24 +6,12 @@ const ServerConnect = `${import.meta.env.VITE_APP_ID}`;
 
 const Login = () => {
   const onSuccess = (res) => {
-    const { credential } = res;
-    console.log(res);
-    console.log(credential);
-
-    const { email, imageUrl, name } = res.profileObj;
-
-    const formatUser = {
-      name,
-      mail: email,
-      image_url: imageUrl
-    };
-
-    console.log('LOGIN SUCCESS! Current user: ', formatUser);
+    const { credential: token } = res;
 
     // eslint-disable-next-line no-debugger
     debugger;
     axios
-      .post(`${ServerConnect}/api/v1/user`, formatUser)
+      .post(`${ServerConnect}/api/v1/user`, { token: token })
       .then((response) => {
         console.log('Solicitud enviada con éxito:', response.data);
         console.log(response.data.data[0].id);
