@@ -12,11 +12,11 @@
     "watch:css": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch"
   },
   "dependencies": {
+    "@react-oauth/google": "^0.12.1",
     "axios": "^1.6.7",
     "gapi-script": "^1.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-google-login": "^5.2.2",
     "react-router": "^6.22.0",
     "react-router-dom": "^6.22.0"
   },
