@@ -1,5 +1,6 @@
 const UserService = require("../services/user");
 const { handleGet, handleGetById, handleDeleted } = require('./base.controller');
+const jwt = require('jsonwebtoken');
 
 const cloudinary = require('cloudinary').v2;
 
