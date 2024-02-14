@@ -42,8 +42,8 @@ const update = async (req, res) => {
             description,
             publication_date,
             image_url: imageUrl,
-            type,
-            status
+            type, 
+            status: true,
         });
         res.json(response);
     } catch (error) {

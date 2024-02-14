@@ -1,21 +1,21 @@
 const {Model, DataTypes} = require('sequelize');
 
-const COMMENT_TABLE = 'Comment';
+const REACTION_TABLE = 'Reaction';
 
 
-class Comment extends Model {
+class Reaction extends Model {
     static config(sequelize){
         return{
             sequelize,
-            tableName: COMMENT_TABLE,
-            modelName: 'Comment',
+            tableName: REACTION_TABLE,
+            modelName: 'Reaction',
             timestamps: true,
         }
     }
 }
 
-const commentSchema ={
-    commentId: {
+const reactionSchema ={
+    reactiontId: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
@@ -33,15 +33,11 @@ const commentSchema ={
         type:DataTypes.UUID,
         allowNull:true, 
     },
-    comment:{
-        allowNull: false,
-        type:DataTypes.STRING(500)
-    },
-    image_url:{
-        type: DataTypes.TEXT,
+    reactions: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false
     },
-        status:{
+    status:{
         allowNull:false,
         type: DataTypes.BOOLEAN,
         field: 'status'
@@ -49,4 +45,4 @@ const commentSchema ={
 }
 
 
-module.exports = {Comment, commentSchema};
+module.exports = {Reaction, reactionSchema};

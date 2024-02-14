@@ -39,8 +39,16 @@ class BaseService {
     }
 
     async create(data) {
-        let date = await this.model.create(data)
-        return date;
+
+        if (data.mail){
+            let date = await this.model.findOrCreate({
+                where: { mail: data.mail}, // Criterio de búsqueda
+                defaults: data})
+                return  date;
+        }else{
+            let date = await this.model.create(data)
+            return date;
+        }
     }
 
     async update(id, data) {
