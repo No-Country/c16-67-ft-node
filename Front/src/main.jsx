@@ -4,6 +4,7 @@ import './input.css';
 import './output.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
+import Index from './pages/Index';
 import Navbar from './components/Navbar';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -11,7 +12,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<Index />} />
+        <Route path="/home" element={<Home />}/>
       </Routes>
     </BrowserRouter>
   </div>
