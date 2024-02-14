@@ -8,7 +8,7 @@ const service = new UserService();
 
 const create = async (req,res) => {
     try {
-        const decodedToken = jwt.decode(req.body);
+        const decodedToken = jwt.decode(req.body.token);
         const { email, name, picture } = decodedToken;
         const response = await service.create({
             name,
