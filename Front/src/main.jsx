@@ -6,12 +6,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Index from './pages/Index';
 import Navbar from './components/Navbar';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-
-console.log(import.meta.env.VITE_USER_ID);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <GoogleOAuthProvider clientId={import.meta.env.VITE_USER_ID}>
+  <div>
     <BrowserRouter>
       <Navbar />
       <Routes>
@@ -19,5 +16,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/home" element={<Home />} />
       </Routes>
     </BrowserRouter>
-  </GoogleOAuthProvider>
+  </div>
 );
