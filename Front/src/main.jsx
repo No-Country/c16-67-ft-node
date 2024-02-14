@@ -8,6 +8,8 @@ import Index from './pages/Index';
 import Navbar from './components/Navbar';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
+console.log(import.meta.env.VITE_USER_ID);
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <GoogleOAuthProvider clientId={import.meta.env.VITE_USER_ID}>
     <BrowserRouter>

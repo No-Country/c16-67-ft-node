@@ -6,6 +6,10 @@ const ServerConnect = `${import.meta.env.VITE_APP_ID}`;
 
 const Login = () => {
   const onSuccess = (res) => {
+    const { credential } = res;
+    console.log(res);
+    console.log(credential);
+
     const { email, imageUrl, name } = res.profileObj;
 
     const formatUser = {
