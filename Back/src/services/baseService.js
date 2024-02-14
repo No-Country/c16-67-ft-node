@@ -1,5 +1,6 @@
 // aqui se generan metodos generales que pueden utilizar todos modelos!
 
+const { Op } = require('sequelize');
 class BaseService {
     constructor(models) {
         this.model = models;
@@ -9,10 +10,25 @@ class BaseService {
         return this.model.findAll();
     }
 
-    async findFk(id, date){
+    async findByName(name) {
+        let options = {};
+        if (name) {
+            options = {
+                where: {
+                    name: {
+                        [Op.iLike]: `%${name}%` // Utiliza iLike para búsqueda insensible a mayúsculas
+                    }
+                }
+            };
+        }
+
+        return this.model.findAll(options);
+    }
+
+    async findFk(id, date) {
         const res = await this.model.findAll({
             where: {
-                [date]: id 
+                [date]: id
             }
         });
         return res;
@@ -23,10 +39,16 @@ class BaseService {
     }
 
     async create(data) {
-        let date = await this.model.findOrCreate({
-            where: { mail: data.mail}, // Criterio de búsqueda
-            defaults: data})
-        return  date;
+
+        if (data.mail){
+            let date = await this.model.findOrCreate({
+                where: { mail: data.mail}, // Criterio de búsqueda
+                defaults: data})
+                return  date;
+        }else{
+            let date = await this.model.create(data)
+            return date;
+        }
     }
 
     async update(id, data) {
