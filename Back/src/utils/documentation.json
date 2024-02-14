@@ -1,0 +1,21 @@
+{
+  "API PETGRAM V1.0": "Node.js",
+  "Endpoints": {
+    "GET": [
+      {
+        "path": "/api/v1/user"
+      },
+      {
+        "path": "/api/v1/pet",
+        "description": "Obtiene todas las mascotas. Puedes filtrar por 'name', 'minAge', 'maxAge', y 'isLost' mediante query params. De no enviar nada, trae toda la información."
+      },
+      {
+        "path": "/api/v1/publication",
+        "description": "Obtiene todas las publicaciones. Puedes filtrar por 'type' mediante query params (valores aceptados: 'Normal', 'Adopcion', 'Perdido'). De no enviar nada, trae toda la información."
+      },
+      {
+        "path": "/api/v1/comment"
+      }
+    ]
+  }
+}
