@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import HomeTab from './../components/HomeTab';
-import PetContainer from './../components/PetContainer';
+import PetContainer from '../components/Feed/PetContainer';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 const ServerConnect = `${import.meta.env.VITE_APP_ID}`;
