@@ -18,17 +18,19 @@ function Login() {
   }
 
   return (
-    <div className="Index">
-      <div className="navFirstPage">
-        <div className="indexLogo" onClick={() => renderHandle('index')}>
-          PETGRAM
+    <>
+      <div className="Index">
+        <div className="navFirstPage">
+          <div className="indexLogo" onClick={() => renderHandle('index')}>
+            PETGRAM
+          </div>
+          <div className="loginButton" onClick={() => renderHandle('login')}>
+            LOGIN/REGISTER
+          </div>
         </div>
-        <div className="loginButton" onClick={() => renderHandle('login')}>
-          LOGIN/REGISTER
-        </div>
+        <div className="renderContainer">{renderIndex}</div>
       </div>
-      <div className="renderContainer">{renderIndex}</div>
-    </div>
+    </>
   );
 }
 
