@@ -1,8 +1,8 @@
 import { React, useState } from 'react';
-import IndexContent from '../components/Index/IndexContent';
-import LoginContent from '../components/Index/LoginContent';
+import IndexContent from '../components/login/IndexContent';
+import LoginContent from '../components/login/LoginContent';
 
-function Index() {
+function Login() {
   const [controllerRender, setControllerRender] = useState('login');
 
   let renderIndex = null;
@@ -32,4 +32,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default Login;

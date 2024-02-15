@@ -1,7 +1,7 @@
 import { useEffect, React } from 'react';
 import { gapi } from 'gapi-script';
-import LoginButton from '../../components/AccountGoogle/login';
-import LogoutButton from '../../components/AccountGoogle/logout';
+import LoginButton from '../account-google/Login';
+import LogoutButton from '../account-google/Logout';
 
 function IndexLogin() {
   const clientId = `${import.meta.env.VITE_USER_ID}`;
