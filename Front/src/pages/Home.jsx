@@ -1,6 +1,6 @@
 import React from 'react';
 import HomeTab from './../components/HomeTab';
-import PetContainer from './../components/PetContainer';
+import PetContainer from '../components/Feed/PetContainer';
 
 export default function Home() {
   return (
