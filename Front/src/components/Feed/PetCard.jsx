@@ -1,7 +1,6 @@
-export default function PetCard({postImage, description, petId, postId}) {
+export default function PetCard({ postImage, description, petId, postId }) {
   const profileImage =
     'https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
-
 
   return (
     <div className="mb-4">
@@ -15,7 +14,6 @@ export default function PetCard({postImage, description, petId, postId}) {
       </div>
       <div className="relative">
         <img src={postImage} className="h-80 object-cover w-full" alt="" />
-        <div className="text-gray-600 ">{description}</div>
         <div className="absolute bottom-3 flex gap-x-3 left-8">
           <div className="flex gap-x-3">
             <span className="material-symbols-outlined">pet_supplies</span>
@@ -27,6 +25,7 @@ export default function PetCard({postImage, description, petId, postId}) {
           </div>
         </div>
       </div>
+      <div className="text-gray-600 ">{description}</div>
     </div>
   );
 }

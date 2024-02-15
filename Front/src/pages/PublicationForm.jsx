@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
@@ -11,13 +11,6 @@ function PublicationForm() {
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState('');
   const [type, setType] = useState([]);
-
-  useEffect(() => {
-    console.log(userId);
-    if (userId === null) {
-      navigate('/login');
-    }
-  });
 
   // Manejadores de cambio para los inputs
   const handleImageChange = (event) => {
@@ -35,9 +28,8 @@ function PublicationForm() {
 
   //FUNCION PROVISORIA HASTA QUE TENGA LA PETID EN LOCAL STORAGE O CONTEX
   const getPetId = async () => {
-    const pet = (await axios.get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`)).data;
-    console.log(pet); //PROVISORIO primer mascota del usuario
-    return pet[0].petId;
+    const pet = JSON.parse(localStorage.getItem('pet'));
+    return pet.petId;
   };
 
   //Manejador del boton PUBLICAR
