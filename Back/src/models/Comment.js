@@ -23,19 +23,28 @@ const commentSchema ={
     },
     userId:{
         type:DataTypes.UUID,
-        allowNull:false,
+        allowNull:true,
     }, 
+    petId:{
+        type:DataTypes.UUID,
+        allowNull:true,
+    },
     postId:{
         type:DataTypes.UUID,
-        allowNull:false,
+        allowNull:true, 
     },
     comment:{
         allowNull: false,
         type:DataTypes.STRING(500)
     },
-    publication_date:{
-        type: DataTypes.DATE,
+    image_url:{
+        type: DataTypes.TEXT,
         allowNull: false
+    },
+        status:{
+        allowNull:false,
+        type: DataTypes.BOOLEAN,
+        field: 'status'
     }
 }
 

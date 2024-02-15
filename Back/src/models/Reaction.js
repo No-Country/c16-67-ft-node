@@ -1,22 +1,21 @@
 const {Model, DataTypes} = require('sequelize');
 
-const PUBLICATION_TABLE= "Publication";
+const REACTION_TABLE = 'Reaction';
 
 
-class Publication extends Model {
+class Reaction extends Model {
     static config(sequelize){
         return{
             sequelize,
-            tableName: PUBLICATION_TABLE,
-            modelName: 'Publication',
-            timestamps: true
+            tableName: REACTION_TABLE,
+            modelName: 'Reaction',
+            timestamps: true,
         }
     }
 }
 
-
-const publicationSchema = {
-    postId:{
+const reactionSchema ={
+    reactiontId: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
@@ -25,22 +24,17 @@ const publicationSchema = {
     userId:{
         type:DataTypes.UUID,
         allowNull:true,
-    },
+    }, 
     petId:{
         type:DataTypes.UUID,
         allowNull:true,
     },
-    type:{
-        type:DataTypes.STRING(10),
-        allowNull:false,
-        field: 'type'
+    postId:{
+        type:DataTypes.UUID,
+        allowNull:true, 
     },
-    description:{
-        type:DataTypes.STRING(500),
-        allowNull:false
-    },
-    image_url:{
-        type: DataTypes.TEXT,
+    reactions: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false
     },
     status:{
@@ -48,8 +42,7 @@ const publicationSchema = {
         type: DataTypes.BOOLEAN,
         field: 'status'
     }
-
 }
 
 
-module.exports = {Publication, publicationSchema};
+module.exports = {Reaction, reactionSchema};

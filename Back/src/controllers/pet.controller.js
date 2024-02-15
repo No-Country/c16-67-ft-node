@@ -1,9 +1,10 @@
-const PublicationService = require('../services/publication');
+const PetService = require('../services/pet');
 const { handleGet, handleGetById, handleDeleted, getByIdFk } = require('./base.controller');
+
 
 const cloudinary = require('cloudinary').v2;
 
-const service = new PublicationService();
+const service = new PetService();
 
 
 const create = async (req, res) => {
@@ -12,14 +13,15 @@ const create = async (req, res) => {
         const result = await cloudinary.uploader.upload(req.file.path);
         // Obtener la URL de la imagen cargada desde Cloudinary
         const imageUrl = result.secure_url;
-        let { userId, petId, description, image_url, type } = req.body
 
+        let { userId, name, age, address, description, image_url } = req.body
         const response = await service.create({
             userId,
-            petId,
+            name,
+            age,
+            address,
             description,
             image_url: imageUrl,
-            type,
             status: true
         });
         res.json({ success: true, data: response });
@@ -34,16 +36,16 @@ const update = async (req, res) => {
         const result = await cloudinary.uploader.upload(req.file.path);
         // Obtener la URL de la imagen cargada desde Cloudinary
         const imageUrl = result.secure_url;
-
-        let { description, publication_date, image_url, type, status } = req.body
         const { id } = req.params;
 
+        let { name, age, address, description, image_url, status } = req.body
         const response = await service.update(id, {
-            description,
-            publication_date,
-            image_url: imageUrl,
-            type, 
-            status: true,
+            name,
+            age,
+            address,
+            description, 
+            image_url: imageUrl, 
+            status: true
         });
         res.json(response);
     } catch (error) {
@@ -54,8 +56,9 @@ const update = async (req, res) => {
 
 const get = async (req, res) => {
     try {
-        const { type } = req.query
-        await handleGet(req, res, service.find.bind(service), type);
+        const { name, minAge, maxAge, isLost } = req.query;
+        const pets = await service.getPets(name, minAge, maxAge, isLost);
+        res.json(pets);
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
@@ -71,11 +74,6 @@ const getByFkuserId = async (req, res) => {
     await getByIdFk(req, res, service.findFk.bind(service), id, "userId");
 };
 
-const getByFkpetId = async (req, res) => {
-    const { id } = req.params;
-    await getByIdFk(req, res, service.findFk.bind(service), id, "petId");
-};
-
 const _deleted = async (req, res) => {
     const { id } = req.params;
     const body = req.body;
@@ -83,5 +81,5 @@ const _deleted = async (req, res) => {
 };
 
 module.exports = {
-    create, get, getById, update, _deleted, getByFkuserId, getByFkpetId
+    create, get, getById, update, _deleted, getByFkuserId
 };

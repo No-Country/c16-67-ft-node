@@ -1,7 +1,8 @@
 const express = require('express');
 const userRouter = require('./user.router');
-const newLocal = './publication.router';
-const publicationRouter = require(newLocal)
+const publicationRouter = require('./publication.router');
+const petRouter = require('./pet.router');
+const commentRouter = require('./comment.router');
 
 
 function routerApi(app){
@@ -9,6 +10,8 @@ function routerApi(app){
     app.use('/api/v1', router);
     router.use('/user', userRouter);
     router.use('/publication', publicationRouter);
+    router.use('/pet',petRouter)
+    router.use('/comment',commentRouter)
 }
 
 

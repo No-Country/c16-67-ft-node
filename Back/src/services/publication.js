@@ -3,8 +3,9 @@ const { models } = require('../libs/sequelize');
 
 class PublicationService extends BaseService {
 
-    constructor(){
-        super(models.Publication); //al llamarlo aqui, inicializamos baseService con el modelo Publication
-    }                              // esto nos ayuda que funcione con el modelo especifico y ahorrano lineas de codigo repetitiva
+    constructor() {
+        super(models.Publication, models.Pet);
+    }                             
+
 }
 module.exports = PublicationService;

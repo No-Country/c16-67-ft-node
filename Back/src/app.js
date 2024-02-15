@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const routerApi = require('./routes');
+const documentation = require("./utils/documentation.json")
 
 //MIDDLEWARES
 app.use(cors());
@@ -14,7 +15,7 @@ app.use(morgan('dev'));
 routerApi(app);
 
 app.get('/', (req, res) => {
-    res.send('backend con NodeJS')
+    res.json(documentation)
 });
 
 

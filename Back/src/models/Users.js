@@ -11,7 +11,7 @@ class User extends Model {
       sequelize,
       tableName:USER_TABLE,  // nombre de la tabla en la base de datos
       modelName: 'User',  // Es el nombre del modelo en Sequelize. Por defecto, Sequelize utilizará este nombre para asociarlo con el nombre de la tabla
-      timestamps: true   // añade campos createdAt y updatedAt automáticamente
+      timestamps: false   // añade campos createdAt y updatedAt automáticamente
     }
   }
 }
@@ -29,21 +29,15 @@ const UserSchema = {
     type: DataTypes.STRING,
     field:'name'
   },
-  address:{
-    allowNull:false,
-    type:DataTypes.STRING,
-    field: 'address'
-  },
   mail:{
     allowNull: false,
     type:DataTypes.STRING,
     field:'mail'
   },
-  phone:{
-    allowNull: true,
-    type: DataTypes.STRING(20),
-    field: 'phone'
-  },
+  image_url:{
+    type: DataTypes.TEXT,
+    allowNull: false
+},
   status:{
     allowNull:false,
     type: DataTypes.BOOLEAN,

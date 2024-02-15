@@ -1,22 +1,21 @@
 const {Model, DataTypes} = require('sequelize');
 
-const PUBLICATION_TABLE= "Publication";
+const PET_TABLE= "Pet";
 
 
-class Publication extends Model {
+class Pet extends Model {
     static config(sequelize){
         return{
             sequelize,
-            tableName: PUBLICATION_TABLE,
-            modelName: 'Publication',
-            timestamps: true
+            tableName: PET_TABLE,
+            modelName: 'Pet',
+            timestamps: false
         }
     }
 }
 
-
-const publicationSchema = {
-    postId:{
+const petSchema = {
+    petId:{
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
@@ -24,16 +23,22 @@ const publicationSchema = {
     },
     userId:{
         type:DataTypes.UUID,
-        allowNull:true,
-    },
-    petId:{
-        type:DataTypes.UUID,
-        allowNull:true,
-    },
-    type:{
-        type:DataTypes.STRING(10),
         allowNull:false,
-        field: 'type'
+    },
+    name:{
+        allowNull: false,
+        type: DataTypes.STRING,
+        field:'name'
+    },
+    age:{
+        type:DataTypes.INTEGER,
+        allowNull:false,
+        field: 'age'
+    },
+    address:{
+        allowNull:false,
+        type:DataTypes.STRING,
+        field: 'address'
     },
     description:{
         type:DataTypes.STRING(500),
@@ -48,8 +53,7 @@ const publicationSchema = {
         type: DataTypes.BOOLEAN,
         field: 'status'
     }
-
 }
 
 
-module.exports = {Publication, publicationSchema};
+module.exports = {Pet, petSchema};
