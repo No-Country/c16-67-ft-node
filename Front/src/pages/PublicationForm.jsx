@@ -36,7 +36,7 @@ function PublicationForm() {
   //FUNCION PROVISORIA HASTA QUE TENGA LA PETID EN LOCAL STORAGE O CONTEX
   const getPetId = async () => {
     const pet = (await axios.get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`)).data;
-    //console.log(pet[0].petId) //PROVISORIO primer mascota del usuario
+    console.log(pet); //PROVISORIO primer mascota del usuario
     return pet[0].petId;
   };
 
