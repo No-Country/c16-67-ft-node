@@ -29,11 +29,15 @@ const PetsForm = () => {
 
     const handleRegistration = async () => {
       try {
-        const res = await axios.post(`${import.meta.env.VITE_APP_ID}/api/v1/pet`, payload, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
+        const res = await axios.post(
+          `${import.meta.env.VITE_SERVER_PRODUCTION}/api/v1/pet`,
+          payload,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
           }
-        });
+        );
         console.log(res);
 
         navigate('/');
