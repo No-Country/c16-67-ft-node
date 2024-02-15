@@ -4,8 +4,7 @@ import { getPublications } from "./getPublications";
 
 export default function PetContainer() {
   const [feedData, setFeedData] = useState([]);
-  // to-do hacer una funcion para traer adoptciones/perdidos segun current URL
-  // Efecto para obtener los datos de las publicaciones al montar el componente
+
   useEffect(() => {
     getPublications().then(data => {
       setFeedData(data);
