@@ -1,6 +1,6 @@
-const handleGet = async (req, res, serviceFunction) => {
+const handleGet = async (req, res, serviceFunction, type) => {
     try {
-        const response = await serviceFunction();
+        const response = await serviceFunction(type);
         res.json(response);
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
