@@ -16,13 +16,13 @@ const Login = () => {
         console.log('Solicitud enviada con éxito:', response.data);
         const userId = response.data.data[0].id;
         localStorage.setItem('userId', JSON.stringify(userId));
-        const pets = axios.get(`${ServerConnect}/api/v1/pet/userid/${userId}`);
-
-        if (pets.length > 0) {
-          navigate('/');
-        } else {
-          navigate('/pets-create');
-        }
+        axios.get(`${ServerConnect}/api/v1/pet/userid/${userId}`).then((res) => {
+          if (res.data.length > 0) {
+            navigate('/');
+          } else {
+            navigate('/pets-create');
+          }
+        });
       })
       .catch((error) => {
         console.error('Error al enviar la solicitud:', error);
