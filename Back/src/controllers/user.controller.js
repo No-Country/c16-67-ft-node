@@ -1,5 +1,6 @@
 const UserService = require("../services/user");
 const { handleGet, handleGetById, handleDeleted } = require('./base.controller');
+const jwt = require('jsonwebtoken');
 
 const cloudinary = require('cloudinary').v2;
 
@@ -8,11 +9,12 @@ const service = new UserService();
 
 const create = async (req,res) => {
     try {
-        const {name,mail,image_url} = req.body
+        const decodedToken = jwt.decode(req.body.token);
+        const { email, name, picture } = decodedToken;
         const response = await service.create({
             name,
-            mail,
-            image_url,
+            mail:email,
+            image_url:picture,
             status:true,
         });
         res.json({success: true, data: response});

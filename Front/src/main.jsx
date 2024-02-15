@@ -1,19 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import PetsForm from './pages/PetsForm';
+import './input.css';
 import './output.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
+import Login from './pages/Login';
 import Navbar from './components/Navbar';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import PetsForm from './pages/PetsForm';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <div>
+  <GoogleOAuthProvider clientId={import.meta.env.VITE_USER_ID}>
     <BrowserRouter>
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route exact path="/login" element={<Login />} />
         <Route exact path="/pets-create" element={<PetsForm />} />
       </Routes>
     </BrowserRouter>
-  </div>
+  </GoogleOAuthProvider>
 );
