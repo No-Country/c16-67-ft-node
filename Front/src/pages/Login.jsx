@@ -1,35 +1,16 @@
-import { React, useState } from 'react';
-import IndexContent from '../components/login/IndexContent';
+import { React, useEffect } from 'react';
 import LoginContent from '../components/login/LoginContent';
+import { useNavigateContext } from '../context/navigationContext';
 
-function Login() {
-  const [controllerRender, setControllerRender] = useState('login');
-
-  let renderIndex = null;
-
-  const renderHandle = (select) => {
-    setControllerRender(select);
-  };
-
-  if (controllerRender === 'index') {
-    renderIndex = <IndexContent />;
-  } else if (controllerRender === 'login') {
-    renderIndex = <LoginContent />;
-  }
+export default function Login() {
+  const { setActive } = useNavigateContext();
+  useEffect(() => {
+    setActive('login');
+  }, []);
 
   return (
-    <div className="Index">
-      <div className="navFirstPage">
-        <div className="indexLogo" onClick={() => renderHandle('index')}>
-          PETGRAM
-        </div>
-        <div className="loginButton" onClick={() => renderHandle('login')}>
-          LOGIN/REGISTER
-        </div>
-      </div>
-      <div className="renderContainer">{renderIndex}</div>
+    <div className="min-h-screen grid place-items-center">
+      <LoginContent />
     </div>
   );
 }
-
-export default Login;
