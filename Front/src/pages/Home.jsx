@@ -3,7 +3,7 @@ import HomeTab from './../components/HomeTab';
 import PetContainer from '../components/Feed/PetContainer';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
-const ServerConnect = `${import.meta.env.VITE_APP_ID}`;
+const ServerConnect = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
 
 export default function Home() {
   const navigate = useNavigate();
@@ -22,10 +22,6 @@ export default function Home() {
   return (
     <>
       <HomeTab />
-      <div className="fixed bg-slate-800 rounded-full text-white text-center mr-4 w-16 h-16 right-4 bottom-24 z-50">
-        <span className="material-symbols-outlined text-2xl">filter_alt</span>
-        <p className="text-sm">Filter</p>
-      </div>
       <PetContainer />
     </>
   );
