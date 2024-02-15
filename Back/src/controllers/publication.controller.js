@@ -55,8 +55,7 @@ const update = async (req, res) => {
 const get = async (req, res) => {
     try {
         const { type } = req.query
-        const publications = await service.getPublications(type);
-        res.json(publications)
+        await handleGet(req, res, service.find.bind(service), type);
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
