@@ -52,7 +52,11 @@ export default function Profile() {
       <select name="select" onChange={onChange} className="w-full">
         <option>Agregar mascota</option>
         {options.map((option) => (
-          <option key={option.value} value={option.value} selected={option.value === pet.petId}>
+          <option
+            key={option.value}
+            value={option.value}
+            selected={pet !== null && option.value === pet.petId}
+          >
             {option.label}
           </option>
         ))}

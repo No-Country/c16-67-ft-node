@@ -7,12 +7,14 @@ export default function Logout() {
   const handleOnClick = () => {
     googleLogout();
     localStorage.removeItem('userId');
-    console.log('Se cerro sesión');
+    localStorage.removeItem('pet');
     navigate('/login');
   };
   return (
-    <button className="bg-slate-500 p-2 rounded-md text-white" onClick={() => handleOnClick()}>
-      Cerrar sesión
-    </button>
+    <>
+      <button className="bg-slate-500 p-2 rounded-md text-white" onClick={() => handleOnClick()}>
+        Cerrar sesión
+      </button>
+    </>
   );
 }

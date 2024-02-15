@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import Spinner from '../Spinner';
 import { useNavigate } from 'react-router-dom';
 import { useNavigateContext } from '../../context/navigationContext';
 
@@ -9,9 +11,11 @@ const ServerConnect = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
 const Login = () => {
   const { setActive } = useNavigateContext();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSuccess = (res) => {
     const { credential: token } = res;
-
+    setIsLoading(false);
     axios
       .post(`${ServerConnect}/api/v1/user`, { token: token })
       .then((response) => {
@@ -30,6 +34,7 @@ const Login = () => {
       .catch((error) => {
         console.error('Error al enviar la solicitud:', error);
       });
+    setIsLoading(true);
   };
 
   const onFailure = (res) => {
@@ -37,9 +42,12 @@ const Login = () => {
   };
 
   return (
-    <div id="signInButton">
-      <GoogleLogin onSuccess={onSuccess} onError={onFailure} />
-    </div>
+    <>
+      {isLoading && <Spinner />}
+      <div id="signInButton">
+        <GoogleLogin onSuccess={onSuccess} onError={onFailure} />
+      </div>
+    </>
   );
 };
 
