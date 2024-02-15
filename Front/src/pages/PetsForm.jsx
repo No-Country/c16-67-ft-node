@@ -1,8 +1,59 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import TextInput from '../components/TextInput';
 import { FiEdit } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const PetsForm = () => {
+  const navigate = useNavigate();
+
+  const nameRef = useRef();
+  const ageRef = useRef();
+  const addressRef = useRef();
+  const descriptionRef = useRef();
+  const photoRef = useRef();
+  const [errors, setErrors] = useState({
+    name: null,
+    dni: null,
+    email: null,
+    password: null,
+    career: null
+  });
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+
+    const payload = new FormData();
+    payload.append('name', nameRef.current.value);
+    payload.append('dni', ageRef.current.value);
+    payload.append('email', addressRef.current.value);
+    payload.append('password', descriptionRef.current.value);
+    payload.append('profile_photo', file);
+
+    const handleRegistration = async () => {
+      setErrors({});
+      try {
+        const res = await axios.post('/signup', payload, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        navigate('/');
+      } catch (err) {
+        throw new Error(err);
+      }
+    };
+
+    if (!file) {
+      console.log('no estas subiendo foto pa'); //Hay que hacer un modal
+    } else {
+      handleRegistration();
+    }
+  };
+
   const handleUploadButtonClick = () => {
     const fileInput = document.getElementById('fileInput');
     fileInput.click();
@@ -22,7 +73,7 @@ const PetsForm = () => {
   return (
     <main>
       <section className="bg-slate-100 h-[100vh]">
-        <form className="p-6 min-h-[650px] h-[780px] overflow-y-scroll">
+        <form className="p-6 min-h-[650px] h-[780px] overflow-y-scroll" onSubmit={onSubmit}>
           <div className="relative w-[100px] h-[100px] rounded-[50px] shadow-md m-auto mt-0 mb-3 bg-white">
             <input
               id="fileInput"
