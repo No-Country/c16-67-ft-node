@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import TextInput from '../components/TextInput';
 import { FiEdit } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
@@ -6,44 +6,40 @@ import axios from 'axios';
 
 const PetsForm = () => {
   const navigate = useNavigate();
-
-  const nameRef = useRef();
-  const ageRef = useRef();
-  const addressRef = useRef();
-  const descriptionRef = useRef();
-  const photoRef = useRef();
-  const [errors, setErrors] = useState({
-    name: null,
-    dni: null,
-    email: null,
-    password: null,
-    career: null
-  });
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+  const [address, setAddress] = useState('');
+  const [description, setDescription] = useState('');
+  const [profilePhoto, setProfilePhoto] = useState(null);
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
+    const userId = JSON.parse(localStorage.getItem('userId'));
 
     const payload = new FormData();
-    payload.append('name', nameRef.current.value);
-    payload.append('dni', ageRef.current.value);
-    payload.append('email', addressRef.current.value);
-    payload.append('password', descriptionRef.current.value);
-    payload.append('profile_photo', file);
+    payload.append('name', name);
+    payload.append('age', age);
+    payload.append('address', address);
+    payload.append('description', description);
+    payload.append('image', profilePhoto);
+    payload.append('userId', userId);
 
     const handleRegistration = async () => {
-      setErrors({});
       try {
-        const res = await axios.post('/signup', payload, {
+        const res = await axios.post(`${import.meta.env.VITE_APP_ID}/api/v1/pet`, payload, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         });
+        console.log(res);
+
         navigate('/');
       } catch (err) {
-        throw new Error(err);
+        console.error(err);
+        throw new Error();
       }
     };
 
@@ -62,12 +58,12 @@ const PetsForm = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const imgElement = document.getElementById('profilePhoto');
-
     const reader = new FileReader();
     reader.onload = (e) => {
       imgElement.src = e.target.result;
     };
     reader.readAsDataURL(file);
+    setProfilePhoto(file);
   };
 
   return (
@@ -93,10 +89,37 @@ const PetsForm = () => {
               id="profilePhoto"
             />
           </div>
-          <TextInput labelName={'Name'} input={'input'} />
-          <TextInput labelName={'Age'} input={'input'} />
-          <TextInput labelName={'Address'} input={'input'} />
-          <TextInput labelName={'Description'} />
+          <TextInput
+            labelName={'Name'}
+            input={'input'}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
+          <TextInput
+            labelName={'Age'}
+            input={'input'}
+            val={age}
+            onChange={(e) => {
+              setAge(e.target.value);
+            }}
+          />
+          <TextInput
+            labelName={'Address'}
+            input={'input'}
+            value={address}
+            onChange={(e) => {
+              setAddress(e.target.value);
+            }}
+          />
+          <TextInput
+            labelName={'Description'}
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+          />
           <button className="block p-2 mt-5 mx-auto text-white bg-gray-500 rounded-md">
             Add Pet
           </button>
