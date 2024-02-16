@@ -88,7 +88,7 @@ const PetsForm = () => {
                 <FiEdit />
               </span>
               <img
-                src={`${import.meta.env.VITE_FRONT_URL}/src/assets/images/defaultProfile.jpg`}
+                src={'/src/assets/images/defaultProfile.jpg'}
                 className="w-full h-full rounded-[50%] object-cover"
                 id="profilePhoto"
               />
