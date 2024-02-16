@@ -26,7 +26,7 @@ export default function Login() {
           <h3 className="font-medium">By PetDevs</h3>
         </div>
       </div>
-      <div className="absolute bottom-0  z-10">
+      <div className="absolute flex justify-center w-full bottom-0  z-10">
         <img
           src={`${import.meta.env.VITE_FRONT_URL}/src/assets/images/foots.png`}
           alt="foot-image"
