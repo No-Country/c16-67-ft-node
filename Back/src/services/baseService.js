@@ -22,6 +22,7 @@ class BaseService {
                         as: 'pets',
                         attributes: ['name', 'image_url'],
                     }],
+                    order: [['createdAt', 'DESC']],
                     raw: true
                 });
             return items;
@@ -60,6 +61,7 @@ class BaseService {
                         {
                             model: this.model2, // Modelo Pet
                             as: 'pet',
+                            order: [['createdAt', 'DESC']],
                             attributes: ['name', 'image_url'],
                         }
                     ],

@@ -16,7 +16,7 @@ export default function PetContainer() {
   }, []);
 
   return (
-    <main>
+    <main className="pb-20">
       {feedData.map((publication, index) => (
         <PetCard
           key={index}

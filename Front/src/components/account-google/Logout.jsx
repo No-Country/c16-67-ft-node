@@ -1,11 +1,20 @@
 import { googleLogout } from '@react-oauth/google';
+import { useNavigate } from 'react-router';
 
-const handleOnClick = () => {
-  googleLogout();
-  localStorage.removeItem('userId');
-  console.log('Se cerro sesión');
-};
+export default function Logout() {
+  const navigate = useNavigate();
 
-const Logout = () => <button onClick={() => handleOnClick()}>Logout</button>;
-
-export default Logout;
+  const handleOnClick = () => {
+    googleLogout();
+    localStorage.removeItem('userId');
+    localStorage.removeItem('pet');
+    navigate('/login');
+  };
+  return (
+    <>
+      <button className="bg-slate-500 p-2 rounded-md text-white" onClick={() => handleOnClick()}>
+        Cerrar sesión
+      </button>
+    </>
+  );
+}
