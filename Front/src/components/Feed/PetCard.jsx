@@ -1,27 +1,11 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-
-const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
-
-export default function PetCard({ postImage, description, petId }) {
-  const [pet, setPet] = useState({
-    name: '',
-    image_url: ''
-  });
-
-  useEffect(() => {
-    axios
-      .get(`${API_URL_BASE}/api/v1/pet/${petId}`)
-      .then((res) => setPet({ name: res.data.name, image_url: res.data.image_url }));
-  }, []);
-
+export default function PetCard({ postImage, description, petId, postId, petName, profileImage }) {
   return (
     <div className="mb-4">
       <div className="flex p-4 gap-x-3 items-center ">
-        <img className="w-12 h-12 object-cover rounded-full" src={pet.image_url} />
+        <img className="w-12 h-12 object-cover rounded-full" src={profileImage} />
         <div className="flex-grow">
-          <div>{pet.name}</div>
-          <div className="text-gray-500">@{pet.name}</div>
+          <div>{petName}</div>
+          <div className="text-gray-500">@{petName}</div>
         </div>
         <button className="text-white bg-gray-500 h-fit p-2 rounded-md">Follow</button>
       </div>
