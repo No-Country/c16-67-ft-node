@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
-export default function PetCard({ postImage, description, petId, postId }) {
+export default function PetCard({ postImage, description, petId }) {
   const [pet, setPet] = useState({
     name: '',
     image_url: ''

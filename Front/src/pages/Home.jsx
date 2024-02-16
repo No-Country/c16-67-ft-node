@@ -4,9 +4,12 @@ import PetContainer from '../components/Feed/PetContainer';
 import Spinner from '../components/Spinner';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import { useModalContext } from '../context/modalContext';
+import Modal from '../components/Modal';
 const ServerConnect = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
 
 export default function Home() {
+  const { modalState } = useModalContext();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -35,6 +38,7 @@ export default function Home() {
   return (
     <>
       {isLoading && <Spinner />}
+      {modalState.isOpen && <Modal />}
       <HomeTab />
       <PetContainer />
     </>
