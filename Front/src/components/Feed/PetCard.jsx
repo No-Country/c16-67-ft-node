@@ -1,10 +1,8 @@
-export default function PetCard({postImage, description, petId, postId, petName, profileImage}) {
-
-
+export default function PetCard({ postImage, description, petId, postId, petName, profileImage }) {
   return (
     <div className="mb-4">
       <div className="flex p-4 gap-x-3 items-center ">
-      <img className="w-12 h-12 object-cover rounded-full" src={profileImage} />
+        <img className="w-12 h-12 object-cover rounded-full" src={profileImage} />
         <div className="flex-grow">
           <div>{petName}</div>
           <div className="text-gray-500">@{petName}</div>

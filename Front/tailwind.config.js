@@ -22,12 +22,34 @@ export default {
         '0%': { marginBottom: '-420px' },
         '50%': { marginBottom: '-280px' },
         '100%': { marginBottom: '-140px' }
+      },
+      fadeInSelfClose: {
+        '0%': {
+          opacity: '0',
+          transform: 'translateY(0)'
+        },
+        '100%': {
+          opacity: '1',
+          transform: 'translateY(-40px)'
+        }
+      },
+      fadeOutSelfClose: {
+        '0%': {
+          opacity: '1',
+          transform: 'translateY(-40px)'
+        },
+        '100%': {
+          opacity: '0',
+          transform: 'translateY(0)'
+        }
       }
     },
     animation: {
       spin: 'spin 1.2s infinite linear',
       increment: 'increment 1.2s infinite linear',
-      top: 'top 2s linear'
+      top: 'top 2s linear',
+      fadeInSelfClose: 'fadeInSelfClose 0.5s ease-in forwards',
+      fadeOutSelfClose: 'fadeOutSelfClose 0.5s ease-in forwards'
     }
   },
   plugins: []

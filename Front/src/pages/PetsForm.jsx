@@ -4,8 +4,11 @@ import Spinner from '../components/Spinner';
 import { FiEdit } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useModalContext } from '../context/modalContext';
+import Modal from '../components/Modal';
 
 const PetsForm = () => {
+  const { openModal, modalState } = useModalContext();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('');
@@ -16,9 +19,8 @@ const PetsForm = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     const fileInput = document.getElementById('fileInput');
-    const file = fileInput.files[0];
+    fileInput.files[0];
     const userId = JSON.parse(localStorage.getItem('userId'));
 
     const payload = new FormData();
@@ -29,27 +31,25 @@ const PetsForm = () => {
     payload.append('image', profilePhoto);
     payload.append('userId', userId);
 
-    const handleRegistration = async () => {
-      setIsLoading(false);
-      try {
-        await axios.post(`${import.meta.env.VITE_SERVER_PRODUCTION}/api/v1/pet`, payload, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-        navigate('/');
-      } catch (err) {
-        console.error(err);
-        throw new Error();
-      }
-    };
-
-    if (!file) {
-      console.log('no estas subiendo foto pa'); //Hay que hacer un modal
-    } else {
-      handleRegistration();
-    }
     setIsLoading(true);
+    try {
+      await axios.post(`${import.meta.env.VITE_SERVER_PRODUCTION}/api/v1/pet`, payload, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      openModal({
+        description: 'Pet created successfully',
+        chooseModal: false
+      });
+      navigate('/');
+    } catch {
+      openModal({
+        description: 'An error has occurred',
+        chooseModal: false
+      });
+    }
+    setIsLoading(false);
   };
 
   const handleUploadButtonClick = () => {
@@ -71,6 +71,7 @@ const PetsForm = () => {
   return (
     <>
       {isLoading && <Spinner />}
+      {modalState.isOpen && <Modal />}
       <main>
         <section className="bg-slate-100 h-[100vh]">
           <form className="p-6 min-h-[650px] h-[780px] overflow-y-scroll" onSubmit={onSubmit}>
@@ -101,6 +102,7 @@ const PetsForm = () => {
                 setName(e.target.value);
               }}
             />
+
             <TextInput
               labelName={'Age'}
               input={'input'}
