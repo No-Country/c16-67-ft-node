@@ -2,7 +2,11 @@
 export default {
   content: ['./src/**/*.{html,jsx, js}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        walter: ['Walter Turncoat', 'cursive']
+      }
+    },
     keyframes: {
       spin: {
         '0%': { transform: 'rotate(0deg)' },
@@ -13,11 +17,17 @@ export default {
         '0%': { width: '20px' },
         '50%': { width: '40px' },
         '100%': { width: '60px' }
+      },
+      top: {
+        '0%': { marginBottom: '-420px' },
+        '50%': { marginBottom: '-280px' },
+        '100%': { marginBottom: '-140px' }
       }
     },
     animation: {
       spin: 'spin 1.2s infinite linear',
-      increment: 'increment 1.2s infinite linear'
+      increment: 'increment 1.2s infinite linear',
+      top: 'top 2s linear'
     }
   },
   plugins: []
