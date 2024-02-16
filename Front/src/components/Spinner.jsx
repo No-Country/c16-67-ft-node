@@ -8,7 +8,7 @@ const Spinner = () => {
       </div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <img
-          src={'/src/assets/images/foots.png'}
+          src={`${import.meta.env.VITE_FRONT_URL}/src/assets/images/foots.png`}
           alt="logo-spinner"
           className="object-cover animate-increment"
         />
