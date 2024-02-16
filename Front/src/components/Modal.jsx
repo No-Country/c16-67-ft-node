@@ -31,15 +31,23 @@ const Modal = () => {
           <div className="flex justify-center object-contain">
             <BiErrorAlt className="relative bottom-[25px] rounded-[30px] text-[60px] bg-white text-[#b23131]" />
           </div>
-          <div className="pb-[10px] text-center font-700 text-[1.4rem] border-b-2 border-solid">
+          <div className="pb-[10px] text-center font-bold text-[1.4rem] border-b-2 border-solid">
             {title.toUpperCase()}
           </div>
           <div className="my-[10px] mx-[5px] text-center text-[1.2rem] italic">{description}</div>
           <div className="flex justify-between mt-[30px]">
-            <button type="cancel" onClick={closeModal}>
+            <button
+              className="px-8 py-[5px] text-[16px] bg-[#b23131] text-white rounded-[10px] shadow-md hover:bg-[#7a3232] hover:transition-all hover:duration-[0.5s] hover:ease-in-out "
+              type="cancel"
+              onClick={closeModal}
+            >
               {denyBtn}
             </button>
-            <button type="submit" onClick={onClick}>
+            <button
+              className="px-8 py-[5px] text-[16px] bg-[#4E9745] text-white rounded-[10px] shadow-md  hover:bg-[#305c2a] hover:transition-all hover:duration-[0.5s] hover:ease-in-out "
+              type="submit"
+              onClick={onClick}
+            >
               {confirmBtn}
             </button>
           </div>
@@ -54,7 +62,11 @@ const Modal = () => {
             }`}
           >
             <div className="mr-[5px] font-500 text-white ">{description}</div>
-            <button type="x" onClick={closeModal}>
+            <button
+              className="ml-1 hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150"
+              type="x"
+              onClick={closeModal}
+            >
               X
             </button>
           </div>

@@ -2,14 +2,18 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import Spinner from '../components/Spinner';
+import { useModalContext } from '../context/modalContext';
+import Modal from '../components/Modal';
+
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
 function PublicationForm() {
+  const { openModal, modalState } = useModalContext();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   //Obtengo id de usuario y mascota de local storage
   const userId = JSON.parse(localStorage.getItem('userId'));
-  const {petId} = JSON.parse(localStorage.getItem('pet'));
+  const { petId } = JSON.parse(localStorage.getItem('pet'));
   // Estados para manejar los valores de los inputs del formulario
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState('');
@@ -28,35 +32,43 @@ function PublicationForm() {
     const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
     setType(selectedOptions);
   };
-      
+
   //Manejador del boton PUBLICAR
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
-    
+
     const formData = new FormData();
     formData.append('image', image);
     formData.append('description', description);
     formData.append('type', type);
     formData.append('userId', userId);
     formData.append('petId', petId);
+
     try {
-      const response = await axios.post(`${API_URL_BASE}/api/v1/publication`, formData, {
+      await axios.post(`${API_URL_BASE}/api/v1/publication`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-      console.log(response.data);
+      openModal({
+        description: 'Publication created successfully',
+        chooseModal: false
+      });
       navigate('/');
-    } catch (error) {
-      console.error(error);
+    } catch {
+      openModal({
+        description: 'An error has occurred',
+        chooseModal: false
+      });
     }
     setIsLoading(false);
-  };      
-        
+  };
+
   return (
     <>
       {isLoading && <Spinner />}
+      {modalState.isOpen && <Modal />}
       <main className="bg-slate-100 h-[100vh]">
         <form className="space-y-4 max-w-md mx-auto">
           <div className="pt-20">
