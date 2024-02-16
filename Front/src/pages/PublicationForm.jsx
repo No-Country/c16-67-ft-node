@@ -7,8 +7,9 @@ const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 function PublicationForm() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  //Obtengo id de usuario de local storage
+  //Obtengo id de usuario y mascota de local storage
   const userId = JSON.parse(localStorage.getItem('userId'));
+  const {petId} = JSON.parse(localStorage.getItem('pet'));
   // Estados para manejar los valores de los inputs del formulario
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState('');
@@ -27,30 +28,18 @@ function PublicationForm() {
     const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
     setType(selectedOptions);
   };
-
-  //FUNCION PROVISORIA HASTA QUE TENGA LA PETID EN LOCAL STORAGE O CONTEX
-  const getPetId = async () => {
-    setIsLoading(true);
-    try {
-      const pet = (await axios.get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`)).data;
-      console.log(pet); //PROVISORIO primer mascota del usuario
-      return pet[0].petId;
-    } catch (err) {
-      console.error(err);
-      setIsLoading(false);
-    }
-  };
-
+      
   //Manejador del boton PUBLICAR
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setIsLoading(true);
+    
     const formData = new FormData();
     formData.append('image', image);
     formData.append('description', description);
     formData.append('type', type);
     formData.append('userId', userId);
-    formData.append('petId', await getPetId());
+    formData.append('petId', petId);
     try {
       const response = await axios.post(`${API_URL_BASE}/api/v1/publication`, formData, {
         headers: {
@@ -62,8 +51,9 @@ function PublicationForm() {
     } catch (error) {
       console.error(error);
     }
-  };
-
+    setIsLoading(false);
+  };      
+        
   return (
     <>
       {isLoading && <Spinner />}
@@ -85,7 +75,7 @@ function PublicationForm() {
             <label className="block text-sm font-medium text-gray-700">Descripción</label>
             <textarea
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 text-gray-700 h-24"
-              maxLength="20"
+              maxLength="50"
               value={description}
               onChange={handleDescriptionChange}
             />

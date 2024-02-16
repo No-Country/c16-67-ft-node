@@ -24,6 +24,8 @@ export default function PetContainer() {
           description={publication.description}
           petId={publication.petId}
           postId={publication.postId}
+          petName={publication["pets.name"]}
+          profileImage={publication["pets.image_url"]}
         />
       ))}
     </main>
