@@ -662,8 +662,16 @@ video {
   height: 20rem;
 }
 
-.h-\[60px\] {
-  height: 60px;
+.h-\[100px\] {
+  height: 100px;
+}
+
+.h-\[100vh\] {
+  height: 100vh;
+}
+
+.h-\[780px\] {
+  height: 780px;
 }
 
 .h-fit {
@@ -673,70 +681,6 @@ video {
 
 .h-full {
   height: 100%;
-}
-
-.h-\[1000px\] {
-  height: 1000px;
-}
-
-.h-\[700px\] {
-  height: 700px;
-}
-
-.h-\[750px\] {
-  height: 750px;
-}
-
-.h-\[720px\] {
-  height: 720px;
-}
-
-.h-\[100px\] {
-  height: 100px;
-}
-
-.h-\[200px\] {
-  height: 200px;
-}
-
-.h-\[80px\] {
-  height: 80px;
-}
-
-.h-\[760px\] {
-  height: 760px;
-}
-
-.h-\[780px\] {
-  height: 780px;
-}
-
-.h-\[100vh\] {
-  height: 100vh;
-}
-
-.max-h-96 {
-  max-height: 24rem;
-}
-
-.max-h-\[660px\] {
-  max-height: 660px;
-}
-
-.min-h-\[660px\] {
-  min-height: 660px;
-}
-
-.min-h-\[560px\] {
-  min-height: 560px;
-}
-
-.min-h-\[160px\] {
-  min-height: 160px;
-}
-
-.min-h-\[60px\] {
-  min-height: 60px;
 }
 
 .min-h-\[650px\] {
@@ -751,24 +695,12 @@ video {
   width: 4rem;
 }
 
-.w-\[60px\] {
-  width: 60px;
-}
-
-.w-full {
-  width: 100%;
-}
-
 .w-\[100px\] {
   width: 100px;
 }
 
-.w-\[200px\] {
-  width: 200px;
-}
-
-.w-\[80px\] {
-  width: 80px;
+.w-full {
+  width: 100%;
 }
 
 .flex-grow {
@@ -803,10 +735,6 @@ video {
 .gap-x-3 {
   -moz-column-gap: 0.75rem;
        column-gap: 0.75rem;
-}
-
-.overflow-scroll {
-  overflow: scroll;
 }
 
 .overflow-y-scroll {
@@ -878,6 +806,11 @@ video {
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 
+.bg-slate-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+}
+
 .bg-slate-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(30 41 59 / var(--tw-bg-opacity));
@@ -886,26 +819,6 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-red-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
-}
-
-.bg-slate-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
-}
-
-.bg-slate-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
-}
-
-.bg-slate-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
 }
 
 .object-cover {
