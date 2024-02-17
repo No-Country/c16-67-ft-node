@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PetCard from './PetCard';
 import { getPublications } from './getPublications';
+import styles from './PetContainer.module.css';
 
 export default function PetContainer({ tabActive }) {
   const [feedData, setFeedData] = useState([]);
@@ -18,7 +19,9 @@ export default function PetContainer({ tabActive }) {
   }, [tabActive]);
 
   return (
-    <main className="pb-20">
+    <div
+      className={`pt-12 md:pt-4 md:max-h-[calc(100vh-112px)] xl:max-h-[calc(100vh-64px)] overflow-auto ${styles.scrollbarCustom}`}
+    >
       {feedData.map((publication, index) => (
         <PetCard
           key={index}
@@ -30,6 +33,6 @@ export default function PetContainer({ tabActive }) {
           profileImage={publication['pets.image_url']}
         />
       ))}
-    </main>
+    </div>
   );
 }

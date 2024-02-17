@@ -4,6 +4,7 @@ import PetContainer from '../components/Feed/PetContainer';
 import Spinner from '../components/Spinner';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import Suggestions from '../components/Suggestions';
 import { useModalContext } from '../context/modalContext';
 import Modal from '../components/Modal';
 const ServerConnect = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
@@ -36,11 +37,14 @@ export default function Home() {
   }, [navigate]);
 
   return (
-    <>
+    <main className="xl:flex">
       {isLoading && <Spinner />}
-      {modalState.isOpen && <Modal />}
-      <HomeTab setTabActive={setTabActive} />
-      <PetContainer tabActive={tabActive} />
-    </>
+      <div className="md:flex-grow xl:flex-grow-[3] xl:basis-0">
+        {modalState.isOpen && <Modal />}
+        <HomeTab setTabActive={setTabActive} />
+        <PetContainer tabActive={tabActive} />
+      </div>
+      <Suggestions />
+    </main>
   );
 }

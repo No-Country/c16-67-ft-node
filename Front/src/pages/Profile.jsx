@@ -54,35 +54,37 @@ export default function Profile() {
   };
 
   return (
-    <div className="px-4">
-      {isLoading && <Spinner />}
-      <div className="flex flex-col items-center gap-y-4 mt-4">
-        {!user.image_url ? (
+    <main>
+      <div className="px-4">
+        {isLoading && <Spinner />}
+        <div className="flex flex-col items-center gap-y-4 mt-4">
+          {!user.image_url ? (
+            <></>
+          ) : (
+            <img src={user.image_url} alt="User image" className="w-12 h-12 rounded-full" />
+          )}
+          <p>{user.name}</p>
+        </div>
+        {options.length === 0 ? (
           <></>
         ) : (
-          <img src={user.image_url} alt="User image" className="w-12 h-12 rounded-full" />
+          <section>
+            <h2 className="mt-12">Mascotas</h2>
+            <select name="select" onChange={onChange} className="w-full">
+              <option>Agregar mascota</option>
+              {options.map((option) => (
+                <option
+                  key={option.value}
+                  value={option.value}
+                  selected={pet !== null && option.value === pet.petId}
+                >
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </section>
         )}
-        <p>{user.name}</p>
       </div>
-      {options.length === 0 ? (
-        <></>
-      ) : (
-        <section>
-          <h2 className="mt-12">Mascotas</h2>
-          <select name="select" onChange={onChange} className="w-full">
-            <option>Agregar mascota</option>
-            {options.map((option) => (
-              <option
-                key={option.value}
-                value={option.value}
-                selected={pet !== null && option.value === pet.petId}
-              >
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </section>
-      )}
-    </div>
+    </main>
   );
 }
