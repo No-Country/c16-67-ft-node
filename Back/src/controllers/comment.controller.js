@@ -8,21 +8,10 @@ const service = new CommentService();
 
 const create = async(req,res) =>{
     try {
-        // // Subir la imagen a Cloudinary
-        // const result = await cloudinary.uploader.upload(req.file.path);
-        // // Obtener la URL de la imagen cargada desde Cloudinary
-        // const imageUrl = result.secure_url;
-
-        let {userId, petId, postId, comment, image_url} = req.body
-        const response = await service.create({
-            userId, 
-            petId,
-            postId,
-            comment,
-            image_url, 
+        const response = await service.create("Comment",{
+            ...req.body,
             status:true
         });
-        console.log(response," LA DATA HECHA ")
         res.json({success: true, data: response});
     } catch (error) {
         res.status(500).send({success:false,message:error.message});
@@ -31,19 +20,13 @@ const create = async(req,res) =>{
 
 const update = async (req,res) =>{
     try {
-        // // Subir la imagen a Cloudinary
-        // const result = await cloudinary.uploader.upload(req.file.path);
-        // // Obtener la URL de la imagen cargada desde Cloudinary
-        // const imageUrl = result.secure_url;
         const {id} = req.params;
-        
-        let {comment, image_url} = req.body
-        const response = await service.update(id,{
-            comment,
-            image_url, 
+
+        const response = await service.update("Comment", id,{
+            ...req.body,
             status:true
-        });
-        res.json(response);
+        },"commentId");
+        res.json({success: true, data: response});
     } catch (error) {
         res.status(500).send({success:false, message:error.message});
     }
@@ -51,33 +34,38 @@ const update = async (req,res) =>{
 
 
 const get = async (req, res) => {
-    await handleGet(req, res, service.find.bind(service));
+    await handleGet(req, res, service.find.bind(service), "Comment");
 };
 
 const getById = async (req, res) => {
     const { id } = req.params;
-    await handleGetById(req, res, service.findOne.bind(service), id);
+    await handleGetById(req, res, service.findOne.bind(service),"Comment", id);
 };
 
-const getByFkuserId = async (req, res) => {
+// todos los getbyfk son find anidados, ya que ademas de buscar en la tabla comment, debo de buscar datos del pet para renderizar en el front
+const getByFkuserId = async (req, res) => { 
     const { id } = req.params;
-    await getByIdFk(req, res, service.findFk.bind(service), id, "userId");
+    await getByIdFk(req, res, service.findFk.bind(service),"Comment", id, "userId");
 };
 
 const getByFkpetId = async (req, res) => {
     const { id } = req.params;
-    await getByIdFk(req, res, service.findFk.bind(service), id, "petId");
+    await getByIdFk(req, res, service.findFk.bind(service),"Comment", id, "petId");
 };
 
 const getByFkpostId = async (req, res) => {
     const { id } = req.params;
-    await getByIdFk(req, res, service.findFk.bind(service), id, "postId");
+    await getByIdFk(req, res, service.findFk.bind(service),"Comment", id, "postId", );
 };
 
 const _deleted = async (req, res) => {
-    const { id } = req.params;
-    const body = req.body;
-    await handleDeleted(req, res, service.deleted.bind(service), id, body);
+    try {
+        const { id } = req.params;
+        await handleDeleted(req, res, service.deleted.bind(service),"Comment", id,{ status: false }, "commentId");
+        res.json({success: true, data: "Eliminado con exito"});
+    } catch (error) {
+        res.status(500).send({success:false, message:error.message});
+    }
 };
 
 module.exports ={

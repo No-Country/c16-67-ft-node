@@ -1,5 +1,5 @@
 const UserService = require("../services/user");
-const { handleGet, handleGetById, handleDeleted } = require('./base.controller');
+const { handleGet, handleGetById, handleUpdate } = require('./base.controller');
 const jwt = require('jsonwebtoken');
 
 const cloudinary = require('cloudinary').v2;
@@ -11,7 +11,7 @@ const create = async (req,res) => {
     try {
         const decodedToken = jwt.decode(req.body.token);
         const { email, name, picture } = decodedToken;
-        const response = await service.create({
+        const response = await service.create("User",{
             name,
             mail:email,
             image_url:picture,
@@ -33,7 +33,7 @@ const update = async (req,res) =>{
 
         const {id} = req.params;
         const { name } = req.body;
-        const response = await service.update(id,{name,image_url:imageUrl});
+        const response = await service.update("User",id,{name,image_url:imageUrl}, "id");
         res.json(response);
     } catch (error) {
         res.status(500).send({success:false,message:error.message});
@@ -42,18 +42,17 @@ const update = async (req,res) =>{
 
 
 const get = async (req, res) => {
-    await handleGet(req, res, service.find.bind(service));
+    await handleGet(req, res, service.find.bind(service),"User");
 };
 
 const getById = async (req, res) => {
     const { id } = req.params;
-    await handleGetById(req, res, service.findOne.bind(service), id);
+    await handleGetById(req, res, service.findOne.bind(service), "User", id);
 };
 
 const _deleted = async (req, res) => {
     const { id } = req.params;
-    const body = req.body;
-    await handleDeleted(req, res, service.deleted.bind(service), id, body);
+    await handleUpdate(req, res, service.update.bind(service),"User", id, { status: false }, "id");
 };
 
 module.exports = {

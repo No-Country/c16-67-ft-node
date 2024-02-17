@@ -6,6 +6,7 @@ const { Comment, commentSchema } = require("./Comment")
 const setupRelations = require('./relations');
 const { Pet, petSchema } = require('./Pet');
 const { Reaction, reactionSchema } = require('./Reaction');
+const { Save,saveSchema } = require('./Save');
 
 async function setupModels(sequelize) {
 
@@ -24,6 +25,10 @@ async function setupModels(sequelize) {
     //inicialización del modelo Reaction (reacciones)
     Reaction.init(reactionSchema, Reaction.config(sequelize));
 
+    // inicializamos del modelo Save (guardar publicaciones)
+    Save.init(saveSchema, Save.config(sequelize));
+
+    
     // configurar relaciones entre modelos
     await setupRelations();
 }
