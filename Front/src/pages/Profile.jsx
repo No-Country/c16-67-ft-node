@@ -44,7 +44,7 @@ export default function Profile() {
 
   return (
     <div className="px-4">
-      <div className="flex flex-col items-center gap-y-4 mt-4">
+      <div className="flex flex-col items-center gap-y-4 pt-4">
         <img src={user.image_url} alt="User image" className="w-12 h-12 rounded-full" />
         <p>{user.name}</p>
       </div>

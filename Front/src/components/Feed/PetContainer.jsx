@@ -16,7 +16,7 @@ export default function PetContainer() {
   }, []);
 
   return (
-    <main className="pb-20">
+    <div className="pt-12 md:pt-4 md:max-h-[calc(100vh-112px)] xl:max-h-[calc(100vh-64px)] overflow-auto">
       {feedData.map((publication, index) => (
         <PetCard
           key={index}
@@ -26,6 +26,6 @@ export default function PetContainer() {
           postId={publication.postId}
         />
       ))}
-    </main>
+    </div>
   );
 }
