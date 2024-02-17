@@ -23,6 +23,14 @@ export default {
         '50%': { marginBottom: '-280px' },
         '100%': { marginBottom: '-140px' }
       },
+      petModalOpen: {
+        '0%': { transform: 'translateY(100%)' },
+        '100%': { transform: 'translateY(0)' }
+      },
+      petModalClose: {
+        '100%': { transform: 'translateY(100%)' },
+        '0%': { transform: 'translateY(0)' }
+      },
       fadeInSelfClose: {
         '0%': {
           opacity: '0',
@@ -48,6 +56,8 @@ export default {
       spin: 'spin 1.2s infinite linear',
       increment: 'increment 1.2s infinite linear',
       top: 'top 2s linear',
+      petModalOpen: 'petModalOpen 0.8s linear',
+      petModalClose: 'petModalClose 0.8s linear',
       fadeInSelfClose: 'fadeInSelfClose 0.5s ease-in forwards',
       fadeOutSelfClose: 'fadeOutSelfClose 0.5s ease-in forwards'
     }
