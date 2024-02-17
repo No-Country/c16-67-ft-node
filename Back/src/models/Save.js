@@ -1,22 +1,21 @@
 const {Model, DataTypes} = require('sequelize');
 
-const PET_TABLE= "Pet";
+const SAVE_TABLE = 'Save';
 
 
-class Pet extends Model {
+class Save extends Model {
     static config(sequelize){
         return{
             sequelize,
-            tableName: PET_TABLE,
-            modelName: 'Pet',
-            timestamps: true
+            tableName: SAVE_TABLE,
+            modelName: 'Save',
+            timestamps: true,
         }
     }
-
 }
 
-const petSchema = {
-    petId:{
+const saveSchema ={
+    saveId: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
@@ -24,28 +23,25 @@ const petSchema = {
     },
     userId:{
         type:DataTypes.UUID,
-        allowNull:false,
+        allowNull:true,
+    }, 
+    petId:{
+        type:DataTypes.UUID,
+        allowNull:true,
     },
-    name:{
+    postId:{
+        type:DataTypes.UUID,
+        allowNull:true, 
+    },
+    image_url_post:{
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    name_pet:{
         allowNull: false,
         type: DataTypes.STRING,
         field:'name'
-    },
-    age:{
-        type:DataTypes.INTEGER,
-        allowNull:false,
-        field: 'age'
-    },
-    address:{
-        allowNull:false,
-        type:DataTypes.STRING,
-        field: 'address'
-    },
-    description:{
-        type:DataTypes.STRING(500),
-        allowNull:false
-    },
-    image_url:{
+    },image_url_pet:{
         type: DataTypes.TEXT,
         allowNull: false
     },
@@ -57,4 +53,5 @@ const petSchema = {
 }
 
 
-module.exports = {Pet, petSchema};
+module.exports = {Save, saveSchema};
+
