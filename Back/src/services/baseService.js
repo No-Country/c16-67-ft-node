@@ -106,7 +106,6 @@ class BaseService {
         return this.models.findAll(options);
     }
 
-
     async findOne(model, id) {
         const selectedModel = this.getModelByName(model);
         if(model === "Publication"){
