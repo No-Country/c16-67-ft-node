@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react';
 import PetCard from './PetCard';
 import { getPublications } from './getPublications';
 
-export default function PetContainer() {
+export default function PetContainer({ tabActive }) {
   const [feedData, setFeedData] = useState([]);
+  //console.log(tabActive);
 
   useEffect(() => {
-    getPublications()
+    setFeedData([]);
+    getPublications(tabActive)
       .then((data) => {
-        setFeedData(data);
+        setFeedData((feedDataPrev) => [...feedDataPrev, ...data]);
       })
       .catch((error) => {
         console.error('Error al obtener las publicaciones:', error);
       });
-  }, []);
+  }, [tabActive]);
 
   return (
     <main className="pb-20">
@@ -24,8 +26,8 @@ export default function PetContainer() {
           description={publication.description}
           petId={publication.petId}
           postId={publication.postId}
-          petName={publication["pets.name"]}
-          profileImage={publication["pets.image_url"]}
+          petName={publication['pets.name']}
+          profileImage={publication['pets.image_url']}
         />
       ))}
     </main>

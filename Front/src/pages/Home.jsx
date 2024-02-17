@@ -9,9 +9,10 @@ import Modal from '../components/Modal';
 const ServerConnect = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
 
 export default function Home() {
+  const navigate = useNavigate();
   const { modalState } = useModalContext();
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  const [tabActive, setTabActive] = useState('Feed');
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
@@ -19,7 +20,6 @@ export default function Home() {
       navigate('/login');
     } else {
       setIsLoading(true);
-
       axios
         .get(`${ServerConnect}/api/v1/pet/userid/${JSON.parse(userId)}`)
         .then((res) => {
@@ -39,8 +39,8 @@ export default function Home() {
     <>
       {isLoading && <Spinner />}
       {modalState.isOpen && <Modal />}
-      <HomeTab />
-      <PetContainer />
+      <HomeTab setTabActive={setTabActive} />
+      <PetContainer tabActive={tabActive} />
     </>
   );
 }
