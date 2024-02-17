@@ -13,8 +13,8 @@ export default function Menu() {
   }, []);
 
   return (
-    <div className="grid place-items-center min-h-screen">
+    <main className="grid place-items-center min-h-screen">
       <Logout />
-    </div>
+    </main>
   );
 }

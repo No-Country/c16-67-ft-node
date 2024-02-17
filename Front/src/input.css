@@ -3,3 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+main {
+    @apply md:pl-56 lg:pl-72 pb-20 md:pb-0 pt-16 md:pt-0;
+}

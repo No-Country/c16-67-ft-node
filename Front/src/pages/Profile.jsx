@@ -24,16 +24,20 @@ export default function Profile() {
       try {
         const [petsResponse, userResponse] = await Promise.all([
           axios.get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`),
-          axios.get(`${API_URL_BASE}/api/v1/user/${userId}`),
+          axios.get(`${API_URL_BASE}/api/v1/user/${userId}`)
         ]);
 
-        setOptions(petsResponse.data.filter(pet => pet.status).map(pet => ({ value: pet.petId, label: pet.name })));
+        setOptions(
+          petsResponse.data
+            .filter((pet) => pet.status)
+            .map((pet) => ({ value: pet.petId, label: pet.name }))
+        );
         setUser(userResponse.data);
       } catch (error) {
-        console.error("Error al obtener los datos:", error);
+        console.error('Error al obtener los datos:', error);
         // TODO hacer modal o alerta error aca
       }
-      setIsLoading(false)
+      setIsLoading(false);
     };
     fetchData();
   }, [userId, navigate]);
@@ -50,31 +54,37 @@ export default function Profile() {
   };
 
   return (
-    <div className="px-4">
-      {isLoading && <Spinner />}
-      <div className="flex flex-col items-center gap-y-4 mt-4">
-        {!user.image_url?<></>:<img src={user.image_url} alt="User image" className="w-12 h-12 rounded-full" />
-        }  
-        <p>{user.name}</p>
+    <main>
+      <div className="px-4">
+        {isLoading && <Spinner />}
+        <div className="flex flex-col items-center gap-y-4 mt-4">
+          {!user.image_url ? (
+            <></>
+          ) : (
+            <img src={user.image_url} alt="User image" className="w-12 h-12 rounded-full" />
+          )}
+          <p>{user.name}</p>
+        </div>
+        {options.length === 0 ? (
+          <></>
+        ) : (
+          <section>
+            <h2 className="mt-12">Mascotas</h2>
+            <select name="select" onChange={onChange} className="w-full">
+              <option>Agregar mascota</option>
+              {options.map((option) => (
+                <option
+                  key={option.value}
+                  value={option.value}
+                  selected={pet !== null && option.value === pet.petId}
+                >
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </section>
+        )}
       </div>
-      {(options.length===0)?<></>:
-      <section>
-        <h2 className="mt-12">Mascotas</h2>
-        <select name="select" onChange={onChange} className="w-full">
-          <option>Agregar mascota</option>
-          {options.map((option) => (
-            <option
-              key={option.value}
-              value={option.value}
-              selected={pet !== null && option.value === pet.petId}
-            >
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </section>
-      }
-
-    </div>
+    </main>
   );
 }

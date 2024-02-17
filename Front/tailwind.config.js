@@ -5,6 +5,29 @@ export default {
     extend: {
       fontFamily: {
         walter: ['Walter Turncoat', 'cursive']
+      },
+      colors: {
+        primary: {
+          100: '#C7E4C3',
+          200: '#85C47D',
+          300: '#4E9745',
+          400: '#2A5125',
+          500: '#050B05'
+        },
+        secondary: {
+          100: '#DD8441',
+          200: '#C76A24',
+          300: '#6F3B14',
+          400: '#45250C',
+          500: '#1A0E05'
+        },
+        accent: {
+          100: '#FFE5AD',
+          200: '#FFC447',
+          300: '#E29900',
+          400: '#7A5300',
+          500: '#140E00'
+        }
       }
     },
     keyframes: {
