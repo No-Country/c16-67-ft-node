@@ -34,7 +34,7 @@ export default function Home() {
   }, [navigate]);
 
   return (
-    <main className="pb-20 md:pb-0 pt-16 md:pt-0 xl:flex">
+    <main className="xl:flex">
       {isLoading && <Spinner />}
       <div className="md:flex-grow xl:flex-grow-[3] xl:basis-0">
         <HomeTab />

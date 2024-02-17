@@ -1,28 +1,14 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import likeIcon from '../../../public/assets/images/like.png';
 import commentIcon from '../../../public/assets/images/comment.png';
-const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
-export default function PetCard({ postImage, description, petId, postId }) {
-  const [pet, setPet] = useState({
-    name: '',
-    image_url: ''
-  });
-
-  useEffect(() => {
-    axios
-      .get(`${API_URL_BASE}/api/v1/pet/${petId}`)
-      .then((res) => setPet({ name: res.data.name, image_url: res.data.image_url }));
-  }, []);
-
+export default function PetCard({ postImage, description, petId, postId, petName, profileImage }) {
   return (
     <div className="mb-4 md:grid md:grid-cols-12 md:h-80 md:shadow-md md:rounded-2xl auto-rows-fr max-w-[640px] mx-auto">
       <div className="flex px-4 gap-x-3 items-center md:h-fit md:mt-4 md:col-[7/13] md:relative">
-        <img className="w-12 h-12 md:w-16 md:h-16 object-cover rounded-full" src={pet.image_url} />
+        <img className="w-12 h-12 md:w-16 md:h-16 object-cover rounded-full" src={profileImage} />
         <div className="flex-grow">
-          <div>{pet.name}</div>
-          <div className="text-gray-500">@{pet.name}</div>
+          <div>{petName}</div>
+          <div className="text-gray-500">@{petName}</div>
           <div className="text-black md:absolute md:left-4 bottom-[-96px]">{description}</div>
         </div>
         <button className="text-white bg-secondary-300 h-fit p-2 rounded-md">Follow</button>
