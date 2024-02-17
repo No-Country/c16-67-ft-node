@@ -76,11 +76,19 @@ class BaseService {
         }
     }
     
-    async findAll() {
+    async findAll(model,id) {
         try {
-            return this.models.findAll();
+            const selectedModel = this.getModelByName(model);
+            const petsWithoutUserId = await selectedModel.findAll({
+                where: {
+                    userId: {
+                        [Op.ne]: id // Filtra los registros donde userId no es igual al userId recibido
+                    }
+                }
+            });
+            return petsWithoutUserId;
         } catch (error) {
-            throw new Error("Error al buscar todos los elementos: " + error.message);
+            throw new Error("Error al buscar mascotas diferentes al userId: " + error.message);
         }
     }
     async findByName(name) {
