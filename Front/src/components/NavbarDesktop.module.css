@@ -1,0 +1,25 @@
+.desktop {
+    li {
+        @apply px-6 py-2 rounded-md;
+
+        p {
+            @apply sm:text-base lg:text-xl;
+        }
+    }
+
+    a {
+        @apply flex gap-x-2 items-center;
+    }
+
+    span {
+        @apply sm:text-2xl lg:text-5xl;
+    }
+}
+
+.navImg {
+    @apply sm:w-6 sm:h-6 lg:w-12 lg:h-12;
+}
+
+.active {
+    @apply bg-primary-200;
+}
