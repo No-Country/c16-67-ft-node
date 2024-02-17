@@ -41,7 +41,7 @@ export default function Home() {
       {isLoading && <Spinner />}
       <div className="md:flex-grow xl:flex-grow-[3] xl:basis-0">
         {modalState.isOpen && <Modal />}
-        <HomeTab setTabActive={setTabActive} />
+        <HomeTab tabActive={tabActive} setTabActive={setTabActive} />
         <PetContainer tabActive={tabActive} />
       </div>
       <Suggestions />
