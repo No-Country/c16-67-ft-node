@@ -1,19 +1,37 @@
 import { googleLogout } from '@react-oauth/google';
 import { useNavigate } from 'react-router';
+import { useModalContext } from '../../context/modalContext';
+import Modal from '../../components/Modal';
 
 export default function Logout() {
+  const { openModal, modalState, closeModal } = useModalContext();
   const navigate = useNavigate();
 
   const handleOnClick = () => {
-    googleLogout();
-    localStorage.removeItem('userId');
-    localStorage.removeItem('pet');
-    navigate('/login');
+    openModal({
+      title: 'Exit',
+      description: 'Are you sure you want to leave?',
+      confirmBtn: 'Yes',
+      denyBtn: 'No',
+      onClick: () => {
+        googleLogout();
+        localStorage.removeItem('userId');
+        localStorage.removeItem('pet');
+        navigate('/login');
+        closeModal();
+      },
+      chooseModal: true
+    });
   };
+
   return (
     <>
-      <button className="bg-slate-500 p-2 rounded-md text-white" onClick={() => handleOnClick()}>
-        Cerrar sesión
+      {modalState.isOpen && <Modal />}
+      <button
+        className="bg-slate-500 px-8 py-[8px] text-[16px] rounded-md text-white"
+        onClick={() => handleOnClick()}
+      >
+        Exit
       </button>
     </>
   );
