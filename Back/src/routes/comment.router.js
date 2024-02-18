@@ -10,10 +10,10 @@ const upload = multer({ storage });
 
 
 router 
-    .get('/', commentController.get)
-    .get('/:id', commentController.getById)
-    .get('/userid/:id', commentController.getByFkuserId)
-    .get('/petid/:id', commentController.getByFkpetId)
+    // .get('/', commentController.get)
+    // .get('/:id', commentController.getById)
+    // .get('/userid/:id', commentController.getByFkuserId)
+    // .get('/petid/:id', commentController.getByFkpetId)
     .get('/postid/:id', commentController.getByFkpostId)
     .post('/',upload.single('image'), commentController.create)
     .put('/:id',upload.single('image'), commentController.update)
