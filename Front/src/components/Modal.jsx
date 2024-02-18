@@ -3,7 +3,8 @@ import { BiErrorAlt } from 'react-icons/bi';
 import { useModalContext } from '../context/modalContext';
 import TextInput from '../components/TextInput';
 import Spinner from '../components/Spinner';
-import { FiEdit } from 'react-icons/fi';
+import { FiEdit, FiX } from 'react-icons/fi';
+import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -125,30 +126,26 @@ const Modal = () => {
         <main>
           <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#6F3B14B2] w-full h-full z-[100]">
             <form
-              className={`p-6 bg-[#F2FBE7] rounded-t-[40px] ${petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
+              className={`p-6 bg-[#F2FBE7] rounded-t-[40px] animate-petModalClose ${petModalOpen && 'animate-petModalOpen'} `}
               onSubmit={onSubmit}
             >
-              <div className="absolute flex flex-row-reverse">
-                <button
-                  className=" ml-1 hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 "
-                  type="x"
+              <div className="absolute flex flex-row-reverse left-0 w-full">
+                <FiX
+                  className="mr-6  text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer"
                   onClick={closeModal}
-                >
-                  X
-                </button>
-              </div>
-              <div className="relative w-[100px] h-[100px] rounded-[50px] shadow-md m-auto mt-0 mb-3 bg-white">
-                <input
-                  id="fileInput"
-                  type="file"
-                  style={{ display: 'none' }}
-                  onChange={handleFileChange}
                 />
+              </div>
+              <p className="mb-4 text-center text-[23px] font-bold">Create your pet´s profile</p>
+              <div className="relative w-[80px] h-[80px] rounded-[50px] shadow-md m-auto mt-0 mb-3 bg-white z-50">
+                <input id="fileInput" type="file" className="hidden" onChange={handleFileChange} />
                 <span
-                  className="flex justify-center items-center absolute w-full h-full bg-[#0000] rounded-[50%] text-[0] text-center cursor-pointer hover:bg-[#0004] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:text-2xl"
+                  className="flex justify-center items-center absolute w-full h-full bg-[#0000] rounded-[50%] text-[0] text-center cursor-pointer hover:bg-[#0004] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:text-2xl z-50"
                   onClick={handleUploadButtonClick}
                 >
                   <FiEdit />
+                  <div className="absolute w-full flex flex-row-reverse bottom-0">
+                    <FaCirclePlus className="text-[24px] mr-1" />
+                  </div>
                 </span>
                 <img
                   src={`${import.meta.env.BASE_URL}assets/images/defaultProfile.jpg`}
@@ -157,7 +154,7 @@ const Modal = () => {
                 />
               </div>
               <TextInput
-                placeholderText={'Name'}
+                placeholderText={'Pet´s name'}
                 input={'input'}
                 value={name}
                 onChange={(e) => {
@@ -174,7 +171,7 @@ const Modal = () => {
                 }}
               />
               <TextInput
-                placeholderText={'Address'}
+                placeholderText={'Location'}
                 input={'input'}
                 value={address}
                 onChange={(e) => {
@@ -182,14 +179,14 @@ const Modal = () => {
                 }}
               />
               <TextInput
-                placeholderText={'Description'}
+                placeholderText={'Profile description'}
                 value={descriptions}
                 onChange={(e) => {
                   setDescriptions(e.target.value);
                 }}
               />
-              <button className="block p-2 mt-5 mx-auto text-white bg-gray-500 rounded-md">
-                Add Pet
+              <button className="block w-full p-2 mb-3 mx-auto text-white text-[18px] bg-[#E29900] rounded-[8px]">
+                Create
               </button>
             </form>
           </section>
