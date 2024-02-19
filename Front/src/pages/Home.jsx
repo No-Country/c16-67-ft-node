@@ -11,7 +11,7 @@ const ServerConnect = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
 
 export default function Home() {
   const navigate = useNavigate();
-  const { modalState } = useModalContext();
+  const { modalState, openModal } = useModalContext();
   const [isLoading, setIsLoading] = useState(false);
   const [tabActive, setTabActive] = useState('Feed');
 
@@ -25,7 +25,10 @@ export default function Home() {
         .get(`${ServerConnect}/api/v1/pet/userid/${JSON.parse(userId)}`)
         .then((res) => {
           if (res.data.length === 0) {
-            navigate('/pets-create');
+            navigate('/profile');
+            openModal({
+              petModal: true
+            });
           }
           setIsLoading(false);
         })

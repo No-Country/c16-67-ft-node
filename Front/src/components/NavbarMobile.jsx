@@ -81,7 +81,7 @@ export default function NavbarMobile({ active, setActive, pet }) {
                 className={`flex-grow flex-basis-0 flex h-full items-center justify-center text-primary-500 ${active === 'settings' ? 'text-black' : ''}`}
               >
                 <NavLink
-                  to={'/menu'}
+                  to={'/settings'}
                   onClick={() => setActive('settings')}
                   className="flex flex-col items-center"
                 >
