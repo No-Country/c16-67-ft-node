@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PetCard from './PetCard';
 import { getPublications } from './getPublications';
 import styles from './PetContainer.module.css';
-import CreatePublicationCard from '../CreatePublicationCard';
+import CreatePublicationCard from './CreatePublicationCard';
 
 export default function PetContainer() {
   const [feedData, setFeedData] = useState([]);

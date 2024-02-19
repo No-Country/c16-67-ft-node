@@ -1,4 +1,4 @@
-import logo from '../../public/assets/images/isologo.svg';
+import logo from '../../../public/assets/images/isologo.svg';
 
 export default function HomeTab() {
   return (

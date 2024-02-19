@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
-import Spinner from '../components/Spinner';
-import { useModalContext } from '../context/modalContext';
-import Modal from '../components/Modal';
+import Spinner from '../Spinner';
+import { useModalContext } from '../../context/modalContext';
+import Modal from '../Modal';
 import styles from './CreatePublicationCard.module.css';
 import Location from './Location';
 
