@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/publication-create" element={<PublicationForm />} />
             <Route exact path="/profile" element={<Profile />} />
-            <Route exact path="/settings" element={<Menu />} />
+            <Route exact path="/menu" element={<Menu />} />
           </Routes>
         </BrowserRouter>
       </GoogleOAuthProvider>

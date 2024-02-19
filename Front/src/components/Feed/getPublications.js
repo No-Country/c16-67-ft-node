@@ -8,6 +8,7 @@ export const getPublications = async (activeFeed) => {
     return publications;
   } else {
     const publications = (await axios.get(`${API_URL_BASE}/api/v1/publication?type=perdido`)).data;
+    console.log(publications);
     return publications;
   }
 };

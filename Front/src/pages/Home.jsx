@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import HomeTab from './../components/HomeTab';
+import HomeTab from '../components/Feed/HomeTab';
 import PetContainer from '../components/Feed/PetContainer';
 import Spinner from '../components/Spinner';
 import { useNavigate } from 'react-router';
