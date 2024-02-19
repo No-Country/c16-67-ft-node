@@ -86,6 +86,13 @@ const getByFkuserId = async (req, res) => {
     await getByIdFk(req, res, service.findFk.bind(service),"Pet", id, "userId");
 };
 
+const getSuggestion = async (req, res) =>{
+    const {id} = req.params;
+    const suggestion = await service.findAll("Pet",id);
+    return res.status(200).json(suggestion);
+}
+
+
 const _deleted = async (req, res) => {
     try {
         const { id } = req.params;
@@ -107,5 +114,5 @@ const _deleted = async (req, res) => {
 };
 
 module.exports = {
-    create, get, getById, update, _deleted, getByFkuserId
+    create, get, getById, update, _deleted, getByFkuserId, getSuggestion
 };
