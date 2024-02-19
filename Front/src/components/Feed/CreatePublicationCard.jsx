@@ -13,7 +13,7 @@ export default function CreatePublicationCard({ setIsAutocompleteActive }) {
   const [isLoading, setIsLoading] = useState(false);
   //Obtengo id de usuario y mascota de local storage
   const userId = JSON.parse(localStorage.getItem('userId'));
-  const { petId } = JSON.parse(localStorage.getItem('pet'));
+  const pet = JSON.parse(localStorage.getItem('pet'));
   // Estados para manejar los valores de los inputs del formulario
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState('');
@@ -39,9 +39,9 @@ export default function CreatePublicationCard({ setIsAutocompleteActive }) {
     formData.append('description', description);
     formData.append('type', type);
     formData.append('userId', userId);
-    formData.append('petId', petId);
+    formData.append('petId', pet.petId);
 
-    console.log({ image, description, type, userId, petId, location });
+    console.log({ image, description, type, userId, pet, location });
 
     if (description === '' || image === null || location === '') {
       console.log('Faltan datos');

@@ -61,7 +61,7 @@ export default function Profile() {
   };
 
   return (
-    <>
+    <main>
       {isLoading && <Spinner />}
       {modalState.isOpen && <Modal />}
       <div className="px-4">
@@ -93,6 +93,6 @@ export default function Profile() {
           </section>
         )}
       </div>
-    </>
+    </main>
   );
 }
