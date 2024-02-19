@@ -124,14 +124,14 @@ const Modal = () => {
       <>
         {isLoading && <Spinner />}
         <main>
-          <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#6F3B14B2] w-full h-full z-[100]">
+          <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#6F3B14B2] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full ">
             <form
-              className={`p-6 bg-[#F2FBE7] rounded-t-[40px] ${!petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
+              className={`p-6 bg-[#F2FBE7] rounded-t-[40px] md:rounded-[24px] md:w-[50%] ${!petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
               onSubmit={onSubmit}
             >
-              <div className="absolute flex flex-row-reverse left-0 w-full">
+              <div className="absolute flex flex-row-reverse left-0 w-full md:relative">
                 <FiX
-                  className="mr-6  text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer"
+                  className="mr-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
                   onClick={() => {
                     setTimeout(() => {
                       closeModal();
@@ -140,8 +140,10 @@ const Modal = () => {
                   }}
                 />
               </div>
-              <p className="mb-4 text-center text-[23px] font-bold">Create your pet´s profile</p>
-              <div className="relative w-[80px] h-[80px] rounded-[50px] shadow-md m-auto mt-0 mb-3 bg-white z-50">
+              <p className="mb-4 text-center text-[23px] font-bold md:text-[48px] md:font-semibold">
+                Create your pet´s profile
+              </p>
+              <div className="relative w-[80px] h-[80px] rounded-[50%] shadow-md m-auto mt-0 mb-3 bg-white z-50 md:w-[130px] md:h-[130px]">
                 <input id="fileInput" type="file" className="hidden" onChange={handleFileChange} />
                 <span
                   className="flex justify-center items-center absolute w-full h-full bg-[#0000] rounded-[50%] text-[0] text-center cursor-pointer hover:bg-[#0004] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:text-2xl z-50"
@@ -149,7 +151,7 @@ const Modal = () => {
                 >
                   <FiEdit />
                   <div className="absolute w-full flex flex-row-reverse bottom-0">
-                    <FaCirclePlus className="text-[24px] mr-1" />
+                    <FaCirclePlus className="text-[24px] mr-1 md:text-[39px]" />
                   </div>
                 </span>
                 <img
@@ -190,7 +192,7 @@ const Modal = () => {
                   setDescriptions(e.target.value);
                 }}
               />
-              <button className="block w-full p-2 mb-3 mx-auto text-white text-[18px] bg-[#E29900] rounded-[8px]">
+              <button className="block w-full p-2 mb-3 mx-auto text-white text-[18px] bg-[#E29900] rounded-[8px] md:text-[28px]">
                 Create
               </button>
             </form>
