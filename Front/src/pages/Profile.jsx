@@ -50,10 +50,6 @@ export default function Profile() {
   const onChange = (event) => {
     if (event.target.value === 'Agregar mascota') {
       openModal({
-        title: 'Exit',
-        description: 'Are you sure you want to leave?',
-        confirmBtn: 'Yes',
-        denyBtn: 'No',
         petModal: true
       });
     } else {

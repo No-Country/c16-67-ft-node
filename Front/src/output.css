@@ -981,7 +981,7 @@ video {
 }
 
 .animate-petModalClose{
-  animation: petModalClose 0.8s linear;
+  animation: petModalClose 0.5s linear;
 }
 
 @keyframes petModalOpen{
@@ -995,7 +995,7 @@ video {
 }
 
 .animate-petModalOpen{
-  animation: petModalOpen 0.8s linear;
+  animation: petModalOpen 0.5s linear;
 }
 
 @keyframes spin{

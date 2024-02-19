@@ -78,8 +78,8 @@ export default {
         spin: 'spin 1.2s infinite linear',
         increment: 'increment 1.2s infinite linear',
         top: 'top 2s linear',
-        petModalOpen: 'petModalOpen 0.8s linear',
-        petModalClose: 'petModalClose 0.8s linear',
+        petModalOpen: 'petModalOpen 0.5s linear',
+        petModalClose: 'petModalClose 0.5s linear',
         fadeInSelfClose: 'fadeInSelfClose 0.5s ease-in forwards',
         fadeOutSelfClose: 'fadeOutSelfClose 0.5s ease-in forwards'
       }

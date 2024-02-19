@@ -85,7 +85,6 @@ const Modal = () => {
       }, 4000);
     }
     setIsFadingOut(true);
-    setPetModalOpen(true);
 
     return () => {
       clearTimeout(timer);
@@ -127,13 +126,18 @@ const Modal = () => {
         <main>
           <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#6F3B14B2] w-full h-full z-[100]">
             <form
-              className={`p-6 bg-[#F2FBE7] rounded-t-[40px]  ${petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
+              className={`p-6 bg-[#F2FBE7] rounded-t-[40px] ${!petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
               onSubmit={onSubmit}
             >
               <div className="absolute flex flex-row-reverse left-0 w-full">
                 <FiX
                   className="mr-6  text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer"
-                  onClick={closeModal}
+                  onClick={() => {
+                    setTimeout(() => {
+                      closeModal();
+                    }, 480);
+                    setPetModalOpen(true);
+                  }}
                 />
               </div>
               <p className="mb-4 text-center text-[23px] font-bold">Create your pet´s profile</p>
@@ -205,7 +209,12 @@ const Modal = () => {
             <button
               className="ml-1 hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150"
               type="x"
-              onClick={closeModal}
+              onClick={() => {
+                setTimeout(() => {
+                  closeModal();
+                }, 480);
+                setIsFadingOut(false);
+              }}
             >
               X
             </button>
