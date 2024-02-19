@@ -8,7 +8,7 @@ import Location from './Location';
 
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
-export default function CreatePublicationCard({ getDataFeed, setIsAutocompleteActive }) {
+export default function CreatePublicationCard({ setIsAutocompleteActive }) {
   const { openModal, modalState } = useModalContext();
   const [isLoading, setIsLoading] = useState(false);
   //Obtengo id de usuario y mascota de local storage
@@ -49,24 +49,26 @@ export default function CreatePublicationCard({ getDataFeed, setIsAutocompleteAc
       return;
     }
 
-    try {
-      await axios.post(`${API_URL_BASE}/api/v1/publication`, formData, {
+    await axios
+      .post(`${API_URL_BASE}/api/v1/publication`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
+      })
+      .then((response) => {
+        console.log(response);
+        setIsLoading(false);
+        openModal({
+          description: 'Publication created successfully',
+          chooseModal: false
+        });
+      })
+      .catch((error) => {
+        openModal({
+          description: error,
+          chooseModal: false
+        });
       });
-      openModal({
-        description: 'Publication created successfully',
-        chooseModal: false
-      });
-      await getDataFeed();
-    } catch (error) {
-      openModal({
-        description: error,
-        chooseModal: false
-      });
-    }
-    setIsLoading(false);
   };
 
   return (

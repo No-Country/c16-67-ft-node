@@ -1,5 +1,5 @@
 import axios from 'axios';
-import logo from '../../public/assets/images/isologo.svg';
+import logo from '../assets/images/isologo.svg';
 import { useEffect, useState } from 'react';
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 

@@ -9,19 +9,18 @@ export default function PetContainer({ tabActive }) {
   const [isAutocompleteActive, setIsAutocompleteActive] = useState(false);
 
   const getDataFeed = () => {
-    getPublications();
+    getPublications(tabActive);
   };
 
   useEffect(() => {
-    setFeedData([]);
     getPublications(tabActive)
       .then((data) => {
-        setFeedData((feedDataPrev) => [...feedDataPrev, ...data]);
+        setFeedData(data);
       })
       .catch((error) => {
         console.error('Error al obtener las publicaciones:', error);
       });
-  }, [feedData, tabActive]);
+  }, [tabActive]);
 
   return (
     <div
