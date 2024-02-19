@@ -10,7 +10,7 @@ export default function NavbarDesktop({ active, setActive, pet }) {
         {pet !== null ? (
           <>
             <img
-              className="md:h-12 md:w-12 lg:h-24 lg:w-24 rounded-full border-2 border-slate-200"
+              className="md:h-12 md:w-12 lg:h-24 lg:w-24 rounded-full border-2 border-slate-200 object-cover"
               src={pet.image_url}
               alt="image of active pet"
             />
