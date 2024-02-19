@@ -1,0 +1,11 @@
+.active {
+    @apply border-secondary-300 border-b-2;
+}
+
+.inactive {
+    @apply text-gray-600 border-gray-300 border-b-2;
+}
+
+.tab {
+    @apply flex-grow basis-0 text-center h-full flex items-center justify-center cursor-pointer;
+}

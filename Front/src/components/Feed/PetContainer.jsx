@@ -3,18 +3,20 @@ import PetCard from './PetCard';
 import { getPublications } from './getPublications';
 import styles from './PetContainer.module.css';
 
-export default function PetContainer() {
+export default function PetContainer({ tabActive }) {
   const [feedData, setFeedData] = useState([]);
+  //console.log(tabActive);
 
   useEffect(() => {
-    getPublications()
+    setFeedData([]);
+    getPublications(tabActive)
       .then((data) => {
-        setFeedData(data);
+        setFeedData((feedDataPrev) => [...feedDataPrev, ...data]);
       })
       .catch((error) => {
         console.error('Error al obtener las publicaciones:', error);
       });
-  }, []);
+  }, [tabActive]);
 
   return (
     <div
