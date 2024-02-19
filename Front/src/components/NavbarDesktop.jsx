@@ -54,8 +54,8 @@ export default function NavbarDesktop({ active, setActive, pet }) {
             <p>Chat</p>
           </NavLink>
         </li>
-        <li className={`${active === 'settigns' ? `${styles.active}` : ''}`}>
-          <NavLink onClick={() => setActive('settigns')} to={'/settings'}>
+        <li className={`${active === 'menu' ? `${styles.active}` : ''}`}>
+          <NavLink onClick={() => setActive('menu')} to={'/menu'}>
             <span className="material-symbols-outlined">settings</span>
             <p>Settings</p>
           </NavLink>
