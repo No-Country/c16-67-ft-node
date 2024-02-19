@@ -7,6 +7,7 @@ import { FiEdit, FiX } from 'react-icons/fi';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import defaultProfile from '../assets/images/defaultProfile.jpg';
 
 const Modal = () => {
   const { modalState, closeModal, openModal } = useModalContext();
@@ -126,7 +127,7 @@ const Modal = () => {
         <main>
           <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#6F3B14B2] w-full h-full z-[100]">
             <form
-              className={`p-6 bg-[#F2FBE7] rounded-t-[40px] animate-petModalClose ${petModalOpen && 'animate-petModalOpen'} `}
+              className={`p-6 bg-[#F2FBE7] rounded-t-[40px]  ${petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
               onSubmit={onSubmit}
             >
               <div className="absolute flex flex-row-reverse left-0 w-full">
@@ -148,7 +149,7 @@ const Modal = () => {
                   </div>
                 </span>
                 <img
-                  src={`${import.meta.env.BASE_URL}assets/images/defaultProfile.jpg`}
+                  src={defaultProfile}
                   className="w-full h-full rounded-[50%] object-cover"
                   id="profilePhoto"
                 />
