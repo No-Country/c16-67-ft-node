@@ -8,6 +8,7 @@ class PetService extends BaseService {
         super([models.Pet, models.Save]); //al llamarlo aqui, inicializamos baseService con el modelo Publication
     }                              // esto nos ayuda que funcione con el modelo especifico y ahorrano lineas de codigo repetitiva
 
+
     async getPets(name, minAge, maxAge, isLost) {
         let conditions = { where: {}, include: [] };
 

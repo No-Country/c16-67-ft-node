@@ -1,37 +1,24 @@
 const SaveService = require("../services/save");
-const { handleUpdate } = require('./base.controller');
+const { handleCreate, handleDeleted, handleGetById } = require('./base.controller');
+const {modelIds, modelNames} = require('../constants');
 
+// utilizamos los servicios que tenemos en la clase hija en (save.service)
 const service = new SaveService();
-
+const Save = service.getModel(modelNames.Save) //obtenemos el modelo que necesitamos
 
 const create = async (req,res) => {
-    try {
-        // Crear una nueva entrada en la tabla Save para guardar la relación
-        await service.create("Save", { ...req.body, status:true });
-
-        res.status(200).json({ message: 'Publicación guardada exitosamente.' });
-    } catch (error) {
-        console.error('Error al guardar la publicación:', error);
-        res.status(500).json({ message: 'Error interno del servidor.' });
-    }
+    let dataBody = { ...req.body, status:true };
+    await handleCreate(req, res, service.create.bind(service),Save, dataBody);
 }
 
 const getById = async (req, res) => {
-    const  petId  = req.params.id;
-    try {
-        // Buscar las publicaciones guardadas por el pet específico
-        const savedPublications = await service.findByPetId(petId);
-
-        res.status(200).json(savedPublications);
-    } catch (error) {
-        console.error('Error al obtener las publicaciones guardadas por el pet:', error);
-        res.status(500).json({ message: 'Error interno del servidor.' });
-    }
+    const { id } = req.params;
+    await handleGetById(req, res, service.findAllSaved.bind(service),Save, id, modelIds.saveId);
 };
 
 const _deleted = async (req, res) => {
     const { id } = req.params;
-    await handleUpdate(req, res, service.update.bind(service),"Save", id, { status: false }, "saveId");
+    await handleDeleted(req, res, service.update.bind(service),Save, id, { status: true },modelIds.saveId);
 };
 
 module.exports = {

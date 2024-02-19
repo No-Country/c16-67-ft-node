@@ -9,7 +9,7 @@ class Pet extends Model {
             sequelize,
             tableName: PET_TABLE,
             modelName: 'Pet',
-            timestamps: true
+            timestamps: false
         }
     }
 

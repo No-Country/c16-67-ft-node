@@ -1,37 +1,48 @@
+
+const handleCreate = async(req,res, serviceFunction, model, dataBody) =>{
+    try {
+        const response = await serviceFunction(model, dataBody)
+        res.status(200).json({ success: true, data: response });
+    } catch (error) {
+        res.status(500).send({ success: false, message: error.message });
+    }
+};
+
+const handleUpdate = async(req,res, serviceFunction, model, id, dataBody, whereId ) =>{
+    try {
+        const response = await serviceFunction(model,id, dataBody, whereId);
+        res.status(200).json({ success: true, data: response });
+    } catch (error) {
+        res.status(500).send({ success: false, message: error.message });
+    }
+};
+
 const handleGet = async (req, res, serviceFunction, model,type) => {
     try {
         const response = await serviceFunction(model,type);
-        res.json(response);
+        res.status(200).json({ success: true, data: response });
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
 };
 
-const handleGetById = async (req, res, serviceFunction, model,id) => {
+const handleGetById = async (req, res, serviceFunction, model,id, whereId) => {
     try {
-        const response = await serviceFunction(model, id);
-        res.json(response);
+        const response = await serviceFunction(model, id, whereId);
+        res.status(200).json({ success: true, data: response });
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
 };
 
-const getByIdFk = async (req,res, serviceFunction,model, id,whereId) =>{
+const handleDeleted = async (req, res, serviceFunction,model, id, dataBody, whereId) => {
     try {
-        const response = await serviceFunction(model,id, whereId);
-        res.json(response);
-    } catch (error) {
-        res.status(500).send({success:false, message:error.message});
-    }
-}
-
-const handleUpdate = async (req, res, serviceFunction,model, id, body, whereId) => {
-    try {
-        const response = await serviceFunction(model,id, body, whereId);
-        res.json(response);
+        const response = await serviceFunction(model,id, dataBody, whereId);
+        res.status(200).json({ success: true, data: response });
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
 };
 
-module.exports = { handleGet, handleGetById, handleUpdate, getByIdFk};
+
+module.exports = { handleGet, handleGetById, handleDeleted, handleCreate, handleUpdate};

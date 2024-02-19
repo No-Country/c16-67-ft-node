@@ -1,71 +1,51 @@
 const CommentService = require('../services/comment');
-const { handleGet, handleGetById, handleDeleted, getByIdFk} = require('./base.controller');
+const { handleGet, handleGetById, handleUpdate, handleCreate, handleDeleted } = require('./base.controller');
+const {modelIds, modelNames} = require('../constants');
 
-const cloudinary = require('cloudinary').v2;
-
+// utilizamos los servicios que tenemos en la clase hija en (comment.service)
 const service = new CommentService();
+const Comment = service.getModel(modelNames.Comment) //obtenemos el modelo que necesitamos
+
 
 
 const create = async(req,res) =>{
-    try {
-        const response = await service.create("Comment",{
-            ...req.body,
-            status:true
-        });
-        res.json({success: true, data: response});
-    } catch (error) {
-        res.status(500).send({success:false,message:error.message});
-    }
+    let dataBody= {...req.body,status:true}
+    await handleCreate(req, res, service.create.bind(service),Comment, dataBody);
 }
 
 const update = async (req,res) =>{
-    try {
         const {id} = req.params;
-
-        const response = await service.update("Comment", id,{
-            ...req.body,
-            status:true
-        },"commentId");
-        res.json({success: true, data: response});
-    } catch (error) {
-        res.status(500).send({success:false, message:error.message});
-    }
+        await handleUpdate(req, res, service.update.bind(service),Comment,id,req.body, modelIds.commentId);
 }
 
 
 const get = async (req, res) => {
-    await handleGet(req, res, service.find.bind(service), "Comment");
+    await handleGet(req, res, service.find.bind(service), Comment);
 };
 
 const getById = async (req, res) => {
     const { id } = req.params;
-    await handleGetById(req, res, service.findOne.bind(service),"Comment", id);
+    await handleGetById(req, res, service.findOne.bind(service),Comment, id, modelIds.commentId);
 };
 
-// todos los getbyfk son find anidados, ya que ademas de buscar en la tabla comment, debo de buscar datos del pet para renderizar en el front
 const getByFkuserId = async (req, res) => { 
     const { id } = req.params;
-    await getByIdFk(req, res, service.findFk.bind(service),"Comment", id, "userId");
+    await handleGetById(req, res, service.findFk.bind(service),Comment, id, modelIds.userId);
 };
 
 const getByFkpetId = async (req, res) => {
     const { id } = req.params;
-    await getByIdFk(req, res, service.findFk.bind(service),"Comment", id, "petId");
+    await handleGetById(req, res, service.findFk.bind(service),Comment, id, modelIds.petId);
 };
 
 const getByFkpostId = async (req, res) => {
     const { id } = req.params;
-    await getByIdFk(req, res, service.findFk.bind(service),"Comment", id, "postId", );
+    await handleGetById(req, res, service.findFk.bind(service),Comment, id, modelIds.postId);
 };
 
 const _deleted = async (req, res) => {
-    try {
         const { id } = req.params;
-        await handleDeleted(req, res, service.deleted.bind(service),"Comment", id,{ status: false }, "commentId");
-        res.json({success: true, data: "Eliminado con exito"});
-    } catch (error) {
-        res.status(500).send({success:false, message:error.message});
-    }
+        await handleDeleted(req, res, service.update.bind(service),Comment, id,{ status: false }, modelIds.commentId);
 };
 
 module.exports ={

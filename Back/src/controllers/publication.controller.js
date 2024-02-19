@@ -1,28 +1,18 @@
 const PublicationService = require('../services/publication');
-const { handleGet, handleGetById, getByIdFk, handleUpdate } = require('./base.controller');
+const { handleGet, handleGetById, handleUpdate, handleCreate, handleDeleted } = require('./base.controller');
+const {modelIds, modelNames, typesPublications} = require('../constants');
+const  uploadImageAndGetUrl  = require('../apiConfig/cloudinary.config');
 
-const cloudinary = require('cloudinary').v2;
-
+// utilizamos los servicios que tenemos en la clase hija en (publication.service)
 const service = new PublicationService();
-
+const Publication = service.getModel(modelNames.Publication) //obtenemos el modelo que necesitamos
+const Save = service.getModel(modelNames.Save)               //obtenemos el modelo que necesitamos
 
 const create = async (req, res) => {
     try {
-        // Subir la imagen a Cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path);
-        // Obtener la URL de la imagen cargada desde Cloudinary
-        const imageUrl = result.secure_url;
-        let { userId, petId, description, type } = req.body
-
-        const response = await service.create("Publication",{
-            userId,
-            petId,
-            description,
-            image_url: imageUrl,
-            type,
-            status: true
-        });
-        res.json({ success: true, data: response });
+        const imageUrl = await uploadImageAndGetUrl(req.file.path);
+        const dataBody = { ...req.body,image_url: imageUrl, status:true };
+        await handleCreate(req, res, service.create.bind(service),Publication, dataBody);
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
@@ -30,35 +20,15 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
     try {
-        // Subir la imagen a Cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path);
-        // Obtener la URL de la imagen cargada desde Cloudinary
-        const imageUrl = result.secure_url;
-
-        let { description, publication_date, type } = req.body
+        const imageUrl = await uploadImageAndGetUrl(req.file.path);
         const { id } = req.params;
+        let dataBody = {...req.body, image_url: imageUrl}
+        // Verificar si existe un registro en la tabla Save para la publicacion
+        const savePost = await service.findFk(Save,id,modelIds.postId); 
+        // Si existe un registro en Save, intentar actualizar la información
+        if (savePost?.length) await service.update(Save, id, { image_url_post: imageUrl }, modelIds.postId);
 
-        const response = await service.update("Publication",id,{
-            description,
-            publication_date,
-            image_url: imageUrl,
-            type, 
-            status: true,
-        }, "postId");
-
-         // Verificar si existe un registro en la tabla Save para la publicacion
-        const savePost = await service.findFk("Save",id,"postId"); 
-
-         // Si existe un registro en Save, intentar actualizar la información
-        if (savePost && savePost.length > 0) {
-            try {
-                await service.update("Save", id, { image_url_post: imageUrl }, "postId");
-                return res.status(200).json(response);
-            } catch (error) {
-                return res.status(500).send({ success: false, message: 'No se pudo actualizar la información en Save.' });
-            }
-        }
-        return res.status(200).json(response);    
+        await handleUpdate(req, res, service.update.bind(service),Publication,id, dataBody, modelIds.postId);
     } catch (error) {
         return res.status(500).send({ success: false, message: error.message });
     }
@@ -66,49 +36,41 @@ const update = async (req, res) => {
 
 
 const get = async (req, res) => {
-    try {
-        const { type } = req.query
-        await handleGet(req, res, service.find.bind(service),"Publication", type);
-    } catch (error) {
-        res.status(500).send({ success: false, message: error.message });
-    }
+    await handleGet(req, res, service.find.bind(service),Publication);
 };
+
+const getFiltered  = async (req, res) =>{
+    await handleGetById(req, res, service.findAllExcludin.bind(service), Publication,typesPublications.Normal, typesPublications.type);
+}
 
 const getById = async (req, res) => {
     const { id } = req.params;
-    await handleGetById(req, res, service.findOne.bind(service), "Publication", id);
+    await handleGetById(req, res, service.findOne.bind(service), Publication, id, modelIds.postId);
 };
 
 const getByFkuserId = async (req, res) => {
     const { id } = req.params;
-    await getByIdFk(req, res, service.findFk.bind(service),"Publication", id, "userId");
+    await handleGetById(req, res, service.findFk.bind(service),Publication, id, modelIds.userId);
 };
 
 const getByFkpetId = async (req, res) => {
     const { id } = req.params;
-    await getByIdFk(req, res, service.findFk.bind(service),"Publication", id, "petId");
+    await handleGetById(req, res, service.findFk.bind(service),Publication, id, modelIds.petId);
 };
 
 const _deleted = async (req, res) => {
     try {
         const { id } = req.params;
-
-        // Actualizar la publicación
-        const updatedPublication = await service.update("Publication", id, { status: false }, "postId");
-
         // Verificar y actualizar la información en Save
-        const savePost = await service.findFk("Save", id, "postId");
-        if (savePost && savePost.length > 0) {
-            await service.update("Save", id, { status: false }, "postId");
-        }
-
-        // Enviar respuesta al cliente con la publicación actualizada
-        return res.status(200).json(updatedPublication);
+        let savePost = await service.findFk.bind(Save, id, "postId");
+        if (savePost.data?.length) await service.update.bind(Save, id, { status: false },modelIds.postId);
+        // Actualizar/Eliminar la publicación
+        await handleDeleted(req, res, service.update.bind(service),Publication, id, { status: false }, modelIds.postId);
     } catch (error) {
         return res.status(500).send({ success: false, message: error.message });
     }
 };
 
 module.exports = {
-    create, get, getById, update, _deleted, getByFkuserId, getByFkpetId
+    create, get, getById, update, _deleted, getByFkuserId, getByFkpetId, getFiltered 
 };
