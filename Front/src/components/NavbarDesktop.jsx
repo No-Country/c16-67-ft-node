@@ -1,5 +1,5 @@
-import feedIcon from '../../public/assets/images/feedIcon.png';
-import chatIcon from '../../public/assets/images/chat.png';
+import feedIcon from '../assets/images/feedIcon.png';
+import chatIcon from '../assets/images/chat.png';
 import { NavLink } from 'react-router-dom';
 import styles from './NavbarDesktop.module.css';
 

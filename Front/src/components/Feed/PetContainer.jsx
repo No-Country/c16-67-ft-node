@@ -4,23 +4,24 @@ import { getPublications } from './getPublications';
 import styles from './PetContainer.module.css';
 import CreatePublicationCard from './CreatePublicationCard';
 
-export default function PetContainer() {
+export default function PetContainer({ tabActive }) {
   const [feedData, setFeedData] = useState([]);
   const [isAutocompleteActive, setIsAutocompleteActive] = useState(false);
 
   const getDataFeed = () => {
-    getPublications()
+    getPublications();
+  };
+
+  useEffect(() => {
+    setFeedData([]);
+    getPublications(tabActive)
       .then((data) => {
-        setFeedData(data);
+        setFeedData((feedDataPrev) => [...feedDataPrev, ...data]);
       })
       .catch((error) => {
         console.error('Error al obtener las publicaciones:', error);
       });
-  };
-
-  useEffect(() => {
-    getDataFeed();
-  }, [feedData]);
+  }, [feedData, tabActive]);
 
   return (
     <div
