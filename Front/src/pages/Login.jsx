@@ -1,6 +1,8 @@
 import { React, useEffect } from 'react';
 import LoginContent from '../components/login/LoginContent';
 import { useNavigateContext } from '../context/navigationContext';
+import logo from '../assets/images/isologo.svg';
+import foots from '../assets/images/foots.png';
 
 export default function Login() {
   const { setActive } = useNavigateContext();
@@ -14,7 +16,7 @@ export default function Login() {
       <div className="fixed flex flex-col top-0 bottom-0 right-0 left-0 justify-center items-center m-2 rounded-[10px] bg-gradient-to-t from-white to-[#d9ae90]">
         <div className="flex flex-col h-[150px]">
           <p className="font-walter  text-[30px] text-[#000] text-center">Welcome to</p>
-          <img src={`${import.meta.env.BASE_URL}assets/images/isologo.svg`} alt="isologo" />
+          <img src={logo} alt="isologo" />
         </div>
         <div className="flex items-center justify-center z-50">
           <LoginContent />
@@ -24,11 +26,7 @@ export default function Login() {
         </div>
       </div>
       <div className="absolute flex justify-center w-full bottom-0  z-10">
-        <img
-          src={`${import.meta.env.BASE_URL}assets/images/foots.png`}
-          alt="foot-image"
-          className=" mb-[-140px] animate-top opacity-30"
-        />
+        <img src={foots} alt="foot-image" className=" mb-[-140px] animate-top opacity-30" />
       </div>
     </main>
   );

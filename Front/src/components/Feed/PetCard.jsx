@@ -1,5 +1,5 @@
-import likeIcon from '../../../public/assets/images/like.png';
-import commentIcon from '../../../public/assets/images/comment.png';
+import likeIcon from '../../assets/images/like.png';
+import commentIcon from '../../assets/images/comment.png';
 
 export default function PetCard({ postImage, description, petId, postId, petName, profileImage }) {
   return (
