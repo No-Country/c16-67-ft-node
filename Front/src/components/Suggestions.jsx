@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
 const Item = ({ pet }) => {
-  console.log(pet);
-
   return (
     <div className="flex justify-between w-full items-center">
       <div className="flex py-4 gap-x-2">
@@ -27,7 +25,6 @@ const Item = ({ pet }) => {
 export default function Suggestions() {
   const userId = JSON.parse(localStorage.getItem('userId'));
   const [pets, setPets] = useState([]);
-  console.log(pets);
 
   useEffect(() => {
     axios

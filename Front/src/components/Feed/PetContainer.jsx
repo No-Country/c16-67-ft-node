@@ -6,6 +6,7 @@ import CreatePublicationCard from '../CreatePublicationCard';
 
 export default function PetContainer() {
   const [feedData, setFeedData] = useState([]);
+  const [isAutocompleteActive, setIsAutocompleteActive] = useState(false);
 
   const getDataFeed = () => {
     getPublications()
@@ -23,9 +24,12 @@ export default function PetContainer() {
 
   return (
     <div
-      className={`pt-12 md:pt-4 md:max-h-[calc(100vh-112px)] xl:max-h-[calc(100vh-64px)] overflow-auto ${styles.scrollbarCustom}`}
+      className={`pt-12 md:pt-4 md:max-h-[calc(100vh-112px)] xl:max-h-[calc(100vh-64px)] ${!isAutocompleteActive ? 'overflow-auto' : 'overflow-hidden'} ${styles.scrollbarCustom}`}
     >
-      <CreatePublicationCard getDataFeed={getDataFeed} />
+      <CreatePublicationCard
+        getDataFeed={getDataFeed}
+        setIsAutocompleteActive={setIsAutocompleteActive}
+      />
       {feedData.map((publication, index) => (
         <PetCard
           key={index}

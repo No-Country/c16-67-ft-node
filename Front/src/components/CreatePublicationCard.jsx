@@ -4,10 +4,11 @@ import Spinner from '../components/Spinner';
 import { useModalContext } from '../context/modalContext';
 import Modal from '../components/Modal';
 import styles from './CreatePublicationCard.module.css';
+import Location from './Location';
 
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
-export default function CreatePublicationCard({ getDataFeed }) {
+export default function CreatePublicationCard({ getDataFeed, setIsAutocompleteActive }) {
   const { openModal, modalState } = useModalContext();
   const [isLoading, setIsLoading] = useState(false);
   //Obtengo id de usuario y mascota de local storage
@@ -17,6 +18,7 @@ export default function CreatePublicationCard({ getDataFeed }) {
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState('');
   const [type, setType] = useState('normal');
+  const [location, setLocataion] = useState('');
 
   // Manejadores de cambio para los inputs
   const handleImageChange = (event) => {
@@ -39,7 +41,13 @@ export default function CreatePublicationCard({ getDataFeed }) {
     formData.append('userId', userId);
     formData.append('petId', petId);
 
-    console.log({ image, description, type, userId, petId });
+    console.log({ image, description, type, userId, petId, location });
+
+    if (description === '' || image === null || location === '') {
+      console.log('Faltan datos');
+      setIsLoading(false);
+      return;
+    }
 
     try {
       await axios.post(`${API_URL_BASE}/api/v1/publication`, formData, {
@@ -100,6 +108,7 @@ export default function CreatePublicationCard({ getDataFeed }) {
           value={description}
           onChange={handleDescriptionChange}
         />
+        <Location setIsAutocompleteActive={setIsAutocompleteActive} setLocataion={setLocataion} />
         <div className="flex justify-between mt-4">
           <label
             htmlFor="file-upload"
