@@ -9,8 +9,9 @@ class PetService extends BaseService {
     }                              // esto nos ayuda que funcione con el modelo especifico y ahorrano lineas de codigo repetitiva
 
 
-    async getPets(name, minAge, maxAge, isLost) {
-        let conditions = { where: {}, include: [] };
+    async getPets(name, minAge, maxAge, isLost,page,limit) {
+        const offset = (page - 1) * limit;
+        let conditions = { where: {}, include: [], offset,limit};
 
         if (name) {
             conditions.where.name = {

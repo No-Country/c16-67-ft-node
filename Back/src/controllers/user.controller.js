@@ -39,7 +39,9 @@ const lastPet = async (req,res) =>{
 
 
 const get = async (req, res) => {
-    await handleGet(req, res, service.find.bind(service),User);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;    
+    await handleGet(req, res, service.find.bind(service),User,page, limit);
 };
 
 const getById = async (req, res) => {

@@ -39,8 +39,10 @@ const getByFkpetId = async (req, res) => {
 };
 
 const getByFkpostId = async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10; 
     const { id } = req.params;
-    await handleGetById(req, res, service.findFk.bind(service),Comment, id, modelIds.postId);
+    await handleGetById(req, res, service.findFk.bind(service),Comment, id, modelIds.postId,page,limit);
 };
 
 const _deleted = async (req, res) => {

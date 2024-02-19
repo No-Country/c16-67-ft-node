@@ -13,7 +13,9 @@ const create = async (req,res) => {
 
 const getById = async (req, res) => {
     const { id } = req.params;
-    await handleGetById(req, res, service.findAllSaved.bind(service),Save, id, modelIds.saveId);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20; 
+    await handleGetById(req, res, service.findAllSaved.bind(service),Save, id, modelIds.saveId,page,limit);
 };
 
 const _deleted = async (req, res) => {

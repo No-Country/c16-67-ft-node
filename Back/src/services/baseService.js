@@ -17,8 +17,12 @@ class BaseService {
     }
 
 
-    async find(model) {
+    async find(model,page, limit) {
         try {
+            if(!page?.length && !limit?.length){
+                return model.findAll();   
+            }
+            const offset = (page - 1) * limit;
             const modelName = model.options.name.singular; //Buscamos el model correcto con el valor que nos pasan
             const modelMapping = {
                 "Publication": { secondaryModel: "Pet", as: "pets", attributes: ['name', 'image_url']},
@@ -35,11 +39,13 @@ class BaseService {
                             attributes: attributes,
                             }],
                         order: [['createdAt', 'DESC']],
+                        offset, // <-- Paginación
+                        limit, // <-- Paginación 
                         raw: true
                     });
                     return items; 
             }
-            return model.findAll();    
+            return model.findAll({offset,limit});    
         } catch (error) {
             throw error; //mandamos el error a la función usada para que se use el respectivo catch
         }
@@ -77,15 +83,18 @@ class BaseService {
     }
     
 
-    async findAllExcludin(model,date,whereId) {
+    async findAllExcludin(model,date,whereId,page,limit) {
         try {
-            console.log(model,date,whereId)
+            const offset = (page - 1) * limit;
             const petsWithoutUserId = await model.findAll({
                 where: {
                     [whereId]: {
                         [Op.ne]: date 
                     }
-                }
+                },
+                order: [['createdAt', 'DESC']],
+                offset, // <-- Paginación
+                limit, // <-- Paginación 
             });
             return petsWithoutUserId;
         } catch (error) {

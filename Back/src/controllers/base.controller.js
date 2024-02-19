@@ -17,18 +17,18 @@ const handleUpdate = async(req,res, serviceFunction, model, id, dataBody, whereI
     }
 };
 
-const handleGet = async (req, res, serviceFunction, model,type) => {
+const handleGet = async (req, res, serviceFunction, model,page,limit) => {
     try {
-        const response = await serviceFunction(model,type);
+        const response = await serviceFunction(model,page,limit);
         res.status(200).json({ success: true, data: response });
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
 };
 
-const handleGetById = async (req, res, serviceFunction, model,id, whereId) => {
+const handleGetById = async (req, res, serviceFunction, model,id, whereId,page,limit) => {
     try {
-        const response = await serviceFunction(model, id, whereId);
+        const response = await serviceFunction(model, id, whereId,page,limit);
         res.status(200).json({ success: true, data: response });
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });

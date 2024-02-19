@@ -38,8 +38,10 @@ const update = async (req, res) => {
 
 const get = async (req, res) => {
     try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10; 
         const { name, minAge, maxAge, isLost } = req.query;
-        const pets = await service.getPets(name, minAge, maxAge, isLost);
+        const pets = await service.getPets(name, minAge, maxAge, isLost,page,limit);
         res.status(200).json({ success: true, data: pets });
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
@@ -57,8 +59,10 @@ const getByFkuserId = async (req, res) => {
 };
 
 const getSuggestion = async (req, res) =>{
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
     const {id} = req.params;
-    await handleGetById(req, res, service.findAllExcludin.bind(service), Pet, id, modelIds.userId);
+    await handleGetById(req, res, service.findAllExcludin.bind(service), Pet, id, modelIds.userId,page,limit);
 }
 
 const _deleted = async (req, res) => {
@@ -67,7 +71,7 @@ const _deleted = async (req, res) => {
         // Verificar la información en Save
         let result = await service.findFk.bind(Save, id, modelIds.petId);
         //  si existe, lo cambia
-        if (result.data?.length) await service.update(Save, id, { status: false }, modelIds.petId);
+        if (result?.length) await service.update(Save, id, { status: false }, modelIds.petId);
         // Actualizar la publicación
         await handleDeleted(req, res, service.update.bind(service),Pet, id, { status: false }, modelIds.petId);
     } catch (error) {

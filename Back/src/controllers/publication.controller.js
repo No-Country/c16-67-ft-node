@@ -36,11 +36,19 @@ const update = async (req, res) => {
 
 
 const get = async (req, res) => {
-    await handleGet(req, res, service.find.bind(service),Publication);
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 20;
+        await handleGet(req, res, service.find.bind(service),Publication, page,limit);
+    } catch (error) {
+        return res.status(500).send({ success: false, message: error.message });
+    }
 };
 
 const getFiltered  = async (req, res) =>{
-    await handleGetById(req, res, service.findAllExcludin.bind(service), Publication,typesPublications.Normal, typesPublications.type);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    await handleGetById(req, res, service.findAllExcludin.bind(service), Publication,typesPublications.Normal, typesPublications.type,page, limit);
 }
 
 const getById = async (req, res) => {
@@ -63,7 +71,7 @@ const _deleted = async (req, res) => {
         const { id } = req.params;
         // Verificar y actualizar la información en Save
         let savePost = await service.findFk.bind(Save, id, "postId");
-        if (savePost.data?.length) await service.update.bind(Save, id, { status: false },modelIds.postId);
+        if (savePost?.length) await service.update.bind(Save, id, { status: false },modelIds.postId);
         // Actualizar/Eliminar la publicación
         await handleDeleted(req, res, service.update.bind(service),Publication, id, { status: false }, modelIds.postId);
     } catch (error) {
