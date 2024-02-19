@@ -1,4 +1,5 @@
 import React from 'react';
+import spinner from '../assets/images/foots.png';
 
 const Spinner = () => {
   return (
@@ -7,11 +8,7 @@ const Spinner = () => {
         <div className="absolute w-full h-full rounded-[50%] border-x-[5px] border-y-[5px] border-transparent border-t-[#fff] box-border"></div>
       </div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <img
-          src={`${import.meta.env.BASE_URL}assets/images/foots.png`}
-          alt="logo-spinner"
-          className="object-cover animate-increment"
-        />
+        <img src={spinner} alt="logo-spinner" className="object-cover animate-increment" />
       </div>
     </div>
   );
