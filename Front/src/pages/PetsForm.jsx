@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useModalContext } from '../context/modalContext';
 import Modal from '../components/Modal';
+import defaultProfile from '../assets/images/defaultProfile.jpg';
 
 const PetsForm = () => {
   const { openModal, modalState } = useModalContext();
@@ -89,7 +90,7 @@ const PetsForm = () => {
                 <FiEdit />
               </span>
               <img
-                src={`${import.meta.env.BASE_URL}assets/images/defaultProfile.jpg`}
+                src={defaultProfile}
                 className="w-full h-full rounded-[50%] object-cover"
                 id="profilePhoto"
               />

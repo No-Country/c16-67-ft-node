@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import feedIcon from '../../public/assets/images/feedIcon.png';
-import logo from '../../public/assets/images/isologo.svg';
-import chatIcon from '../../public/assets/images/chat.png';
+import feedIcon from '../assets/images/feedIcon.png';
+import logo from '../assets/images/isologo.svg';
+import chatIcon from '../assets/images/chat.png';
 
 export default function NavbarMobile({ active, setActive, pet }) {
   return (

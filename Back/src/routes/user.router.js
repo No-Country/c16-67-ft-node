@@ -13,6 +13,7 @@ router
     .get('/:id', userController.getById)
     .post('/', userController.create)
     .put('/:id',upload.single('image'), userController.update)
+    .put('/lastpet/:id', userController.lastPet)
     .put('/deleted/:id', userController._deleted);
 
     module.exports = router;

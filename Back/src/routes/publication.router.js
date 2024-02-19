@@ -11,6 +11,7 @@ const upload = multer({ storage });
 
 router 
     .get('/', publicationController.get)
+    .get('/filtered', publicationController.getFiltered)
     .get('/:id', publicationController.getById)
     .get('/userid/:id', publicationController.getByFkuserId)
     .get('/petid/:id', publicationController.getByFkpetId)

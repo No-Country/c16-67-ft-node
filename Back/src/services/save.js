@@ -6,16 +6,15 @@ class SaveService extends BaseService {
     constructor() {
         super([models.Save]);
     }                             
-    async findByPetId(petId) {
+    async findAllSaved(model,petId) {
         try {
             // Obtener los postId de las publicaciones guardadas por el animal
-            const savedPublications = await models.Save.findAll({
+            const savedPublications = await model.findAll({
                 where: { petId }
             });
-            return savedPublications;
+            return savedPublications
         } catch (error) {
-            console.error(error);
-            throw new Error('An error occurred while retrieving saved publications');
+            return { error: true, message: error.message }
         }
     }
 
