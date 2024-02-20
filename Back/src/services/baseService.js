@@ -105,7 +105,8 @@ class BaseService {
 
     async findOne(model, id, whereId) {
         try {
-            if(model === "Publication"){
+            const modelName = model.options.name.singular;
+            if(modelName === "Publication"){
                 const selectedModelFk = this.getModel("Pet");
                 const nestedInformation = await model.findOne({
                     where: { [whereId]: id },
@@ -119,7 +120,6 @@ class BaseService {
                 });
             return nestedInformation
             }
-            console.log(whereId)
             return model.findOne({where: { [whereId]: id }});  
         } catch (error) {
             throw error; //mandamos el error a la función usada para que se use el respectivo catch
@@ -128,10 +128,11 @@ class BaseService {
 
     async create(model, dataBody) {
         try {
-            if (model === "User"){
+            const modelName = model.options.name.singular;
+            if (modelName === "User"){
                 let date = await model.findOrCreate({
-                    where: { mail: data.mail}, // Criterio de búsqueda
-                    defaults: data})
+                    where: { mail: dataBody.mail}, // Criterio de búsqueda
+                    defaults: dataBody})
                     return  date;
             }
             let date = await model.create(dataBody) 
