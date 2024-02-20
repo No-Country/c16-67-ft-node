@@ -1,8 +1,17 @@
 import likeIcon from '../../assets/images/like.png';
 import commentIcon from '../../assets/images/comment.png';
 
-export default function PetCard({ postImage, description, petId, postId, petName, profileImage }) {
-  return (
+export default function PetCard({
+  postImage,
+  description,
+  pet,
+  isSelected,
+  petName,
+  profileImage,
+  petCardProfile,
+  onClick
+}) {
+  return !petCardProfile ? (
     <div className="mb-4 md:grid md:grid-cols-12 md:h-80 md:shadow-md md:rounded-2xl auto-rows-fr max-w-[640px] mx-auto">
       <div className="flex px-4 gap-x-3 items-center md:h-fit md:mt-4 md:col-[7/13] md:relative">
         <img className="w-12 h-12 md:w-16 md:h-16 object-cover rounded-full" src={profileImage} />
@@ -36,6 +45,14 @@ export default function PetCard({ postImage, description, petId, postId, petName
       <div className="hidden md:block ml-5 col-[7/13] h-fit md:row-[6/7] text-gray-500">
         Add a comment...
       </div>
+    </div>
+  ) : (
+    <div
+      className={`border p-2 cursor-pointer ${isSelected ? 'border-blue-500' : 'border-gray-300'}`}
+      onClick={() => onClick(pet.petId)}
+    >
+      <img src={pet.image_url} alt={pet.name} className="w-20 h-20 object-cover rounded-full" />
+      <p className="text-center mt-2">{pet.name}</p>
     </div>
   );
 }

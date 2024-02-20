@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import { useModalContext } from '../context/modalContext';
 import Modal from '../components/Modal';
+import PetCard from '../components/Feed/PetCard';
+import { FiArrowLeft } from 'react-icons/fi';
+import { MdEdit } from 'react-icons/md';
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
 export default function Profile() {
@@ -47,13 +50,14 @@ export default function Profile() {
     fetchData();
   }, [userId, navigate]);
 
-  const onChange = (event) => {
-    if (event.target.value === 'Agregar mascota') {
+  const onChange = (petId) => {
+    if (petId === 'addPet') {
       openModal({
-        petModal: true
+        petModal: true,
+        xBtnPetModal: true
       });
     } else {
-      axios.get(`${API_URL_BASE}/api/v1/pet/${event.target.value}`).then((res) => {
+      axios.get(`${API_URL_BASE}/api/v1/pet/${petId}`).then((res) => {
         const pet = { petId: res.data.petId, name: res.data.name, image_url: res.data.image_url };
         localStorage.setItem('pet', JSON.stringify(pet));
       });
@@ -66,30 +70,38 @@ export default function Profile() {
       {modalState.isOpen && <Modal />}
       <div className="px-4">
         <div className="flex flex-col items-center gap-y-4 mt-4">
+          <div className="flex justify-between items-center w-full text-[28px]">
+            <FiArrowLeft className="cursor-pointer" onClick={() => navigate(-1)} />
+            <span>Profile</span>
+            <MdEdit className="cursor-pointer" />
+          </div>
           {!user.image_url ? (
             <></>
           ) : (
-            <img src={user.image_url} alt="User image" className="w-12 h-12 rounded-full" />
+            <img src={user.image_url} alt="User image" className="w-[90px] h-[90px] rounded-full" />
           )}
-          <p>{user.name}</p>
+          <p className="font-semibold">{user.mail}</p>
         </div>
         {options.length === 0 ? (
           <></>
         ) : (
-          <section>
-            <h2 className="mt-12">Mascotas</h2>
-            <select name="select" onChange={onChange} className="w-full">
-              <option>Agregar mascota</option>
-              {options.map((option) => (
-                <option
-                  key={option.value}
-                  value={option.value}
-                  selected={pet !== null && option.value === pet.petId}
-                >
-                  {option.label}
-                </option>
-              ))}
-            </select>
+          <section className="flex flex-wrap gap-4">
+            {options.map((option) => (
+              <PetCard
+                petCardProfile={true}
+                key={option.value}
+                pet={option}
+                isSelected={pet !== null && option.value === pet.petId}
+                onClick={onChange}
+              />
+            ))}
+            <PetCard
+              petCardProfile={true}
+              key="addPet"
+              pet={{ value: 'addPet', label: 'Agregar mascota' }}
+              isSelected={false}
+              onClick={onChange}
+            />
           </section>
         )}
       </div>

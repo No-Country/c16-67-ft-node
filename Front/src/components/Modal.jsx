@@ -11,8 +11,17 @@ import defaultProfile from '../assets/images/defaultProfile.jpg';
 
 const Modal = () => {
   const { modalState, closeModal, openModal } = useModalContext();
-  const { isOpen, description, title, confirmBtn, denyBtn, chooseModal, petModal, onClick } =
-    modalState;
+  const {
+    isOpen,
+    description,
+    title,
+    confirmBtn,
+    denyBtn,
+    chooseModal,
+    petModal,
+    xBtnPetModal,
+    onClick
+  } = modalState;
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [petModalOpen, setPetModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -129,17 +138,19 @@ const Modal = () => {
               className={`p-6 bg-[#F2FBE7] rounded-t-[40px] md:rounded-[24px] md:w-[50%] ${!petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
               onSubmit={onSubmit}
             >
-              <div className="absolute flex flex-row-reverse left-0 w-full md:relative">
-                <FiX
-                  className="mr-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
-                  onClick={() => {
-                    setTimeout(() => {
-                      closeModal();
-                    }, 480);
-                    setPetModalOpen(true);
-                  }}
-                />
-              </div>
+              {xBtnPetModal ? (
+                <div className="absolute flex flex-row-reverse left-0 w-full md:relative">
+                  <FiX
+                    className="mr-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
+                    onClick={() => {
+                      setTimeout(() => {
+                        closeModal();
+                      }, 480);
+                      setPetModalOpen(true);
+                    }}
+                  />
+                </div>
+              ) : null}
               <p className="mb-4 text-center text-[23px] font-bold md:text-[48px] md:font-semibold">
                 Create your pet´s profile
               </p>
