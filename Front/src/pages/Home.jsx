@@ -24,7 +24,7 @@ export default function Home() {
       axios
         .get(`${ServerConnect}/api/v1/pet/userid/${JSON.parse(userId)}`)
         .then((res) => {
-          if (res.data.length === 0) {
+          if (res.data.data.length === 0) {
             navigate('/profile');
             openModal({
               petModal: true

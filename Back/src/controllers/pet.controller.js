@@ -1,25 +1,18 @@
 const PetService = require('../services/pet');
-const { handleGet, handleGetById, handleUpdate, getByIdFk } = require('./base.controller');
+const { handleGetById, handleCreate, handleDeleted, handleUpdate } = require('./base.controller');
+const {modelIds, modelNames} = require('../constants');
+const  uploadImageAndGetUrl  = require('../apiConfig/cloudinary.config');
 
-
-const cloudinary = require('cloudinary').v2;
-
+// utilizamos los servicios que tenemos en la clase hija en (pet.service)
 const service = new PetService();
-
+const Pet = service.getModel(modelNames.Pet)   //obtenemos el modelo que necesitamos
+const Save = service.getModel(modelNames.Save) //obtenemos el modelo que necesitamos
 
 const create = async (req, res) => {
     try {
-        // Subir la imagen a Cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path);
-        // Obtener la URL de la imagen cargada desde Cloudinary
-        const imageUrl = result.secure_url;
-
-        const response = await service.create("Pet",{
-            ...req.body,
-            image_url: imageUrl, // Pasa la URL de la imagen
-            status:true
-        });
-        res.json({ success: true, data: response });
+        const imageUrl = await uploadImageAndGetUrl(req.file.path);
+        const dataBody = { ...req.body,image_url: imageUrl, status:true };
+        await handleCreate(req, res, service.create.bind(service),Pet, dataBody);  
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
@@ -27,92 +20,65 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
     try {
-        // Subir la imagen a Cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path);
-        // Obtener la URL de la imagen cargada desde Cloudinary
-        const imageUrl = result.secure_url;
-    
+        const imageUrl = await uploadImageAndGetUrl(req.file.path);
         const { id } = req.params;
         let { name } = req.body;
-    
-        // Actualizar la información de la mascota en la tabla Pet
-        const responsePetUpdate = await service.update("Pet", id, {
-            ...req.body,
-            image_url: imageUrl // Pasa la URL de la imagen
-        }, "petId");
-    
+        let dataBody = {...req.body, image_url: imageUrl}
         // Verificar si existe un registro en la tabla Save para la mascota
-        const savePet = await service.findFk("Save",id, "petId"); 
-
+        const savePet = await service.findFk(Save,id, modelIds.petId); 
         // Si existe un registro en Save, intentar actualizar la información
-        if (savePet && savePet.length > 0) {
-            try {
-                await service.update("Save",id, { name_pet: name, image_url_pet: imageUrl }, "petId");
-                // Si la actualización en Save es exitosa, retornar estado 200 con la respuesta de la actualización de Pet
-                return res.status(200).json(responsePetUpdate);
-            } catch (error) {
-                // Si la actualización en Save falla, retornar estado 500
-                return res.status(500).send({ success: false, message: 'No se pudo actualizar la información en Save.' });
-            }
-        }
-    
-        // Si no existe un registro en Save, retornar estado 200 con la respuesta de la actualización de Pet
-        return res.status(200).json(responsePetUpdate);
-    
+        if (savePet?.length) await service.update(Save,id, { name_pet: name, image_url_pet: imageUrl }, modelIds.petId);
+        
+        await handleUpdate(req, res, service.update.bind(service),Pet, id, dataBody, modelIds.petId);
     } catch (error) {
         // Si ocurre un error durante el proceso, retornar estado 500 con el mensaje de error
         return res.status(500).send({ success: false, message: error.message });
     }
 }
 
-
 const get = async (req, res) => {
     try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10; 
         const { name, minAge, maxAge, isLost } = req.query;
-        const pets = await service.getPets(name, minAge, maxAge, isLost);
-        res.json(pets);
+        const pets = await service.getPets(name, minAge, maxAge, isLost,page,limit);
+        res.status(200).json({ success: true, data: pets });
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
 };
 
 const getById = async (req, res) => {
-    const { id } = req.params;
-    await handleGetById(req, res, service.findOne.bind(service), "Pet",id);
+        const { id } = req.params;
+        await handleGetById(req, res, service.findOne.bind(service), Pet,id, modelIds.petId);
 };
 
 const getByFkuserId = async (req, res) => {
     const { id } = req.params;
-    await getByIdFk(req, res, service.findFk.bind(service),"Pet", id, "userId");
+    await handleGetById(req, res, service.findFk.bind(service),Pet, id, modelIds.userId);
 };
 
 const getSuggestion = async (req, res) =>{
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
     const {id} = req.params;
-    const suggestion = await service.findAll("Pet",id);
-    return res.status(200).json(suggestion);
+    await handleGetById(req, res, service.findAllExcludin.bind(service), Pet, id, modelIds.userId,page,limit);
 }
-
 
 const _deleted = async (req, res) => {
     try {
         const { id } = req.params;
-
+        // Verificar la información en Save
+        let result = await service.findFk.bind(Save, id, modelIds.petId);
+        //  si existe, lo cambia
+        if (result?.length) await service.update(Save, id, { status: false }, modelIds.petId);
         // Actualizar la publicación
-        const updatedPublication = await service.update("Pet", id, { status: false }, "petId");
-
-        // Verificar y actualizar la información en Save
-        const savePost = await service.findFk("Save", id, "petId");
-        if (savePost && savePost.length > 0) {
-            await service.update("Save", id, { status: false }, "petId");
-        }
-
-        // Enviar respuesta al cliente con la publicación actualizada
-        return res.status(200).json(updatedPublication);
+        await handleDeleted(req, res, service.update.bind(service),Pet, id, { status: false }, modelIds.petId);
     } catch (error) {
         return res.status(500).send({ success: false, message: error.message });
     }
 };
 
 module.exports = {
-    create, get, getById, update, _deleted, getByFkuserId, getSuggestion
+    create, get, getById, update, _deleted, getByFkuserId, getSuggestion, handleUpdate
 };

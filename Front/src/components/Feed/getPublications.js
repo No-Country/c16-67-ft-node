@@ -5,10 +5,10 @@ export const getPublications = async (activeFeed) => {
   if (activeFeed === 'Feed') {
     console.log(activeFeed);
     const publications = (await axios.get(`${API_URL_BASE}/api/v1/publication`)).data;
-    return publications;
+    return publications.data;
   } else {
     const publications = (await axios.get(`${API_URL_BASE}/api/v1/publication?type=perdido`)).data;
     console.log(publications);
-    return publications;
+    return publications.data;
   }
 };
