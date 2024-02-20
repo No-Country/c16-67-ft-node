@@ -23,10 +23,10 @@ const Login = () => {
       .post(`${ServerConnect}/api/v1/user`, { token: token })
       .then((response) => {
         console.log('Solicitud enviada con éxito:', response.data);
-        const userId = response.data.data[0].id;
+        const userId = response.data.data.userId;
         localStorage.setItem('userId', JSON.stringify(userId));
         axios.get(`${ServerConnect}/api/v1/pet/userid/${userId}`).then((res) => {
-          if (res.data.length > 0) {
+          if (res.data.data.length > 0) {
             setActive('feed');
             openModal({
               description: 'Login successful',
