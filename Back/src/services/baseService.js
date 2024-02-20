@@ -131,7 +131,9 @@ class BaseService {
             const modelName = model.options.name.singular;
             if (modelName === "User"){
                 let date = await model.findOrCreate({
-                    where: { mail: dataBody.mail}})
+                    where: { mail: dataBody.mail},
+                    defaults: dataBody
+                })
                     return  date[0];
             }
             let date = await model.create(dataBody) 
