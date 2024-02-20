@@ -1,17 +1,38 @@
 import likeIcon from '../../assets/images/like.png';
 import commentIcon from '../../assets/images/comment.png';
+import { FaCheckCircle } from 'react-icons/fa';
+import addPet from '../../assets/images/addPet.svg';
 
 export default function PetCard({
   postImage,
   description,
-  pet,
+  petImg,
   isSelected,
   petName,
   profileImage,
   petCardProfile,
+  petCardProfileDefault,
   onClick
 }) {
-  return !petCardProfile ? (
+  return petCardProfile ? (
+    <div
+      className={`w-[151px] h-[188px] border rounded-[14px] cursor-pointer shadow-md ${isSelected ? 'border-[#182E15] border-[2px]' : 'border-gray-300'}`}
+      onClick={onClick}
+    >
+      <img src={petImg} className="w-[150px] h-[140px] rounded-t-[14px] object-cover" />
+      <div className="flex justify-between items-center h-[40px] mx-4">
+        <p className="text-center text-[16px] font-bold">{petName}</p>
+        {isSelected ? <FaCheckCircle className="text-[20px]" /> : null}
+      </div>
+    </div>
+  ) : petCardProfileDefault ? (
+    <div
+      className={`w-[151px] h-[188px] mb-8 border rounded-[14px] cursor-pointer shadow-md `}
+      onClick={onClick}
+    >
+      <img src={addPet} className="w-full h-full rounded-t-[14px] object-cover" />
+    </div>
+  ) : (
     <div className="mb-4 md:grid md:grid-cols-12 md:h-80 md:shadow-md md:rounded-2xl auto-rows-fr max-w-[640px] mx-auto">
       <div className="flex px-4 gap-x-3 items-center md:h-fit md:mt-4 md:col-[7/13] md:relative">
         <img className="w-12 h-12 md:w-16 md:h-16 object-cover rounded-full" src={profileImage} />
@@ -45,14 +66,6 @@ export default function PetCard({
       <div className="hidden md:block ml-5 col-[7/13] h-fit md:row-[6/7] text-gray-500">
         Add a comment...
       </div>
-    </div>
-  ) : (
-    <div
-      className={`border p-2 cursor-pointer ${isSelected ? 'border-blue-500' : 'border-gray-300'}`}
-      onClick={() => onClick(pet.petId)}
-    >
-      <img src={pet.image_url} alt={pet.name} className="w-20 h-20 object-cover rounded-full" />
-      <p className="text-center mt-2">{pet.name}</p>
     </div>
   );
 }

@@ -20,6 +20,7 @@ const Modal = () => {
     chooseModal,
     petModal,
     xBtnPetModal,
+    error,
     onClick
   } = modalState;
   const [isFadingOut, setIsFadingOut] = useState(false);
@@ -105,7 +106,7 @@ const Modal = () => {
       <div className="flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-[#00000096] z-[1000]">
         <div className="fixed w-[71%] max-w-[370px] my-0 mx-5 pt-0 pb-5 px-5 rounded-[10px] bg-white shadow-md">
           <div className="flex justify-center object-contain">
-            <BiErrorAlt className="relative bottom-[25px] rounded-[30px] text-[60px] bg-white text-[#b23131]" />
+            <BiErrorAlt className="relative bottom-[25px] rounded-[30px] text-[60px] bg-white text-[#E63333]" />
           </div>
           <div className="pb-[10px] text-center font-bold text-[1.4rem] border-b-2 border-solid">
             {title.toUpperCase()}
@@ -113,7 +114,7 @@ const Modal = () => {
           <div className="my-[10px] mx-[5px] text-center text-[1.2rem] italic">{description}</div>
           <div className="flex justify-between mt-[30px]">
             <button
-              className="px-8 py-[5px] text-[16px] bg-[#b23131] text-white rounded-[10px] shadow-md hover:bg-[#7a3232] hover:transition-all hover:duration-[0.5s] hover:ease-in-out "
+              className="px-8 py-[5px] text-[16px] bg-[#E63333] text-white rounded-[10px] shadow-md hover:bg-[#7a3232] hover:transition-all hover:duration-[0.5s] hover:ease-in-out "
               type="cancel"
               onClick={closeModal}
             >
@@ -214,7 +215,7 @@ const Modal = () => {
       <>
         <div className="flex justify-center items-center fixed left-0 right-0 bottom-[10px] z-[999]">
           <div
-            className={`flex justify-evenly py-[10px] px-[15px] my-0 mx-5 shadow-md rounded-[5px] text-white bg-[#4a2e1a] ${
+            className={`flex justify-evenly py-[10px] px-[15px] my-0 mx-5 shadow-md rounded-[5px] text-white ${error ? 'bg-[#E63333]' : 'bg-[#B8682A]'} ${
               !isFadingOut ? 'animate-fadeOutSelfClose' : 'animate-fadeInSelfClose'
             }`}
           >

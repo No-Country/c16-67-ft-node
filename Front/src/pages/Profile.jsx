@@ -14,8 +14,11 @@ export default function Profile() {
   const [options, setOptions] = useState([]);
   const [user, setUser] = useState({ name: '', image_url: '' });
   const userId = JSON.parse(localStorage.getItem('userId'));
-  const pet = JSON.parse(localStorage.getItem('pet'));
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedPet, setSelectedPet] = useState(() => {
+    const storedPet = localStorage.getItem('pet');
+    return storedPet ? JSON.parse(storedPet) : null;
+  });
 
   const navigate = useNavigate();
 
@@ -36,13 +39,14 @@ export default function Profile() {
         setOptions(
           petsResponse.data
             .filter((pet) => pet.status)
-            .map((pet) => ({ value: pet.petId, label: pet.name }))
+            .map((pet) => ({ value: pet.petId, label: pet.name, image: pet.image_url }))
         );
         setUser(userResponse.data);
       } catch (error) {
         openModal({
           description: 'An error has occurred',
-          chooseModal: false
+          chooseModal: false,
+          error: true
         });
       }
       setIsLoading(false);
@@ -50,17 +54,31 @@ export default function Profile() {
     fetchData();
   }, [userId, navigate]);
 
-  const onChange = (petId) => {
-    if (petId === 'addPet') {
+  const onCardClick = (pet) => {
+    if (pet.value === 'addPet') {
       openModal({
         petModal: true,
         xBtnPetModal: true
       });
     } else {
-      axios.get(`${API_URL_BASE}/api/v1/pet/${petId}`).then((res) => {
-        const pet = { petId: res.data.petId, name: res.data.name, image_url: res.data.image_url };
-        localStorage.setItem('pet', JSON.stringify(pet));
-      });
+      axios
+        .get(`${API_URL_BASE}/api/v1/pet/${pet.value}`)
+        .then((res) => {
+          const petData = {
+            petId: res.data.petId,
+            name: res.data.name,
+            image_url: res.data.image_url
+          };
+          localStorage.setItem('pet', JSON.stringify(petData));
+          setSelectedPet(petData);
+        })
+        .catch(() => {
+          openModal({
+            description: 'An error has occurred',
+            chooseModal: false,
+            error: true
+          });
+        });
     }
   };
 
@@ -80,27 +98,32 @@ export default function Profile() {
           ) : (
             <img src={user.image_url} alt="User image" className="w-[90px] h-[90px] rounded-full" />
           )}
-          <p className="font-semibold">{user.mail}</p>
+          <p className="font-semibold mb-3">{user.mail}</p>
         </div>
         {options.length === 0 ? (
-          <></>
+          <section className="flex justify-center flex-wrap gap-4">
+            <PetCard
+              petCardProfileDefault={true}
+              isSelected={selectedPet !== null && selectedPet.value === 'addPet'}
+              onClick={() => onCardClick({ value: 'addPet' })}
+            />
+          </section>
         ) : (
-          <section className="flex flex-wrap gap-4">
+          <section className="flex justify-center flex-wrap gap-4">
             {options.map((option) => (
               <PetCard
                 petCardProfile={true}
                 key={option.value}
-                pet={option}
-                isSelected={pet !== null && option.value === pet.petId}
-                onClick={onChange}
+                petImg={option.image}
+                petName={option.label}
+                isSelected={selectedPet !== null && option.value === selectedPet.petId}
+                onClick={() => onCardClick(option)}
               />
             ))}
             <PetCard
-              petCardProfile={true}
-              key="addPet"
-              pet={{ value: 'addPet', label: 'Agregar mascota' }}
-              isSelected={false}
-              onClick={onChange}
+              petCardProfileDefault={true}
+              isSelected={selectedPet !== null && selectedPet.value === 'addPet'}
+              onClick={() => onCardClick({ value: 'addPet' })}
             />
           </section>
         )}
