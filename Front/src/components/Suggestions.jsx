@@ -29,7 +29,7 @@ export default function Suggestions() {
   useEffect(() => {
     axios
       .get(`${API_URL_BASE}/api/v1/pet/suggestion/${userId}`)
-      .then((res) => setPets(res.data.slice(0, 5)));
+      .then((res) => setPets(res.data.data.slice(0, 5)));
   }, []);
   return (
     <div className="hidden xl:block xl:p-4 xl:flex-grow xl:basis-0">

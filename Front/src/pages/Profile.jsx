@@ -29,13 +29,12 @@ export default function Profile() {
           axios.get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`),
           axios.get(`${API_URL_BASE}/api/v1/user/${userId}`)
         ]);
-
         setOptions(
-          petsResponse.data
+          petsResponse.data.data
             .filter((pet) => pet.status)
             .map((pet) => ({ value: pet.petId, label: pet.name }))
         );
-        setUser(userResponse.data);
+        setUser(userResponse.data.data);
       } catch (error) {
         openModal({
           description: 'An error has occurred',
@@ -54,7 +53,13 @@ export default function Profile() {
       });
     } else {
       axios.get(`${API_URL_BASE}/api/v1/pet/${event.target.value}`).then((res) => {
-        const pet = { petId: res.data.petId, name: res.data.name, image_url: res.data.image_url };
+        console.log(res.data);
+        const { data } = res;
+        const pet = {
+          petId: data.data.petId,
+          name: data.data.name,
+          image_url: data.data.image_url
+        };
         localStorage.setItem('pet', JSON.stringify(pet));
       });
     }
