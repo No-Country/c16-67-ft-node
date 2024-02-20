@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 import Spinner from '../components/Spinner';
+import { useModalContext } from '../context/modalContext';
+import Modal from '../components/Modal';
+const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
 export default function Profile() {
+  const { modalState, openModal } = useModalContext();
   const [options, setOptions] = useState([]);
   const [user, setUser] = useState({ name: '', image_url: '' });
   const userId = JSON.parse(localStorage.getItem('userId'));
@@ -34,8 +37,10 @@ export default function Profile() {
         );
         setUser(userResponse.data);
       } catch (error) {
-        console.error('Error al obtener los datos:', error);
-        // TODO hacer modal o alerta error aca
+        openModal({
+          description: 'An error has occurred',
+          chooseModal: false
+        });
       }
       setIsLoading(false);
     };
@@ -44,7 +49,9 @@ export default function Profile() {
 
   const onChange = (event) => {
     if (event.target.value === 'Agregar mascota') {
-      navigate('/pets-create');
+      openModal({
+        petModal: true
+      });
     } else {
       axios.get(`${API_URL_BASE}/api/v1/pet/${event.target.value}`).then((res) => {
         const pet = { petId: res.data.petId, name: res.data.name, image_url: res.data.image_url };
@@ -55,8 +62,9 @@ export default function Profile() {
 
   return (
     <main>
+      {isLoading && <Spinner />}
+      {modalState.isOpen && <Modal />}
       <div className="px-4">
-        {isLoading && <Spinner />}
         <div className="flex flex-col items-center gap-y-4 mt-4">
           {!user.image_url ? (
             <></>

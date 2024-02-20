@@ -9,6 +9,7 @@ export const ModalProvider = ({ children }) => {
     title: '',
     confirmBtn: '',
     denyBtn: '',
+    petModal: false,
     chooseModal: false,
     onClick: null
   });
@@ -27,6 +28,7 @@ export const ModalProvider = ({ children }) => {
       title: '',
       confirmBtn: '',
       denyBtn: '',
+      petModal: false,
       chooseModal: false,
       onClick: null
     });

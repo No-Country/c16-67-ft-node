@@ -35,10 +35,9 @@ const Login = () => {
             navigate('/');
           } else {
             openModal({
-              description: 'Login successful',
-              chooseModal: false
+              petModal: true
             });
-            navigate('/pets-create');
+            navigate('/profile');
           }
         });
       })
