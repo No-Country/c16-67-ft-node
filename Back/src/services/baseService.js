@@ -19,9 +19,6 @@ class BaseService {
 
     async find(model,page, limit) {
         try {
-            if(!page?.length && !limit?.length){
-                return model.findAll();   
-            }
             const offset = (page - 1) * limit;
             const modelName = model.options.name.singular; //Buscamos el model correcto con el valor que nos pasan
             const modelMapping = {
