@@ -37,11 +37,11 @@ export default function Profile() {
         ]);
 
         setOptions(
-          petsResponse.data
+          petsResponse.data.data
             .filter((pet) => pet.status)
             .map((pet) => ({ value: pet.petId, label: pet.name, image: pet.image_url }))
         );
-        setUser(userResponse.data);
+        setUser(userResponse.data.data);
       } catch (error) {
         openModal({
           description: 'An error has occurred',
@@ -64,10 +64,11 @@ export default function Profile() {
       axios
         .get(`${API_URL_BASE}/api/v1/pet/${pet.value}`)
         .then((res) => {
+          const { data } = res;
           const petData = {
-            petId: res.data.petId,
-            name: res.data.name,
-            image_url: res.data.image_url
+            petId: data.data.petId,
+            name: data.data.name,
+            image_url: data.data.image_url
           };
           localStorage.setItem('pet', JSON.stringify(petData));
           setSelectedPet(petData);

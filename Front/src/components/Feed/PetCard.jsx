@@ -12,6 +12,7 @@ export default function PetCard({
   profileImage,
   petCardProfile,
   petCardProfileDefault,
+  address,
   onClick
 }) {
   return petCardProfile ? (
@@ -45,7 +46,7 @@ export default function PetCard({
       </div>
       <div className="px-4 mb-2 flex gap-x-2 md:col-[7/13] md:row-[3/4] h-fit">
         <span className="material-symbols-outlined">location_on</span>
-        Córdoba, Córdoba, Argentina
+        <span>{address}</span>
       </div>
       <img
         src={postImage}

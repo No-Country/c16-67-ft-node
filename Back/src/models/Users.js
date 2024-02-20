@@ -18,7 +18,7 @@ class User extends Model {
 
 // Definir los campos de la tabla User 
 const UserSchema = {
-  id: {
+  userId: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
@@ -42,6 +42,10 @@ const UserSchema = {
     allowNull:false,
     type: DataTypes.BOOLEAN,
     field: 'status'
+  },
+  last_pet:{
+    type:DataTypes.UUID,
+    allowNull:true,
   }
 }
 
