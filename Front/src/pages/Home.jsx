@@ -32,8 +32,12 @@ export default function Home() {
           }
           setIsLoading(false);
         })
-        .catch((err) => {
-          console.error(err);
+        .catch(() => {
+          openModal({
+            description: 'An error has occurred',
+            chooseModal: false,
+            error: true
+          });
           setIsLoading(false);
         });
     }
