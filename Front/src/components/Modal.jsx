@@ -8,6 +8,7 @@ import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import defaultProfile from '../assets/images/defaultProfile.jpg';
+import { useUserContext } from '../context/userContext';
 
 const Modal = () => {
   const { modalState, closeModal, openModal } = useModalContext();
@@ -27,7 +28,7 @@ const Modal = () => {
     e.preventDefault();
     const fileInput = document.getElementById('fileInput');
     fileInput.files[0];
-    const userId = JSON.parse(localStorage.getItem('userId'));
+    const { userId } = useUserContext();
 
     const payload = new FormData();
     payload.append('name', name);
@@ -203,9 +204,7 @@ const Modal = () => {
       <>
         <div className="flex justify-center items-center fixed left-0 right-0 bottom-[10px] z-[999]">
           <div
-            className={`flex justify-evenly py-[10px] px-[15px] my-0 mx-5 shadow-md rounded-[5px] text-white bg-[#4a2e1a] ${
-              !isFadingOut ? 'animate-fadeOutSelfClose' : 'animate-fadeInSelfClose'
-            }`}
+            className={`flex justify-evenly py-[10px] px-[15px] my-0 mx-5 shadow-md rounded-[5px] text-white bg-[#4a2e1a] ${!isFadingOut ? 'animate-fadeOutSelfClose' : 'animate-fadeInSelfClose'}`}
           >
             <div className="mr-[5px] font-500 text-white ">{description}</div>
             <button

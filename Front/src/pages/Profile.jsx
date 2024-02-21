@@ -4,17 +4,22 @@ import { useNavigate } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import { useModalContext } from '../context/modalContext';
 import Modal from '../components/Modal';
+import { useUserContext } from '../context/userContext';
+import { useNavigateContext } from '../context/navigationContext';
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
 export default function Profile() {
   const { modalState, openModal } = useModalContext();
   const [options, setOptions] = useState([]);
   const [user, setUser] = useState({ name: '', image_url: '' });
-  const userId = JSON.parse(localStorage.getItem('userId'));
-  const pet = JSON.parse(localStorage.getItem('pet'));
+  const { userId, getPet, setActivePet } = useUserContext();
+  const pet = getPet();
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { setActive } = useNavigateContext();
+
+  setActive('profile');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,7 +65,7 @@ export default function Profile() {
           name: data.data.name,
           image_url: data.data.image_url
         };
-        localStorage.setItem('pet', JSON.stringify(pet));
+        setActivePet(pet);
       });
     }
   };

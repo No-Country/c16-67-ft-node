@@ -4,6 +4,8 @@ import axios from 'axios';
 import Spinner from '../components/Spinner';
 import { useModalContext } from '../context/modalContext';
 import Modal from '../components/Modal';
+import { useUserContext } from '../context/userContext';
+import { useNavigateContext } from '../context/navigationContext';
 
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
@@ -12,12 +14,14 @@ function PublicationForm() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   //Obtengo id de usuario y mascota de local storage
-  const userId = JSON.parse(localStorage.getItem('userId'));
-  const { petId } = JSON.parse(localStorage.getItem('pet'));
+  const { petId, userId } = useUserContext();
   // Estados para manejar los valores de los inputs del formulario
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState('');
   const [type, setType] = useState([]);
+  const { setActive } = useNavigateContext();
+
+  setActive('publication-create');
 
   // Manejadores de cambio para los inputs
   const handleImageChange = (event) => {

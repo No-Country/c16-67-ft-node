@@ -1,6 +1,7 @@
 import axios from 'axios';
 import logo from '../assets/images/isologo.svg';
 import { useEffect, useState } from 'react';
+import { useUserContext } from '../context/userContext';
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
 const Item = ({ pet }) => {
@@ -23,7 +24,7 @@ const Item = ({ pet }) => {
 };
 
 export default function Suggestions() {
-  const userId = JSON.parse(localStorage.getItem('userId'));
+  const { userId } = useUserContext();
   const [pets, setPets] = useState([]);
 
   useEffect(() => {
