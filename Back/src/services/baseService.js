@@ -1,168 +1,161 @@
 // aqui se generan metodos generales que pueden utilizar todos modelos!
 
 const { Op } = require('sequelize');
-const { Publication } = require('../models/Publication');
+
 class BaseService {
     constructor(models) {
         this.models = models;
     }
 
-    getModelByName(modelName) {
-        const model = this.models.find(model => model.options.name.singular === modelName);
-        return model;
+    getModel(modelo) {
+        try {
+            const models = this.models.find(model => model.options.name.singular === modelo);
+            return models; 
+        } catch (error) {
+            throw error; //mandamos el error a la función usada para que se use el respectivo catch
+        }
     }
 
 
-    async find(model,type) {
-        const selectedModel = this.getModelByName(model);
-        const modelName = selectedModel.options.name.singular; //Buscamos el model correcto con el valor que nos pasan
-        
-        if (modelName === "Publication" || modelName === "Comment") {
-            try {
-                const selectedModelFk = this.getModelByName("Pet"); // Buscamos el modelo Pet en nuestros models
-                const items = await selectedModel.findAll({
-                    include: [{
-                        model: selectedModelFk,
-                        as: 'pets',
-                        attributes: ['name', 'image_url'],
-                        }],
-                    where: type ? { type: type } : undefined, //Condición type para las consultas anidadas
-                    order: [['createdAt', 'DESC']],
-                    raw: true
-                });
-                return items;
-            } catch (error) {
-                throw new Error("Error al buscar los elementos: " + error.message);
-            }    
-        }
-        let condition = {};
-            if (type) {
-                condition.where = { type: type };
+    async find(model,page, limit) {
+        try {
+            const offset = (page - 1) * limit;
+            const modelName = model.options.name.singular; //Buscamos el model correcto con el valor que nos pasan
+            const modelMapping = {
+                "Publication": { secondaryModel: "Pet", as: "pets", attributes: ['name', 'image_url']},
+                "Comment": { secondaryModel: "Pet", as: "pet", attributes: ['name', 'image_url']}
+            };
+            if (modelMapping[modelName]) {
+                const { secondaryModel, as, attributes } = modelMapping[modelName];
+                const selectedModelFk = this.getModel(secondaryModel);
+
+                    const items = await model.findAll({
+                        include: [{
+                            model: selectedModelFk,
+                            as: as,
+                            attributes: attributes,
+                            }],
+                        order: [['createdAt', 'DESC']],
+                        offset, // <-- Paginación
+                        limit, // <-- Paginación 
+                        raw: true
+                    });
+                    return items; 
             }
-        return selectedModel.findAll(condition);    
+            return model.findAll({offset,limit});    
+        } catch (error) {
+            throw error; //mandamos el error a la función usada para que se use el respectivo catch
+        }
     }
 
 
     async findFk(model,id, whereId, ) {
-        const selectedModel = this.getModelByName(model);
-        const modelName = selectedModel.options.name.singular;
+        try {
+            const modelName = model.options.name.singular;
+            const modelMapping = {
+                "Publication": { secondaryModel: "Pet", as: "pets", attributes: ['name', 'image_url']},
+                "Comment": { secondaryModel: "Pet", as: "pet", attributes: ['name', 'image_url']}
+            };
+            if (modelMapping[modelName]) {
+                const { secondaryModel, as, attributes } = modelMapping[modelName];
+                const selectedModelFk = this.getModel(secondaryModel);
 
-        const modelMapping = {
-            "Publication": { secondaryModel: "Pet", alias: "pets", attributes: ['name', 'image_url']},
-            "Comment": { secondaryModel: "Pet", alias: "pet", attributes: ['name', 'image_url']}
-        };
-    
-        if (modelMapping[modelName]) {
-            const { secondaryModel, alias, attributes } = modelMapping[modelName];
-            const selectedModelFk = this.getModelByName(secondaryModel);
-
-            try {
-                const NestedInformation = await selectedModel.findAll({
+                const NestedInformation = await model.findAll({
                     where: { [whereId]: id },
                     include: [{
                         model: selectedModelFk,
-                        as: alias,
+                        as: as,
                         attributes: attributes,
                     }],
                     order: [['createdAt', 'DESC']],
                     raw: true
                 });
                 return NestedInformation;
-            } catch (error) {
-                throw new Error("Error al buscar información relacionada: " + error.message);
+            } else {
+                return await model.findAll({ where: { [whereId]: id }});
             }
-        } else {
-            return await selectedModel.findAll({ where: { [whereId]: id }});
-        }
+        } catch (error) {
+            throw error; //mandamos el error a la función usada para que se use el respectivo catch
+        }   
     }
     
-    async findAll(model,id) {
+
+    async findAllExcludin(model,date,whereId,page,limit) {
         try {
-            const selectedModel = this.getModelByName(model);
-            const petsWithoutUserId = await selectedModel.findAll({
+            const offset = (page - 1) * limit;
+            const petsWithoutUserId = await model.findAll({
                 where: {
-                    userId: {
-                        [Op.ne]: id // Filtra los registros donde userId no es igual al userId recibido
+                    [whereId]: {
+                        [Op.ne]: date 
                     }
-                }
+                },
+                order: [['createdAt', 'DESC']],
+                offset, // <-- Paginación
+                limit, // <-- Paginación 
             });
             return petsWithoutUserId;
         } catch (error) {
-            throw new Error("Error al buscar mascotas diferentes al userId: " + error.message);
+            throw error; //mandamos el error a la función usada para que se use el respectivo catch
         }
     }
-    async findByName(name) {
-        let options = {};
-        if (name) {
-            options = {
-                where: {
-                    name: {
-                        [Op.iLike]: `%${name}%` // Utiliza iLike para búsqueda insensible a mayúsculas
-                    }
-                }
-            };
-        }
 
-        return this.models.findAll(options);
-    }
 
-    async findOne(model, id) {
-        const selectedModel = this.getModelByName(model);
-        if(model === "Publication"){
-            const selectedModelFk = this.getModelByName("Pet");
-            const nestedInformation = await selectedModel.findOne({
-                where: { postId: id },
-                include: [{
-                    model: selectedModelFk, // Usamos el modelo de Pet
-                    as: 'pets', // Alias de la asociación con Pet
-                    attributes: ['name', 'image_url'], // Atributos de Pet que deseas incluir
-                }],
-                order: [['createdAt', 'DESC']],
-                raw: true
-            });
-            return nestedInformation
-        }
-        return selectedModel.findByPk(id);
-    }
-
-    async create(model, data) {
+    async findOne(model, id, whereId) {
         try {
-            const selectedModel = this.getModelByName(model);
-            
-            if (model === "User"){
-                let date = await selectedModel.findOrCreate({
-                    where: { mail: data.mail}, // Criterio de búsqueda
-                    defaults: data})
-                    return  date;
+            const modelName = model.options.name.singular;
+            if(modelName === "Publication"){
+                const selectedModelFk = this.getModel("Pet");
+                const nestedInformation = await model.findOne({
+                    where: { [whereId]: id },
+                    include: [{
+                        model: selectedModelFk, // Usamos el modelo de Pet
+                        as: 'pets', // Alias de la asociación con Pet
+                        attributes: ['name', 'image_url'], // Atributos de Pet que deseas incluir
+                    }],
+                    order: [['createdAt', 'DESC']],
+                    raw: true
+                });
+            return nestedInformation
             }
+            return model.findOne({where: { [whereId]: id }});  
+        } catch (error) {
+            throw error; //mandamos el error a la función usada para que se use el respectivo catch
+        }
+    }
 
-            let date = await selectedModel.create(data) 
+    async create(model, dataBody) {
+        try {
+            const modelName = model.options.name.singular;
+            if (modelName === "User"){
+                let date = await model.findOrCreate({
+                    where: { mail: dataBody.mail},
+                    defaults: dataBody
+                })
+                    return  date[0];
+            }
+            let date = await model.create(dataBody) 
             return date;
         } catch (error) {
-            throw new Error("Error al buscar todos los elementos: " + error.message);
+            throw error; //mandamos el error a la función usada para que se use el respectivo catch
         }
     }
 
     async update(model,id, data, whereId) {
         try {
-            const selectedModel = this.getModelByName(model);
             // Construye la condición where dinámicamente
             const whereCondition = {};
             whereCondition[whereId] = id;
-
-            let result = await selectedModel.update(data, { where: whereCondition });
-            
+            let result = await model.update(data, { where: whereCondition });
             if (result[0] === 1) { //validamos que se haya actualizado
                 // Construye el objeto actualizado con los datos proporcionados
                 const updatedObject = { ...whereCondition, ...data }; //tambien le agrego la id 
                 return updatedObject;
             } else {
-                throw new Error('No se pudo actualizar el objeto');
+                throw error; //mandamos el error a la función usada para que se use el respectivo catch
             } 
         } catch (error) {
-            throw new Error("Error al actualizar: " + error.message);
+            throw error; //mandamos el error a la función usada para que se use el respectivo catch
         }
-        // Construye la condición where dinámicamente
     }
 
 }

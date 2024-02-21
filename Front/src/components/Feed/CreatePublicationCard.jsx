@@ -40,6 +40,7 @@ export default function CreatePublicationCard({ setIsAutocompleteActive }) {
     formData.append('type', type);
     formData.append('userId', userId);
     formData.append('petId', pet.petId);
+    formData.append('address', location);
 
     console.log({ image, description, type, userId, pet, location });
 

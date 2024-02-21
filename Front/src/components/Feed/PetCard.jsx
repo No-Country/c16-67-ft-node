@@ -1,7 +1,16 @@
 import likeIcon from '../../assets/images/like.png';
 import commentIcon from '../../assets/images/comment.png';
 
-export default function PetCard({ postImage, description, petId, postId, petName, profileImage }) {
+export default function PetCard({
+  postImage,
+  description,
+  petId,
+  postId,
+  petName,
+  profileImage,
+  address
+}) {
+  console.log(petName, profileImage);
   return (
     <div className="mb-4 md:grid md:grid-cols-12 md:h-80 md:shadow-md md:rounded-2xl auto-rows-fr max-w-[640px] mx-auto">
       <div className="flex px-4 gap-x-3 items-center md:h-fit md:mt-4 md:col-[7/13] md:relative">
@@ -15,7 +24,7 @@ export default function PetCard({ postImage, description, petId, postId, petName
       </div>
       <div className="px-4 mb-2 flex gap-x-2 md:col-[7/13] md:row-[3/4] h-fit">
         <span className="material-symbols-outlined">location_on</span>
-        Córdoba, Córdoba, Argentina
+        <span>{address}</span>
       </div>
       <img
         src={postImage}
