@@ -105,9 +105,9 @@ function PublicationForm() {
               value={type}
               onChange={handleTypeChange}
             >
-              <option value="normal">Normal</option>
-              <option value="perdido">Perdido</option>
-              <option value="adopcion">Adopción</option>
+              <option value="Normal">Normal</option>
+              <option value="Perdido">Perdido</option>
+              <option value="Adopcion">Adopción</option>
             </select>
           </div>
           <div className="flex justify-center">

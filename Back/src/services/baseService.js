@@ -10,51 +10,51 @@ class BaseService {
     getModel(modelo) {
         try {
             const models = this.models.find(model => model.options.name.singular === modelo);
-            return models; 
+            return models;
         } catch (error) {
             throw error; //mandamos el error a la función usada para que se use el respectivo catch
         }
     }
 
 
-    async find(model,page, limit) {
+    async find(model, page, limit) {
         try {
             const offset = (page - 1) * limit;
             const modelName = model.options.name.singular; //Buscamos el model correcto con el valor que nos pasan
             const modelMapping = {
-                "Publication": { secondaryModel: "Pet", as: "pets", attributes: ['name', 'image_url']},
-                "Comment": { secondaryModel: "Pet", as: "pet", attributes: ['name', 'image_url']}
+                "Publication": { secondaryModel: "Pet", as: "pets", attributes: ['name', 'image_url'] },
+                "Comment": { secondaryModel: "Pet", as: "pet", attributes: ['name', 'image_url'] }
             };
             if (modelMapping[modelName]) {
                 const { secondaryModel, as, attributes } = modelMapping[modelName];
                 const selectedModelFk = this.getModel(secondaryModel);
 
-                    const items = await model.findAll({
-                        include: [{
-                            model: selectedModelFk,
-                            as: as,
-                            attributes: attributes,
-                            }],
-                        order: [['createdAt', 'DESC']],
-                        offset, // <-- Paginación
-                        limit, // <-- Paginación 
-                        raw: true
-                    });
-                    return items; 
+                const items = await model.findAll({
+                    include: [{
+                        model: selectedModelFk,
+                        as: as,
+                        attributes: attributes,
+                    }],
+                    order: [['createdAt', 'DESC']],
+                    offset, // <-- Paginación
+                    limit, // <-- Paginación 
+                    raw: true
+                });
+                return items;
             }
-            return model.findAll({offset,limit});    
+            return model.findAll({ offset, limit });
         } catch (error) {
             throw error; //mandamos el error a la función usada para que se use el respectivo catch
         }
     }
 
 
-    async findFk(model,id, whereId, ) {
+    async findFk(model, id, whereId,) {
         try {
             const modelName = model.options.name.singular;
             const modelMapping = {
-                "Publication": { secondaryModel: "Pet", as: "pets", attributes: ['name', 'image_url']},
-                "Comment": { secondaryModel: "Pet", as: "pet", attributes: ['name', 'image_url']}
+                "Publication": { secondaryModel: "Pet", as: "pets", attributes: ['name', 'image_url'] },
+                "Comment": { secondaryModel: "Pet", as: "pet", attributes: ['name', 'image_url'] }
             };
             if (modelMapping[modelName]) {
                 const { secondaryModel, as, attributes } = modelMapping[modelName];
@@ -72,28 +72,48 @@ class BaseService {
                 });
                 return NestedInformation;
             } else {
-                return await model.findAll({ where: { [whereId]: id }});
+                return await model.findAll({ where: { [whereId]: id } });
             }
         } catch (error) {
             throw error; //mandamos el error a la función usada para que se use el respectivo catch
-        }   
+        }
     }
-    
 
-    async findAllExcludin(model,date,whereId,page,limit) {
+
+    async findAllExcludin(model, date, whereId, page, limit) {
         try {
             const offset = (page - 1) * limit;
-            const petsWithoutUserId = await model.findAll({
-                where: {
-                    [whereId]: {
-                        [Op.ne]: date 
-                    }
-                },
-                order: [['createdAt', 'DESC']],
-                offset, // <-- Paginación
-                limit, // <-- Paginación 
-            });
-            return petsWithoutUserId;
+            const modelName = model.options.name.singular;
+            const modelMapping = {
+                "Publication": { secondaryModel: "Pet", as: "pets", attributes: ['name', 'image_url'] },
+                "Comment": { secondaryModel: "Pet", as: "pet", attributes: ['name', 'image_url'] }
+            };
+
+            if (modelMapping[modelName]) {
+                const { secondaryModel, as, attributes } = modelMapping[modelName];
+                const selectedModelFk = this.getModel(secondaryModel);
+                const NestedInformation = await model.findAll({
+                    where: { [whereId]: { [Op.ne]: date } },
+                    include: [{
+                        model: selectedModelFk,
+                        as: as,
+                        attributes: attributes,
+                    }],
+                    order: [['createdAt', 'DESC']],
+                    offset, // <-- Paginación
+                    limit, // <-- Paginación 
+                    raw: true
+                });
+                return NestedInformation;
+            } else {
+                const petsWithoutUserId = await model.findAll({
+                    where: { [whereId]: { [Op.ne]: date } },
+                    order: [['createdAt', 'DESC']],
+                    offset, // <-- Paginación
+                    limit, // <-- Paginación 
+                });
+                return petsWithoutUserId
+            }
         } catch (error) {
             throw error; //mandamos el error a la función usada para que se use el respectivo catch
         }
@@ -103,7 +123,7 @@ class BaseService {
     async findOne(model, id, whereId) {
         try {
             const modelName = model.options.name.singular;
-            if(modelName === "Publication"){
+            if (modelName === "Publication") {
                 const selectedModelFk = this.getModel("Pet");
                 const nestedInformation = await model.findOne({
                     where: { [whereId]: id },
@@ -115,32 +135,34 @@ class BaseService {
                     order: [['createdAt', 'DESC']],
                     raw: true
                 });
-            return nestedInformation
+                return nestedInformation
             }
-            return model.findOne({where: { [whereId]: id }});  
+            return model.findOne({ where: { [whereId]: id } });
         } catch (error) {
             throw error; //mandamos el error a la función usada para que se use el respectivo catch
         }
     }
 
     async create(model, dataBody) {
+        console.log(dataBody, model)
         try {
             const modelName = model.options.name.singular;
-            if (modelName === "User"){
+            if (modelName === "User") {
                 let date = await model.findOrCreate({
-                    where: { mail: dataBody.mail},
+                    where: { mail: dataBody.mail },
                     defaults: dataBody
                 })
-                    return  date[0];
+                return date[0];
             }
-            let date = await model.create(dataBody) 
+            let date = await model.create(dataBody)
+            console.log(date)
             return date;
         } catch (error) {
             throw error; //mandamos el error a la función usada para que se use el respectivo catch
         }
     }
 
-    async update(model,id, data, whereId) {
+    async update(model, id, data, whereId) {
         try {
             // Construye la condición where dinámicamente
             const whereCondition = {};
@@ -152,7 +174,7 @@ class BaseService {
                 return updatedObject;
             } else {
                 throw error; //mandamos el error a la función usada para que se use el respectivo catch
-            } 
+            }
         } catch (error) {
             throw error; //mandamos el error a la función usada para que se use el respectivo catch
         }
