@@ -60,13 +60,13 @@ export default {
           },
           '100%': {
             opacity: '1',
-            transform: 'translateY(-40px)'
+            transform: 'translateY(-110px)'
           }
         },
         fadeOutSelfClose: {
           '0%': {
             opacity: '1',
-            transform: 'translateY(-40px)'
+            transform: 'translateY(-110px)'
           },
           '100%': {
             opacity: '0',

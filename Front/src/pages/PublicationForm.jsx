@@ -63,7 +63,8 @@ function PublicationForm() {
     } catch {
       openModal({
         description: 'An error has occurred',
-        chooseModal: false
+        chooseModal: false,
+        error: true
       });
     }
     setIsLoading(false);

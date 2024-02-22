@@ -11,7 +11,7 @@ export default function NavbarMobile({ active, pet }) {
           <div className="fixed w-full bg-white">
             <div className="h-16 px-4 flex justify-between items-center">
               <img
-                className="h-14 w-14 rounded-full border-2 border-slate-200"
+                className="h-14 w-14 rounded-full border-2 border-slate-200 object-cover"
                 src={pet !== null ? pet.image_url : ''}
                 alt="image of active pet"
               />

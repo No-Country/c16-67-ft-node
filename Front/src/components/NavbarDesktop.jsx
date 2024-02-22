@@ -5,7 +5,9 @@ import styles from './NavbarDesktop.module.css';
 
 export default function NavbarDesktop({ active, pet }) {
   return (
-    <div className={`hidden md:block fixed left-0 ml-4 mt-4 md-32 lg:w-64 ${styles.desktop}`}>
+    <div
+      className={`hidden md:block fixed left-0 ml-4 mt-4 md-32 lg:w-64 pr-2 md:border-r-[2px] md:border-[#B8682A] md:h-full ${styles.desktop}`}
+    >
       <div className="ml-4 flex items-center gap-x-4">
         {pet !== null ? (
           <>

@@ -13,8 +13,6 @@ export default function App() {
   const userIdLS = localStorage.getItem('userId');
   const { userId } = useUserContext();
 
-  console.log(userIdLS);
-
   return (
     <>
       {userIdLS !== null || userId !== '' ? (

@@ -26,7 +26,6 @@ export const UserProvider = ({ children }) => {
   const loginContext = (userId, last_pet) => {
     setUserId(userId);
     localStorage.setItem('userId', JSON.stringify(userId));
-    console.log(last_pet);
     axios
       .get(`${API_URL_BASE}/api/v1/pet/${last_pet}`)
       .then((response) => {

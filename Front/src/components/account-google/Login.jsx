@@ -27,6 +27,7 @@ const Login = () => {
         console.log('Solicitud enviada con éxito:', response.data);
         const { userId, last_pet } = response.data.data;
         await loginContext(userId, last_pet);
+
         axios.get(`${ServerConnect}/api/v1/pet/userid/${userId}`).then((res) => {
           if (res.data.data.length > 0) {
             setActive('feed');
@@ -45,8 +46,9 @@ const Login = () => {
       })
       .catch(() => {
         openModal({
-          description: 'An error has ocurred',
-          chooseModal: false
+          description: 'An error has occurred',
+          chooseModal: false,
+          error: true
         });
       });
     setIsLoading(true);
@@ -54,8 +56,9 @@ const Login = () => {
 
   const onFailure = () => {
     openModal({
-      description: 'An error has ocurred',
-      chooseModal: false
+      description: 'An error has occurred',
+      chooseModal: false,
+      error: true
     });
   };
 
