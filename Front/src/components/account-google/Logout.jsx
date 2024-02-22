@@ -2,10 +2,12 @@ import { googleLogout } from '@react-oauth/google';
 import { useNavigate } from 'react-router';
 import { useModalContext } from '../../context/modalContext';
 import Modal from '../../components/Modal';
+import { useUserContext } from '../../context/userContext';
 
 export default function Logout() {
   const { openModal, modalState, closeModal } = useModalContext();
   const navigate = useNavigate();
+  const { logoutContext } = useUserContext();
 
   const handleOnClick = () => {
     openModal({
@@ -13,11 +15,10 @@ export default function Logout() {
       description: 'Are you sure you want to leave?',
       confirmBtn: 'Yes',
       denyBtn: 'No',
-      onClick: () => {
+      onClick: async () => {
         googleLogout();
-        localStorage.removeItem('userId');
-        localStorage.removeItem('pet');
-        navigate('/login');
+        navigate('/');
+        await logoutContext();
         closeModal();
       },
       chooseModal: true

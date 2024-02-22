@@ -5,6 +5,7 @@ import { useModalContext } from '../../context/modalContext';
 import Modal from '../Modal';
 import styles from './CreatePublicationCard.module.css';
 import Location from './Location';
+import { useUserContext } from '../../context/userContext';
 
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
@@ -12,8 +13,9 @@ export default function CreatePublicationCard({ setIsAutocompleteActive }) {
   const { openModal, modalState } = useModalContext();
   const [isLoading, setIsLoading] = useState(false);
   //Obtengo id de usuario y mascota de local storage
-  const userId = JSON.parse(localStorage.getItem('userId'));
-  const pet = JSON.parse(localStorage.getItem('pet'));
+  const { userId } = useUserContext();
+  const { getPet } = useUserContext();
+  const pet = getPet();
   // Estados para manejar los valores de los inputs del formulario
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState('');

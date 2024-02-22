@@ -8,6 +8,7 @@ import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import defaultProfile from '../assets/images/defaultProfile.jpg';
+import { useUserContext } from '../context/userContext';
 
 const Modal = () => {
   const { modalState, closeModal, openModal } = useModalContext();
@@ -32,6 +33,7 @@ const Modal = () => {
   const [address, setAddress] = useState('');
   const [descriptions, setDescriptions] = useState('');
   const [profilePhoto, setProfilePhoto] = useState(null);
+  const { setActivePet } = useUserContext();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -47,19 +49,28 @@ const Modal = () => {
     payload.append('image', profilePhoto);
     payload.append('userId', userId);
 
+    console.log(payload);
+
     setIsLoading(true);
     try {
-      await axios.post(`${import.meta.env.VITE_SERVER_PRODUCTION}/api/v1/pet`, payload, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
+      const response = await axios
+        .post(`${import.meta.env.VITE_SERVER_PRODUCTION}/api/v1/pet`, payload, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      console.log(response);
+      setActivePet(response.data.data);
       openModal({
         description: 'Pet created successfully',
         chooseModal: false
       });
       navigate('/');
-    } catch {
+    } catch (error) {
+      console.log(error);
       openModal({
         description: 'An error has occurred',
         chooseModal: false
@@ -215,9 +226,7 @@ const Modal = () => {
       <>
         <div className="flex justify-center items-center fixed left-0 right-0 bottom-[10px] z-[999]">
           <div
-            className={`flex justify-evenly py-[10px] px-[15px] my-0 mx-5 shadow-md rounded-[5px] text-white ${error ? 'bg-[#E63333]' : 'bg-[#B8682A]'} ${
-              !isFadingOut ? 'animate-fadeOutSelfClose' : 'animate-fadeInSelfClose'
-            }`}
+            className={`flex justify-evenly py-[10px] px-[15px] my-0 mx-5 shadow-md rounded-[5px] text-white ${error ? 'bg-[#E63333]' : 'bg-[#B8682A]'} ${!isFadingOut ? 'animate-fadeOutSelfClose' : 'animate-fadeInSelfClose'}`}
           >
             <div className="mr-[5px] font-500 text-white ">{description}</div>
             <button
