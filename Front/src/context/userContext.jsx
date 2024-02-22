@@ -19,21 +19,30 @@ export const UserProvider = ({ children }) => {
     if (userId !== null) {
       setUserId(userId);
       const pet = JSON.parse(localStorage.getItem('pet'));
-      setActivePet(pet);
+      if (pet !== null) {
+        setActivePet(pet);
+      }
     }
   }, []);
 
   const loginContext = (userId, last_pet) => {
+    console.log(userId);
     setUserId(userId);
     localStorage.setItem('userId', JSON.stringify(userId));
-    axios
-      .get(`${API_URL_BASE}/api/v1/pet/${last_pet}`)
-      .then((response) => {
-        setActivePet(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    console.log(last_pet);
+    if (last_pet === null) {
+      console.log('No pet');
+      return;
+    } else {
+      axios
+        .get(`${API_URL_BASE}/api/v1/pet/${last_pet}`)
+        .then((response) => {
+          setActivePet(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const logoutContext = () => {
