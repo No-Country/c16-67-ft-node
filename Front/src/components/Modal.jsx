@@ -103,7 +103,7 @@ const Modal = () => {
 
   return isOpen ? (
     chooseModal ? (
-      <div className="flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-[#00000096] z-[1000]">
+      <div className="flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-[#0000007A] z-[1000]">
         <div className="fixed w-[71%] max-w-[370px] my-0 mx-5 pt-0 pb-5 px-5 rounded-[10px] bg-white shadow-md">
           <div className="flex justify-center object-contain">
             <BiErrorAlt className="relative bottom-[25px] rounded-[30px] text-[60px] bg-white text-[#E63333]" />
@@ -134,7 +134,7 @@ const Modal = () => {
       <>
         {isLoading && <Spinner />}
         <main>
-          <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#6F3B14B2] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full ">
+          <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full ">
             <form
               className={`p-6 bg-[#F2FBE7] rounded-t-[40px] md:rounded-[24px] md:w-[50%] ${!petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
               onSubmit={onSubmit}

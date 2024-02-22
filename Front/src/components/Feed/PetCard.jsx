@@ -1,6 +1,6 @@
 import likeIcon from '../../assets/images/like.png';
 import commentIcon from '../../assets/images/comment.png';
-import { FaCheckCircle } from 'react-icons/fa';
+import { FiCheckCircle } from 'react-icons/fi';
 import addPet from '../../assets/images/addPet.svg';
 
 export default function PetCard({
@@ -23,7 +23,7 @@ export default function PetCard({
       <img src={petImg} className="w-[150px] h-[140px] rounded-t-[14px] object-cover" />
       <div className="flex justify-between items-center h-[40px] mx-4">
         <p className="text-center text-[16px] font-bold">{petName}</p>
-        {isSelected ? <FaCheckCircle className="text-[20px]" /> : null}
+        {isSelected ? <FiCheckCircle className="text-[20px]" /> : null}
       </div>
     </div>
   ) : petCardProfileDefault ? (
