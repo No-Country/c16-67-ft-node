@@ -1,5 +1,6 @@
 import feedIcon from '../assets/images/feedIcon.png';
 import chatIcon from '../assets/images/chat.png';
+import defaultProfile from '../assets/images/defaultProfile.jpg';
 import { NavLink } from 'react-router-dom';
 import styles from './NavbarDesktop.module.css';
 
@@ -13,7 +14,7 @@ export default function NavbarDesktop({ active, pet }) {
           <>
             <img
               className="md:h-12 md:w-12 lg:h-24 lg:w-24 rounded-full border-2 border-slate-200 object-cover"
-              src={pet.image_url}
+              src={pet.image_url !== '' ? pet.image_url : defaultProfile}
               alt="image of active pet"
             />
             <div>

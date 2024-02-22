@@ -16,7 +16,8 @@ export default function Profile() {
   const { modalState, openModal } = useModalContext();
   const [options, setOptions] = useState([]);
   const [user, setUser] = useState({ name: '', image_url: '' });
-  const { userId, getPet, setActivePet } = useUserContext();
+  const { getPet, setActivePet } = useUserContext();
+  const userId = JSON.parse(localStorage.getItem('userId'));
   const pet = getPet();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,11 +33,13 @@ export default function Profile() {
         navigate('/login');
         return;
       }
-
+      console.log(userId);
       try {
         const [petsResponse, userResponse] = await Promise.all([
-          axios.get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`),
-          axios.get(`${API_URL_BASE}/api/v1/user/${userId}`)
+          axios
+            .get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`)
+            .catch((error) => console.log(error)),
+          axios.get(`${API_URL_BASE}/api/v1/user/${userId}`).catch((error) => console.log(error))
         ]);
 
         setOptions(
