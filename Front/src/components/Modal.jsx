@@ -8,6 +8,7 @@ import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import defaultProfile from '../assets/images/defaultProfile.jpg';
+import { useUserContext } from '../context/userContext';
 
 const Modal = () => {
   const { modalState, closeModal, openModal } = useModalContext();
@@ -37,7 +38,7 @@ const Modal = () => {
     e.preventDefault();
     const fileInput = document.getElementById('fileInput');
     fileInput.files[0];
-    const userId = JSON.parse(localStorage.getItem('userId'));
+    const { userId } = useUserContext();
 
     const payload = new FormData();
     payload.append('name', name);

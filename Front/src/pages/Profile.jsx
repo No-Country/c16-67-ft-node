@@ -4,23 +4,26 @@ import { useNavigate } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import { useModalContext } from '../context/modalContext';
 import Modal from '../components/Modal';
+import { useUserContext } from '../context/userContext';
+import { useNavigateContext } from '../context/navigationContext';
 import PetCard from '../components/Feed/PetCard';
 import { FiArrowLeft } from 'react-icons/fi';
 import { MdEdit } from 'react-icons/md';
+
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
 export default function Profile() {
   const { modalState, openModal } = useModalContext();
   const [options, setOptions] = useState([]);
   const [user, setUser] = useState({ name: '', image_url: '' });
-  const userId = JSON.parse(localStorage.getItem('userId'));
+  const { userId, getPet, setActivePet } = useUserContext();
+  const pet = getPet();
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedPet, setSelectedPet] = useState(() => {
-    const storedPet = localStorage.getItem('pet');
-    return storedPet ? JSON.parse(storedPet) : null;
-  });
 
   const navigate = useNavigate();
+  const { setActive } = useNavigateContext();
+
+  setActive('profile');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,25 +64,16 @@ export default function Profile() {
         xBtnPetModal: true
       });
     } else {
-      axios
-        .get(`${API_URL_BASE}/api/v1/pet/${pet.value}`)
-        .then((res) => {
-          const { data } = res;
-          const petData = {
-            petId: data.data.petId,
-            name: data.data.name,
-            image_url: data.data.image_url
-          };
-          localStorage.setItem('pet', JSON.stringify(petData));
-          setSelectedPet(petData);
-        })
-        .catch(() => {
-          openModal({
-            description: 'An error has occurred',
-            chooseModal: false,
-            error: true
-          });
-        });
+      axios.get(`${API_URL_BASE}/api/v1/pet/${pet.value}`).then((res) => {
+        console.log(res.data);
+        const { data } = res;
+        const pet = {
+          petId: data.data.petId,
+          name: data.data.name,
+          image_url: data.data.image_url
+        };
+        setActivePet(pet);
+      });
     }
   };
 
@@ -105,7 +99,7 @@ export default function Profile() {
           <section className="flex justify-center flex-wrap gap-4">
             <PetCard
               petCardProfileDefault={true}
-              isSelected={selectedPet !== null && selectedPet.value === 'addPet'}
+              isSelected={pet !== null && pet.value === 'addPet'}
               onClick={() => onCardClick({ value: 'addPet' })}
             />
           </section>
@@ -117,13 +111,13 @@ export default function Profile() {
                 key={option.value}
                 petImg={option.image}
                 petName={option.label}
-                isSelected={selectedPet !== null && option.value === selectedPet.petId}
+                isSelected={pet !== null && option.value === pet.petId}
                 onClick={() => onCardClick(option)}
               />
             ))}
             <PetCard
               petCardProfileDefault={true}
-              isSelected={selectedPet !== null && selectedPet.value === 'addPet'}
+              isSelected={pet !== null && pet.value === 'addPet'}
               onClick={() => onCardClick({ value: 'addPet' })}
             />
           </section>

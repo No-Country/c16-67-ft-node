@@ -1,16 +1,9 @@
-import { React, useEffect } from 'react';
+import { React } from 'react';
 import LoginContent from '../components/login/LoginContent';
-import { useNavigateContext } from '../context/navigationContext';
 import logo from '../assets/images/isologo.svg';
 import foots from '../assets/images/foots.png';
 
 export default function Login() {
-  const { setActive } = useNavigateContext();
-
-  useEffect(() => {
-    setActive('login');
-  }, []);
-
   return (
     <main className="fixed bg-[#73360A] w-full h-full p-0">
       <div className="fixed flex flex-col top-0 bottom-0 right-0 left-0 justify-center items-center m-2 rounded-[10px] bg-gradient-to-t from-white to-[#d9ae90]">

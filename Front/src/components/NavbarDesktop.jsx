@@ -3,7 +3,7 @@ import chatIcon from '../assets/images/chat.png';
 import { NavLink } from 'react-router-dom';
 import styles from './NavbarDesktop.module.css';
 
-export default function NavbarDesktop({ active, setActive, pet }) {
+export default function NavbarDesktop({ active, pet }) {
   return (
     <div
       className={`hidden md:block fixed left-0 ml-4 mt-4 md-32 lg:w-64 pr-2 md:border-r-[2px] md:border-[#B8682A] md:h-full ${styles.desktop}`}
@@ -27,7 +27,7 @@ export default function NavbarDesktop({ active, setActive, pet }) {
       </div>
       <ul className="mt-8">
         <li className={`${active === 'feed' ? `${styles.active}` : ''}`}>
-          <NavLink onClick={() => setActive('feed')} to={'/'}>
+          <NavLink to={'/'}>
             <img src={feedIcon} className={`${styles.navImg}`} alt="Feed icon" />
             <p>Feed</p>
           </NavLink>
@@ -39,7 +39,7 @@ export default function NavbarDesktop({ active, setActive, pet }) {
           </NavLink>
         </li>
         <li className={`${active === 'profile' ? `${styles.active}` : ''}`}>
-          <NavLink onClick={() => setActive('profile')} to={'/profile'}>
+          <NavLink to={'/profile'}>
             <span className="material-symbols-outlined">pets</span>
             <p>Profile</p>
           </NavLink>
@@ -57,7 +57,7 @@ export default function NavbarDesktop({ active, setActive, pet }) {
           </NavLink>
         </li>
         <li className={`${active === 'menu' ? `${styles.active}` : ''}`}>
-          <NavLink onClick={() => setActive('menu')} to={'/menu'}>
+          <NavLink to={'/menu'}>
             <span className="material-symbols-outlined">settings</span>
             <p>Settings</p>
           </NavLink>

@@ -3,7 +3,7 @@ import feedIcon from '../assets/images/feedIcon.png';
 import logo from '../assets/images/isologo.svg';
 import chatIcon from '../assets/images/chat.png';
 
-export default function NavbarMobile({ active, setActive, pet }) {
+export default function NavbarMobile({ active, pet }) {
   return (
     <>
       {active !== 'login' ? (
@@ -43,7 +43,6 @@ export default function NavbarMobile({ active, setActive, pet }) {
               >
                 <NavLink
                   to={'/'}
-                  onClick={() => setActive('feed')}
                   className={`grid place-items-center ${active === 'feed' && 'bg-primary-300 py-1 px-2 rounded-lg'}`}
                 >
                   <img className="h-6 w-6" src={feedIcon} alt="Feed icon" />
@@ -55,18 +54,13 @@ export default function NavbarMobile({ active, setActive, pet }) {
                 Search
               </li>
               <li className="absolute right-1/2 translate-x-1/2 top-[-28px] p-0 w-12 h-12 bg-accent-300 rounded-full grid place-items-center shadow-lg">
-                <NavLink
-                  className="grid place-items-center"
-                  to={'/publication-create'}
-                  onClick={() => setActive('publication-create')}
-                >
+                <NavLink className="grid place-items-center" to={'/publication-create'}>
                   <span className="material-symbols-outlined text-4xl text-white">add</span>
                 </NavLink>
               </li>
               <li className="flex-grow-[2] flex-col flex-basis-0 flex h-full items-center justify-center">
                 <NavLink
                   to={'/profile'}
-                  onClick={() => setActive('profile')}
                   className={`grid place-items-center ${active === 'profile' && 'bg-primary-300 py-1 px-2 rounded-lg'}`}
                 >
                   <span className="material-symbols-outlined">pets</span>
@@ -76,7 +70,6 @@ export default function NavbarMobile({ active, setActive, pet }) {
               <li className={`flex-grow flex-basis-0 flex h-full items-center justify-center`}>
                 <NavLink
                   to={'/menu'}
-                  onClick={() => setActive('menu')}
                   className={`grid place-items-center ${active === 'menu' && 'bg-primary-300 py-1 px-2 rounded-lg'}`}
                 >
                   <span className="material-symbols-outlined">settings</span>

@@ -5,6 +5,7 @@ import Spinner from '../Spinner';
 import { useNavigate } from 'react-router-dom';
 import { useNavigateContext } from '../../context/navigationContext';
 import { useModalContext } from '../../context/modalContext';
+import { useUserContext } from '../../context/userContext';
 import Modal from '../Modal';
 
 //const clientId = `${import.meta.env.VITE_USER_ID}`;
@@ -13,6 +14,7 @@ const ServerConnect = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
 const Login = () => {
   const { setActive } = useNavigateContext();
   const { openModal, modalState } = useModalContext();
+  const { loginContext } = useUserContext();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,9 +23,11 @@ const Login = () => {
     setIsLoading(false);
     axios
       .post(`${ServerConnect}/api/v1/user`, { token: token })
-      .then((response) => {
-        const userId = response.data.data.userId;
-        localStorage.setItem('userId', JSON.stringify(userId));
+      .then(async (response) => {
+        console.log('Solicitud enviada con éxito:', response.data);
+        const { userId, last_pet } = response.data.data;
+        await loginContext(userId, last_pet);
+
         axios.get(`${ServerConnect}/api/v1/pet/userid/${userId}`).then((res) => {
           if (res.data.data.length > 0) {
             setActive('feed');
