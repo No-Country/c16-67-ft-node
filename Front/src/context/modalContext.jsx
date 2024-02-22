@@ -10,7 +10,9 @@ export const ModalProvider = ({ children }) => {
     confirmBtn: '',
     denyBtn: '',
     petModal: false,
+    xBtnPetModal: false,
     chooseModal: false,
+    error: false,
     onClick: null
   });
 
@@ -29,7 +31,9 @@ export const ModalProvider = ({ children }) => {
       confirmBtn: '',
       denyBtn: '',
       petModal: false,
+      xBtnPetModal: false,
       chooseModal: false,
+      error: false,
       onClick: null
     });
   };

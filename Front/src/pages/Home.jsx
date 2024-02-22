@@ -7,6 +7,7 @@ import axios from 'axios';
 import Suggestions from '../components/Suggestions';
 import { useModalContext } from '../context/modalContext';
 import Modal from '../components/Modal';
+import { useNavigateContext } from '../context/navigationContext';
 const ServerConnect = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
 
 export default function Home() {
@@ -14,9 +15,12 @@ export default function Home() {
   const { modalState, openModal } = useModalContext();
   const [isLoading, setIsLoading] = useState(false);
   const [tabActive, setTabActive] = useState('Feed');
+  const userId = localStorage.getItem('userId');
+  const { setActive } = useNavigateContext();
+
+  setActive('feed');
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
     if (userId === null) {
       navigate('/login');
     } else {
@@ -32,8 +36,12 @@ export default function Home() {
           }
           setIsLoading(false);
         })
-        .catch((err) => {
-          console.error(err);
+        .catch(() => {
+          openModal({
+            description: 'An error has occurred',
+            chooseModal: false,
+            error: true
+          });
           setIsLoading(false);
         });
     }

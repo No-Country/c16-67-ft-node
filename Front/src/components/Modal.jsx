@@ -8,11 +8,22 @@ import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import defaultProfile from '../assets/images/defaultProfile.jpg';
+import { useUserContext } from '../context/userContext';
 
 const Modal = () => {
   const { modalState, closeModal, openModal } = useModalContext();
-  const { isOpen, description, title, confirmBtn, denyBtn, chooseModal, petModal, onClick } =
-    modalState;
+  const {
+    isOpen,
+    description,
+    title,
+    confirmBtn,
+    denyBtn,
+    chooseModal,
+    petModal,
+    xBtnPetModal,
+    error,
+    onClick
+  } = modalState;
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [petModalOpen, setPetModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -27,7 +38,7 @@ const Modal = () => {
     e.preventDefault();
     const fileInput = document.getElementById('fileInput');
     fileInput.files[0];
-    const userId = JSON.parse(localStorage.getItem('userId'));
+    const { userId } = useUserContext();
 
     const payload = new FormData();
     payload.append('name', name);
@@ -93,10 +104,10 @@ const Modal = () => {
 
   return isOpen ? (
     chooseModal ? (
-      <div className="flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-[#00000096] z-[1000]">
+      <div className="flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-[#0000007A] z-[1000]">
         <div className="fixed w-[71%] max-w-[370px] my-0 mx-5 pt-0 pb-5 px-5 rounded-[10px] bg-white shadow-md">
           <div className="flex justify-center object-contain">
-            <BiErrorAlt className="relative bottom-[25px] rounded-[30px] text-[60px] bg-white text-[#b23131]" />
+            <BiErrorAlt className="relative bottom-[25px] rounded-[30px] text-[60px] bg-white text-[#E63333]" />
           </div>
           <div className="pb-[10px] text-center font-bold text-[1.4rem] border-b-2 border-solid">
             {title.toUpperCase()}
@@ -104,7 +115,7 @@ const Modal = () => {
           <div className="my-[10px] mx-[5px] text-center text-[1.2rem] italic">{description}</div>
           <div className="flex justify-between mt-[30px]">
             <button
-              className="px-8 py-[5px] text-[16px] bg-[#b23131] text-white rounded-[10px] shadow-md hover:bg-[#7a3232] hover:transition-all hover:duration-[0.5s] hover:ease-in-out "
+              className="px-8 py-[5px] text-[16px] bg-[#E63333] text-white rounded-[10px] shadow-md hover:bg-[#7a3232] hover:transition-all hover:duration-[0.5s] hover:ease-in-out "
               type="cancel"
               onClick={closeModal}
             >
@@ -124,22 +135,24 @@ const Modal = () => {
       <>
         {isLoading && <Spinner />}
         <main>
-          <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#6F3B14B2] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full ">
+          <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full ">
             <form
               className={`p-6 bg-[#F2FBE7] rounded-t-[40px] md:rounded-[24px] md:w-[50%] ${!petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
               onSubmit={onSubmit}
             >
-              <div className="absolute flex flex-row-reverse left-0 w-full md:relative">
-                <FiX
-                  className="mr-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
-                  onClick={() => {
-                    setTimeout(() => {
-                      closeModal();
-                    }, 480);
-                    setPetModalOpen(true);
-                  }}
-                />
-              </div>
+              {xBtnPetModal ? (
+                <div className="absolute flex flex-row-reverse left-0 w-full md:relative">
+                  <FiX
+                    className="mr-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
+                    onClick={() => {
+                      setTimeout(() => {
+                        closeModal();
+                      }, 480);
+                      setPetModalOpen(true);
+                    }}
+                  />
+                </div>
+              ) : null}
               <p className="mb-4 text-center text-[23px] font-bold md:text-[48px] md:font-semibold">
                 Create your pet´s profile
               </p>
@@ -203,7 +216,7 @@ const Modal = () => {
       <>
         <div className="flex justify-center items-center fixed left-0 right-0 bottom-[10px] z-[999]">
           <div
-            className={`flex justify-evenly py-[10px] px-[15px] my-0 mx-5 shadow-md rounded-[5px] text-white bg-[#4a2e1a] ${
+            className={`flex justify-evenly py-[10px] px-[15px] my-0 mx-5 shadow-md rounded-[5px] text-white ${error ? 'bg-[#E63333]' : 'bg-[#B8682A]'} ${
               !isFadingOut ? 'animate-fadeOutSelfClose' : 'animate-fadeInSelfClose'
             }`}
           >
