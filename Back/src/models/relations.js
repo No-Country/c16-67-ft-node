@@ -4,6 +4,7 @@ const { Publication } = require('./Publication');
 const { Comment } = require('./Comment');
 const { Pet } = require('./Pet');
 const { Reaction } = require('./Reaction');
+const { Save } = require('./Save');
 
 async function setupRelations() {
 
@@ -27,6 +28,10 @@ async function setupRelations() {
 
     await Pet.hasMany(Reaction, { foreignKey: 'petId', as: 'petreaction' }); //indica que una mascota puede hacer muchas reacciones
     await Reaction.belongsTo(Pet, { foreignKey: 'petId', as: 'pet' });
+
+    await Pet.belongsToMany(Publication, { through: Save, foreignKey: 'petId', as: 'savedPublications' });
+    await Publication.belongsToMany(Pet, { through: Save, foreignKey: 'postId', as: 'savedByUsers' });
+
 
 }
 

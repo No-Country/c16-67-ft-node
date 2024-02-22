@@ -8,20 +8,19 @@ const TextInput = ({ labelName, input, placeholderText, error, value, onChange }
       </label>
       {input ? (
         <input
-          className={`p-2 w-full mb-[10px] text-center border border-solid border-gray-300 rounded box-border shadow-md text-[14px] italic focus: outline-none ${error ? 'border-[#ea3354] focus:border focus:border-solid focus:border-[#ea3354]' : 'focus:border focus:border-solid focus:border-[#86a17c]'}`}
+          className={`p-2 w-full h-[40px] mb-[10px] border-[1px] border-solid border-[#00000080] rounded-[8px] box-border shadow-md text-[16px] bg-[#F2FBE7] focus: outline-none md:h-[57px] md:text-[22px] ${error ? 'border-[#ea3354] focus:border focus:border-solid focus:border-[#ea3354]' : 'focus:border focus:border-solid focus:border-[#86a17c]'}`}
           placeholder={placeholderText}
           value={value}
           onChange={onChange}
         />
       ) : (
         <textarea
-          className={`p-2 w-full mb-[10px] text-center border border-solid border-gray-300 rounded box-border shadow-md text-[14px] italic focus: outline-none ${error ? 'border-[#ea3354] focus:border focus:border-solid focus:border-[#ea3354]' : 'focus:border focus:border-solid focus:border-[#86a17c]'}`}
+          className={`p-2 w-full mb-[10px] border-[1px] border-solid border-[#00000080] rounded-[8px] box-border shadow-md text-[16px] bg-[#F2FBE7] focus: outline-none md:h-[121px] md:text-[22px] ${error ? 'border-[#ea3354] focus:border focus:border-solid focus:border-[#ea3354]' : 'focus:border focus:border-solid focus:border-[#86a17c]'}`}
           placeholder={placeholderText}
           value={value}
           onChange={onChange}
         ></textarea>
       )}
-      <span className="block h-5 mb-1 text-[#ea3354] text-[14px]">{error}</span>
     </div>
   );
 };

@@ -13,6 +13,7 @@ router
     .get('/', petController.get)
     .get('/:id', petController.getById)
     .get('/userid/:id', petController.getByFkuserId)
+    .get('/suggestion/:id', petController.getSuggestion)
     .post('/',upload.single('image'), petController.create)
     .put('/:id',upload.single('image'), petController.update)
     .put('/deleted/:id', petController._deleted)

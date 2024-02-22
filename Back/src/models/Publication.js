@@ -39,6 +39,11 @@ const publicationSchema = {
         type:DataTypes.STRING(500),
         allowNull:false
     },
+    address: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        field: 'address'
+    },
     image_url:{
         type: DataTypes.TEXT,
         allowNull: false

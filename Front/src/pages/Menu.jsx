@@ -1,20 +1,13 @@
-import React, { useEffect } from 'react';
 import Logout from '../components/account-google/Logout';
-import { useNavigate } from 'react-router';
+import { useNavigateContext } from '../context/navigationContext';
 
 export default function Menu() {
-  const userId = localStorage.getItem('userId');
-  const navigate = useNavigate();
+  const { setActive } = useNavigateContext();
 
-  useEffect(() => {
-    if (userId === null) {
-      navigate('/login');
-    }
-  }, []);
-
+  setActive('menu');
   return (
-    <div className="grid place-items-center min-h-screen">
+    <main className="grid place-items-center min-h-screen">
       <Logout />
-    </div>
+    </main>
   );
 }

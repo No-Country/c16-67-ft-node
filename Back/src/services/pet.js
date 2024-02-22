@@ -5,11 +5,13 @@ const { Op } = require('sequelize');
 class PetService extends BaseService {
 
     constructor() {
-        super(models.Pet); //al llamarlo aqui, inicializamos baseService con el modelo Publication
+        super([models.Pet, models.Save]); //al llamarlo aqui, inicializamos baseService con el modelo Publication
     }                              // esto nos ayuda que funcione con el modelo especifico y ahorrano lineas de codigo repetitiva
 
-    async getPets(name, minAge, maxAge, isLost) {
-        let conditions = { where: {}, include: [] };
+
+    async getPets(name, minAge, maxAge, isLost,page,limit) {
+        const offset = (page - 1) * limit;
+        let conditions = { where: {}, include: [], offset,limit};
 
         if (name) {
             conditions.where.name = {
@@ -48,7 +50,9 @@ class PetService extends BaseService {
             delete conditions.where;
         }
 
-        return this.model.findAll(conditions);
+        return models.Pet.findAll(conditions);
     }
+
+
 }
 module.exports = PetService;

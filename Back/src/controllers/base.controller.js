@@ -1,38 +1,48 @@
-const handleGet = async (req, res, serviceFunction, type) => {
+
+const handleCreate = async(req,res, serviceFunction, model, dataBody) =>{
     try {
-        const response = await serviceFunction(type);
-        res.json(response);
+        const response = await serviceFunction(model, dataBody)
+        res.status(200).json({ success: true, data: response });
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
 };
 
-const handleGetById = async (req, res, serviceFunction, id) => {
+const handleUpdate = async(req,res, serviceFunction, model, id, dataBody, whereId ) =>{
     try {
-        const response = await serviceFunction(id);
-        res.json(response);
+        const response = await serviceFunction(model,id, dataBody, whereId);
+        res.status(200).json({ success: true, data: response });
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
 };
 
-const getByIdFk = async (req,res, serviceFunction, id,date) =>{
+const handleGet = async (req, res, serviceFunction, model,page,limit) => {
     try {
-        const {id} = req.params;
-        const response = await serviceFunction(id, date);
-        res.json(response);
-    } catch (error) {
-        res.status(500).send({success:false, message:error.message});
-    }
-}
-
-const handleDeleted = async (req, res, serviceFunction, id, body) => {
-    try {
-        const response = await serviceFunction(id, body);
-        res.json(response);
+        const response = await serviceFunction(model,page,limit);
+        res.status(200).json({ success: true, data: response });
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
     }
 };
 
-module.exports = { handleGet, handleGetById, handleDeleted, getByIdFk};
+const handleGetById = async (req, res, serviceFunction, model,id, whereId,page,limit) => {
+    try {
+        const response = await serviceFunction(model, id, whereId,page,limit);
+        res.status(200).json({ success: true, data: response });
+    } catch (error) {
+        res.status(500).send({ success: false, message: error.message });
+    }
+};
+
+const handleDeleted = async (req, res, serviceFunction,model, id, dataBody, whereId) => {
+    try {
+        const response = await serviceFunction(model,id, dataBody, whereId);
+        res.status(200).json({ success: true, data: response });
+    } catch (error) {
+        res.status(500).send({ success: false, message: error.message });
+    }
+};
+
+
+module.exports = { handleGet, handleGetById, handleDeleted, handleCreate, handleUpdate};

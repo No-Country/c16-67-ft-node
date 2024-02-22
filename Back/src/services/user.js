@@ -4,7 +4,7 @@ const BaseService = require('./baseService');
 
 class UserService extends BaseService{
     constructor(){
-        super(models.User); 
+        super([models.User]); 
     }  
 
 }

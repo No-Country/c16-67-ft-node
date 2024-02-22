@@ -1,83 +1,53 @@
 const CommentService = require('../services/comment');
-const { handleGet, handleGetById, handleDeleted, getByIdFk} = require('./base.controller');
+const { handleGet, handleGetById, handleUpdate, handleCreate, handleDeleted } = require('./base.controller');
+const {modelIds, modelNames} = require('../constants');
 
-const cloudinary = require('cloudinary').v2;
-
+// utilizamos los servicios que tenemos en la clase hija en (comment.service)
 const service = new CommentService();
+const Comment = service.getModel(modelNames.Comment) //obtenemos el modelo que necesitamos
+
 
 
 const create = async(req,res) =>{
-    try {
-        // // Subir la imagen a Cloudinary
-        // const result = await cloudinary.uploader.upload(req.file.path);
-        // // Obtener la URL de la imagen cargada desde Cloudinary
-        // const imageUrl = result.secure_url;
-
-        let {userId, petId, postId, comment, image_url} = req.body
-        const response = await service.create({
-            userId, 
-            petId,
-            postId,
-            comment,
-            image_url, 
-            status:true
-        });
-        console.log(response," LA DATA HECHA ")
-        res.json({success: true, data: response});
-    } catch (error) {
-        res.status(500).send({success:false,message:error.message});
-    }
+    let dataBody= {...req.body,status:true}
+    await handleCreate(req, res, service.create.bind(service),Comment, dataBody);
 }
 
 const update = async (req,res) =>{
-    try {
-        // // Subir la imagen a Cloudinary
-        // const result = await cloudinary.uploader.upload(req.file.path);
-        // // Obtener la URL de la imagen cargada desde Cloudinary
-        // const imageUrl = result.secure_url;
         const {id} = req.params;
-        
-        let {comment, image_url} = req.body
-        const response = await service.update(id,{
-            comment,
-            image_url, 
-            status:true
-        });
-        res.json(response);
-    } catch (error) {
-        res.status(500).send({success:false, message:error.message});
-    }
+        await handleUpdate(req, res, service.update.bind(service),Comment,id,req.body, modelIds.commentId);
 }
 
 
 const get = async (req, res) => {
-    await handleGet(req, res, service.find.bind(service));
+    await handleGet(req, res, service.find.bind(service), Comment);
 };
 
 const getById = async (req, res) => {
     const { id } = req.params;
-    await handleGetById(req, res, service.findOne.bind(service), id);
+    await handleGetById(req, res, service.findOne.bind(service),Comment, id, modelIds.commentId);
 };
 
-const getByFkuserId = async (req, res) => {
+const getByFkuserId = async (req, res) => { 
     const { id } = req.params;
-    await getByIdFk(req, res, service.findFk.bind(service), id, "userId");
+    await handleGetById(req, res, service.findFk.bind(service),Comment, id, modelIds.userId);
 };
 
 const getByFkpetId = async (req, res) => {
     const { id } = req.params;
-    await getByIdFk(req, res, service.findFk.bind(service), id, "petId");
+    await handleGetById(req, res, service.findFk.bind(service),Comment, id, modelIds.petId);
 };
 
 const getByFkpostId = async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10; 
     const { id } = req.params;
-    await getByIdFk(req, res, service.findFk.bind(service), id, "postId");
+    await handleGetById(req, res, service.findFk.bind(service),Comment, id, modelIds.postId,page,limit);
 };
 
 const _deleted = async (req, res) => {
-    const { id } = req.params;
-    const body = req.body;
-    await handleDeleted(req, res, service.deleted.bind(service), id, body);
+        const { id } = req.params;
+        await handleDeleted(req, res, service.update.bind(service),Comment, id,{ status: false }, modelIds.commentId);
 };
 
 module.exports ={
