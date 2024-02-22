@@ -90,17 +90,17 @@ export default function CreatePublicationCard({ setIsAutocompleteActive }) {
           </li>
           <li
             onClick={() => {
-              setType('perdido');
+              setType('Perdido');
             }}
-            className={`${type === 'perdido' ? styles.active : ''}`}
+            className={`${type === 'Perdido' ? styles.active : ''}`}
           >
             Lost
           </li>
           <li
             onClick={() => {
-              setType('adopcion');
+              setType('Adopcion');
             }}
-            className={`${type === 'adopcion' ? styles.active : ''}`}
+            className={`${type === 'Adopcion' ? styles.active : ''}`}
           >
             In adoption
           </li>
