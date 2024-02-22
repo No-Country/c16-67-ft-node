@@ -22,7 +22,6 @@ const Login = () => {
     axios
       .post(`${ServerConnect}/api/v1/user`, { token: token })
       .then((response) => {
-        console.log('Solicitud enviada con éxito:', response.data);
         const userId = response.data.data.userId;
         localStorage.setItem('userId', JSON.stringify(userId));
         axios.get(`${ServerConnect}/api/v1/pet/userid/${userId}`).then((res) => {
@@ -43,8 +42,9 @@ const Login = () => {
       })
       .catch(() => {
         openModal({
-          description: 'An error has ocurred',
-          chooseModal: false
+          description: 'An error has occurred',
+          chooseModal: false,
+          error: true
         });
       });
     setIsLoading(true);
@@ -52,8 +52,9 @@ const Login = () => {
 
   const onFailure = () => {
     openModal({
-      description: 'An error has ocurred',
-      chooseModal: false
+      description: 'An error has occurred',
+      chooseModal: false,
+      error: true
     });
   };
 
