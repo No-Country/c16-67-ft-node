@@ -25,7 +25,6 @@ function AutocompleteSearch({ setIsAutocompleteActive, setLocataion }) {
       },
       transformResult: function (response) {
         var suggestions = $.map(response, function (dataItem) {
-          setLocataion(dataItem.display_address);
           return {
             value: dataItem.display_address,
             data: dataItem
@@ -37,6 +36,7 @@ function AutocompleteSearch({ setIsAutocompleteActive, setLocataion }) {
         };
       },
       onSelect: function (suggestion) {
+        setLocataion(suggestion.value);
         //displayLatLon(suggestion.data.display_name, suggestion.data.lat, suggestion.data.lon);
       }
     });

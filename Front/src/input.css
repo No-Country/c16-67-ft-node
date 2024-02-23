@@ -5,7 +5,24 @@
 @tailwind utilities;
 
 * {
+    @apply font-roboto;
+}
+
+p,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     @apply text-body-md font-roboto;
+}
+
+#root {
+    max-width: 1440px;
+    margin: auto;
+    position: relative;
 }
 
 main {

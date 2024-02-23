@@ -1,7 +1,7 @@
 import axios from 'axios';
 import logo from '../assets/images/isologo.svg';
 import { useEffect, useState } from 'react';
-import { useUserContext } from '../context/userContext';
+import FollowButton from './FollowButton';
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
 const Item = ({ pet }) => {
@@ -18,19 +18,21 @@ const Item = ({ pet }) => {
           <p>@{pet.name}</p>
         </div>
       </div>
-      <button className="text-white bg-secondary-300 h-fit p-2 rounded-md">Follow</button>
+      <FollowButton />
     </div>
   );
 };
 
 export default function Suggestions() {
-  const { userId } = useUserContext();
+  const userId = JSON.parse(localStorage.getItem('userId'));
   const [pets, setPets] = useState([]);
 
   useEffect(() => {
+    console.log(userId);
     axios
       .get(`${API_URL_BASE}/api/v1/pet/suggestion/${userId}`)
-      .then((res) => setPets(res.data.data.slice(0, 5)));
+      .then((res) => setPets(res.data.data.slice(0, 5)))
+      .catch((err) => console.log(err));
   }, []);
   return (
     <div className="hidden xl:block xl:p-4 xl:flex-grow xl:basis-0">

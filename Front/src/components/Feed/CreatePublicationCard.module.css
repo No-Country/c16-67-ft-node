@@ -5,5 +5,5 @@
 }
 
 .active {
-    @apply bg-primary-200 text-white;
+    @apply bg-primary-500 text-white;
 }

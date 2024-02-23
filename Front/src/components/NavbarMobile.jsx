@@ -1,7 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import feedIcon from '../assets/images/feedIcon.png';
+import feedIcon from '../assets/images/feedIcon.svg';
+import footIcon from '../assets/images/footIcon.svg';
 import logo from '../assets/images/isologo.svg';
-import chatIcon from '../assets/images/chat.png';
+import chatIcon from '../assets/images/chat.svg';
+import searchIcon from '../assets/images/search.svg';
+import menuIcon from '../assets/images/menu.svg';
 
 export default function NavbarMobile({ active, pet }) {
   return (
@@ -11,13 +14,12 @@ export default function NavbarMobile({ active, pet }) {
           <div className="fixed w-full bg-white">
             <div className="h-16 px-4 flex justify-between items-center">
               <img
-                className="h-14 w-14 rounded-full border-2 border-slate-200 object-cover"
+                className="h-12 w-12 rounded-full border-2 border-slate-200 object-cover"
                 src={pet !== null ? pet.image_url : ''}
                 alt="image of active pet"
               />
-              <img src={logo} className="absolute w-full left-0 h-12" alt="logo" />
-              <div className="flex gap-x-1">
-                <span className="material-symbols-outlined">notifications</span>
+              <img src={logo} className="left-0 h-12" alt="logo" />
+              <div className="w-12 flex justify-end">
                 <img src={chatIcon} alt="chat icon" className="h-6 w-6" />
               </div>
             </div>
@@ -43,36 +45,37 @@ export default function NavbarMobile({ active, pet }) {
               >
                 <NavLink
                   to={'/'}
-                  className={`grid place-items-center ${active === 'feed' && 'bg-primary-300 py-1 px-2 rounded-lg'}`}
+                  className={`grid place-items-center ${active === 'feed' && 'bg-primary-500 py-1 px-2 rounded-lg'}`}
                 >
                   <img className="h-6 w-6" src={feedIcon} alt="Feed icon" />
                   <span>Feed</span>
                 </NavLink>
               </li>
               <li className="flex-grow-[2] flex flex-col flex-basis-0 h-full items-center justify-center">
-                <span className="material-symbols-outlined">search</span>
+                <img className="h-6 w-6" src={searchIcon} alt="Search icon" />
                 Search
               </li>
-              <li className="absolute right-1/2 translate-x-1/2 top-[-28px] p-0 w-12 h-12 bg-accent-300 rounded-full grid place-items-center shadow-lg">
+              <li className="absolute right-1/2 translate-x-1/2 top-[-32px] p-0 w-14 h-14 bg-accent-500 rounded-full grid place-items-center shadow-lg">
                 <NavLink className="grid place-items-center" to={'/publication-create'}>
-                  <span className="material-symbols-outlined text-4xl text-white">add</span>
+                  <span className="material-symbols-outlined text-2xl ">add</span>
+                  <p className="text-body-sm">Post</p>
                 </NavLink>
               </li>
               <li className="flex-grow-[2] flex-col flex-basis-0 flex h-full items-center justify-center">
                 <NavLink
                   to={'/profile'}
-                  className={`grid place-items-center ${active === 'profile' && 'bg-primary-300 py-1 px-2 rounded-lg'}`}
+                  className={`grid place-items-center ${active === 'profile' && 'bg-primary-500 py-1 px-2 rounded-lg'}`}
                 >
-                  <span className="material-symbols-outlined">pets</span>
-                  Profile
+                  <img className="h-6 w-6" src={footIcon} alt="Profile icon" />
+                  <p className="text-body-sm">Profile</p>
                 </NavLink>
               </li>
               <li className={`flex-grow flex-basis-0 flex h-full items-center justify-center`}>
                 <NavLink
                   to={'/menu'}
-                  className={`grid place-items-center ${active === 'menu' && 'bg-primary-300 py-1 px-2 rounded-lg'}`}
+                  className={`grid place-items-center ${active === 'menu' && 'bg-primary-500 py-1 px-2 rounded-lg'}`}
                 >
-                  <span className="material-symbols-outlined">settings</span>
+                  <img className="h-6 w-6" src={menuIcon} alt="Menu icon" />
                   More
                 </NavLink>
               </li>
