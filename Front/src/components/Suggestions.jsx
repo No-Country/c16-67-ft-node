@@ -28,10 +28,9 @@ export default function Suggestions() {
   const [pets, setPets] = useState([]);
 
   useEffect(() => {
-    console.log(userId);
     axios
-      .get(`${API_URL_BASE}/api/v1/pet/suggestion/${userId}`)
-      .then((res) => setPets(res.data.data.slice(0, 5)))
+      .get(`${API_URL_BASE}/api/v1/pet/suggestion/${userId}?limit=5`)
+      .then((res) => setPets(res.data.data))
       .catch((err) => console.log(err));
   }, []);
   return (
