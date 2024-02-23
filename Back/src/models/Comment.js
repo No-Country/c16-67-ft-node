@@ -41,10 +41,10 @@ const commentSchema ={
         type: DataTypes.TEXT,
         allowNull: false
     },
-        status:{
-        allowNull:false,
-        type: DataTypes.BOOLEAN,
-        field: 'status'
+    status:{
+    allowNull:false,
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
     }
 }
 

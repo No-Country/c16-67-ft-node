@@ -40,7 +40,7 @@ const reactionSchema ={
     status:{
         allowNull:false,
         type: DataTypes.BOOLEAN,
-        field: 'status'
+        defaultValue: true
     }
 }
 

@@ -33,7 +33,7 @@ const publicationSchema = {
     type:{
         type:DataTypes.STRING(10),
         allowNull:false,
-        field: 'type'
+
     },
     description:{
         type:DataTypes.STRING(500),
@@ -42,7 +42,6 @@ const publicationSchema = {
     address: {
         allowNull: false,
         type: DataTypes.STRING,
-        field: 'address'
     },
     image_url:{
         type: DataTypes.TEXT,
@@ -51,7 +50,7 @@ const publicationSchema = {
     status:{
         allowNull:false,
         type: DataTypes.BOOLEAN,
-        field: 'status'
+        defaultValue: true
     }
 
 }

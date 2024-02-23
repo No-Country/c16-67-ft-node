@@ -22,17 +22,15 @@ const UserSchema = {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
   },
   name:{
     allowNull: false,
     type: DataTypes.STRING,
-    field:'name'
   },
   mail:{
     allowNull: false,
     type:DataTypes.STRING,
-    field:'mail'
   },
   image_url:{
     type: DataTypes.TEXT,
@@ -41,7 +39,7 @@ const UserSchema = {
   status:{
     allowNull:false,
     type: DataTypes.BOOLEAN,
-    field: 'status'
+    defaultValue: true
   },
   last_pet:{
     type:DataTypes.UUID,

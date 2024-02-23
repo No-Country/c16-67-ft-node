@@ -40,15 +40,15 @@ const saveSchema ={
     name_pet:{
         allowNull: false,
         type: DataTypes.STRING,
-        field:'name'
-    },image_url_pet:{
+    },
+    image_url_pet:{
         type: DataTypes.TEXT,
         allowNull: false
     },
     status:{
         allowNull:false,
         type: DataTypes.BOOLEAN,
-        field: 'status'
+        defaultValue: true
     }
 }
 

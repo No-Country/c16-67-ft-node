@@ -4,7 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const routerApi = require('./routes');
-const documentation = require("./utils/documentation.json")
+const documentation = require("./utils/documentation.json");
+
 
 //MIDDLEWARES
 app.use(cors());
@@ -19,4 +20,4 @@ app.get('/', (req, res) => {
 });
 
 
-module.exports = app
+module.exports = {app}

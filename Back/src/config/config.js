@@ -7,6 +7,9 @@ const config = {
     dbHost: process.env.DB_HOST,
     dbName: process.env.DB_NAME,
     dbPort: process.env.DB_PORT,
+    // redis
+    redisHost:process.env.REDIS_HOST,
+    redisPort:process.env.REDIS_PORT,
 }
 
 

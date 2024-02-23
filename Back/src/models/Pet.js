@@ -29,17 +29,14 @@ const petSchema = {
     name: {
         allowNull: false,
         type: DataTypes.STRING,
-        field: 'name'
     },
     age: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        field: 'age'
     },
     address: {
         allowNull: false,
         type: DataTypes.STRING,
-        field: 'address'
     },
     description: {
         type: DataTypes.STRING(500),
@@ -52,7 +49,7 @@ const petSchema = {
     status: {
         allowNull: false,
         type: DataTypes.BOOLEAN,
-        field: 'status'
+        defaultValue: true
     }
 }
 

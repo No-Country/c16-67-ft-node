@@ -9,7 +9,7 @@ class PetService extends BaseService {
     }                              // esto nos ayuda que funcione con el modelo especifico y ahorrano lineas de codigo repetitiva
 
 
-    async getPets(name, minAge, maxAge, isLost,page,limit) {
+    async getPets(name,page,limit) {
         const offset = (page - 1) * limit;
         let conditions = { where: {}, include: [], offset,limit};
 
@@ -17,32 +17,6 @@ class PetService extends BaseService {
             conditions.where.name = {
                 [Op.iLike]: `%${name}%` // Utiliza iLike para búsqueda insensible a mayúsculas
             };
-        }
-        if (Number(minAge) > Number(maxAge)) throw Error("la edad menor no puede ser superior a la mayor")
-        // Implementa la búsqueda por rango de edad
-        if (minAge && maxAge) {
-            conditions.where.age = {
-                [Op.gte]: minAge, // Mayor o igual que minAge
-                [Op.lte]: maxAge  // Menor o igual que maxAge
-            };
-        } else if (minAge) {
-            conditions.where.age = {
-                [Op.gte]: minAge // Cuando solo especifica el límite inferior
-            };
-        } else if (maxAge) {
-            conditions.where.age = {
-                [Op.lte]: maxAge // Cuando solo especifica el límite superior
-            };
-        }
-
-        // Filtrar por publicaciones de tipo "perdido"
-        if (isLost) {
-            conditions.include.push({
-                model: models.Publication,
-                as: 'publication', // Asegúrate de que este alias coincida con cómo has definido la relación
-                where: { type: 'Perdido' },
-                //required: true // Esto hace que la consulta sea un INNER JOIN
-            });
         }
 
         // Si no hay condiciones de búsqueda específicas, elimina el 'where' para devolver todos los registros
