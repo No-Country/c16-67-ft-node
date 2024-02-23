@@ -76,12 +76,12 @@ export default function CreatePublicationCard({ setIsAutocompleteActive }) {
 
   return (
     <div
-      className={`hidden md:block m-4 p-4 rounded-md border border-secondary-300 relative ${styles.form}`}
+      className={`hidden md:block m-4 p-4 rounded-md border shadow-md relative max-w-[768px] mx-auto ${styles.form}`}
     >
       {isLoading && <Spinner />}
       {modalState.isOpen && <Modal />}
       <form onSubmit={handleSubmit}>
-        <ul className="flex absolute top-[-12px] left-12 bg-white border-2 border-primary-200 rounded-md">
+        <ul className="flex absolute top-[-12px] left-12 bg-white border-2 border-primary-500 rounded-md">
           <li
             onClick={() => {
               setType('normal');
@@ -117,13 +117,13 @@ export default function CreatePublicationCard({ setIsAutocompleteActive }) {
         <div className="flex justify-between mt-4">
           <label
             htmlFor="file-upload"
-            className="bg-white rounded-md cursor-pointer border border-primary-200 py-2 px-6 flex items-center gap-x-2"
+            className="bg-white rounded-md cursor-pointer border border-secondary-800 py-2 px-6 flex items-center gap-x-2"
           >
             <span className="material-symbols-outlined">attachment</span>
             Attach
           </label>
           <input id="file-upload" type="file" onChange={handleImageChange} className="hidden" />
-          <button className="px-4 py-2 bg-accent-300 text-white rounded-md" type="submit">
+          <button className="px-4 py-2 w-40 text-title-lg bg-accent-500 rounded-md" type="submit">
             Post
           </button>
         </div>
