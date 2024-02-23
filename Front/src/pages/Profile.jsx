@@ -64,6 +64,28 @@ export default function Profile() {
     fetchData();
   }, [userId, navigate]);
 
+  useEffect(() => {
+    // Nuevo useEffect para actualizar las publicaciones cuando cambie pet.petId
+    const fetchPublications = async () => {
+      if (!pet.petId) return; // Verifica que pet.petId exista
+      setIsLoading(true);
+      try {
+        const response = await axios.get(`${API_URL_BASE}/api/v1/publication/petid/${pet.petId}`);
+        setPublications(response.data.data);
+      } catch (error) {
+        openModal({
+          description: 'An error has occurred while fetching publications',
+          chooseModal: false,
+          error: true
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPublications();
+  }, [pet.petId]); // Este efecto depende de pet.petId
+
   const onSelectPet = (e) => {
     if (e.target.value === 'addPet') {
       openModal({
