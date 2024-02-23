@@ -1,7 +1,7 @@
 import { React } from 'react';
 import LoginContent from '../components/login/LoginContent';
 import logo from '../assets/images/isologo.svg';
-import foots from '../assets/images/foots.png';
+import foots from '../assets/images/footIcon.svg';
 
 export default function Login() {
   return (

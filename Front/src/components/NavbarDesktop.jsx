@@ -1,5 +1,10 @@
-import feedIcon from '../assets/images/feedIcon.png';
-import chatIcon from '../assets/images/chat.png';
+import feedIcon from '../assets/images/feedIcon.svg';
+import chatIcon from '../assets/images/chat.svg';
+import searchIcon from '../assets/images/search.svg';
+import footIcon from '../assets/images/footIcon.svg';
+import notificationsIcon from '../assets/images/notifications.svg';
+import saveIcon from '../assets/images/save.svg';
+import settingsIcon from '../assets/images/settings.svg';
 import defaultProfile from '../assets/images/defaultProfile.jpg';
 import { NavLink } from 'react-router-dom';
 import styles from './NavbarDesktop.module.css';
@@ -7,7 +12,7 @@ import styles from './NavbarDesktop.module.css';
 export default function NavbarDesktop({ active, pet }) {
   return (
     <div
-      className={`hidden md:block fixed left-0 ml-4 mt-4 md-32 lg:w-64 pr-2 md:border-r-[2px] md:border-[#B8682A] md:h-full ${styles.desktop}`}
+      className={`hidden md:block absolute left-0 ml-4 mt-4 md:w-52 lg:w-64 pr-2 ${styles.desktop}`}
     >
       <div className="ml-4 flex items-center gap-x-4">
         {pet !== null ? (
@@ -35,20 +40,14 @@ export default function NavbarDesktop({ active, pet }) {
         </li>
         <li className={`${active === 'search' ? `${styles.active}` : ''}`}>
           <NavLink>
-            <span className="material-symbols-outlined">search</span>
+            <img src={searchIcon} className={`${styles.navImg}`} alt="Search icon" />
             <p>Search</p>
           </NavLink>
         </li>
         <li className={`${active === 'profile' ? `${styles.active}` : ''}`}>
           <NavLink to={'/profile'}>
-            <span className="material-symbols-outlined">pets</span>
+            <img src={footIcon} className={`${styles.navImg}`} alt="Profile icon" />
             <p>Profile</p>
-          </NavLink>
-        </li>
-        <li className={`${active === 'notifications' ? `${styles.active}` : ''}`}>
-          <NavLink className="">
-            <span className="material-symbols-outlined">notifications</span>
-            <p>Notifications</p>
           </NavLink>
         </li>
         <li className={`${active === 'chat' ? `${styles.active}` : ''}`}>
@@ -57,9 +56,23 @@ export default function NavbarDesktop({ active, pet }) {
             <p>Chat</p>
           </NavLink>
         </li>
+        <div className="border-b border-black" />
+        <h2 className="sm:text-title-md md:text-headline-sm px-6 py-3">Menu</h2>
+        <li className={`${active === 'notifications' ? `${styles.active}` : ''}`}>
+          <NavLink className="">
+            <img src={notificationsIcon} className={`${styles.navImg}`} alt="Notification icon" />
+            <p>Notifications</p>
+          </NavLink>
+        </li>
+        <li className={`${active === 'notifications' ? `${styles.active}` : ''}`}>
+          <NavLink className="">
+            <img src={saveIcon} className={`${styles.navImg}`} alt="Saved icon" />
+            <p>Notifications</p>
+          </NavLink>
+        </li>
         <li className={`${active === 'menu' ? `${styles.active}` : ''}`}>
           <NavLink to={'/menu'}>
-            <span className="material-symbols-outlined">settings</span>
+            <img src={settingsIcon} className={`${styles.navImg}`} alt="Settings icon" />
             <p>Settings</p>
           </NavLink>
         </li>

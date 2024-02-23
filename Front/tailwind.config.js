@@ -4,29 +4,69 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        walter: ['Walter Turncoat', 'cursive']
+        walter: ['Walter Turncoat', 'cursive'],
+        roboto: ['Roboto', 'sans-serif']
       },
       colors: {
         primary: {
-          100: '#C7E4C3',
-          200: '#85C47D',
-          300: '#4E9745',
-          400: '#2A5125',
-          500: '#050B05'
+          50: '#f8f0ea',
+          100: '#e9d0bd',
+          200: '#deba9d',
+          300: '#cf9a70',
+          400: '#c68655',
+          500: '#b8682a',
+          600: '#a75f26',
+          700: '#834a1e',
+          800: '#653917',
+          900: '#4d2c12'
         },
         secondary: {
-          100: '#DD8441',
-          200: '#C76A24',
-          300: '#6F3B14',
-          400: '#45250C',
-          500: '#1A0E05'
+          50: '#eaf8f2',
+          100: '#bde9d6',
+          200: '#9ddec2',
+          300: '#70cfa6',
+          400: '#55c695',
+          500: '#2ab87a',
+          600: '#26a76f',
+          700: '#1e8357',
+          800: '#176543',
+          900: '#124d33'
         },
         accent: {
-          100: '#FFE5AD',
-          200: '#FFC447',
-          300: '#E29900',
-          400: '#7A5300',
-          500: '#140E00'
+          50: '#fcf5e6',
+          100: '#f6dfb0',
+          200: '#f2d08a',
+          300: '#ecbb54',
+          400: '#e8ad33',
+          500: '#e29900',
+          600: '#ce8b00',
+          700: '#a06d00',
+          800: '#7c5400',
+          900: '#5f4000'
+        },
+        error: {
+          50: '#fce6e6',
+          100: '#f5b0b0',
+          200: '#f18a8a',
+          300: '#ea5454',
+          400: '#e63333',
+          500: '#e00000',
+          600: '#cc0000',
+          700: '#9f0000',
+          800: '#7b0000',
+          900: '#5e0000'
+        },
+        Success: {
+          50: '#eaf8eb',
+          100: '#bde9c0',
+          200: '#9ddea1',
+          300: '#70cf76',
+          400: '#55c55c',
+          500: '#2ab733',
+          600: '#26a72e',
+          700: '#1e8224',
+          800: '#17651c',
+          900: '#124d15'
         }
       },
       keyframes: {
@@ -82,6 +122,23 @@ export default {
         petModalClose: 'petModalClose 0.5s linear',
         fadeInSelfClose: 'fadeInSelfClose 0.5s ease-in forwards',
         fadeOutSelfClose: 'fadeOutSelfClose 0.5s ease-in forwards'
+      },
+      fontSize: {
+        'body-lg': ['16px', '24px'],
+        'body-md': ['14px', '20px'],
+        'body-sm': ['12px', '16px'],
+        'label-lg': ['14px', '20px'],
+        'label-md': ['12px', '16px'],
+        'label-sm': ['11px', '16px'],
+        'title-lg': ['22px', '28px'],
+        'title-md': ['16px', '24px'],
+        'title-sm': ['14px', '20px'],
+        'headline-lg': ['32px', '40px'],
+        'headline-md': ['28px', '36px'],
+        'headline-sm': ['24px', '32px'],
+        'display-lg': ['57px', '64px'],
+        'display-md': ['45px', '52px'],
+        'display-sm': ['36px', '44px']
       }
     }
   },

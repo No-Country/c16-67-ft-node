@@ -1,8 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import feedIcon from '../assets/images/feedIcon.png';
+import feedIcon from '../assets/images/feedIcon.svg';
 import logo from '../assets/images/isologo.svg';
-import chatIcon from '../assets/images/chat.png';
-
+import chatIcon from '../assets/images/chat.svg';
 export default function NavbarMobile({ active, pet }) {
   console.log(active);
   return (
@@ -12,13 +11,12 @@ export default function NavbarMobile({ active, pet }) {
           <div className="fixed w-full bg-white">
             <div className="h-16 px-4 flex justify-between items-center">
               <img
-                className="h-14 w-14 rounded-full border-2 border-slate-200 object-cover"
+                className="h-12 w-12 rounded-full border-2 border-slate-200 object-cover"
                 src={pet !== null ? pet.image_url : ''}
                 alt="image of active pet"
               />
-              <img src={logo} className="absolute w-full left-0 h-12" alt="logo" />
-              <div className="flex gap-x-1">
-                <span className="material-symbols-outlined">notifications</span>
+              <img src={logo} className="left-0 h-12" alt="logo" />
+              <div className="w-12 flex justify-end">
                 <img src={chatIcon} alt="chat icon" className="h-6 w-6" />
               </div>
             </div>
