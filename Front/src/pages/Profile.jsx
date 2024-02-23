@@ -128,7 +128,7 @@ export default function Profile() {
   };
 
   return (
-    <main>
+    <main className="p-0">
       {isLoading && <Spinner />}
       {modalState.isOpen && <Modal />}
       <div className="px-4">
