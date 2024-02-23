@@ -11,56 +11,21 @@ import { MdEdit } from 'react-icons/md';
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
 export default function Profile() {
+  const navigate = useNavigate();
   const { modalState, openModal } = useModalContext();
   const [options, setOptions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [publications, setPublications] = useState([]);
   const [user, setUser] = useState({ name: '', image_url: '' });
   const { getPet, setActivePet } = useUserContext();
   const userId = JSON.parse(localStorage.getItem('userId'));
+  const { petId } = JSON.parse(localStorage.getItem('pet'));
   const pet = getPet();
-  const [isLoading, setIsLoading] = useState(false);
-  const [publications, setPublications] = useState([]);
-
-  const navigate = useNavigate();
   const { setActive } = useNavigateContext();
 
   setActive('profile');
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      if (userId === null) {
-        navigate('/login');
-        return;
-      }
-      try {
-        const [petsResponse, userResponse, publicationsResponse] = await Promise.all([
-          axios.get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`),
-          axios.get(`${API_URL_BASE}/api/v1/user/${userId}`),
-          axios.get(`${API_URL_BASE}/api/v1/publication/petid/${pet.petId}`)
-        ]);
-
-        setOptions(
-          petsResponse.data.data
-            .filter((pet) => pet.status)
-            .map((pet) => ({
-              value: pet.petId,
-              label: pet.name,
-              description: pet.description,
-              image: pet.image_url
-            }))
-        );
-        setPublications(publicationsResponse.data.data);
-        console.log(publications);
-        setUser(userResponse.data.data);
-      } catch (error) {
-        openModal({
-          description: 'An error has occurred',
-          chooseModal: false,
-          error: true
-        });
-      }
-      setIsLoading(false);
-    };
     fetchData();
   }, [userId, navigate]);
 
@@ -85,6 +50,42 @@ export default function Profile() {
 
     fetchPublications();
   }, [pet.petId]); // Este efecto depende de pet.petId
+
+  //FUNCIONES
+  const fetchData = async () => {
+    setIsLoading(true);
+    if (userId === null) {
+      navigate('/login');
+      return;
+    }
+    try {
+      const [petsResponse, userResponse, publicationsResponse] = await Promise.all([
+        axios.get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`),
+        axios.get(`${API_URL_BASE}/api/v1/user/${userId}`),
+        axios.get(`${API_URL_BASE}/api/v1/publication/petid/${petId}`)
+      ]);
+
+      setOptions(
+        petsResponse.data.data
+          .filter((pet) => pet.status)
+          .map((pet) => ({
+            value: pet.petId,
+            label: pet.name,
+            description: pet.description,
+            image: pet.image_url
+          }))
+      );
+      setPublications(publicationsResponse.data.data);
+      setUser(userResponse.data.data);
+    } catch (error) {
+      openModal({
+        description: 'An error has occurred',
+        chooseModal: false,
+        error: true
+      });
+    }
+    setIsLoading(false);
+  };
 
   const onSelectPet = (e) => {
     if (e.target.value === 'addPet') {
