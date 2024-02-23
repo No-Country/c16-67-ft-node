@@ -18,6 +18,7 @@ export default function Profile() {
   const userId = JSON.parse(localStorage.getItem('userId'));
   const pet = getPet();
   const [isLoading, setIsLoading] = useState(false);
+  const [publications, setPublications] = useState([]);
 
   const navigate = useNavigate();
   const { setActive } = useNavigateContext();
@@ -32,16 +33,12 @@ export default function Profile() {
         return;
       }
       try {
-        const [petsResponse, userResponse] = await Promise.all([
-          axios
-            .get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`)
-            .catch((error) => console.log(error)),
-          axios.get(`${API_URL_BASE}/api/v1/user/${userId}`).catch((error) => console.log(error)),
-          axios
-            .get(`${API_URL_BASE}/api/v1/publication/petid/${pet.petId}`)
-            .catch((error) => console.log(error))
+        const [petsResponse, userResponse, publicationsResponse] = await Promise.all([
+          axios.get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`),
+          axios.get(`${API_URL_BASE}/api/v1/user/${userId}`),
+          axios.get(`${API_URL_BASE}/api/v1/publication/petid/${pet.petId}`)
         ]);
-        console.log(petsResponse);
+
         setOptions(
           petsResponse.data.data
             .filter((pet) => pet.status)
@@ -52,6 +49,8 @@ export default function Profile() {
               image: pet.image_url
             }))
         );
+        setPublications(publicationsResponse.data.data);
+        console.log(publications);
         setUser(userResponse.data.data);
       } catch (error) {
         openModal({
@@ -162,7 +161,7 @@ export default function Profile() {
           </div>
           <p className="mt-4 text-[16px]">{pet.description}</p>
           <div className="flex flex-wrap gap-4">
-            {options.map((publication, index) => (
+            {publications.map((publication, index) => (
               <img
                 key={index}
                 src={publication.image_url}
