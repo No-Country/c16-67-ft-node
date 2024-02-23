@@ -144,7 +144,7 @@ const Modal = () => {
     ) : petModal ? (
       <>
         {isLoading && <Spinner />}
-        <main>
+        <main className="p-0">
           <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full ">
             <form
               className={`p-6 bg-[#F2FBE7] rounded-t-[40px] md:rounded-[24px] md:w-[50%] ${!petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}

@@ -175,7 +175,7 @@ export default function Profile() {
           <img
             src={pet.image_url}
             alt="Pet-image"
-            className="w-[90px] h-[90px] rounded-full object-cover"
+            className="w-[100px] h-[100px] rounded-full shadow-lg object-cover"
           />
           <p className="text-[24px] mt-1 mb-4 text-[#232220]">{pet.name}</p>
           <div className="flex justify-center w-[50%] text-[#176543] text-[16px] font-black">
@@ -183,15 +183,23 @@ export default function Profile() {
             <p className="text-center">500 Following</p>
           </div>
           <p className="mt-4 text-[16px]">{pet.description}</p>
-          <div className="flex flex-wrap gap-4">
-            {publications.map((publication, index) => (
-              <img
-                key={index}
-                src={publication.image_url}
-                alt={`Publication-${index}`}
-                className="w-[150px] h-[150px] object-cover rounded-md"
-              />
-            ))}
+          <div className="flex flex-col items-center  mt-8 w-full">
+            {publications.length === 0 ? (
+              <section className="flex justify-center h-[200px] p-4 shadow-lg bg-[#fafafa] font-semibold">
+                <div className="flex items-center">There´s no publication yet</div>
+              </section>
+            ) : (
+              <div className="grid grid-cols-2 gap-4">
+                {publications.map((publication, index) => (
+                  <img
+                    key={index}
+                    src={publication.image_url}
+                    alt={`Publication-${index}`}
+                    className="w-[160px] h-[160px] object-cover rounded-md shadow-lg"
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </div>

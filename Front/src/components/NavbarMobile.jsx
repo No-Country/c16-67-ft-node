@@ -3,7 +3,6 @@ import feedIcon from '../assets/images/feedIcon.svg';
 import logo from '../assets/images/isologo.svg';
 import chatIcon from '../assets/images/chat.svg';
 export default function NavbarMobile({ active, pet }) {
-  console.log(active);
   return (
     <div className="block md:hidden">
       {active !== 'profile' && (
