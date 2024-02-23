@@ -6,8 +6,6 @@ import { useModalContext } from '../context/modalContext';
 import Modal from '../components/Modal';
 import { useUserContext } from '../context/userContext';
 import { useNavigateContext } from '../context/navigationContext';
-import PetCard from '../components/Feed/PetCard';
-import { FiArrowLeft } from 'react-icons/fi';
 import { MdEdit } from 'react-icons/md';
 
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
@@ -33,19 +31,26 @@ export default function Profile() {
         navigate('/login');
         return;
       }
-      console.log(userId);
       try {
         const [petsResponse, userResponse] = await Promise.all([
           axios
             .get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`)
             .catch((error) => console.log(error)),
-          axios.get(`${API_URL_BASE}/api/v1/user/${userId}`).catch((error) => console.log(error))
+          axios.get(`${API_URL_BASE}/api/v1/user/${userId}`).catch((error) => console.log(error)),
+          axios
+            .get(`${API_URL_BASE}/api/v1/publication/petid/${pet.petId}`)
+            .catch((error) => console.log(error))
         ]);
-
+        console.log(petsResponse);
         setOptions(
           petsResponse.data.data
             .filter((pet) => pet.status)
-            .map((pet) => ({ value: pet.petId, label: pet.name, image: pet.image_url }))
+            .map((pet) => ({
+              value: pet.petId,
+              label: pet.name,
+              description: pet.description,
+              image: pet.image_url
+            }))
         );
         setUser(userResponse.data.data);
       } catch (error) {
@@ -60,23 +65,43 @@ export default function Profile() {
     fetchData();
   }, [userId, navigate]);
 
-  const onCardClick = (pet) => {
-    if (pet.value === 'addPet') {
+  const onSelectPet = (e) => {
+    if (e.target.value === 'addPet') {
       openModal({
         petModal: true,
         xBtnPetModal: true
       });
     } else {
-      axios.get(`${API_URL_BASE}/api/v1/pet/${pet.value}`).then((res) => {
-        console.log(res.data);
-        const { data } = res;
-        const pet = {
-          petId: data.data.petId,
-          name: data.data.name,
-          image_url: data.data.image_url
-        };
-        setActivePet(pet);
-      });
+      axios
+        .get(`${API_URL_BASE}/api/v1/pet/${e.target.value}`)
+        .then((res) => {
+          console.log(res.data);
+          const { data } = res;
+          const pet = {
+            petId: data.data.petId,
+            name: data.data.name,
+            description: data.data.description,
+            image_url: data.data.image_url
+          };
+          axios
+            .get(`${API_URL_BASE}/api/v1/publication/petid/${pet.petId}`)
+            .then((res) => {
+              console.log(res.data);
+
+              const { data } = res;
+              const petWithPublications = {
+                ...pet,
+                publications: data.data.image_url
+              };
+              setActivePet(petWithPublications);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
@@ -87,44 +112,66 @@ export default function Profile() {
       <div className="px-4">
         <div className="flex flex-col items-center gap-y-4 mt-4">
           <div className="flex justify-between items-center w-full text-[28px]">
-            <FiArrowLeft className="cursor-pointer" onClick={() => navigate(-1)} />
-            <span>Profile</span>
-            <MdEdit className="cursor-pointer" />
+            {options.length === 0 ? (
+              <></>
+            ) : (
+              <section>
+                <select
+                  name="select"
+                  onChange={onSelectPet}
+                  className="w-full h-[32px] border-[1px] border-[#E9D0BD] rounded-[8px] text-[16px] outline-none"
+                >
+                  {options.map((option) => (
+                    <option
+                      key={option.value}
+                      value={option.value}
+                      selected={pet !== null && option.value === pet.petId}
+                      className="text-[16px]  "
+                    >
+                      @{option.label}
+                    </option>
+                  ))}
+                  <option value={'addPet'} className="text-[16px] ">
+                    Add pet
+                  </option>
+                </select>
+              </section>
+            )}
+            {!user.image_url ? (
+              <></>
+            ) : (
+              <img
+                src={user.image_url}
+                alt="User image"
+                className="w-[35px] h-[35px] rounded-full"
+              />
+            )}
           </div>
-          {!user.image_url ? (
-            <></>
-          ) : (
-            <img src={user.image_url} alt="User image" className="w-[90px] h-[90px] rounded-full" />
-          )}
-          <p className="font-semibold mb-3">{user.mail}</p>
+          <MdEdit className="cursor-pointer" />
         </div>
-        {options.length === 0 ? (
-          <section className="flex justify-center flex-wrap gap-4">
-            <PetCard
-              petCardProfileDefault={true}
-              isSelected={pet !== null && pet.value === 'addPet'}
-              onClick={() => onCardClick({ value: 'addPet' })}
-            />
-          </section>
-        ) : (
-          <section className="flex justify-center flex-wrap gap-4">
-            {options.map((option) => (
-              <PetCard
-                petCardProfile={true}
-                key={option.value}
-                petImg={option.image}
-                petName={option.label}
-                isSelected={pet !== null && option.value === pet.petId}
-                onClick={() => onCardClick(option)}
+        <section className="flex flex-col items-center justify-center ">
+          <img
+            src={pet.image_url}
+            alt="Pet-image"
+            className="w-[90px] h-[90px] rounded-full object-cover"
+          />
+          <p className="text-[24px] mt-1 mb-4 text-[#232220]">{pet.name}</p>
+          <div className="flex justify-center w-[50%] text-[#176543] text-[16px] font-black">
+            <p className="text-center border-r-[1px] border-[#176543] mr-3 pr-3">1000 Followers</p>
+            <p className="text-center">500 Following</p>
+          </div>
+          <p className="mt-4 text-[16px]">{pet.description}</p>
+          <div className="flex flex-wrap gap-4">
+            {options.map((publication, index) => (
+              <img
+                key={index}
+                src={publication.image_url}
+                alt={`Publication-${index}`}
+                className="w-[150px] h-[150px] object-cover rounded-md"
               />
             ))}
-            <PetCard
-              petCardProfileDefault={true}
-              isSelected={pet !== null && pet.value === 'addPet'}
-              onClick={() => onCardClick({ value: 'addPet' })}
-            />
-          </section>
-        )}
+          </div>
+        </section>
       </div>
     </main>
   );

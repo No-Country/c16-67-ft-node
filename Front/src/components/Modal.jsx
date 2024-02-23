@@ -45,7 +45,7 @@ const Modal = () => {
     payload.append('name', name);
     payload.append('age', age);
     payload.append('address', address);
-    payload.append('description', description);
+    payload.append('description', descriptions);
     payload.append('image', profilePhoto);
     payload.append('userId', userId);
 
