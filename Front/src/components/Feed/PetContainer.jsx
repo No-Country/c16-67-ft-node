@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PetCard from './PetCard';
-import { getPublications } from './getPublications';
+import { getPublications, getPublicationsSaved } from './getPublications';
 import styles from './PetContainer.module.css';
 import CreatePublicationCard from './CreatePublicationCard';
 import { useModalContext } from '../../context/modalContext';
@@ -9,6 +9,7 @@ import Modal from '../Modal';
 export default function PetContainer({ tabActive }) {
   const { modalState, openModal } = useModalContext();
   const [feedData, setFeedData] = useState([]);
+  const [saved, setSaved] = useState([]);
   const [isAutocompleteActive, setIsAutocompleteActive] = useState(false);
 
   const getDataFeed = () => {
@@ -28,6 +29,19 @@ export default function PetContainer({ tabActive }) {
         });
       });
   }, [tabActive]);
+
+  useEffect(() => {
+    fetchSaved();
+  }, []);
+
+  const fetchSaved = () => {
+    getPublicationsSaved()
+      .then((data) => {
+        setSaved(data);
+        console.log(data);
+      })
+      .catch((error) => console.error(error));
+  };
 
   return (
     <>
@@ -49,6 +63,8 @@ export default function PetContainer({ tabActive }) {
             petName={publication['pets.name']}
             profileImage={publication['pets.image_url']}
             address={publication.address}
+            saved={saved.find((savedPublication) => savedPublication.postId === publication.postId)}
+            fetchSaved={fetchSaved}
           />
         ))}
       </div>
