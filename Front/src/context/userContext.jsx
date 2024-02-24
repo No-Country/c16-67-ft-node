@@ -13,6 +13,7 @@ export const UserProvider = ({ children }) => {
   const [petId, setPetId] = useState('');
   const [petName, setPetName] = useState('');
   const [petImage, setPetImage] = useState('');
+  const [petDescription, setPetDescription] = useState('');
 
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem('userId'));
@@ -52,6 +53,7 @@ export const UserProvider = ({ children }) => {
     setPetId('');
     setPetImage('');
     setPetName('');
+    setPetDescription('');
     axios.put(`${API_URL_BASE}/api/v1/user/lastpet/${userId}`, { petId: petId }).catch((error) => {
       console.log(error);
     });
@@ -61,14 +63,25 @@ export const UserProvider = ({ children }) => {
     setPetId(pet.petId);
     setPetName(pet.name);
     setPetImage(pet.image_url);
+    setPetDescription(pet.description);
     localStorage.setItem(
       'pet',
-      JSON.stringify({ petId: pet.petId, name: pet.name, image_url: pet.image_url })
+      JSON.stringify({
+        petId: pet.petId,
+        name: pet.name,
+        image_url: pet.image_url,
+        description: pet.description
+      })
     );
   };
 
   const getPet = () => {
-    return { petId: petId, name: petName, image_url: petImage };
+    return {
+      petId: petId,
+      name: petName,
+      image_url: petImage,
+      description: petDescription
+    };
   };
 
   return (
@@ -81,7 +94,8 @@ export const UserProvider = ({ children }) => {
         userId,
         petId,
         petName,
-        petImage
+        petImage,
+        petDescription
       }}
     >
       {children}
