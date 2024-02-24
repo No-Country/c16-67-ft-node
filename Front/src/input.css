@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 * {
-    @apply font-roboto;
+  @apply font-roboto;
 }
 
 p,
@@ -16,15 +16,15 @@ h3,
 h4,
 h5,
 h6 {
-    @apply text-body-md font-roboto;
+  @apply text-body-md font-roboto;
 }
 
 #root {
-    max-width: 1440px;
-    margin: auto;
-    position: relative;
+  max-width: 1440px;
+  margin: auto;
+  position: relative;
 }
 
 main {
-    @apply md:pl-56 lg:pl-72 pb-20 md:pb-0 pt-16 md:pt-0;
+  @apply md:pl-56 lg:pl-72 pb-20 md:pb-0 pt-16 md:pt-0;
 }
