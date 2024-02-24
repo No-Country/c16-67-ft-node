@@ -20,7 +20,7 @@ const getById = async (req, res) => {
 
 const _deleted = async (req, res) => {
     const { id } = req.params;
-    await handleDeleted(req, res, service.update.bind(service),Save, id, { status: true },modelIds.saveId);
+    await handleDeleted(req, res, service.update.bind(service),Save, id, { status: false },modelIds.saveId);
 };
 
 module.exports = {
