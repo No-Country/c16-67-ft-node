@@ -197,7 +197,7 @@ export default function Profile() {
         <>
           {modalState.isOpen && <Modal />}
           <div className="px-4">
-            <div className="flex flex-col items-center gap-y-4 mt-4">
+            <div className="flex flex-col items-center gap-y-4 pt-4 md:pt-0">
               <div className="flex justify-between items-center w-full text-[28px] md:hidden">
                 {options.length === 0 ? (
                   <></>

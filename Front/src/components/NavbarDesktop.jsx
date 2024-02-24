@@ -35,45 +35,45 @@ export default function NavbarDesktop({ active, pet }) {
         <li className={`${active === 'feed' ? `${styles.active}` : ''}`}>
           <NavLink to={'/'}>
             <img src={feedIcon} className={`${styles.navImg}`} alt="Feed icon" />
-            <p>Feed</p>
+            <p className={`${active === 'feed' && `${styles.activeText}`}`}>Feed</p>
           </NavLink>
         </li>
         <li className={`${active === 'search' ? `${styles.active}` : ''}`}>
           <NavLink>
             <img src={searchIcon} className={`${styles.navImg}`} alt="Search icon" />
-            <p>Search</p>
+            <p className={`${active === 'search' && `${styles.activeText}`}`}>Search</p>
           </NavLink>
         </li>
         <li className={`${active === 'profile' ? `${styles.active}` : ''}`}>
           <NavLink to={'/profile'}>
             <img src={footIcon} className={`${styles.navImg}`} alt="Profile icon" />
-            <p>Profile</p>
+            <p className={`${active === 'profile' && `${styles.activeText}`}`}>Profile</p>
           </NavLink>
         </li>
         <li className={`${active === 'chat' ? `${styles.active}` : ''}`}>
           <NavLink>
             <img src={chatIcon} alt="chat icon" className={`${styles.navImg}`} />
-            <p>Chat</p>
+            <p className={`${active === 'chat' && `${styles.activeText}`}`}>Chat</p>
           </NavLink>
         </li>
-        <div className="border-b border-black" />
-        <h2 className="sm:text-title-md md:text-headline-sm px-6 py-3">Menu</h2>
+        <div className="border-b border-black opacity-25" />
+        <h2 className="sm:text-title-md md:text-title-lg px-6 py-3">Menu</h2>
         <li className={`${active === 'notifications' ? `${styles.active}` : ''}`}>
           <NavLink className="">
             <img src={notificationsIcon} className={`${styles.navImg}`} alt="Notification icon" />
-            <p>Notifications</p>
+            <p className={`${active === 'feed' && `${styles.activeText}`}`}>Notifications</p>
           </NavLink>
         </li>
         <li className={`${active === 'notifications' ? `${styles.active}` : ''}`}>
           <NavLink className="">
             <img src={saveIcon} className={`${styles.navImg}`} alt="Saved icon" />
-            <p>Notifications</p>
+            <p className={`${active === 'notifications' && `${styles.activeText}`}`}>Saved</p>
           </NavLink>
         </li>
         <li className={`${active === 'menu' ? `${styles.active}` : ''}`}>
           <NavLink to={'/menu'}>
             <img src={settingsIcon} className={`${styles.navImg}`} alt="Settings icon" />
-            <p>Settings</p>
+            <p className={`${active === 'menu' && `${styles.activeText}`}`}>Settings</p>
           </NavLink>
         </li>
       </ul>
