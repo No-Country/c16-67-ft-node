@@ -7,6 +7,7 @@ import Modal from '../components/Modal';
 import { useUserContext } from '../context/userContext';
 import { useNavigateContext } from '../context/navigationContext';
 import { MdEdit } from 'react-icons/md';
+import Select from 'react-select';
 
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
@@ -30,9 +31,8 @@ export default function Profile() {
   }, [userId, navigate]);
 
   useEffect(() => {
-    // Nuevo useEffect para actualizar las publicaciones cuando cambie pet.petId
     const fetchPublications = async () => {
-      if (!pet.petId) return; // Verifica que pet.petId exista
+      if (!pet.petId) return;
       setIsLoading(true);
       try {
         const response = await axios.get(`${API_URL_BASE}/api/v1/publication/petid/${pet.petId}`);
@@ -49,7 +49,7 @@ export default function Profile() {
     };
 
     fetchPublications();
-  }, [pet.petId]); // Este efecto depende de pet.petId
+  }, [pet.petId]);
 
   //FUNCIONES
   const fetchData = async () => {
@@ -88,14 +88,14 @@ export default function Profile() {
   };
 
   const onSelectPet = (e) => {
-    if (e.target.value === 'addPet') {
+    if (e.value === 'addPet') {
       openModal({
         petModal: true,
         xBtnPetModal: true
       });
     } else {
       axios
-        .get(`${API_URL_BASE}/api/v1/pet/${e.target.value}`)
+        .get(`${API_URL_BASE}/api/v1/pet/${e.value}`)
         .then((res) => {
           console.log(res.data);
           const { data } = res;
@@ -127,6 +127,41 @@ export default function Profile() {
     }
   };
 
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      width: '100%',
+      height: '32px',
+      borderRadius: '8px 8px 5px 5px',
+      border: state.isFocused ? 'none' : '2px solid #E9D0BD',
+      boxShadow: state.isFocused ? '0 0 0 1px #E9D0BB' : 'none',
+      outline: 'none',
+      fontSize: '16px',
+      '&:hover': {
+        border: '2px solid #cfad93'
+      }
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      width: '100%',
+      backgroundColor: state.isSelected ? '#F8F0EA' : '#F8F0EA',
+      fontSize: '16px',
+      color: state.isSelected ? '#000' : '#000',
+      '&:hover': {
+        backgroundColor: state.isSelected ? '#c39f84' : '#ddcbbd',
+        color: '#FFFFFF'
+      }
+    }),
+    menu: (provided) => ({
+      ...provided,
+      marginTop: '0',
+      padding: '0',
+      backgroundColor: '#F3F4F6',
+      borderRadius: '0 0 8px 8px',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+    })
+  };
+
   return (
     <main className="p-0">
       {isLoading && <Spinner />}
@@ -138,25 +173,21 @@ export default function Profile() {
               <></>
             ) : (
               <section>
-                <select
-                  name="select"
-                  onChange={onSelectPet}
-                  className="w-full h-[32px] border-[1px] border-[#E9D0BD] rounded-[8px] text-[16px] outline-none"
-                >
-                  {options.map((option) => (
-                    <option
-                      key={option.value}
-                      value={option.value}
-                      selected={pet !== null && option.value === pet.petId}
-                      className="text-[16px]  "
-                    >
-                      @{option.label}
-                    </option>
-                  ))}
-                  <option value={'addPet'} className="text-[16px] ">
-                    Add pet
-                  </option>
-                </select>
+                <section>
+                  <Select
+                    options={[...options, { value: 'addPet', label: 'Add pet' }]}
+                    onChange={(selectedOption) => onSelectPet(selectedOption)}
+                    value={options.find(
+                      (option) =>
+                        option.value === pet.petId ||
+                        options.find((option) => option.value === 'addPet')
+                    )}
+                    getOptionLabel={(option) =>
+                      option.value === 'addPet' ? option.label : `@${option.label}`
+                    }
+                    styles={customStyles}
+                  />
+                </section>
               </section>
             )}
             {!user.image_url ? (
@@ -169,27 +200,29 @@ export default function Profile() {
               />
             )}
           </div>
-          <MdEdit className="cursor-pointer" />
         </div>
-        <section className="flex flex-col items-center justify-center ">
+        <section className="flex flex-col items-center justify-center mt-5">
+          <div className="absolute flex flex-row-reverse left-0 right-6 top-[60px] text-[24px]">
+            <MdEdit className="cursor-pointer" />
+          </div>
           <img
             src={pet.image_url}
             alt="Pet-image"
-            className="w-[100px] h-[100px] rounded-full shadow-lg object-cover"
+            className="w-[100px] h-[100px] mb-3 rounded-full shadow-lg object-cover"
           />
-          <p className="text-[24px] mt-1 mb-4 text-[#232220]">{pet.name}</p>
+          <p className="text-[24px] mt-1 mb-5 text-[#232220]">{pet.name}</p>
           <div className="flex justify-center w-[50%] text-[#176543] text-[16px] font-black">
             <p className="text-center border-r-[1px] border-[#176543] mr-3 pr-3">1000 Followers</p>
             <p className="text-center">500 Following</p>
           </div>
           <p className="mt-4 text-[16px]">{pet.description}</p>
-          <div className="flex flex-col items-center  mt-8 w-full">
+          <div className="flex flex-col items-center mt-8 w-full">
             {publications.length === 0 ? (
               <section className="flex justify-center h-[200px] p-4 shadow-lg bg-[#fafafa] font-semibold">
                 <div className="flex items-center">There´s no publication yet</div>
               </section>
             ) : (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 mb-[120px]">
                 {publications.map((publication, index) => (
                   <img
                     key={index}
