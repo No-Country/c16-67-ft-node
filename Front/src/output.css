@@ -1679,20 +1679,12 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.opacity-30{
-  opacity: 0.3;
-}
-
-.opacity-50{
-  opacity: 0.5;
-}
-
-.opacity-40{
-  opacity: 0.4;
-}
-
 .opacity-25{
   opacity: 0.25;
+}
+
+.opacity-30{
+  opacity: 0.3;
 }
 
 .shadow-lg{
@@ -2036,12 +2028,12 @@ main{
     border-color: rgb(184 104 42 / var(--tw-border-opacity));
   }
 
-  .md\:pt-4{
-    padding-top: 1rem;
-  }
-
   .md\:pt-0{
     padding-top: 0px;
+  }
+
+  .md\:pt-4{
+    padding-top: 1rem;
   }
 
   .md\:text-\[16px\]{
@@ -2080,11 +2072,6 @@ main{
   .md\:text-xl{
     font-size: 1.25rem;
     line-height: 1.75rem;
-  }
-
-  .md\:text-title-md{
-    font-size: 16px;
-    line-height: 24px;
   }
 
   .md\:font-semibold{

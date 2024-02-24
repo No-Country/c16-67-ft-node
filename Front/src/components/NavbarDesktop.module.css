@@ -1,6 +1,6 @@
 .desktop {
     li {
-        @apply px-6 h-[68px] flex items-center rounded-full;
+        @apply px-6 h-[56px] flex items-center rounded-full;
 
         p {
             @apply sm:text-title-md;
@@ -8,7 +8,7 @@
     }
 
     .activeText {
-        @apply md:text-headline-sm;
+        @apply md:text-title-lg;
     }
 
     a {
