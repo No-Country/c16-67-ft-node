@@ -6,25 +6,24 @@ import { useUserContext } from '../../context/userContext';
 const CreatePublicationCard = ({ pet }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const { getPet } = useUserContext();
-  
-  // Estados para manejar los valores de los inputs del formulario
-  const [image, setImage] = useState(null);
-  const [description, setDescription] = useState('');
-  const [type, setType] = useState('Normal');
-  const [location, setLocataion] = useState('');
 
   const handleOpenModal = () => {
+    console.log('abrio');
     setModalOpen(true);
   };
 
   const handleCloseModal = () => {
+    console.log('cerro');
     setModalOpen(false);
   };
 
   const activePet = pet || getPet();
 
   return (
-    <div onClick={handleOpenModal} className="flex hidden md:flex items-start max-w-full mb-6 rounded-lg p-4 shadow-md mx-2 md:mx-0">
+    <div
+      onClick={handleOpenModal}
+      className="hidden md:flex items-start max-w-full mb-6 rounded-lg p-4 shadow-md mx-2 md:mx-0"
+    >
       {/* Imagen redonda */}
       <img
         className="md:h-8 md:w-8 lg:h-16 lg:w-16 mt-4 mr-2 rounded-full border-2 border-slate-200 object-cover"
