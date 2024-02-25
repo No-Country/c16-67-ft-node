@@ -4,6 +4,7 @@ import Location from './Location';
 import Spinner from '../../components/Spinner';
 import axios from 'axios';
 import defaultProfileIcon from '../../assets/images/defaultProfile.jpg';
+import { FiX } from 'react-icons/fi';
 
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
@@ -89,11 +90,6 @@ const ModalPost = ({ closeModal }) => {
       {isLoading && <Spinner />}
       <main>
         <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full">
-          <button
-            className="px-8 py-[5px] text-[16px] bg-gray-500 text-white rounded-[10px] shadow-md"
-            type="cancel"
-            onClick={() => closeModal()}
-          ></button>
           <form
             className={`p-6 bg-white rounded-t-[40px] md:rounded-[24px] md:w-[50%] h-[90vh] md:mt-12 animate-petModalOpen`}
             onSubmit={handleSubmit}
@@ -101,6 +97,10 @@ const ModalPost = ({ closeModal }) => {
           >
             <div className="relative mb-4">
               <p className="text-center text-[28px] font-bold">Create Post</p>
+              <FiX
+                className="absolute top-0 right-0 mr-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
+                onClick={() => closeModal()}
+              />
             </div>
             <hr className="border-black mb-4" />
             <p className="mb-4 text-[28px]">Choose the type of post</p>
