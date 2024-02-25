@@ -274,14 +274,22 @@ export default function Profile() {
                       <div className="flex items-center">There´s no publication yet</div>
                     </section>
                   ) : (
-                    <div className="grid grid-cols-2 gap-4 mb-[120px] lg:grid-cols-3">
+                    <div className="grid grid-cols-2 gap-4 mb-[120px] justify-center lg:grid-cols-3">
                       {publications.map((publication, index) => (
-                        <img
-                          key={index}
-                          src={publication.image_url}
-                          alt={`Publication-${index}`}
-                          className="w-[160px] h-[160px] object-cover rounded-md shadow-lg md:w-[204px] md:h-[224px] lg:w-[224px] lg:h-[244px]"
-                        />
+                        <div key={index} className="flex shadow-md rounded-[8px] overflow-hidden">
+                          <div className="flex-1 relative hover:opacity-100">
+                            <img
+                              src={publication.image_url}
+                              alt={`Publication-${index}`}
+                              className="w-[160px] h-[160px] object-cover rounded-md shadow-lg md:w-[204px] md:h-[224px] lg:w-[224px] lg:h-[244px]"
+                            />
+                            <div className="flex shadow-md rounded-[8px] overflow-hidden hover:opacity-100">
+                              <p className="flex items-center justify-center h-[100%] absolute px-1 m-0 left-0 right-0 bottom-0 text-center text-[14px] md:text-[16px] bg-[#0000078d] text-white opacity-0 hover:opacity-100 hover:transition-all hover:duration-[0.5s] hover:ease-in-out ">
+                                {publication.description}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
                       ))}
                     </div>
                   )}
