@@ -19,7 +19,7 @@ export default function CreatePublicationCard({ setIsAutocompleteActive }) {
   // Estados para manejar los valores de los inputs del formulario
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState('');
-  const [type, setType] = useState('normal');
+  const [type, setType] = useState('Normal');
   const [location, setLocataion] = useState('');
 
   // Manejadores de cambio para los inputs
@@ -84,9 +84,9 @@ export default function CreatePublicationCard({ setIsAutocompleteActive }) {
         <ul className="flex absolute top-[-12px] left-12 bg-white border-2 border-primary-500 rounded-md">
           <li
             onClick={() => {
-              setType('normal');
+              setType('Normal');
             }}
-            className={`${type === 'normal' ? styles.active : ''}`}
+            className={`${type === 'Normal' ? styles.active : ''}`}
           >
             Feed
           </li>
