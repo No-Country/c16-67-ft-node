@@ -6,7 +6,7 @@ import catsLanding from '../assets/images/catsLanding.png';
 export default function Login() {
   return (
     <>
-      <main className="fixed flex flex-col py-10 top-0 bottom-0 right-0 left-0 justify-start items-center bg-[#F8F0EA]">
+      <main className="fixed flex flex-col pl-0 py-10 top-0 bottom-0 right-0 left-0 justify-start items-center bg-[#F8F0EA]">
         <img src={logo} alt="isologo" className="w-[179px] h-[50px]" />
         <div className="flex flex-col justify-end mt-[20px]">
           <h3 className="mb-5 text-[#232220CC] text-[16px] font-semibold">By PetDevs</h3>
