@@ -1,10 +1,14 @@
 .desktop {
     li {
-        @apply px-6 py-2 rounded-full;
+        @apply px-6 h-[56px] flex items-center rounded-full;
 
         p {
-            @apply sm:text-base lg:text-xl;
+            @apply sm:text-title-md;
         }
+    }
+
+    .activeText {
+        @apply md:text-title-lg;
     }
 
     a {
@@ -17,9 +21,9 @@
 }
 
 .navImg {
-    @apply sm:w-6 sm:h-6 lg:w-12 lg:h-12;
+    @apply sm:w-6 sm:h-6 md:w-[30px] md:h-[30px];
 }
 
 .active {
-    @apply bg-primary-200;
+    @apply bg-secondary-50;
 }

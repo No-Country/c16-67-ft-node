@@ -5,7 +5,7 @@ import foots from '../assets/images/foots.png';
 
 export default function Login() {
   return (
-    <main className="fixed bg-[#73360A] w-full h-full p-0">
+    <main className="fixed bg-[#73360A] w-full h-full p-0 ">
       <div className="fixed flex flex-col top-0 bottom-0 right-0 left-0 justify-center items-center m-2 rounded-[10px] bg-gradient-to-t from-white to-[#d9ae90]">
         <div className="flex flex-col h-[150px]">
           <p className="font-walter  text-[30px] text-[#000] text-center">Welcome to</p>
@@ -18,8 +18,12 @@ export default function Login() {
           <h3 className="font-medium">By PetDevs</h3>
         </div>
       </div>
-      <div className="absolute flex justify-center w-full bottom-0  z-10">
-        <img src={foots} alt="foot-image" className=" mb-[-140px] animate-top opacity-30" />
+      <div className="absolute flex justify-center w-full bottom-0 z-10">
+        <img
+          src={foots}
+          alt="foot-image"
+          className="md:max-w-[500px] mb-[-140px] animate-top opacity-30"
+        />
       </div>
     </main>
   );

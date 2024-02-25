@@ -6,6 +6,12 @@ import { useUserContext } from '../../context/userContext';
 const CreatePublicationCard = ({ pet }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const { getPet } = useUserContext();
+  
+  // Estados para manejar los valores de los inputs del formulario
+  const [image, setImage] = useState(null);
+  const [description, setDescription] = useState('');
+  const [type, setType] = useState('Normal');
+  const [location, setLocataion] = useState('');
 
   const handleOpenModal = () => {
     setModalOpen(true);

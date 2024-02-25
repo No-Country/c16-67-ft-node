@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { BiErrorAlt } from 'react-icons/bi';
 import { useModalContext } from '../context/modalContext';
 import TextInput from '../components/TextInput';
 import Spinner from '../components/Spinner';
@@ -30,7 +29,6 @@ const Modal = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
-  const [address, setAddress] = useState('');
   const [descriptions, setDescriptions] = useState('');
   const [profilePhoto, setProfilePhoto] = useState(null);
   const { setActivePet } = useUserContext();
@@ -44,8 +42,8 @@ const Modal = () => {
     const payload = new FormData();
     payload.append('name', name);
     payload.append('age', age);
-    payload.append('address', address);
-    payload.append('description', description);
+    payload.append('address', '123');
+    payload.append('description', descriptions);
     payload.append('image', profilePhoto);
     payload.append('userId', userId);
 
@@ -115,24 +113,25 @@ const Modal = () => {
   return isOpen ? (
     chooseModal ? (
       <div className="flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-[#0000007A] z-[1000]">
-        <div className="fixed w-[71%] max-w-[370px] my-0 mx-5 pt-0 pb-5 px-5 rounded-[10px] bg-white shadow-md">
-          <div className="flex justify-center object-contain">
-            <BiErrorAlt className="relative bottom-[25px] rounded-[30px] text-[60px] bg-white text-[#E63333]" />
+        <div className="fixed w-[71%] max-w-[448px] mx-5 p-5 px-5 rounded-[6px] bg-white shadow-[#FFECAA66]">
+          <div className="flex justify-between w-full">
+            <div className="py-[10px] font-bold text-[1.4rem]">{title}</div>
+            <FiX
+              className="hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
+              onClick={closeModal}
+            />
           </div>
-          <div className="pb-[10px] text-center font-bold text-[1.4rem] border-b-2 border-solid">
-            {title.toUpperCase()}
-          </div>
-          <div className="my-[10px] mx-[5px] text-center text-[1.2rem] italic">{description}</div>
-          <div className="flex justify-between mt-[30px]">
+          <div className="my-[10px] text-[1.2rem] text-[#2D3748]">{description}</div>
+          <div className="flex justify-end mt-[30px]">
             <button
-              className="px-8 py-[5px] text-[16px] bg-[#E63333] text-white rounded-[10px] shadow-md hover:bg-[#7a3232] hover:transition-all hover:duration-[0.5s] hover:ease-in-out "
+              className="px-8 py-[5px] mr-[20px] w-[134px] text-[16px] bg-[#EAF8F2] text-[#1A202C] rounded-[6px] shadow-md font-semibold hover:bg-[#cce7db] hover:transition-all hover:duration-[0.5s] hover:ease-in-out "
               type="cancel"
               onClick={closeModal}
             >
               {denyBtn}
             </button>
             <button
-              className="px-8 py-[5px] text-[16px] bg-[#4E9745] text-white rounded-[10px] shadow-md  hover:bg-[#305c2a] hover:transition-all hover:duration-[0.5s] hover:ease-in-out "
+              className="px-8 py-[5px] w-[134px] text-[16px] bg-[#B8682A] text-[#FAFAFA] rounded-[6px] shadow-md font-semibold hover:bg-[#9e673c] hover:transition-all hover:duration-[0.5s] hover:ease-in-out "
               type="submit"
               onClick={onClick}
             >
@@ -144,10 +143,10 @@ const Modal = () => {
     ) : petModal ? (
       <>
         {isLoading && <Spinner />}
-        <main>
+        <main className="p-0">
           <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full ">
             <form
-              className={`p-6 bg-[#F2FBE7] rounded-t-[40px] md:rounded-[24px] md:w-[50%] ${!petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
+              className={`p-6 bg-[#FAFAFA] rounded-t-[40px] md:rounded-[24px] md:w-[50%] ${!petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
               onSubmit={onSubmit}
             >
               {xBtnPetModal ? (
@@ -166,7 +165,7 @@ const Modal = () => {
               <p className="mb-4 text-center text-[23px] font-bold md:text-[48px] md:font-semibold">
                 Create your pet´s profile
               </p>
-              <div className="relative w-[80px] h-[80px] rounded-[50%] shadow-md m-auto mt-0 mb-3 bg-white z-50 md:w-[130px] md:h-[130px]">
+              <div className="relative w-[80px] h-[80px] rounded-[50%] shadow-md m-auto mt-0 mb-3 bg-white z-50 md:mt-10 md:w-[130px] md:h-[130px]">
                 <input id="fileInput" type="file" className="hidden" onChange={handleFileChange} />
                 <span
                   className="flex justify-center items-center absolute w-full h-full bg-[#0000] rounded-[50%] text-[0] text-center cursor-pointer hover:bg-[#0004] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:text-2xl z-50"
@@ -191,7 +190,6 @@ const Modal = () => {
                   setName(e.target.value);
                 }}
               />
-
               <TextInput
                 placeholderText={'Age'}
                 input={'input'}
@@ -201,21 +199,13 @@ const Modal = () => {
                 }}
               />
               <TextInput
-                placeholderText={'Location'}
-                input={'input'}
-                value={address}
-                onChange={(e) => {
-                  setAddress(e.target.value);
-                }}
-              />
-              <TextInput
                 placeholderText={'Profile description'}
                 value={descriptions}
                 onChange={(e) => {
                   setDescriptions(e.target.value);
                 }}
               />
-              <button className="block w-full p-2 mb-3 mx-auto text-white text-[18px] bg-[#E29900] rounded-[8px] md:text-[28px]">
+              <button className="block w-full p-2 mb-3 mx-auto text-white text-[18px] bg-[#B8682A] rounded-[8px] md:text-[28px]">
                 Create
               </button>
             </form>
