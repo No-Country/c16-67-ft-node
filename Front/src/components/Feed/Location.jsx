@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 const locationiqKey = import.meta.env.VITE_LOCATION_IQ_API_KEY;
 
-function AutocompleteSearch({ setIsAutocompleteActive, setLocataion }) {
+function AutocompleteSearch({ setAddress }) {
   useEffect(() => {
     $('#search-box-input').autocomplete({
       minChars: 3,
@@ -36,17 +36,17 @@ function AutocompleteSearch({ setIsAutocompleteActive, setLocataion }) {
         };
       },
       onSelect: function (suggestion) {
-        setLocataion(suggestion.value);
+        setAddress(suggestion.value);
         //displayLatLon(suggestion.data.display_name, suggestion.data.lat, suggestion.data.lon);
       }
     });
   }, []); // Ejecutar solo una vez al montar el componente
 
-  function displayLatLon(display_name, lat, lng) {
-    var resultString =
-      'You have selected ' + display_name + '<br/>Lat: ' + lat + '<br/>Lon: ' + lng;
-    document.getElementById('result').innerHTML = resultString;
-  }
+  // function displayLatLon(display_name, lat, lng) {
+  //   var resultString =
+  //     'You have selected ' + display_name + '<br/>Lat: ' + lat + '<br/>Lon: ' + lng;
+  //   document.getElementById('result').innerHTML = resultString;
+  // }
 
   function highlight(text, focus) {
     var r = RegExp('(' + escapeRegExp(focus) + ')', 'gi');
@@ -69,8 +69,6 @@ function AutocompleteSearch({ setIsAutocompleteActive, setLocataion }) {
             id="search-box-input"
             title="Search"
             placeholder="Search for an address..."
-            onFocusCapture={() => setIsAutocompleteActive(true)}
-            onBlur={() => setIsAutocompleteActive(false)}
           />
           <a className="locationiq-autocomplete-search-icon"></a>
         </div>
