@@ -1,133 +1,74 @@
-import { useState } from 'react';
-import axios from 'axios';
-import Spinner from '../Spinner';
-import { useModalContext } from '../../context/modalContext';
-import Modal from '../Modal';
-import styles from './CreatePublicationCard.module.css';
-import Location from './Location';
+import React, { useState } from 'react';
+import ModalPost from './ModalPost';
+import defaultProfile from '../../assets/images/defaultProfile.jpg';
 import { useUserContext } from '../../context/userContext';
 
-const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
-
-export default function CreatePublicationCard({ setIsAutocompleteActive }) {
-  const { openModal, modalState } = useModalContext();
-  const [isLoading, setIsLoading] = useState(false);
-  //Obtengo id de usuario y mascota de local storage
-  const { userId } = useUserContext();
+const CreatePublicationCard = ({ pet }) => {
+  const [isModalOpen, setModalOpen] = useState(false);
   const { getPet } = useUserContext();
-  const pet = getPet();
-  // Estados para manejar los valores de los inputs del formulario
-  const [image, setImage] = useState(null);
-  const [description, setDescription] = useState('');
-  const [type, setType] = useState('Normal');
-  const [location, setLocataion] = useState('');
 
-  // Manejadores de cambio para los inputs
-  const handleImageChange = (event) => {
-    setImage(event.target.files[0]); // Asume que solo se sube una imagen
+  const handleOpenModal = () => {
+    console.log('abrio');
+    setModalOpen(true);
   };
 
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
+  const handleCloseModal = () => {
+    console.log('cerro');
+    setModalOpen(false);
   };
 
-  //Manejador del boton PUBLICAR
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-
-    const formData = new FormData();
-    formData.append('image', image);
-    formData.append('description', description);
-    formData.append('type', type);
-    formData.append('userId', userId);
-    formData.append('petId', pet.petId);
-    formData.append('address', location);
-
-    console.log({ image, description, type, userId, pet, location });
-
-    if (description === '' || image === null || location === '') {
-      console.log('Faltan datos');
-      setIsLoading(false);
-      return;
-    }
-
-    await axios
-      .post(`${API_URL_BASE}/api/v1/publication`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      .then((response) => {
-        console.log(response);
-        setIsLoading(false);
-        openModal({
-          description: 'Publication created successfully',
-          chooseModal: false
-        });
-      })
-      .catch((error) => {
-        openModal({
-          description: error,
-          chooseModal: false
-        });
-      });
-  };
+  const activePet = pet || getPet();
 
   return (
     <div
-      className={`hidden md:block m-4 p-4 rounded-md border shadow-md relative max-w-[768px] mx-auto ${styles.form}`}
+      onClick={handleOpenModal}
+      className="hidden md:flex items-start max-w-full mb-6 rounded-lg p-4 shadow-md mx-2 md:mx-0"
     >
-      {isLoading && <Spinner />}
-      {modalState.isOpen && <Modal />}
-      <form onSubmit={handleSubmit}>
-        <ul className="flex absolute top-[-12px] left-12 bg-white border-2 border-primary-500 rounded-md">
-          <li
-            onClick={() => {
-              setType('Normal');
-            }}
-            className={`${type === 'Normal' ? styles.active : ''}`}
-          >
-            Feed
-          </li>
-          <li
-            onClick={() => {
-              setType('Perdido');
-            }}
-            className={`${type === 'Perdido' ? styles.active : ''}`}
-          >
-            Lost
-          </li>
-          <li
-            onClick={() => {
-              setType('Adopcion');
-            }}
-            className={`${type === 'Adopcion' ? styles.active : ''}`}
-          >
-            In adoption
-          </li>
-        </ul>
+      {/* Imagen redonda */}
+      <img
+        className="md:h-8 md:w-8 lg:h-16 lg:w-16 mt-4 mr-2 rounded-full border-2 border-slate-200 object-cover"
+        src={activePet?.image_url || defaultProfile}
+        alt="image of active pet"
+        onError={(e) => {
+          e.target.src = defaultProfile; // Manejar error de carga de imagen
+        }}
+      />
+
+      <div className="flex flex-col flex-1 mt-2 max-md:max-w-full">
+        {/* Texto del post */}
         <input
           className="mt-4 block w-full border border-gray-300 rounded-full shadow-sm p-3 pl-6 text-gray-700"
           placeholder="Enter the description..."
-          value={description}
-          onChange={handleDescriptionChange}
         />
-        <Location setIsAutocompleteActive={setIsAutocompleteActive} setLocataion={setLocataion} />
-        <div className="flex justify-between mt-4">
-          <label
-            htmlFor="file-upload"
-            className="bg-white rounded-md cursor-pointer border border-secondary-800 py-2 px-6 flex items-center gap-x-2"
-          >
-            <span className="material-symbols-outlined">attachment</span>
-            Attach
-          </label>
-          <input id="file-upload" type="file" onChange={handleImageChange} className="hidden" />
-          <button className="px-4 py-2 w-40 text-title-lg bg-accent-500 rounded-md" type="submit">
-            Post
-          </button>
+
+        {/* Iconos Attach y Location */}
+        <div className="flex gap-5 justify-between self-start mt-1.5 font-bold text-green-800 whitespace-nowrap">
+          {/* Icono Attach */}
+          <div className="flex gap-2.5 justify-between py-1 rounded-lg">
+            <img
+              loading="lazy"
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/c35a9f326467e0dd9894c0186dae85d1eff08ff83b928692eb8d5e02ed3bafb6?"
+              className="w-6 aspect-square"
+            />
+            <div className="my-auto">Attach</div>
+          </div>
+
+          {/* Icono Location */}
+          <div className="flex gap-2.5 justify-between py-1 rounded-lg">
+            <img
+              loading="lazy"
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/fd1878bca7ea5f726d04178f868b7dc7b4e543c4185ecfac9668a020f07d3945?"
+              className="w-6 aspect-square"
+            />
+            <div>Location</div>
+          </div>
         </div>
-      </form>
+      </div>
+
+      {/* Renderiza el modal si isModalOpen es true */}
+      {isModalOpen && <ModalPost closeModal={handleCloseModal} />}
     </div>
   );
-}
+};
+
+export default CreatePublicationCard;
