@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../components/ui/Spinner';
 import { useModalContext } from '../context/modalContext';
-import Modal from '../components/ui/modal/Modal';
+import PetModal from '../components/ui/modal/PetModal';
 import { useUserContext } from '../context/userContext';
 import { useNavigateContext } from '../context/navigationContext';
 import Suggestions from '../components/Feed/Suggestions';
@@ -195,7 +195,7 @@ export default function Profile() {
         <Spinner />
       ) : (
         <>
-          {modalState.isOpen && <Modal />}
+          {modalState.isOpen && <PetModal />}
           <div className="px-4">
             <div className="flex flex-col items-center gap-y-4 pt-4 md:pt-0">
               <div className="flex justify-between items-center w-full text-[28px] md:hidden">
