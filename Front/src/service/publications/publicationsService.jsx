@@ -16,10 +16,17 @@ export const getPublications = async (activeFeed) => {
 
 export const getPublicationsSaved = async () => {
   const { petId } = JSON.parse(localStorage.getItem('pet'));
-  console.log(petId);
 
   const response = await axios.get(`${API_URL_BASE}/api/v1/save/${petId}`).catch((error) => {
     console.error(error);
   });
   return response.data.data;
+};
+
+export const postPublication = async (publication) => {
+  return await axios.post(`${API_URL_BASE}/api/v1/publication`, publication, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
 };

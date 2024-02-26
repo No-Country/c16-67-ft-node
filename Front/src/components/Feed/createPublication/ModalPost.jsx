@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useModalContext } from '../../context/modalContext';
+import { useModalContext } from '../../../context/modalContext';
 import Location from './Location';
-import Spinner from '../../components/Spinner';
-import axios from 'axios';
-import defaultProfileIcon from '../../assets/images/defaultProfile.jpg';
+import Spinner from '../../ui/Spinner';
+import defaultProfileIcon from '../../../assets/images/defaultProfile.jpg';
 import { FiX } from 'react-icons/fi';
-
-const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
+import { postPublication } from '../../../service/publications/publicationsService';
 
 const ModalPost = ({ closeModal }) => {
   const { openModal } = useModalContext();
@@ -48,12 +46,7 @@ const ModalPost = ({ closeModal }) => {
     }
     console.log(userId);
 
-    await axios
-      .post(`${API_URL_BASE}/api/v1/publication`, formDataReq, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+    postPublication(formDataReq)
       .then((response) => {
         console.log(response);
         setIsLoading(false);

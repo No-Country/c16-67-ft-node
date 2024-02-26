@@ -1,10 +1,9 @@
-import likeIcon from '../../assets/images/paw.svg';
-import commentIcon from '../../assets/images/comment.svg';
-import saveIcon from '../../assets/images/save.svg';
-import saveIconFill from '../../assets/images/saveFill.svg';
-import FollowButton from '../FollowButton';
-import axios from 'axios';
-const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
+import likeIcon from '../../../assets/images/paw.svg';
+import commentIcon from '../../../assets/images/comment.svg';
+import saveIcon from '../../../assets/images/save.svg';
+import saveIconFill from '../../../assets/images/saveFill.svg';
+import FollowButton from '../../ui/FollowButton';
+import { deleteSaved, postSave } from '../../../service/saves/saveService';
 
 export default function PetCard({
   postImage,
@@ -28,26 +27,15 @@ export default function PetCard({
       image_url_pet: profileImage,
       image_url_post: postImage
     };
-
-    axios
-      .post(`${API_URL_BASE}/api/v1/save`, body)
-      .then(() => {
-        fetchSaved();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    postSave(body).then(() => {
+      fetchSaved();
+    });
   };
 
-  const deleteSaved = () => {
-    axios
-      .put(`${API_URL_BASE}/api/v1/save/deleted/${saved.saveId}`)
-      .then(() => {
-        fetchSaved();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  const deleteSave = () => {
+    deleteSaved(saved.saveId).then(() => {
+      fetchSaved();
+    });
   };
 
   return (
@@ -101,7 +89,7 @@ export default function PetCard({
                 src={saveIconFill}
                 alt="like icon"
                 className="mr-5 cursor-pointer"
-                onClick={deleteSaved}
+                onClick={deleteSave}
               />
             </>
           )}

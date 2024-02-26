@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useModalContext } from '../context/modalContext';
-import TextInput from '../components/TextInput';
-import Spinner from '../components/Spinner';
+import { useModalContext } from '../../../context/modalContext';
+import TextInput from '../TextInput';
+import Spinner from '../Spinner';
 import { FiEdit, FiX } from 'react-icons/fi';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import defaultProfile from '../assets/images/defaultProfile.jpg';
-import { useUserContext } from '../context/userContext';
+import defaultProfile from '../../../assets/images/defaultProfile.jpg';
+import { useUserContext } from '../../../context/userContext';
 
 const Modal = () => {
   const { modalState, closeModal, openModal } = useModalContext();

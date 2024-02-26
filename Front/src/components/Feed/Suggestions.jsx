@@ -1,8 +1,7 @@
-import axios from 'axios';
-import logo from '../assets/images/isologo.svg';
+import logo from '../../assets/images/isologo.svg';
 import { useEffect, useState } from 'react';
-import FollowButton from './FollowButton';
-const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
+import FollowButton from '../ui/FollowButton';
+import { getPetSuggestions } from '../../service/pets/petService';
 
 const Item = ({ pet }) => {
   return (
@@ -28,10 +27,9 @@ export default function Suggestions() {
   const [pets, setPets] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${API_URL_BASE}/api/v1/pet/suggestion/${userId}?limit=5`)
-      .then((res) => setPets(res.data.data))
-      .catch((err) => console.log(err));
+    getPetSuggestions(userId).then((response) => {
+      setPets(response.data.data);
+    });
   }, []);
   return (
     <div className="hidden xl:block xl:p-4 xl:flex-grow xl:basis-0">

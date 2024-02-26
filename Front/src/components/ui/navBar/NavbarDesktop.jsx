@@ -1,11 +1,11 @@
-import feedIcon from '../assets/images/feedIcon.svg';
-import chatIcon from '../assets/images/chat.svg';
-import searchIcon from '../assets/images/search.svg';
-import footIcon from '../assets/images/footIcon.svg';
-import notificationsIcon from '../assets/images/notifications.svg';
-import saveIcon from '../assets/images/save.svg';
-import settingsIcon from '../assets/images/settings.svg';
-import defaultProfile from '../assets/images/defaultProfile.jpg';
+import feedIcon from '../../../assets/images/feedIcon.svg';
+import chatIcon from '../../../assets/images/chat.svg';
+import searchIcon from '../../../assets/images/search.svg';
+import footIcon from '../../../assets/images/footIcon.svg';
+import notificationsIcon from '../../../assets/images/notifications.svg';
+import saveIcon from '../../../assets/images/save.svg';
+import settingsIcon from '../../../assets/images/settings.svg';
+import defaultProfile from '../../../assets/images/defaultProfile.jpg';
 import { NavLink } from 'react-router-dom';
 import styles from './NavbarDesktop.module.css';
 

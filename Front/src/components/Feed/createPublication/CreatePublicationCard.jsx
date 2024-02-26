@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ModalPost from './ModalPost';
-import defaultProfile from '../../assets/images/defaultProfile.jpg';
-import { useUserContext } from '../../context/userContext';
+import defaultProfile from '../../../assets/images/defaultProfile.jpg';
+import { useUserContext } from '../../../context/userContext';
 
 const CreatePublicationCard = ({ pet }) => {
   const [isModalOpen, setModalOpen] = useState(false);
