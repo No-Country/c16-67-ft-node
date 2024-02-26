@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/ui/Spinner';
 import { useModalContext } from '../context/modalContext';
-import Modal from '../components/Modal';
+import Modal from '../components/ui/modal/Modal';
 import { useUserContext } from '../context/userContext';
 import { useNavigateContext } from '../context/navigationContext';
 
