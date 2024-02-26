@@ -5,9 +5,9 @@ import Spinner from '../Spinner';
 import { FiEdit, FiX } from 'react-icons/fi';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import defaultProfile from '../../../assets/images/defaultProfile.jpg';
 import { useUserContext } from '../../../context/userContext';
+import { createPet } from '../../../service/pets/petCreation';
 
 const Modal = () => {
   const { modalState, closeModal, openModal } = useModalContext();
@@ -33,7 +33,7 @@ const Modal = () => {
   const [profilePhoto, setProfilePhoto] = useState(null);
   const { setActivePet } = useUserContext();
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     const fileInput = document.getElementById('fileInput');
     fileInput.files[0];
@@ -47,34 +47,25 @@ const Modal = () => {
     payload.append('image', profilePhoto);
     payload.append('userId', userId);
 
-    console.log(payload);
-
     setIsLoading(true);
-    try {
-      const response = await axios
-        .post(`${import.meta.env.VITE_SERVER_PRODUCTION}/api/v1/pet`, payload, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        })
-        .catch((error) => {
-          console.log(error);
+
+    createPet(payload)
+      .then((response) => {
+        setActivePet(response.data.data);
+        openModal({
+          description: 'Pet created successfully',
+          chooseModal: false
         });
-      console.log(response);
-      setActivePet(response.data.data);
-      openModal({
-        description: 'Pet created successfully',
-        chooseModal: false
+        navigate('/');
+      })
+      .catch(() => {
+        openModal({
+          description: 'An error has occurred',
+          chooseModal: false,
+          error: true
+        });
+        setIsLoading(false);
       });
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-      openModal({
-        description: 'An error has occurred',
-        chooseModal: false
-      });
-    }
-    setIsLoading(false);
   };
 
   const handleUploadButtonClick = () => {
