@@ -6,3 +6,9 @@ export const getPetSuggestions = async (userId) => {
     .get(`${API_URL_BASE}/api/v1/pet/suggestion/${userId}?limit=5`)
     .catch((err) => console.log(err));
 };
+
+export const getPetById = async (petId) => {
+  return await axios.get(`${API_URL_BASE}/api/v1/pet/${petId}`).catch((error) => {
+    console.log(error);
+  });
+};
