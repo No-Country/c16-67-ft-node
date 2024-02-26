@@ -40,6 +40,7 @@ export default function PetContainer({ tabActive }) {
   const fetchSaved = () => {
     getPublicationsSaved()
       .then((data) => {
+        console.log(data);
         setSaved(data);
       })
       .catch((error) => console.error(error));
