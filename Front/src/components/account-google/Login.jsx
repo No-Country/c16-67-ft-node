@@ -67,7 +67,15 @@ const Login = () => {
       {isLoading && <Spinner />}
       {modalState.isOpen && <Modal />}
       <div id="signInButton">
-        <GoogleLogin onSuccess={onSuccess} onError={onFailure} />
+        <GoogleLogin
+          text="signin_with"
+          width="300px"
+          shape="rectangular"
+          theme="filled_black"
+          locale="english"
+          onSuccess={onSuccess}
+          onError={onFailure}
+        />
       </div>
     </>
   );
