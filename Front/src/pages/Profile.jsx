@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../components/ui/Spinner';
 import { useModalContext } from '../context/modalContext';
@@ -9,26 +8,27 @@ import { useNavigateContext } from '../context/navigationContext';
 import Suggestions from '../components/Feed/Suggestions';
 import { MdEdit } from 'react-icons/md';
 import Select from 'react-select';
-import { getPetsByUserId } from '../service/pets/petService';
+import { getPetById, getPetsByUserId } from '../service/pets/petService';
 import { getUserById } from '../service/users/userService';
 import { getPublicationsByPetId } from '../service/publications/publicationsService';
-
-const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
 export default function Profile() {
   //INSTANCIAS
   const navigate = useNavigate();
+
   //CONTEXTOS
   const { modalState, openModal } = useModalContext();
   const { getPet, setActivePet } = useUserContext();
   const { setActive } = useNavigateContext();
   const pet = getPet();
   setActive('profile');
+
   //ESTADOS LOCALES
   const [options, setOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [publications, setPublications] = useState([]);
   const [user, setUser] = useState({ name: '', image_url: '' });
+
   //LOCAL STORAGE
   const userId = JSON.parse(localStorage.getItem('userId'));
   const { petId } = JSON.parse(localStorage.getItem('pet'));
@@ -56,7 +56,7 @@ export default function Profile() {
         getUserById(userId),
         getPublicationsByPetId(petId)
       ]);
-
+      //PROVSISORIO luego se va a filtrar en el back
       setOptions(
         petsResponse.data
           .filter((pet) => pet.status)
@@ -79,40 +79,27 @@ export default function Profile() {
     setIsLoading(false);
   };
 
-  const onSelectPet = (e) => {
-    if (e.value === 'addPet') {
+  const onSelectPet = async (event) => {
+    if (event.value === 'addPet') {
       openModal({
         petModal: true,
         xBtnPetModal: true
       });
     } else {
-      axios
-        .get(`${API_URL_BASE}/api/v1/pet/${e.value}`)
-        .then((res) => {
-          const { data } = res;
-          const pet = {
-            petId: data.data.petId,
-            name: data.data.name,
-            description: data.data.description,
-            image_url: data.data.image_url
-          };
-          axios
-            .get(`${API_URL_BASE}/api/v1/publication/petid/${pet.petId}`)
-            .then((res) => {
-              const { data } = res;
-              const petWithPublications = {
-                ...pet,
-                publications: data.data.image_url
-              };
-              setActivePet(petWithPublications);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      const { data } = await getPetById(event.value);
+      const pet = {
+        petId: data.data.petId,
+        name: data.data.name,
+        description: data.data.description,
+        image_url: data.data.image_url
+      };
+
+      const publications = await getPublicationsByPetId(petId);
+      const petWithPublications = {
+        ...pet,
+        publications: publications.data.image_url
+      };
+      setActivePet(petWithPublications);
     }
   };
 
