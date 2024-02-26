@@ -21,7 +21,6 @@ export default function Profile() {
   const { getPet, setActivePet } = useUserContext();
   const { setActive } = useNavigateContext();
   const pet = getPet();
-  setActive('profile');
 
   //ESTADOS LOCALES
   const [options, setOptions] = useState([]);
@@ -35,13 +34,8 @@ export default function Profile() {
 
   useEffect(() => {
     fetchData();
-  }, [userId, navigate]);
-
-  useEffect(() => {
-    if (!pet.petId) return;
-
-    fetchData();
-  }, [pet.petId]);
+    setActive('profile');
+  }, [userId, navigate, petId]);
 
   //FUNCIONES
   const fetchData = async () => {
