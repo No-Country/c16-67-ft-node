@@ -80,10 +80,13 @@ export default {
           '50%': { width: '40px' },
           '100%': { width: '60px' }
         },
-        top: {
-          '0%': { marginBottom: '-420px' },
-          '50%': { marginBottom: '-280px' },
-          '100%': { marginBottom: '-140px' }
+        paws: {
+          '0% ': {
+            transform: 'translateY(0) rotate(23deg)'
+          },
+          '100%': {
+            transform: 'translateY(-100%) rotate(23deg)'
+          }
         },
         petModalOpen: {
           '0%': { transform: 'translateY(100%)' },
@@ -117,7 +120,7 @@ export default {
       animation: {
         spin: 'spin 1.2s infinite linear',
         increment: 'increment 1.2s infinite linear',
-        top: 'top 2s linear',
+        paws: 'paws 5s linear infinite',
         petModalOpen: 'petModalOpen 0.5s linear',
         petModalClose: 'petModalClose 0.5s linear',
         fadeInSelfClose: 'fadeInSelfClose 0.5s ease-in forwards',
