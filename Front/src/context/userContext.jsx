@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
-const API_URL_BASE = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
+import { getPetById } from '../service/pets/petService';
+import { changeLastPet } from '../service/users/userService';
 
 const UserContext = createContext();
 
@@ -35,14 +35,9 @@ export const UserProvider = ({ children }) => {
       console.log('No pet');
       return;
     } else {
-      axios
-        .get(`${API_URL_BASE}/api/v1/pet/${last_pet}`)
-        .then((response) => {
-          setActivePet(response.data.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      getPetById(last_pet).then((response) => {
+        setActivePet(response.data.data);
+      });
     }
   };
 
@@ -54,9 +49,7 @@ export const UserProvider = ({ children }) => {
     setPetImage('');
     setPetName('');
     setPetDescription('');
-    axios.put(`${API_URL_BASE}/api/v1/user/lastpet/${userId}`, { petId: petId }).catch((error) => {
-      console.log(error);
-    });
+    changeLastPet(userId, petId);
   };
 
   const setActivePet = (pet) => {

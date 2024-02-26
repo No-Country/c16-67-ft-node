@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useModalContext } from '../../context/modalContext';
+import { useModalContext } from '../../../context/modalContext';
 import Location from './Location';
-import Spinner from '../../components/Spinner';
-import axios from 'axios';
-import defaultProfileIcon from '../../assets/images/defaultProfile.jpg';
-
-const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
+import Spinner from '../../ui/Spinner';
+import addPet from '../../../assets/images/addPet.svg';
+import { FiX } from 'react-icons/fi';
+import { postPublication } from '../../../service/publications/publicationsService';
 
 const ModalPost = ({ closeModal }) => {
   const { openModal } = useModalContext();
@@ -47,12 +46,7 @@ const ModalPost = ({ closeModal }) => {
     }
     console.log(userId);
 
-    await axios
-      .post(`${API_URL_BASE}/api/v1/publication`, formDataReq, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+    postPublication(formDataReq)
       .then((response) => {
         console.log(response);
         setIsLoading(false);
@@ -87,82 +81,83 @@ const ModalPost = ({ closeModal }) => {
   return (
     <>
       {isLoading && <Spinner />}
-      <main>
-        <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full">
-          <button
-            className="px-8 py-[5px] text-[16px] bg-gray-500 text-white rounded-[10px] shadow-md"
-            type="cancel"
-            onClick={() => closeModal()}
-          ></button>
-          <form
-            className={`p-6 bg-white rounded-t-[40px] md:rounded-[24px] md:w-[50%] h-[90vh] md:mt-12 animate-petModalOpen`}
-            onSubmit={handleSubmit}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="relative mb-4">
-              <p className="text-center text-[28px] font-bold">Create Post</p>
-            </div>
-            <hr className="border-black mb-4" />
-            <p className="mb-4 text-[28px]">Choose the type of post</p>
-            <div className="flex mb-4">
+      <section className="fixed  flex flex-col-reverse  left-0 right-0 bottom-0 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full">
+        <form
+          className={`container mx-auto max-w-2xl py-6 bg-white rounded-t-[40px] md:rounded-[24px] md:w-[50%] animate-petModalOpen`}
+          onSubmit={handleSubmit}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="relative mb-4">
+            <p className="text-center text-[28px] ">Create Post</p>
+            <FiX
+              className="absolute top-0 right-4 mr-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
+              onClick={() => closeModal()}
+            />
+          </div>
+          <hr className="border-t border-black w-full my-0 opacity-30" />
+          <div className="px-16">
+            <p className="grow mt-4 text-2xl leading-8 text-neutral-800">Choose the type of post</p>
+            <div className="flex mb-4 mx grow mt-4">
               <button
                 onClick={() => setFormData({ ...formData, type: 'Feed' })}
-                className={`${formData.type === 'Feed' ? 'bg-yellow-800 text-white border border-yellow-900' : 'text-yellow-800 border border-yellow-900'} cursor-pointer py-1 px-2 rounded-tl-md rounded-bl-md`}
+                className={`${formData.type === 'Feed' ? 'bg-[#B8682A] text-white border border-[#B8682A]' : 'text-yellow-800 border border-[#B8682A]'} cursor-pointer py-1 px-8 rounded-tl-md rounded-bl-md`}
               >
                 Feed
               </button>
 
               <button
                 onClick={() => setFormData({ ...formData, type: 'Lost' })}
-                className={`${formData.type === 'Lost' ? 'bg-yellow-800 text-white border border-yellow-900' : 'text-yellow-800 border border-yellow-900'} cursor-pointer py-1 px-2`}
+                className={`${formData.type === 'Lost' ? 'bg-[#B8682A] text-white border border-[#B8682A]' : 'text-[#B8682A] border border-[#B8682A]'} cursor-pointer py-1 px-8`}
               >
                 Lost
               </button>
 
               <button
                 onClick={() => setFormData({ ...formData, type: 'Adoption' })}
-                className={`${formData.type === 'Adoption' ? 'bg-yellow-800 text-white border border-yellow-900' : 'text-yellow-800 border border-yellow-900'} cursor-pointer py-1 px-2 rounded-tr-md rounded-br-md`}
+                className={`${formData.type === 'Adoption' ? 'bg-[#B8682A] text-white border border-[#B8682A]' : 'text-[#B8682A] border border-[#B8682A]'} cursor-pointer py-1 px-8 rounded-tr-md rounded-br-md`}
               >
                 Adoption
               </button>
             </div>
 
-            <div className="relative mb-4">
-              <input
-                className="mt-4 block w-full border border-gray-300 rounded-md shadow-sm p-9 pl-6 text-gray-700"
+            <div className="relative mb-10 ">
+              <label className="block text-gray-700 font-bold mb-2">Description</label>
+              <textarea
+                className="block w-full border border-gray-500 rounded-3xl shadow-sm py-3 px-4 text-lg text-gray-700 resize-none"
+                rows="4"
                 placeholder="Enter the description..."
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
-              />
+              ></textarea>
             </div>
-
-            <p className="mb-4 text-[28px]">Location</p>
-            {/* Agrega tu componente Location aquí */}
-            <Location setAddress={setAddress} />
-
-            <p className="mb-4  text-[#176543] text-[28px]">Attach</p>
+            <div className="mb-8 ">
+              <p className="  text-[20px]">Location</p>
+              {/* Agrega tu componente Location aquí */}
+              <Location setAddress={setAddress} />
+            </div>
+            <p className="mb-3  text-[#176543]  font-bold text-[22px]">Attach</p>
             <label
               htmlFor="file-upload"
-              className="rounded-ml cursor-pointer border border-secondary-800 py-2 px-6 flex items-center gap-x-2"
-              style={{ width: '150px', height: '125px', backgroundColor: '#EAF8F2' }}
+              className="rounded-ml  mb-6 cursor-pointer border  py-2 px-6 flex items-center justify-center gap-x-2 bg-secondary-50 rounded-md"
+              style={{ width: '200px', height: '164px' }}
             >
               <input id="file-upload" type="file" onChange={handleImageChange} className="hidden" />
 
-              <div className="w-20 h-22 max-w-full">
-                <img src={defaultProfileIcon} alt="icono" />
+              <div className="flex justify-center  items-center  max-w-full">
+                <img src={addPet} alt="icono" />
               </div>
             </label>
-
+            <div className="mb-10"></div>
             <button
               type="submit"
-              className="block w-full p-2 mb-3 mx-auto text-white text-[28px] bg-[#E29900] rounded-[8px]"
+              className="block w-full p-2  mx-auto text-white text-[28px] bg-[#E29900] rounded-[8px]"
             >
               Post
             </button>
-          </form>
-        </section>
-      </main>
+          </div>
+        </form>
+      </section>
     </>
   );
 };

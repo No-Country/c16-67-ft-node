@@ -1,5 +1,5 @@
-import { useNavigateContext } from '../context/navigationContext';
-import { useUserContext } from '../context/userContext';
+import { useNavigateContext } from '../../../context/navigationContext';
+import { useUserContext } from '../../../context/userContext';
 import NavbarDesktop from './NavbarDesktop';
 import NavbarMobile from './NavbarMobile';
 
