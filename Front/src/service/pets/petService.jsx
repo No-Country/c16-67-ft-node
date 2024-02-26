@@ -12,3 +12,13 @@ export const getPetById = async (petId) => {
     console.log(error);
   });
 };
+
+export const getPetsByUserId = async (userId) => {
+  try {
+    const pets = (await axios.get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`)).data;
+    return pets;
+  } catch (error) {
+    console.error(error.message);
+    throw Error(error.message);
+  }
+};

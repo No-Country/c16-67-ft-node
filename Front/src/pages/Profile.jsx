@@ -9,47 +9,38 @@ import { useNavigateContext } from '../context/navigationContext';
 import Suggestions from '../components/Feed/Suggestions';
 import { MdEdit } from 'react-icons/md';
 import Select from 'react-select';
+import { getPetsByUserId } from '../service/pets/petService';
+import { getUserById } from '../service/users/userService';
+import { getPublicationsByPetId } from '../service/publications/publicationsService';
 
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
 export default function Profile() {
+  //INSTANCIAS
   const navigate = useNavigate();
+  //CONTEXTOS
   const { modalState, openModal } = useModalContext();
+  const { getPet, setActivePet } = useUserContext();
+  const { setActive } = useNavigateContext();
+  const pet = getPet();
+  setActive('profile');
+  //ESTADOS LOCALES
   const [options, setOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [publications, setPublications] = useState([]);
   const [user, setUser] = useState({ name: '', image_url: '' });
-  const { getPet, setActivePet } = useUserContext();
+  //LOCAL STORAGE
   const userId = JSON.parse(localStorage.getItem('userId'));
   const { petId } = JSON.parse(localStorage.getItem('pet'));
-  const pet = getPet();
-  const { setActive } = useNavigateContext();
-
-  setActive('profile');
 
   useEffect(() => {
     fetchData();
   }, [userId, navigate]);
 
   useEffect(() => {
-    const fetchPublications = async () => {
-      if (!pet.petId) return;
-      setIsLoading(true);
-      try {
-        const response = await axios.get(`${API_URL_BASE}/api/v1/publication/petid/${pet.petId}`);
-        setPublications(response.data.data);
-      } catch (error) {
-        openModal({
-          description: 'An error has occurred while fetching publications',
-          chooseModal: false,
-          error: true
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    if (!pet.petId) return;
 
-    fetchPublications();
+    fetchData();
   }, [pet.petId]);
 
   //FUNCIONES
@@ -61,13 +52,13 @@ export default function Profile() {
     }
     try {
       const [petsResponse, userResponse, publicationsResponse] = await Promise.all([
-        axios.get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`),
-        axios.get(`${API_URL_BASE}/api/v1/user/${userId}`),
-        axios.get(`${API_URL_BASE}/api/v1/publication/petid/${petId}`)
+        getPetsByUserId(userId),
+        getUserById(userId),
+        getPublicationsByPetId(petId)
       ]);
 
       setOptions(
-        petsResponse.data.data
+        petsResponse.data
           .filter((pet) => pet.status)
           .map((pet) => ({
             value: pet.petId,
@@ -76,8 +67,8 @@ export default function Profile() {
             image: pet.image_url
           }))
       );
-      setPublications(publicationsResponse.data.data);
-      setUser(userResponse.data.data);
+      setPublications(publicationsResponse.data);
+      setUser(userResponse.data);
     } catch (error) {
       openModal({
         description: 'An error has occurred',
@@ -98,7 +89,6 @@ export default function Profile() {
       axios
         .get(`${API_URL_BASE}/api/v1/pet/${e.value}`)
         .then((res) => {
-          console.log(res.data);
           const { data } = res;
           const pet = {
             petId: data.data.petId,
@@ -109,8 +99,6 @@ export default function Profile() {
           axios
             .get(`${API_URL_BASE}/api/v1/publication/petid/${pet.petId}`)
             .then((res) => {
-              console.log(res.data);
-
               const { data } = res;
               const petWithPublications = {
                 ...pet,

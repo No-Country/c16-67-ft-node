@@ -33,3 +33,14 @@ export const postPublication = async (publication) => {
     }
   });
 };
+
+export const getPublicationsByPetId = async (petId) => {
+  try {
+    const publications = (await axios.get(`${API_URL_BASE}/api/v1/publication/petid/${petId}`))
+      .data;
+    return publications;
+  } catch (error) {
+    console.error(error.message);
+    throw Error(error.message);
+  }
+};
