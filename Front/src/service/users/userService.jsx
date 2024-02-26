@@ -8,3 +8,13 @@ export const changeLastPet = async (userId, petId) => {
       console.log(error);
     });
 };
+
+export const getUserById = async (userId) => {
+  try {
+    const user = (await axios.get(`${API_URL_BASE}/api/v1/user/${userId}`)).data;
+    return user;
+  } catch (error) {
+    console.error(error.message);
+    throw Error(error.message);
+  }
+};
