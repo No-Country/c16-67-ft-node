@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PetCard from './PetCard';
-import { getPublications, getPublicationsSaved } from './getPublications';
 import styles from './PetContainer.module.css';
-import CreatePublicationCard from './CreatePublicationCard';
-import { useModalContext } from '../../context/modalContext';
-import Modal from '../Modal';
+import CreatePublicationCard from '../createPublication/CreatePublicationCard';
+import { useModalContext } from '../../../context/modalContext';
+import Modal from '../../ui/modal/Modal';
+import {
+  getPublicationsSaved,
+  getPublications
+} from '../../../service/publications/publicationsService';
 
 export default function PetContainer({ tabActive }) {
   const { modalState, openModal } = useModalContext();
@@ -37,8 +40,8 @@ export default function PetContainer({ tabActive }) {
   const fetchSaved = () => {
     getPublicationsSaved()
       .then((data) => {
-        setSaved(data);
         console.log(data);
+        setSaved(data);
       })
       .catch((error) => console.error(error));
   };

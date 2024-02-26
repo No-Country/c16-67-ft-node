@@ -1,8 +1,8 @@
 import { useEffect, React } from 'react';
 import { gapi } from 'gapi-script';
-import LoginButton from '../account-google/Login';
+import LoginButton from './Login';
 import { useModalContext } from '../../context/modalContext';
-import Modal from '../Modal';
+import Modal from '../ui/modal/Modal';
 
 function IndexLogin() {
   const { modalState, openModal } = useModalContext();

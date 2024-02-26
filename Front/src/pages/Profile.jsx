@@ -1,56 +1,41 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/ui/Spinner';
 import { useModalContext } from '../context/modalContext';
-import Modal from '../components/Modal';
+import PetModal from '../components/ui/modal/PetModal';
 import { useUserContext } from '../context/userContext';
 import { useNavigateContext } from '../context/navigationContext';
-import Suggestions from '../components/Suggestions';
+import Suggestions from '../components/Feed/Suggestions';
 import { MdEdit } from 'react-icons/md';
 import Select from 'react-select';
-
-const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
+import { getPetById, getPetsByUserId } from '../service/pets/petService';
+import { getUserById } from '../service/users/userService';
+import { getPublicationsByPetId } from '../service/publications/publicationsService';
 
 export default function Profile() {
+  //INSTANCIAS
   const navigate = useNavigate();
+
+  //CONTEXTOS
   const { modalState, openModal } = useModalContext();
+  const { getPet, setActivePet } = useUserContext();
+  const { setActive } = useNavigateContext();
+  const pet = getPet();
+
+  //ESTADOS LOCALES
   const [options, setOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [publications, setPublications] = useState([]);
   const [user, setUser] = useState({ name: '', image_url: '' });
-  const { getPet, setActivePet } = useUserContext();
+
+  //LOCAL STORAGE
   const userId = JSON.parse(localStorage.getItem('userId'));
   const { petId } = JSON.parse(localStorage.getItem('pet'));
-  const pet = getPet();
-  const { setActive } = useNavigateContext();
-
-  setActive('profile');
 
   useEffect(() => {
     fetchData();
-  }, [userId, navigate]);
-
-  useEffect(() => {
-    const fetchPublications = async () => {
-      if (!pet.petId) return;
-      setIsLoading(true);
-      try {
-        const response = await axios.get(`${API_URL_BASE}/api/v1/publication/petid/${pet.petId}`);
-        setPublications(response.data.data);
-      } catch (error) {
-        openModal({
-          description: 'An error has occurred while fetching publications',
-          chooseModal: false,
-          error: true
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchPublications();
-  }, [pet.petId]);
+    setActive('profile');
+  }, [userId, navigate, petId]);
 
   //FUNCIONES
   const fetchData = async () => {
@@ -61,13 +46,13 @@ export default function Profile() {
     }
     try {
       const [petsResponse, userResponse, publicationsResponse] = await Promise.all([
-        axios.get(`${API_URL_BASE}/api/v1/pet/userid/${userId}`),
-        axios.get(`${API_URL_BASE}/api/v1/user/${userId}`),
-        axios.get(`${API_URL_BASE}/api/v1/publication/petid/${petId}`)
+        getPetsByUserId(userId),
+        getUserById(userId),
+        getPublicationsByPetId(petId)
       ]);
-
+      //PROVSISORIO luego se va a filtrar en el back
       setOptions(
-        petsResponse.data.data
+        petsResponse.data
           .filter((pet) => pet.status)
           .map((pet) => ({
             value: pet.petId,
@@ -76,8 +61,8 @@ export default function Profile() {
             image: pet.image_url
           }))
       );
-      setPublications(publicationsResponse.data.data);
-      setUser(userResponse.data.data);
+      setPublications(publicationsResponse.data);
+      setUser(userResponse.data);
     } catch (error) {
       openModal({
         description: 'An error has occurred',
@@ -88,43 +73,27 @@ export default function Profile() {
     setIsLoading(false);
   };
 
-  const onSelectPet = (e) => {
-    if (e.value === 'addPet') {
+  const onSelectPet = async (event) => {
+    if (event.value === 'addPet') {
       openModal({
         petModal: true,
         xBtnPetModal: true
       });
     } else {
-      axios
-        .get(`${API_URL_BASE}/api/v1/pet/${e.value}`)
-        .then((res) => {
-          console.log(res.data);
-          const { data } = res;
-          const pet = {
-            petId: data.data.petId,
-            name: data.data.name,
-            description: data.data.description,
-            image_url: data.data.image_url
-          };
-          axios
-            .get(`${API_URL_BASE}/api/v1/publication/petid/${pet.petId}`)
-            .then((res) => {
-              console.log(res.data);
+      const { data } = await getPetById(event.value);
+      const pet = {
+        petId: data.data.petId,
+        name: data.data.name,
+        description: data.data.description,
+        image_url: data.data.image_url
+      };
 
-              const { data } = res;
-              const petWithPublications = {
-                ...pet,
-                publications: data.data.image_url
-              };
-              setActivePet(petWithPublications);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      const publications = await getPublicationsByPetId(petId);
+      const petWithPublications = {
+        ...pet,
+        publications: publications.data.image_url
+      };
+      setActivePet(petWithPublications);
     }
   };
 
@@ -195,7 +164,7 @@ export default function Profile() {
         <Spinner />
       ) : (
         <>
-          {modalState.isOpen && <Modal />}
+          {modalState.isOpen && <PetModal />}
           <div className="px-4">
             <div className="flex flex-col items-center gap-y-4 pt-4 md:pt-0">
               <div className="flex justify-between items-center w-full text-[28px] md:hidden">

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import Spinner from '../Spinner';
+import Spinner from '../ui/Spinner';
 import { useNavigate } from 'react-router-dom';
 import { useNavigateContext } from '../../context/navigationContext';
 import { useModalContext } from '../../context/modalContext';
 import { useUserContext } from '../../context/userContext';
-import Modal from '../Modal';
+import Modal from '../ui/modal/Modal';
 
 //const clientId = `${import.meta.env.VITE_USER_ID}`;
 const ServerConnect = `${import.meta.env.VITE_SERVER_PRODUCTION}`;

@@ -1,4 +1,4 @@
-import logo from '../../assets/images/isologo.svg';
+import logo from '../../../assets/images/isologo.svg';
 import styles from './HomeTab.module.css';
 
 export default function HomeTab({ tabActive, setTabActive }) {

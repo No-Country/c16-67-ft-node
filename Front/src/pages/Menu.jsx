@@ -1,4 +1,4 @@
-import Logout from '../components/account-google/Logout';
+import Logout from '../components/authentication/Logout';
 import { useNavigateContext } from '../context/navigationContext';
 
 export default function Menu() {

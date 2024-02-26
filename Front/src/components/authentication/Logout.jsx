@@ -1,7 +1,7 @@
 import { googleLogout } from '@react-oauth/google';
 import { useNavigate } from 'react-router';
 import { useModalContext } from '../../context/modalContext';
-import Modal from '../../components/Modal';
+import Modal from '../ui/modal/Modal';
 import { useUserContext } from '../../context/userContext';
 
 export default function Logout() {
