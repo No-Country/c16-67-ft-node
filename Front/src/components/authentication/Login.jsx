@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import Spinner from '../../components/ui/Spinner';
+import Spinner from '../ui/Spinner';
 import { useNavigate } from 'react-router-dom';
 import { useNavigateContext } from '../../context/navigationContext';
 import { useModalContext } from '../../context/modalContext';

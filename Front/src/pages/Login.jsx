@@ -1,5 +1,5 @@
 import { React } from 'react';
-import LoginContent from '../components/login/LoginContent';
+import LoginContent from '../components/authentication/LoginContent';
 import logo from '../assets/images/isologo.svg';
 import foots from '../assets/images/foots.png';
 

@@ -81,21 +81,21 @@ const ModalPost = ({ closeModal }) => {
   return (
     <>
       {isLoading && <Spinner />}
-      <main>
-        <section className="fixed  flex flex-col-reverse  left-0 right-0 bottom-0 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full">
-          <form
-            className={`container mx-auto max-w-2xl px-16 py-6 bg-white rounded-t-[40px] md:rounded-[24px] md:w-[50%] h-[87vh] md:mt-12 animate-petModalOpen`}
-            onSubmit={handleSubmit}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="relative mb-4">
-              <p className="text-center text-[28px] ">Create Post</p>
-              <FiX
-                className="absolute top-0 right-0 mr-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
-                onClick={() => closeModal()}
-              />
-            </div>
-            <hr className="border-t-2 border-black w-full my-0" />
+      <section className="fixed  flex flex-col-reverse  left-0 right-0 bottom-0 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full">
+        <form
+          className={`container mx-auto max-w-2xl py-6 bg-white rounded-t-[40px] md:rounded-[24px] md:w-[50%] animate-petModalOpen`}
+          onSubmit={handleSubmit}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="relative mb-4">
+            <p className="text-center text-[28px] ">Create Post</p>
+            <FiX
+              className="absolute top-0 right-4 mr-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
+              onClick={() => closeModal()}
+            />
+          </div>
+          <hr className="border-t border-black w-full my-0 opacity-30" />
+          <div className="px-16">
             <p className="grow mt-4 text-2xl leading-8 text-neutral-800">Choose the type of post</p>
             <div className="flex mb-4 mx grow mt-4">
               <button
@@ -121,35 +121,32 @@ const ModalPost = ({ closeModal }) => {
             </div>
 
             <div className="relative mb-10 ">
-            <label className="block text-gray-700 font-bold mb-2">
-  Description
-</label>
-<textarea
-  className="block w-full border border-gray-500 rounded-3xl shadow-sm py-3 px-4 text-lg text-gray-700 resize-none"
-  rows="4"
-  placeholder="Enter the description..."
-  name="description"
-  value={formData.description}
-  onChange={handleChange}
-></textarea>
-</div>
- <div className='mb-8 '>
-            <p className="  text-[20px]">Location</p>
-            {/* Agrega tu componente Location aquí */}
-            <Location setAddress={setAddress} />
-</div>
+              <label className="block text-gray-700 font-bold mb-2">Description</label>
+              <textarea
+                className="block w-full border border-gray-500 rounded-3xl shadow-sm py-3 px-4 text-lg text-gray-700 resize-none"
+                rows="4"
+                placeholder="Enter the description..."
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+              ></textarea>
+            </div>
+            <div className="mb-8 ">
+              <p className="  text-[20px]">Location</p>
+              {/* Agrega tu componente Location aquí */}
+              <Location setAddress={setAddress} />
+            </div>
             <p className="mb-3  text-[#176543]  font-bold text-[22px]">Attach</p>
             <label
               htmlFor="file-upload"
-              className="rounded-ml  mb-6 cursor-pointer border  py-2 px-6 flex items-center gap-x-2"
-              style={{ width: '150px', height: '125px', backgroundColor: '#EAF8F2' }}
+              className="rounded-ml  mb-6 cursor-pointer border  py-2 px-6 flex items-center justify-center gap-x-2 bg-secondary-50 rounded-md"
+              style={{ width: '200px', height: '164px' }}
             >
               <input id="file-upload" type="file" onChange={handleImageChange} className="hidden" />
 
-              <div className="flex justify-center  items-center w-50 h-60  max-w-full">
-  <img src={addPet} alt="icono" />
-</div>
-
+              <div className="flex justify-center  items-center  max-w-full">
+                <img src={addPet} alt="icono" />
+              </div>
             </label>
             <div className="mb-10"></div>
             <button
@@ -158,10 +155,9 @@ const ModalPost = ({ closeModal }) => {
             >
               Post
             </button>
-           
-          </form>
-        </section>
-      </main>
+          </div>
+        </form>
+      </section>
     </>
   );
 };

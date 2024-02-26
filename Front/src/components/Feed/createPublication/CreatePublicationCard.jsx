@@ -22,7 +22,7 @@ const CreatePublicationCard = ({ pet }) => {
   return (
     <div
       onClick={handleOpenModal}
-      className="hidden md:flex items-start max-w-full mb-6 rounded-lg p-4 shadow-md mx-2 md:mx-0"
+      className="hidden md:flex items-start max-w-full mb-6 rounded-lg p-4 mx-2 md:mx-0"
     >
       {/* Imagen redonda */}
       <img
@@ -34,10 +34,10 @@ const CreatePublicationCard = ({ pet }) => {
         }}
       />
 
-      <div className="flex flex-col flex-1 mt-2 max-md:max-w-full">
+      <div className="flex flex-col flex-1 mt-2 w-full">
         {/* Texto del post */}
         <input
-          className="mt-4 block w-full border border-gray-300 rounded-full shadow-sm p-3 pl-6 text-gray-700"
+          className="mt-4 block w-full border border-gray-300 rounded-full shadow-sm p-3 pl-6 text-gray-700 cursor-pointer"
           placeholder="Enter the description..."
         />
 
