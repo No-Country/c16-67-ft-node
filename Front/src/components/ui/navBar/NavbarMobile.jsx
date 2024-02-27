@@ -48,8 +48,10 @@ export default function NavbarMobile({ active, pet }) {
             </NavLink>
           </li>
           <li className="flex-grow-[2] flex flex-col flex-basis-0 h-full items-center justify-center">
-            <span className="material-symbols-outlined">search</span>
-            Search
+            <NavLink to={'/search'}>
+              <span className="material-symbols-outlined">search</span>
+              Search
+            </NavLink>
           </li>
           <li className="absolute right-1/2 translate-x-1/2 top-[-28px] p-0 w-12 h-12 bg-accent-300 rounded-full grid place-items-center shadow-lg">
             <NavLink className="grid place-items-center" to={'/publication-create'}>
