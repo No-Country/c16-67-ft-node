@@ -18,9 +18,8 @@ export default function Home() {
   const userId = localStorage.getItem('userId');
   const { setActive } = useNavigateContext();
 
-  setActive('feed');
-
   useEffect(() => {
+    setActive('feed');
     if (userId === null) {
       navigate('/login');
     } else {
