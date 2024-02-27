@@ -2,12 +2,23 @@ import { NavLink } from 'react-router-dom';
 import feedIcon from '../../../assets/images/feedIcon.svg';
 import logo from '../../../assets/images/isologo.svg';
 import chatIcon from '../../../assets/images/chat.svg';
+import ModalPost from '../../Feed/createPublication/ModalPost';
+import { useState } from 'react';
 export default function NavbarMobile({ active, pet }) {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
   return (
     <div className="block md:hidden">
       {active !== 'profile' && (
         <>
-          <div className="fixed w-full bg-white">
+          <div className="fixed w-full bg-white z-50">
             <div className="h-16 px-4 flex justify-between items-center">
               <img
                 className="h-12 w-12 rounded-full border-2 border-slate-200 object-cover"
@@ -52,7 +63,7 @@ export default function NavbarMobile({ active, pet }) {
             Search
           </li>
           <li className="absolute right-1/2 translate-x-1/2 top-[-28px] p-0 w-12 h-12 bg-accent-300 rounded-full grid place-items-center shadow-lg">
-            <NavLink className="grid place-items-center" to={'/publication-create'}>
+            <NavLink className="grid place-items-center" onClick={() => handleOpenModal()}>
               <span className="material-symbols-outlined text-4xl text-white">add</span>
             </NavLink>
           </li>
@@ -76,6 +87,7 @@ export default function NavbarMobile({ active, pet }) {
           </li>
         </ul>
       </nav>
+      {isModalOpen && <ModalPost closeModal={handleCloseModal} />}
     </div>
   );
 }

@@ -5,12 +5,12 @@ import { useModalContext } from '../context/modalContext';
 import PetModal from '../components/ui/modal/PetModal';
 import { useUserContext } from '../context/userContext';
 import { useNavigateContext } from '../context/navigationContext';
-import Suggestions from '../components/Feed/Suggestions';
 import { MdEdit } from 'react-icons/md';
 import Select from 'react-select';
 import { getPetById, getPetsByUserId } from '../service/pets/petService';
 import { getUserById } from '../service/users/userService';
 import { getPublicationsByPetId } from '../service/publications/publicationsService';
+import Suggestions from '../components/Feed/suggestions/Suggestions';
 
 export default function Profile() {
   //INSTANCIAS

@@ -67,7 +67,7 @@ export default function NavbarDesktop({ active, pet }) {
           </NavLink>
         </li>
         <li className={`${active === 'saved' ? `${styles.active}` : ''}`}>
-          <NavLink className="">
+          <NavLink to="/saved">
             <img src={saveIcon} className={`${styles.navImg}`} alt="Saved icon" />
             <p className={`${active === 'saved' && `${styles.activeText}`}`}>Saved</p>
           </NavLink>

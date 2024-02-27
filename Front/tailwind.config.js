@@ -8,6 +8,7 @@ export default {
         roboto: ['Roboto', 'sans-serif']
       },
       colors: {
+        'blackOpacity': '#0000007A',
         primary: {
           50: '#f8f0ea',
           100: '#e9d0bd',

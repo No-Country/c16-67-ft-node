@@ -40,7 +40,6 @@ export default function PetContainer({ tabActive }) {
   const fetchSaved = () => {
     getPublicationsSaved()
       .then((data) => {
-        console.log(data);
         setSaved(data);
       })
       .catch((error) => console.error(error));
@@ -63,11 +62,13 @@ export default function PetContainer({ tabActive }) {
             description={publication.description}
             petId={publication.petId}
             postId={publication.postId}
+            type={publication.type}
             petName={publication['pets.name']}
             profileImage={publication['pets.image_url']}
             address={publication.address}
             saved={saved.find((savedPublication) => savedPublication.postId === publication.postId)}
             fetchSaved={fetchSaved}
+            tabActive={tabActive}
           />
         ))}
       </div>
