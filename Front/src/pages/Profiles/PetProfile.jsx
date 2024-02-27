@@ -4,7 +4,7 @@ import Spinner from '../../components/ui/Spinner';
 import { useModalContext } from '../../context/modalContext';
 import PetModal from '../../components/ui/modal/PetModal';
 import { useNavigateContext } from '../../context/navigationContext';
-import Suggestions from '../../components/Feed/Suggestions';
+import Suggestions from '../../components/Feed/suggestions/Suggestions';
 import { getPetById } from '../../service/pets/petService';
 import { getUserById } from '../../service/users/userService';
 import { getPublicationsByPetId } from '../../service/publications/publicationsService';

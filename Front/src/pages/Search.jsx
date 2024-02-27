@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigateContext } from '../context/navigationContext';
 import { PetsProfilesContainer } from '../components/SearchPets/PetsProfilesContainer';
-import Suggestions from '../components/Feed/Suggestions';
+import Suggestions from '../components/Feed/suggestions/Suggestions';
 import { BiSearchAlt2 } from 'react-icons/bi';
 
 export const Search = () => {
