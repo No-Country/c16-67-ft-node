@@ -15,20 +15,14 @@ export const PetsProfilesContainer = ({ inputName }) => {
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
     fetchPets();
   }, [inputName, userId]);
 
   const fetchPets = async () => {
-    try {
-      const petsData = await getPetsByName(inputName);
-      const filteredPets = petsData.data.filter((pet) => pet.userId !== userId);
-      setPets(filteredPets);
-    } catch (error) {
-      console.error(error.message);
-    } finally {
-      setIsLoading(false);
-    }
+    const petsData = await getPetsByName(inputName);
+    const filteredPets = petsData.data.filter((pet) => pet.userId !== userId);
+    setPets(filteredPets);
+    setIsLoading(false);
   };
 
   return (
