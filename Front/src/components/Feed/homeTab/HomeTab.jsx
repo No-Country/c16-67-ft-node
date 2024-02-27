@@ -5,7 +5,7 @@ export default function HomeTab({ tabActive, setTabActive }) {
   return (
     <div>
       <img src={logo} className="w-full hidden md:block xl:hidden h-12" alt="logo" />
-      <div className="flex h-12 md:h-16 md:text-xl fixed md:static w-full bg-white">
+      <div className="flex h-12 md:h-16 md:text-xl fixed md:static w-full bg-white z-50">
         <div
           className={`${styles.tab} ${tabActive === 'Feed' ? `${styles.active}` : `${styles.inactive}`}`}
           onClick={() => setTabActive('Feed')}

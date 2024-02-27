@@ -6,19 +6,23 @@ import notificationsIcon from '../../../assets/images/notifications.svg';
 import saveIcon from '../../../assets/images/save.svg';
 import settingsIcon from '../../../assets/images/settings.svg';
 import defaultProfile from '../../../assets/images/defaultProfile.jpg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './NavbarDesktop.module.css';
 
 export default function NavbarDesktop({ active, pet }) {
+  const navigate = useNavigate();
   return (
     <div
       className={`hidden md:block absolute left-0 ml-4 mt-4 md:w-52 lg:w-64 pr-2 ${styles.desktop}`}
     >
-      <div className="ml-4 flex items-center gap-x-4">
+      <div
+        className="ml-4 flex items-center gap-x-4 cursor-pointer"
+        onClick={() => navigate('/profile')}
+      >
         {pet !== null ? (
           <>
             <img
-              className="md:h-12 md:w-12 lg:h-24 lg:w-24 rounded-full border-2 border-slate-200 object-cover"
+              className="md:h-12 md:w-12 lg:h-24 lg:w-24 rounded-full border-2 border-slate-200 object-cover cursor-pointer"
               src={pet.image_url !== '' ? pet.image_url : defaultProfile}
               alt="image of active pet"
             />
@@ -39,7 +43,7 @@ export default function NavbarDesktop({ active, pet }) {
           </NavLink>
         </li>
         <li className={`${active === 'search' ? `${styles.active}` : ''}`}>
-          <NavLink>
+          <NavLink to={'/search'}>
             <img src={searchIcon} className={`${styles.navImg}`} alt="Search icon" />
             <p className={`${active === 'search' && `${styles.activeText}`}`}>Search</p>
           </NavLink>
@@ -67,7 +71,7 @@ export default function NavbarDesktop({ active, pet }) {
           </NavLink>
         </li>
         <li className={`${active === 'saved' ? `${styles.active}` : ''}`}>
-          <NavLink className="">
+          <NavLink to="/saved">
             <img src={saveIcon} className={`${styles.navImg}`} alt="Saved icon" />
             <p className={`${active === 'saved' && `${styles.activeText}`}`}>Saved</p>
           </NavLink>

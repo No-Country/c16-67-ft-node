@@ -13,7 +13,7 @@ const ModalPost = ({ closeModal }) => {
   const [formData, setFormData] = useState({
     description: '',
     image: null,
-    type: 'Feed'
+    type: 'Normal'
   });
   const userId = JSON.parse(localStorage.getItem('userId'));
   const { petId } = JSON.parse(localStorage.getItem('pet'));
@@ -81,26 +81,28 @@ const ModalPost = ({ closeModal }) => {
   return (
     <>
       {isLoading && <Spinner />}
-      <section className="fixed  flex flex-col-reverse  left-0 right-0 bottom-0 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full">
+      <section className="fixed  flex flex-col-reverse  left-0 right-0 top-0 bg-blackOpacity w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full">
         <form
-          className={`container mx-auto max-w-2xl py-6 bg-white rounded-t-[40px] md:rounded-[24px] md:w-[50%] animate-petModalOpen`}
+          className={`container mx-auto max-w-2xl py-6 overflow-y-auto md:overflow-y-hidden bg-white  md:rounded-2xl animate-petModalOpen`}
           onSubmit={handleSubmit}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="relative mb-4">
-            <p className="text-center text-[28px] ">Create Post</p>
+            <p className="text-center text-headline-md ">Create Post</p>
             <FiX
-              className="absolute top-0 right-4 mr-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
+              className="absolute top-0 right-4 mr-6 text-[20px] border-[2px] border-solid border-black rounded-full hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
               onClick={() => closeModal()}
             />
           </div>
           <hr className="border-t border-black w-full my-0 opacity-30" />
-          <div className="px-16">
-            <p className="grow mt-4 text-2xl leading-8 text-neutral-800">Choose the type of post</p>
+          <div className="px-4 md:px-16">
+            <p className="grow mt-4 text-title-md md:text-headline-sm leading-8 text-neutral-800">
+              Choose the type of post
+            </p>
             <div className="flex mb-4 mx grow mt-4">
               <button
-                onClick={() => setFormData({ ...formData, type: 'Feed' })}
-                className={`${formData.type === 'Feed' ? 'bg-[#B8682A] text-white border border-[#B8682A]' : 'text-yellow-800 border border-[#B8682A]'} cursor-pointer py-1 px-8 rounded-tl-md rounded-bl-md`}
+                onClick={() => setFormData({ ...formData, type: 'Normal' })}
+                className={`${formData.type === 'Normal' ? 'bg-[#B8682A] text-white border border-[#B8682A]' : 'text-yellow-800 border border-[#B8682A]'} cursor-pointer py-1 px-8 rounded-tl-md rounded-bl-md`}
               >
                 Feed
               </button>
@@ -123,7 +125,7 @@ const ModalPost = ({ closeModal }) => {
             <div className="relative mb-10 ">
               <label className="block text-gray-700 font-bold mb-2">Description</label>
               <textarea
-                className="block w-full border border-gray-500 rounded-3xl shadow-sm py-3 px-4 text-lg text-gray-700 resize-none"
+                className="block w-full border border-gray-500 rounded-md shadow-sm py-3 px-4 text-lg text-gray-700 resize-none"
                 rows="4"
                 placeholder="Enter the description..."
                 name="description"
@@ -136,11 +138,10 @@ const ModalPost = ({ closeModal }) => {
               {/* Agrega tu componente Location aquí */}
               <Location setAddress={setAddress} />
             </div>
-            <p className="mb-3  text-[#176543]  font-bold text-[22px]">Attach</p>
+            <p className="mb-3  text-secondary-800  font-bold text-[22px]">Attach</p>
             <label
               htmlFor="file-upload"
-              className="rounded-ml  mb-6 cursor-pointer border  py-2 px-6 flex items-center justify-center gap-x-2 bg-secondary-50 rounded-md"
-              style={{ width: '200px', height: '164px' }}
+              className="rounded-ml aspect-square mb-6 cursor-pointer border  py-2 px-6 flex items-center justify-center gap-x-2 md:w-[200px] md:h-[164px] bg-secondary-50 rounded-md"
             >
               <input id="file-upload" type="file" onChange={handleImageChange} className="hidden" />
 

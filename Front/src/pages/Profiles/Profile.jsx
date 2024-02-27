@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Spinner from '../components/ui/Spinner';
-import { useModalContext } from '../context/modalContext';
-import PetModal from '../components/ui/modal/PetModal';
-import { useUserContext } from '../context/userContext';
-import { useNavigateContext } from '../context/navigationContext';
-import Suggestions from '../components/Feed/Suggestions';
+import Spinner from '../../components/ui/Spinner';
+import { useModalContext } from '../../context/modalContext';
+import PetModal from '../../components/ui/modal/PetModal';
+import { useUserContext } from '../../context/userContext';
+import { useNavigateContext } from '../../context/navigationContext';
+import Suggestions from '../../components/Feed/suggestions/Suggestions';
 import { MdEdit } from 'react-icons/md';
 import Select from 'react-select';
-import { getPetById, getPetsByUserId } from '../service/pets/petService';
-import { getUserById } from '../service/users/userService';
-import { getPublicationsByPetId } from '../service/publications/publicationsService';
+import { getPetById, getPetsByUserId } from '../../service/pets/petService';
+import { getUserById } from '../../service/users/userService';
+import { getPublicationsByPetId } from '../../service/publications/publicationsService';
 
 export default function Profile() {
   //INSTANCIAS
@@ -50,7 +50,7 @@ export default function Profile() {
         getUserById(userId),
         getPublicationsByPetId(petId)
       ]);
-      //PROVSISORIO luego se va a filtrar en el back
+
       setOptions(
         petsResponse.data
           .filter((pet) => pet.status)

@@ -65,7 +65,7 @@ function AutocompleteSearch({ setAddress }) {
           id="search-box-area"
         >
           <input
-            className="locationiq-autocomplete-input ui-autocomplete-input mt-4 block w-full border border-gray-500 rounded-xl shadow-sm p-3 pl-6 text-gray-700"
+            className="locationiq-autocomplete-input ui-autocomplete-input mt-4 block w-full border border-gray-500 rounded-md shadow-sm p-3 pl-6 text-gray-700"
             id="search-box-input"
             title="Search"
             placeholder="Search for an address..."
