@@ -39,7 +39,7 @@ export default function NavbarDesktop({ active, pet }) {
           </NavLink>
         </li>
         <li className={`${active === 'search' ? `${styles.active}` : ''}`}>
-          <NavLink>
+          <NavLink to={'/search'}>
             <img src={searchIcon} className={`${styles.navImg}`} alt="Search icon" />
             <p className={`${active === 'search' && `${styles.activeText}`}`}>Search</p>
           </NavLink>

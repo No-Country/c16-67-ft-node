@@ -7,6 +7,7 @@ import PublicationForm from './pages/PublicationForm';
 import Profile from './pages/Profile';
 import Menu from './pages/Menu';
 import { useUserContext } from './context/userContext';
+import { Search } from './pages/Search';
 
 export default function App() {
   // Get userId from useUserContext
@@ -23,6 +24,7 @@ export default function App() {
             <Route exact path="/publication-create" element={<PublicationForm />} />
             <Route exact path="/profile" element={<Profile />} />
             <Route exact path="/menu" element={<Menu />} />
+            <Route exact path="/search" element={<Search />} />
           </Routes>
         </BrowserRouter>
       ) : (
