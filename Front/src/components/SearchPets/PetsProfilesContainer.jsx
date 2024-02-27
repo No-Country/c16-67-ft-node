@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { getPetsByName, getPetById } from '../../service/pets/petService';
+import { getPetsByName } from '../../service/pets/petService';
 import { PetProfileCard } from './PetProfileCard';
 import Spinner from '../ui/Spinner';
 import { useNavigate } from 'react-router';
 
-export const PetsProfilesContainer = ({ inputName }) => {
+export const PetsProfilesContainer = ({ inputName, userId }) => {
   const [pets, setPets] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -21,7 +21,9 @@ export const PetsProfilesContainer = ({ inputName }) => {
   const fetchPets = async () => {
     try {
       const petsData = await getPetsByName(inputName);
-      setPets(petsData.data);
+      console.log(petsData);
+      const filteredPets = petsData.data.filter((pet) => pet.petId !== userId);
+      setPets(filteredPets);
     } catch (error) {
       console.error(error.message);
     } finally {
@@ -29,15 +31,6 @@ export const PetsProfilesContainer = ({ inputName }) => {
     }
   };
 
-  const profilePet = async (petId) => {
-    try {
-      const petsData = await getPetById(petId);
-      navigate(`/profile/${petId}`);
-      setPets(petsData.data);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
   return (
     <section>
       {isLoading ? (
@@ -52,12 +45,12 @@ export const PetsProfilesContainer = ({ inputName }) => {
                   name={pet.name}
                   image={pet.image_url}
                   altText={`Image of ${pet.name}`}
-                  onClick={() => profilePet(pet.petId)}
+                  onClick={() => navigate(`/profile/${pet.petId}`)}
                 />
               ))}
             </div>
           ) : (
-            <div>0 pets founded with that word</div>
+            <div className="text-center text-headline-sm">0 pets founded with that word</div>
           )}
         </>
       )}

@@ -4,7 +4,8 @@ import Login from './pages/Login';
 import Navbar from './components/ui/navBar/Navbar';
 import React from 'react';
 import PublicationForm from './pages/PublicationForm';
-import Profile from './pages/Profile';
+import Profile from './pages/Profiles/Profile';
+import PetProfile from './pages/Profiles/PetProfile';
 import Menu from './pages/Menu';
 import { useUserContext } from './context/userContext';
 import { Search } from './pages/Search';
@@ -22,7 +23,8 @@ export default function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/publication-create" element={<PublicationForm />} />
-            <Route exact path="/profile/:id" element={<Profile />} />
+            <Route exact path="/profile" element={<Profile />} />
+            <Route exact path="/profile/:id" element={<PetProfile />} />
             <Route exact path="/menu" element={<Menu />} />
             <Route exact path="/search" element={<Search />} />
           </Routes>
