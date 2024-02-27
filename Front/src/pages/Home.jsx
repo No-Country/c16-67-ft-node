@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Spinner from '../components/ui/Spinner';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
-import Suggestions from '../components/Feed/Suggestions';
+import Suggestions from '../components/Feed/suggestions/Suggestions';
 import { useModalContext } from '../context/modalContext';
 import Modal from '../components/ui/modal/Modal';
 import { useNavigateContext } from '../context/navigationContext';
@@ -18,9 +18,8 @@ export default function Home() {
   const userId = localStorage.getItem('userId');
   const { setActive } = useNavigateContext();
 
-  setActive('feed');
-
   useEffect(() => {
+    setActive('feed');
     if (userId === null) {
       navigate('/login');
     } else {

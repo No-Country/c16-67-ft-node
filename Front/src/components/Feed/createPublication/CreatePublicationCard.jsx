@@ -8,12 +8,10 @@ const CreatePublicationCard = ({ pet }) => {
   const { getPet } = useUserContext();
 
   const handleOpenModal = () => {
-    console.log('abrio');
     setModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    console.log('cerro');
     setModalOpen(false);
   };
 
