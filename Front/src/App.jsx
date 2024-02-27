@@ -22,7 +22,7 @@ export default function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/publication-create" element={<PublicationForm />} />
-            <Route exact path="/profile" element={<Profile />} />
+            <Route exact path="/profile/:id" element={<Profile />} />
             <Route exact path="/menu" element={<Menu />} />
             <Route exact path="/search" element={<Search />} />
           </Routes>
