@@ -5,7 +5,7 @@ import { useModalContext } from '../../context/modalContext';
 import PetModal from '../../components/ui/modal/PetModal';
 import { useUserContext } from '../../context/userContext';
 import { useNavigateContext } from '../../context/navigationContext';
-import Suggestions from '../../components/Feed/Suggestions';
+import Suggestions from '../../components/Feed/suggestions/Suggestions';
 import { MdEdit } from 'react-icons/md';
 import Select from 'react-select';
 import { getPetById, getPetsByUserId } from '../../service/pets/petService';

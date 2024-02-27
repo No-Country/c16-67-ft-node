@@ -8,6 +8,7 @@ import Profile from './pages/Profiles/Profile';
 import PetProfile from './pages/Profiles/PetProfile';
 import Menu from './pages/Menu';
 import { useUserContext } from './context/userContext';
+import Saved from './pages/Saved';
 import { Search } from './pages/Search';
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
             <Route exact path="/profile" element={<Profile />} />
             <Route exact path="/profile/:id" element={<PetProfile />} />
             <Route exact path="/menu" element={<Menu />} />
+            <Route exact path="/saved" element={<Saved />} />
             <Route exact path="/search" element={<Search />} />
           </Routes>
         </BrowserRouter>

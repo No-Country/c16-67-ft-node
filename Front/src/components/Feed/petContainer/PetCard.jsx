@@ -14,7 +14,9 @@ export default function PetCard({
   address,
   postId,
   saved,
-  fetchSaved
+  fetchSaved,
+  tabActive,
+  type
 }) {
   const [seeMore, setSeeMore] = useState(false);
 
@@ -51,14 +53,16 @@ export default function PetCard({
         <div className="flex-grow">
           <div>{petName}</div>
           <div className="text-gray-500">@{petName}</div>
-          <div className={`text-black md:hidden flex ${seeMore ? 'flex-col' : 'justify-between'}`}>
-            <p className={`${!seeMore && 'truncate w-40'}`}>{description}</p>
+          <div
+            className={`text-black md:hidden flex max-w-[calc(100vw-196px)] ${seeMore ? 'flex-col' : 'justify-between'}`}
+          >
+            <p className={`${!seeMore && 'truncate'}`}>{description}</p>
             {!seeMore && (
               <p
-                className="text-black cursor-pointer font-bold md:hidden"
+                className="text-black cursor-pointer font-bold md:hidden  min-w-5"
                 onClick={() => setSeeMore(true)}
               >
-                See more
+                See
               </p>
             )}
             {seeMore && (
@@ -73,19 +77,30 @@ export default function PetCard({
         </div>
         <FollowButton />
       </div>
-      <div className="px-4 my-3 flex gap-x-2 md:col-[7/13] md:row-[2/3] h-fit self-center md:border-b md:border-primary-500">
+      <div className="px-4 my-3 flex gap-x-2 md:col-[7/13] md:row-[2/3] h-full md:my-0 md:mb-4 items-center self-center md:border-b md:border-primary-500">
         <span className="material-symbols-outlined">location_on</span>
-        <span>{address}</span>
+        <p>{address}</p>
       </div>
       <div className="text-black hidden md:block md:col-[7/13] md:row-[3/5] ml-4 max-h-24 overflow-hidden">
         {description}
       </div>
-      <img
-        src={postImage}
-        className="md:h-[360px] md:w-full object-cover md:rounded-2xl
-        md:row-start-1 md:col-[1/7] md:row-[1/7]"
-        alt=""
-      />
+      <div className="md:row-start-1 md:col-[1/7] md:row-[1/7] relative">
+        <img
+          src={postImage}
+          className="md:h-[360px] w-full aspect-square object-cover md:rounded-s-2xl"
+          alt=""
+        />
+        {tabActive === 'Lost-Adption' && type === 'Lost' && (
+          <p className="absolute top-4 right-4 h-6 w-14 grid place-items-center rounded-sm bg-secondary-700 text-white font-bold uppercase">
+            {type}
+          </p>
+        )}
+        {tabActive === 'Lost-Adption' && type === 'Adopcion' && (
+          <p className="absolute top-4 right-4 h-6 px-2 grid place-items-center rounded-sm bg-secondary-100 text-primary-700 font-bold uppercase">
+            In adoption
+          </p>
+        )}
+      </div>
       <div className="flex justify-between ml-5 mt-2 col-[7/13] h-fit md:row-[5/6]">
         <div className="flex gap-x-6 ">
           <div className="flex gap-x-1">
