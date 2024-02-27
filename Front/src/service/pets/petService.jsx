@@ -22,3 +22,13 @@ export const getPetsByUserId = async (userId) => {
     throw Error(error.message);
   }
 };
+
+export const getPetsByName = async (name) => {
+  try {
+    const pets = (await axios.get(`${API_URL_BASE}/api/v1/pet?name=${name}`)).data;
+    return pets;
+  } catch (error) {
+    console.error(error.message);
+    throw Error(error.message);
+  }
+};
