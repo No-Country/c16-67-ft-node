@@ -22,7 +22,7 @@ const CreatePublicationCard = ({ pet }) => {
   return (
     <div
       onClick={handleOpenModal}
-      className="hidden md:flex items-start max-w-full mb-6 rounded-lg p-4 mx-2 md:mx-0"
+      className="hidden md:flex items-start max-w-full mb-6 rounded-lg p-4 mx-2 md:mx-0 cursor-pointer"
     >
       {/* Imagen redonda */}
       <img
