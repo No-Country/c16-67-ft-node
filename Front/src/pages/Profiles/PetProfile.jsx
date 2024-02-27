@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../../components/ui/Spinner';
 import { useModalContext } from '../../context/modalContext';
 import PetModal from '../../components/ui/modal/PetModal';
-import { useUserContext } from '../../context/userContext';
 import { useNavigateContext } from '../../context/navigationContext';
 import Suggestions from '../../components/Feed/Suggestions';
-import { MdEdit } from 'react-icons/md';
-import { getPetsByUserId } from '../../service/pets/petService';
+import { getPetById } from '../../service/pets/petService';
 import { getUserById } from '../../service/users/userService';
 import { getPublicationsByPetId } from '../../service/publications/publicationsService';
 import FollowButton from '../../components/ui/FollowButton';
@@ -17,49 +15,37 @@ export default function PetProfile() {
 
   //CONTEXTOS
   const { modalState, openModal } = useModalContext();
-  const { getPet, setActivePet } = useUserContext();
   const { setActive } = useNavigateContext();
-  const pet = getPet();
 
   //ESTADOS LOCALES
-  const [options, setOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [pets, setPets] = useState([]);
   const [publications, setPublications] = useState([]);
   const [user, setUser] = useState({ name: '', image_url: '' });
-
-  //LOCAL STORAGE
   const userId = JSON.parse(localStorage.getItem('userId'));
-  const { petId } = JSON.parse(localStorage.getItem('pet'));
+  const { id } = useParams();
 
   useEffect(() => {
     fetchData();
     setActive('profile');
-  }, [userId, navigate, petId]);
+  }, [id, navigate]);
 
   //FUNCIONES
   const fetchData = async () => {
     setIsLoading(true);
-    if (userId === null) {
+    if (id === null) {
       navigate('/login');
       return;
     }
+
     try {
-      const [petsResponse, userResponse, publicationsResponse] = await Promise.all([
-        getPetsByUserId(userId),
+      const [petResponse, userResponse, publicationsResponse] = await Promise.all([
+        getPetById(id),
         getUserById(userId),
-        getPublicationsByPetId(petId)
+        getPublicationsByPetId(id)
       ]);
 
-      setOptions(
-        petsResponse.data
-          .filter((pet) => pet.status)
-          .map((pet) => ({
-            value: pet.petId,
-            label: pet.name,
-            description: pet.description,
-            image: pet.image_url
-          }))
-      );
+      setPets(petResponse.data.data);
       setPublications(publicationsResponse.data);
       setUser(userResponse.data);
     } catch (error) {
@@ -97,7 +83,7 @@ export default function PetProfile() {
               <section className="flex flex-col items-center justify-center mt-5 xl:w-[75%] w-full ">
                 <div className="flex justify-center items-center w-full">
                   <img
-                    src={pet.image_url}
+                    src={pets.image_url}
                     alt="Pet-image"
                     className="w-[100px] h-[100px] ml-[100px] md:ml-[120px] mb-3 rounded-full shadow-lg object-cover"
                   />
@@ -106,7 +92,7 @@ export default function PetProfile() {
                   </div>
                 </div>
                 <p className=" mt-1 mb-4 text-[24px] text-[#232220] text-center lg:text-[26px]">
-                  {pet.name}
+                  {pets.name}
                 </p>
 
                 <div className="flex justify-center w-[200px] text-[#176543] font-black ">
@@ -115,7 +101,7 @@ export default function PetProfile() {
                   </p>
                   <p className="text-center text-[14px] md:text-[16px]">500 Following</p>
                 </div>
-                <p className="mt-4 text-[16px]">{pet.description}</p>
+                <p className="mt-4 text-[16px]">{pets.description}</p>
                 <div className="flex flex-col items-center mt-8 w-full">
                   {publications.length === 0 ? (
                     <section className="flex justify-center h-[200px] p-4 shadow-lg bg-[#fafafa] font-semibold">

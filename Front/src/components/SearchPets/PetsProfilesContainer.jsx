@@ -4,10 +4,11 @@ import { PetProfileCard } from './PetProfileCard';
 import Spinner from '../ui/Spinner';
 import { useNavigate } from 'react-router';
 
-export const PetsProfilesContainer = ({ inputName, userId }) => {
+export const PetsProfilesContainer = ({ inputName }) => {
   const [pets, setPets] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const userId = JSON.parse(localStorage.getItem('userId'));
 
   useEffect(() => {
     setIsLoading(true);
@@ -16,13 +17,12 @@ export const PetsProfilesContainer = ({ inputName, userId }) => {
   useEffect(() => {
     setIsLoading(true);
     fetchPets();
-  }, [inputName]);
+  }, [inputName, userId]);
 
   const fetchPets = async () => {
     try {
       const petsData = await getPetsByName(inputName);
-      console.log(petsData);
-      const filteredPets = petsData.data.filter((pet) => pet.petId !== userId);
+      const filteredPets = petsData.data.filter((pet) => pet.userId !== userId);
       setPets(filteredPets);
     } catch (error) {
       console.error(error.message);
