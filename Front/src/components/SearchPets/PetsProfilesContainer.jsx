@@ -2,12 +2,10 @@ import { useEffect, useState } from 'react';
 import { getPetsByName } from '../../service/pets/petService';
 import { PetProfileCard } from './PetProfileCard';
 import Spinner from '../ui/Spinner';
-import { useNavigate } from 'react-router';
 
 export const PetsProfilesContainer = ({ inputName }) => {
   const [pets, setPets] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
   const userId = JSON.parse(localStorage.getItem('userId'));
 
   useEffect(() => {
@@ -45,7 +43,7 @@ export const PetsProfilesContainer = ({ inputName }) => {
                   name={pet.name}
                   image={pet.image_url}
                   altText={`Image of ${pet.name}`}
-                  onClick={() => navigate(`/profile/${pet.petId}`)}
+                  petId={pet.petId}
                 />
               ))}
             </div>

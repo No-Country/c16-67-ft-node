@@ -1,12 +1,13 @@
+import { NavLink } from 'react-router-dom';
 import FollowButton from '../ui/FollowButton';
 
-export const PetProfileCard = ({ name, image, altText, onClick }) => {
+export const PetProfileCard = ({ name, image, altText, petId }) => {
   return (
-    <section
-      className="relative mb-4 md:shadow-md md:rounded-2xl w-full hover:bg-primary-50 hover:transition-all hover:duration-[0.4s] hover:ease-in-out md:border"
-      onClick={onClick}
-    >
-      <div className="flex justify-between px-4 gap-x-3 items-center md:h-fit md:col-[7/13]  md:relative md:self-center">
+    <section className="relative mb-4 md:shadow-md md:rounded-2xl w-full hover:bg-primary-50 hover:transition-all hover:duration-[0.4s] hover:ease-in-out md:border">
+      <NavLink
+        className="flex justify-between px-4 gap-x-3 items-center md:h-fit md:col-[7/13]  md:relative md:self-center"
+        to={`/profile/${petId}`}
+      >
         <div className="flex items-center gap-x-3">
           <img
             className="w-24 h-24 object-cover rounded-full p-2 cursor-pointer"
@@ -18,10 +19,10 @@ export const PetProfileCard = ({ name, image, altText, onClick }) => {
             <span>@{name}</span>
           </div>
         </div>
-      </div>
-      <div className="absolute flex justify-end w-[96%] top-7">
-        <FollowButton />
-      </div>
+        <div className="">
+          <FollowButton />
+        </div>
+      </NavLink>
     </section>
   );
 };
