@@ -23,7 +23,7 @@ export const Search = () => {
         maxLength={25}
         placeholder="Pet´s name"
       ></input>
-      <PetsProfilesContainer inputName={inputName} setInputName={setInputName} />
+      <PetsProfilesContainer inputName={inputName} />
     </main>
   );
 };
