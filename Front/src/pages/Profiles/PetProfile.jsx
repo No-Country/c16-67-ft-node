@@ -4,7 +4,6 @@ import Spinner from '../../components/ui/Spinner';
 import { useModalContext } from '../../context/modalContext';
 import PetModal from '../../components/ui/modal/PetModal';
 import { useNavigateContext } from '../../context/navigationContext';
-import Suggestions from '../../components/Feed/suggestions/Suggestions';
 import { getPetById } from '../../service/pets/petService';
 import { getUserById } from '../../service/users/userService';
 import { getPublicationsByPetId } from '../../service/publications/publicationsService';
@@ -80,7 +79,7 @@ export default function PetProfile() {
               </div>
             </div>
             <div className="xl:flex">
-              <section className="flex flex-col items-center justify-center mt-5 xl:w-[75%] w-full ">
+              <section className="flex flex-col items-center justify-center mt-5 w-full ">
                 <div className="flex justify-center items-center w-full">
                   <img
                     src={pets.image_url}
@@ -129,7 +128,6 @@ export default function PetProfile() {
                   )}
                 </div>
               </section>
-              <Suggestions className="xl:ml-auto" />
             </div>
           </div>
         </>

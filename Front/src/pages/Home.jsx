@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Spinner from '../components/ui/Spinner';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
-import Suggestions from '../components/Feed/suggestions/Suggestions';
 import { useModalContext } from '../context/modalContext';
 import Modal from '../components/ui/modal/Modal';
 import { useNavigateContext } from '../context/navigationContext';
@@ -47,14 +46,11 @@ export default function Home() {
   }, [navigate]);
 
   return (
-    <main className="xl:flex">
+    <main className="">
       {isLoading && <Spinner />}
-      <div className="md:flex-grow xl:flex-grow-[3] xl:basis-0 text-body">
-        {modalState.isOpen && <Modal />}
-        <HomeTab tabActive={tabActive} setTabActive={setTabActive} />
-        <PetContainer tabActive={tabActive} />
-      </div>
-      <Suggestions />
+      {modalState.isOpen && <Modal />}
+      <HomeTab tabActive={tabActive} setTabActive={setTabActive} />
+      <PetContainer tabActive={tabActive} />
     </main>
   );
 }

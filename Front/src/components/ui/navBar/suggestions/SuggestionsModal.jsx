@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SuggestionItems from './SuggestionItem';
-import { getPetSuggestions } from '../../../service/pets/petService';
+import { getPetSuggestions } from '../../../../service/pets/petService';
 import { FiX } from 'react-icons/fi';
 import styles from './SuggestionsModal.module.css';
 
@@ -18,7 +18,7 @@ export default function SuggestionsModal({ setIsModalOpen }) {
   }, []);
 
   return (
-    <div className="fixed w-screen bg-blackOpacity left-0">
+    <div className="fixed w-screen bg-blackOpacity left-0 top-0">
       <div
         className={`bg-white m-auto max-w-[648px] h-[calc(100vh-192px)] overflow-auto my-24 rounded-3xl relative`}
       >

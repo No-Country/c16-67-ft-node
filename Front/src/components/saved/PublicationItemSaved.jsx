@@ -28,11 +28,11 @@ export default function PublicationItemSaved({ item, fetchPublications }) {
           onClick={handleClick}
         />
       </div>
-      <div className="h-48 sm:h-72">
+      <div className="h-fit">
         <img
           src={item.image_url_post}
           alt={`post image`}
-          className="object-cover h-full w-full rounded-b-md"
+          className="object-cover aspect-square w-full rounded-b-md"
         />
       </div>
     </div>
