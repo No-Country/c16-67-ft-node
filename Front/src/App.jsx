@@ -24,7 +24,9 @@ export default function App() {
         <BrowserRouter>
           <Navbar />
           <div className="md:pl-56 lg:pl-72 pb-20 md:pb-0 pt-16 md:pt-0 xl:flex">
-            <div className="md:flex-grow xl:flex-grow-[3] xl:basis-0 text-body-md">
+            <div
+              className={`md:flex-grow xl:flex-grow-[3] xl:basis-0 text-body-md md:max-h-screen overflow-y-auto scrollbarCustom`}
+            >
               <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/publication-create" element={<PublicationForm />} />

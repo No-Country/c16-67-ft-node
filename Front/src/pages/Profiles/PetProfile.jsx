@@ -79,7 +79,7 @@ export default function PetProfile() {
               </div>
             </div>
             <div className="xl:flex">
-              <section className="flex flex-col items-center justify-center mt-5 xl:w-[75%] w-full ">
+              <section className="flex flex-col items-center justify-center mt-5 w-full ">
                 <div className="flex justify-center items-center w-full">
                   <img
                     src={pets.image_url}

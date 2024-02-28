@@ -24,3 +24,12 @@ h6 {
   margin: auto;
   position: relative;
 }
+
+.scrollbarCustom::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbarCustom::-webkit-scrollbar-thumb {
+  @apply bg-primary-200;
+  border-radius: 4px;
+}

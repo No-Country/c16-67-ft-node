@@ -7,7 +7,6 @@ import Modal from '../components/ui/modal/Modal';
 import { useNavigateContext } from '../context/navigationContext';
 import PetContainer from '../components/Feed/petContainer/PetContainer';
 import HomeTab from '../components/Feed/homeTab/HomeTab';
-import Suggestions from '../components/ui/navBar/suggestions/Suggestions';
 const ServerConnect = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
 
 export default function Home() {
