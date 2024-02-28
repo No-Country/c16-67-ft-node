@@ -164,7 +164,13 @@ export default function PetCard({
             placeholder="Add a growl.."
             className="w-full p-2 rounded-3xl text-body-lg bg-[#FBF0E7] outline-none"
           />
-          <button className="absolute right-4 top-2 text-body-lg text-secondary-800 font-bold">
+          <button
+            className="absolute right-4 top-2 text-body-lg text-secondary-800 font-bold hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-110"
+            onClick={(e) => {
+              e.preventDefault();
+              console.log('holis');
+            }}
+          >
             Send
           </button>
         </div>
