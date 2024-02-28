@@ -1,9 +1,10 @@
 const cloudinary = require('cloudinary').v2;
+const { config } = require('../config/config');
 
 cloudinary.config({ 
-cloud_name: 'dnwt4nr29', 
-api_key: '889177556872531', 
-api_secret: 'yXMT73bV0f8LENrYWv3wlSFigqw' 
+cloud_name: config.cloud_name, 
+api_key: config.api_key, 
+api_secret: config.api_secret 
 });
 
 async function uploadImageAndGetUrl(req) {
