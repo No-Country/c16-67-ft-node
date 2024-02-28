@@ -1,5 +1,5 @@
 import React from 'react';
-import FollowButton from '../../ui/FollowButton';
+import FollowButton from '../../FollowButton';
 
 export default function SuggestionItem({ pet }) {
   return (

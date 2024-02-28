@@ -44,7 +44,7 @@ export default function PetCard({
   };
 
   return (
-    <div className="mb-4 md:grid md:grid-cols-12 md:h-[360px] md:shadow-md md:rounded-2xl auto-rows-fr max-w-[768px] md:border mx-auto">
+    <div className="mb-4 md:grid md:grid-cols-12 md:h-[360px] md:shadow-md md:rounded-2xl auto-rows-fr max-w-[768px] md:border mx-auto md:mx-4">
       <div className="flex px-4 gap-x-3 items-center md:h-fit md:col-[7/13] md:relative md:self-center">
         <img
           className={`w-12 h-12 object-cover rounded-full ${seeMore && 'self-start mt-[10px]'}`}

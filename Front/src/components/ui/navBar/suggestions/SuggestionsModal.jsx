@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SuggestionItems from './SuggestionItem';
-import { getPetSuggestions } from '../../../service/pets/petService';
+import { getPetSuggestions } from '../../../../service/pets/petService';
 import { FiX } from 'react-icons/fi';
 import styles from './SuggestionsModal.module.css';
 

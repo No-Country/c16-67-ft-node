@@ -1,8 +1,8 @@
-import logo from '../../../assets/images/isologo.svg';
+import logo from '../../../../assets/images/isologo.svg';
 import { useEffect, useState } from 'react';
-import { getPetSuggestions } from '../../../service/pets/petService';
 import SuggestionsModal from './SuggestionsModal';
 import SuggestionItem from './SuggestionItem';
+import { getPetSuggestions } from '../../../../service/pets/petService';
 
 export default function Suggestions() {
   const userId = JSON.parse(localStorage.getItem('userId'));
@@ -16,7 +16,7 @@ export default function Suggestions() {
   }, []);
   return (
     <>
-      <div className="hidden xl:block xl:p-4 xl:flex-grow xl:basis-0">
+      <div>
         <img src={logo} className="w-full h-12" alt="logo" />
         <div className="flex mt-6 gap-x-1 justify-between">
           <p>Suggestions for you</p>
@@ -25,11 +25,11 @@ export default function Suggestions() {
           </p>
         </div>
         {
-          <>
+          <div className="border shadow-md bg-whiteSmoke px-4 rounded-2xl">
             {pets.map((pet) => (
               <SuggestionItem key={pet.petId} pet={pet} />
             ))}
-          </>
+          </div>
         }
       </div>
       {isModalOpen && <SuggestionsModal setIsModalOpen={setIsModalOpen} />}

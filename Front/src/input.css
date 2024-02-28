@@ -24,7 +24,3 @@ h6 {
   margin: auto;
   position: relative;
 }
-
-main {
-  @apply md:pl-56 lg:pl-72 pb-20 md:pb-0 pt-16 md:pt-0;
-}

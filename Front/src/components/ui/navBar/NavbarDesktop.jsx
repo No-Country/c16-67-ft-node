@@ -5,15 +5,38 @@ import footIcon from '../../../assets/images/footIcon.svg';
 import notificationsIcon from '../../../assets/images/notifications.svg';
 import saveIcon from '../../../assets/images/save.svg';
 import settingsIcon from '../../../assets/images/settings.svg';
+import logoutIcon from '../../../assets/images/logout.svg';
 import defaultProfile from '../../../assets/images/defaultProfile.jpg';
 import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './NavbarDesktop.module.css';
+import Modal from '../modal/Modal';
+import { useModalContext } from '../../../context/modalContext';
+import { useUserContext } from '../../../context/userContext';
+import { googleLogout } from '@react-oauth/google';
 
 export default function NavbarDesktop({ active, pet }) {
   const navigate = useNavigate();
+  const { openModal, modalState, closeModal } = useModalContext();
+  const { logoutContext } = useUserContext();
+
+  const handleLogout = () => {
+    openModal({
+      title: 'Exit',
+      description: 'Are you sure you want to leave?',
+      confirmBtn: 'Yes',
+      denyBtn: 'No',
+      onClick: async () => {
+        googleLogout();
+        navigate('/');
+        await logoutContext();
+        closeModal();
+      },
+      chooseModal: true
+    });
+  };
   return (
     <div
-      className={`hidden md:block absolute left-0 ml-4 mt-4 md:w-52 lg:w-64 pr-2 ${styles.desktop}`}
+      className={`hidden md:block absolute left-0 ml-4 lg:ml-8 pt-4 min-h-screen md:w-52 lg:w-64 border-r border-neutral-300 ${styles.desktop}`}
     >
       <div
         className="ml-4 flex items-center gap-x-4 cursor-pointer"
@@ -22,13 +45,13 @@ export default function NavbarDesktop({ active, pet }) {
         {pet !== null ? (
           <>
             <img
-              className="md:h-12 md:w-12 lg:h-24 lg:w-24 rounded-full border-2 border-slate-200 object-cover cursor-pointer"
+              className="md:h-12 md:w-12 rounded-full border-2 border-slate-200 object-cover cursor-pointer"
               src={pet.image_url !== '' ? pet.image_url : defaultProfile}
               alt="image of active pet"
             />
             <div>
-              <p>{pet.name}</p>
-              <p>@{pet.name}</p>
+              <p className="text-headline-sm">{pet.name}</p>
+              <p className="text-body-lg">@{pet.name}</p>
             </div>
           </>
         ) : (
@@ -60,7 +83,7 @@ export default function NavbarDesktop({ active, pet }) {
             <p className={`${active === 'chat' && `${styles.activeText}`}`}>Chat</p>
           </NavLink>
         </li>
-        <div className="border-b border-black opacity-25" />
+        <div className="border-b border-neutral-300" />
         <h2 className="sm:text-title-md md:text-title-lg px-6 py-3">Menu</h2>
         <li className={`${active === 'notifications' ? `${styles.active}` : ''}`}>
           <NavLink className="">
@@ -82,7 +105,13 @@ export default function NavbarDesktop({ active, pet }) {
             <p className={`${active === 'menu' && `${styles.activeText}`}`}>Settings</p>
           </NavLink>
         </li>
+        <div className="border-b border-neutral-300 mt-4" />
+        <li className="mt-4 flex gap-x-2 cursor-pointer" onClick={handleLogout}>
+          <img src={logoutIcon} className={`${styles.navImg}`} alt="Logout icon" />
+          <p>Logout</p>
+        </li>
       </ul>
+      {modalState.isOpen && <Modal />}
     </div>
   );
 }

@@ -1,5 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import feedIcon from '../../../assets/images/feedIcon.svg';
+import searchIcon from '../../../assets/images/search.svg';
+import footIcon from '../../../assets/images/footIcon.svg';
+import menuIcon from '../../../assets/images/menu.svg';
 import logo from '../../../assets/images/isologo.svg';
 import chatIcon from '../../../assets/images/chat.svg';
 import ModalPost from '../../Feed/createPublication/ModalPost';
@@ -59,8 +62,8 @@ export default function NavbarMobile({ active, pet }) {
             </NavLink>
           </li>
           <li className="flex-grow-[2] flex flex-col flex-basis-0 h-full items-center justify-center">
-            <NavLink to={'/search'}>
-              <span className="material-symbols-outlined">search</span>
+            <NavLink className="grid place-items-center" to={'/search'}>
+              <img className="h-6 w-6" src={searchIcon} alt="Search icon" />
               Search
             </NavLink>
           </li>
@@ -74,7 +77,7 @@ export default function NavbarMobile({ active, pet }) {
               to={'/profile'}
               className={`grid place-items-center ${active === 'profile' && 'bg-primary-300 py-1 px-2 rounded-lg'}`}
             >
-              <span className="material-symbols-outlined">pets</span>
+              <img className="h-6 w-6" src={footIcon} alt="Profile icon" />
               Profile
             </NavLink>
           </li>
@@ -83,7 +86,7 @@ export default function NavbarMobile({ active, pet }) {
               to={'/menu'}
               className={`grid place-items-center ${active === 'menu' && 'bg-primary-300 py-1 px-2 rounded-lg'}`}
             >
-              <span className="material-symbols-outlined">settings</span>
+              <img className="h-6 w-6" src={menuIcon} alt="Menu icon" />
               More
             </NavLink>
           </li>
