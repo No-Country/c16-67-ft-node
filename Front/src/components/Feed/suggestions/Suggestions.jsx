@@ -1,4 +1,4 @@
-import logo from '../../../assets/images/isologo.svg';
+import logo from '../../../assets/images/isologo2.svg';
 import { useEffect, useState } from 'react';
 import { getPetSuggestions } from '../../../service/pets/petService';
 import SuggestionsModal from './SuggestionsModal';
