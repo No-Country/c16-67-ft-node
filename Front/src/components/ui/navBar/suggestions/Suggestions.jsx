@@ -1,4 +1,4 @@
-import logo from '../../../../assets/images/isologo.svg';
+import logo from '../../../../assets/images/isologo2.svg';
 import { useEffect, useState } from 'react';
 import SuggestionsModal from './SuggestionsModal';
 import SuggestionItem from './SuggestionItem';

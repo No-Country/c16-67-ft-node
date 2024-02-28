@@ -86,7 +86,7 @@ export default function PetProfile() {
                     alt="Pet-image"
                     className="w-[100px] h-[100px] ml-[100px] md:ml-[120px] mb-3 rounded-full shadow-lg object-cover"
                   />
-                  <div className="ml-[20px] md:ml-[40px]">
+                  <div className="pl-[20px] md:pl-[40px]">
                     <FollowButton />
                   </div>
                 </div>

@@ -3,7 +3,7 @@ import feedIcon from '../../../assets/images/feedIcon.svg';
 import searchIcon from '../../../assets/images/search.svg';
 import footIcon from '../../../assets/images/footIcon.svg';
 import menuIcon from '../../../assets/images/menu.svg';
-import logo from '../../../assets/images/isologo.svg';
+import logo from '../../../assets/images/isologo2.svg';
 import chatIcon from '../../../assets/images/chat.svg';
 import ModalPost from '../../Feed/createPublication/ModalPost';
 import { useState } from 'react';
