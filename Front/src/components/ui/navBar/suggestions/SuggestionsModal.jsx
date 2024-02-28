@@ -18,7 +18,7 @@ export default function SuggestionsModal({ setIsModalOpen }) {
   }, []);
 
   return (
-    <div className="fixed w-screen bg-blackOpacity left-0">
+    <div className="fixed w-screen bg-blackOpacity left-0 top-0">
       <div
         className={`bg-white m-auto max-w-[648px] h-[calc(100vh-192px)] overflow-auto my-24 rounded-3xl relative`}
       >
