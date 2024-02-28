@@ -15,7 +15,7 @@ export default function NavbarMobile({ active, pet }) {
     setModalOpen(false);
   };
   return (
-    <div className="block md:hidden">
+    <div className="block md:hidden  ">
       {active !== 'profile' && (
         <>
           <div className="fixed w-full bg-white z-50">

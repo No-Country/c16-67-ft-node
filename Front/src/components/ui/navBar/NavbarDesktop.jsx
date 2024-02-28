@@ -35,7 +35,7 @@ export default function NavbarDesktop({ active, pet }) {
           <></>
         )}
       </div>
-      <ul className="mt-8">
+      <ul className="mt-8  border-r-2 border-stone-400">
         <li className={`${active === 'feed' ? `${styles.active}` : ''}`}>
           <NavLink to={'/'}>
             <img src={feedIcon} className={`${styles.navImg}`} alt="Feed icon" />

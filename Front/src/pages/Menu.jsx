@@ -1,5 +1,6 @@
-import Logout from '../components/authentication/Logout';
+//import Logout from '../components/authentication/Logout';<Logout />
 import { useNavigateContext } from '../context/navigationContext';
+import ConfiguracionPage from '../service/settings/Settings';
 
 export default function Menu() {
   const { setActive } = useNavigateContext();
@@ -7,7 +8,7 @@ export default function Menu() {
   setActive('menu');
   return (
     <main className="grid place-items-center min-h-screen">
-      <Logout />
+      <ConfiguracionPage/>
     </main>
   );
 }
