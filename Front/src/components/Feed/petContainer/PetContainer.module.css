@@ -1,8 +1,17 @@
 .scrollbarCustom::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 .scrollbarCustom::-webkit-scrollbar-thumb {
-    @apply bg-primary-200;
-    border-radius: 4px;
+  @apply bg-primary-200;
+  border-radius: 4px;
+}
+
+.scrollbarCustomLikes::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbarCustomLikes::-webkit-scrollbar-thumb {
+  @apply bg-gradient-to-b from-[#F06900] to-[#C31A02];
+  border-radius: 4px;
 }

@@ -6,6 +6,7 @@ import { FiEdit, FiX } from 'react-icons/fi';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import defaultProfile from '../../../assets/images/defaultProfile.jpg';
+import Modal from './Modal';
 import { useUserContext } from '../../../context/userContext';
 import { createPet } from '../../../service/pets/petCreation';
 
@@ -49,7 +50,7 @@ const PetModal = () => {
       .catch(() => {
         openModal({
           description: 'An error has occurred',
-          chooseModal: false,
+          chooseModal: true,
           error: true
         });
         setIsLoading(false);
@@ -76,6 +77,7 @@ const PetModal = () => {
     petModal ? (
       <>
         {isLoading && <Spinner />}
+        <Modal />
         <main className="p-0">
           <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full ">
             <form
