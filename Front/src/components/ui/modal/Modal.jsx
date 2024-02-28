@@ -59,7 +59,7 @@ const Modal = () => {
       <>
         <div className="flex justify-center items-center fixed left-0 right-0 bottom-[10px] z-[999]">
           <div
-            className={`flex justify-evenly py-[10px] px-[15px] my-0 mx-5 shadow-md rounded-[5px] text-white ${error ? 'bg-[#E63333]' : 'bg-[#B8682A]'} ${!isFadingOut ? 'animate-fadeOutSelfClose' : 'animate-fadeInSelfClose'}`}
+            className={`flex justify-evenly py-[10px] px-[15px] my-0 mx-5 shadow-md rounded-[5px] text-white ${error ? 'bg-error-400' : 'bg-Success-500'} ${!isFadingOut ? 'animate-fadeOutSelfClose' : 'animate-fadeInSelfClose'}`}
           >
             <div className="mr-[5px] font-500 text-white ">{description}</div>
             <button

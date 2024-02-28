@@ -35,8 +35,8 @@ const CreatePublicationCard = ({ pet }) => {
       <div className="flex flex-col flex-1 mt-2 w-full">
         {/* Texto del post */}
         <input
-          className="mt-4 block w-full border border-gray-300 rounded-full shadow-sm p-3 pl-6 text-gray-700 cursor-pointer"
-          placeholder="Enter the description..."
+          className="mt-4 block w-full border border-gray-300 rounded-full shadow-sm p-3 pl-6 text-gray-700 cursor-pointer outline-none hover:bg-secondary-50"
+          placeholder="Create Post"
         />
 
         {/* Iconos Attach y Location */}
