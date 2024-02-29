@@ -29,7 +29,6 @@ const Login = () => {
         await loginContext(userId, last_pet);
 
         axios.get(`${ServerConnect}/api/v1/pet/userid/${userId}`).then((res) => {
-          console.log(res.data.data);
           if (res.data.data.length > 0) {
             setActive('feed');
             openModal({
