@@ -11,7 +11,7 @@ const ServerConnect = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
 
 export default function Home() {
   const navigate = useNavigate();
-  const { modalState, openModal } = useModalContext();
+  const { modalTextState, openModal } = useModalContext();
   const [isLoading, setIsLoading] = useState(false);
   const [tabActive, setTabActive] = useState('Feed');
   const userId = localStorage.getItem('userId');
@@ -27,7 +27,7 @@ export default function Home() {
         .get(`${ServerConnect}/api/v1/pet/userid/${JSON.parse(userId)}`)
         .then((res) => {
           if (res.data.data.length === 0) {
-            navigate('/profile');
+            navigate('/create-first-pet');
             openModal({
               petModal: true
             });
@@ -48,7 +48,7 @@ export default function Home() {
   return (
     <main className="">
       {isLoading && <Spinner />}
-      {modalState.isOpen && <Modal />}
+      {modalTextState.isOpen && <Modal />}
       <HomeTab tabActive={tabActive} setTabActive={setTabActive} />
       <PetContainer tabActive={tabActive} />
     </main>

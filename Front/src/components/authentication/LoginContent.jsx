@@ -5,7 +5,7 @@ import { useModalContext } from '../../context/modalContext';
 import Modal from '../ui/modal/Modal';
 
 function IndexLogin() {
-  const { modalState, openModal } = useModalContext();
+  const { openModal } = useModalContext();
   const clientId = `${import.meta.env.VITE_USER_ID}`;
 
   useEffect(() => {
@@ -18,7 +18,6 @@ function IndexLogin() {
         .catch(() => {
           openModal({
             description: 'An error has occurred',
-            chooseModal: false,
             error: true
           });
         });
@@ -28,7 +27,7 @@ function IndexLogin() {
 
   return (
     <>
-      {modalState.isOpen && <Modal />}
+      <Modal />
       <div className="ModalLogin">
         <div className="modalLoginGradient">
           <div className="modalLoginContainer">

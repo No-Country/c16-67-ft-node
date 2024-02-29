@@ -5,7 +5,7 @@ import Modal from '../ui/modal/Modal';
 import { useUserContext } from '../../context/userContext';
 
 export default function Logout() {
-  const { openModal, modalState, closeModal } = useModalContext();
+  const { openModal, modalChooseState, closeModal } = useModalContext();
   const navigate = useNavigate();
   const { logoutContext } = useUserContext();
 
@@ -27,7 +27,7 @@ export default function Logout() {
 
   return (
     <>
-      {modalState.isOpen && <Modal />}
+      {modalChooseState.isOpen && <Modal />}
       <button
         className="bg-slate-500 px-8 py-[8px] text-[16px] rounded-md text-white"
         onClick={() => handleOnClick()}

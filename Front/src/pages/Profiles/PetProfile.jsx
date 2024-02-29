@@ -13,7 +13,7 @@ export default function PetProfile() {
   const navigate = useNavigate();
 
   //CONTEXTOS
-  const { modalState, openModal } = useModalContext();
+  const { modalTextState, openModal } = useModalContext();
   const { setActive } = useNavigateContext();
 
   //ESTADOS LOCALES
@@ -63,7 +63,7 @@ export default function PetProfile() {
         <Spinner />
       ) : (
         <>
-          {modalState.isOpen && <PetModal />}
+          {modalTextState.isOpen && <PetModal />}
           <div className="px-4">
             <div className="flex flex-col items-center gap-y-4 pt-4 md:pt-0">
               <div className="flex justify-between items-center w-full text-[28px] md:hidden">

@@ -33,6 +33,7 @@ export const UserProvider = ({ children }) => {
     console.log(last_pet);
     if (last_pet === null) {
       console.log('No pet');
+      localStorage.setItem('pet', JSON.stringify(last_pet));
       return;
     } else {
       getPetById(last_pet).then((response) => {
