@@ -11,7 +11,7 @@ import { useUserContext } from '../../../context/userContext';
 import { createPet } from '../../../service/pets/petCreation';
 
 const PetModal = () => {
-  const { petModalState, closeModal, openModal } = useModalContext();
+  const { petModalState, modalTextState, closeModal, openModal } = useModalContext();
   const { isOpen, xBtnPetModal } = petModalState;
   const [petModalOpen, setPetModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const PetModal = () => {
       .catch(() => {
         openModal({
           description: 'An error has occurred',
-          chooseModal: true,
+          chooseModal: false,
           error: true
         });
         setIsLoading(false);
@@ -77,7 +77,7 @@ const PetModal = () => {
   return isOpen ? (
     <>
       {isLoading && <Spinner />}
-      <Modal />
+      {modalTextState.isOpen && <Modal />}
       <main className="p-0">
         <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full ">
           <form
