@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import SuggestionItems from '../suggestions/SuggestionItem';
 import { getPetSuggestions } from '../../../service/pets/petService';
 import { FiX } from 'react-icons/fi';
 import styles from './PetContainer.module.css';
 import Spinner from '../../ui/Spinner';
+import SuggestionItem from '../../ui/navBar/suggestions/SuggestionItem';
 
 export default function SuggestionsModal({ setIsModalOpen }) {
   const [pets, setPets] = useState([]);
@@ -42,7 +42,7 @@ export default function SuggestionsModal({ setIsModalOpen }) {
           >
             {pets.map((pet) => (
               <>
-                <SuggestionItems pet={pet} key={pet.petId} />
+                <SuggestionItem pet={pet} key={pet.petId} />
               </>
             ))}
           </div>

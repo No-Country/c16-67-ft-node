@@ -13,7 +13,7 @@ const ServerConnect = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
 
 const Login = () => {
   const { setActive } = useNavigateContext();
-  const { openModal, modalState } = useModalContext();
+  const { openModal, modalTextState } = useModalContext();
   const { loginContext } = useUserContext();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -37,10 +37,7 @@ const Login = () => {
             });
             navigate('/');
           } else {
-            openModal({
-              petModal: true
-            });
-            navigate('/profile');
+            navigate('/create-first-pet');
           }
         });
       })
@@ -65,7 +62,7 @@ const Login = () => {
   return (
     <>
       {isLoading && <Spinner />}
-      {modalState.isOpen && <Modal />}
+      {modalTextState.isOpen && <Modal />}
       <div id="signInButton">
         <GoogleLogin
           text="signin_with"

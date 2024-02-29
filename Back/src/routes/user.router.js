@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user.controller')
-
 const multer = require('multer');
+
 
 // Configuración de Multer para manejar la carga de archivos
 const storage = multer.diskStorage({}); // Puedes personalizar esto según tus necesidades
 const upload = multer({ storage });
+//redis
+
 
 router
     .get('/', userController.get)
