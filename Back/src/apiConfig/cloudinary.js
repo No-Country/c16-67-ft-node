@@ -1,10 +1,10 @@
 const cloudinary = require('cloudinary').v2;
-const { config } = require('../config/config');
+require('dotenv').config();
 
 cloudinary.config({ 
-cloud_name: config.cloud_name, 
-api_key: config.api_key, 
-api_secret: config.api_secret 
+cloud_name: process.env.CLOUD_NAME, 
+api_key: process.env.API_KEY, 
+api_secret: process.env.API_SECRET 
 });
 
 async function uploadImageAndGetUrl(req) {
