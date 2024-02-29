@@ -18,9 +18,7 @@ export default function App() {
   // Get userId from useUserContext
   const userIdLS = localStorage.getItem('userId');
   const { userId } = useUserContext();
-  const petId = localStorage.getItem('pet');
-  console.log('petId:', petId);
-  console.log('userIdLS:', userIdLS);
+
   return (
     <BrowserRouter>
       {userIdLS !== null || userId !== '' ? (

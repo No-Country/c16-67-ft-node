@@ -3,15 +3,20 @@ import { useContext, useState, createContext } from 'react';
 const ModalContext = createContext();
 
 export const ModalProvider = ({ children }) => {
-  const [modalState, setModalState] = useState({
+  const [modalChooseState, setModalChooseState] = useState({
     isOpen: false,
     description: '',
     title: '',
     confirmBtn: '',
     denyBtn: '',
-    chooseModal: false,
-    error: false,
+    chooseModal: true,
     onClick: null
+  });
+
+  const [modalTextState, setModalTextState] = useState({
+    isOpen: false,
+    description: '',
+    error: false
   });
 
   const [petModalState, setPetModalState] = useState({
@@ -25,8 +30,13 @@ export const ModalProvider = ({ children }) => {
         isOpen: true,
         ...modalConfig
       });
+    } else if (modalConfig.modalTextState) {
+      setModalTextState({
+        isOpen: true,
+        ...modalConfig
+      });
     } else {
-      setModalState({
+      setModalChooseState({
         isOpen: true,
         ...modalConfig
       });
@@ -34,14 +44,13 @@ export const ModalProvider = ({ children }) => {
   };
 
   const closeModal = () => {
-    setModalState({
+    setModalChooseState({
       isOpen: false,
       description: '',
       title: '',
       confirmBtn: '',
       denyBtn: '',
-      chooseModal: false,
-      error: false,
+      chooseModal: true,
       onClick: null
     });
 
@@ -49,10 +58,18 @@ export const ModalProvider = ({ children }) => {
       isOpen: false,
       xBtnPetModal: false
     });
+
+    setModalTextState({
+      isOpen: false,
+      description: '',
+      error: false
+    });
   };
 
   return (
-    <ModalContext.Provider value={{ modalState, petModalState, openModal, closeModal }}>
+    <ModalContext.Provider
+      value={{ modalChooseState, petModalState, modalTextState, openModal, closeModal }}
+    >
       {children}
     </ModalContext.Provider>
   );

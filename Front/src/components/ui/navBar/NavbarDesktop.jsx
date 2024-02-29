@@ -16,7 +16,7 @@ import { googleLogout } from '@react-oauth/google';
 
 export default function NavbarDesktop({ active, pet }) {
   const navigate = useNavigate();
-  const { openModal, modalState, closeModal } = useModalContext();
+  const { openModal, modalChooseState, closeModal } = useModalContext();
   const { logoutContext } = useUserContext();
 
   const handleLogout = () => {
@@ -111,7 +111,7 @@ export default function NavbarDesktop({ active, pet }) {
           <p>Logout</p>
         </li>
       </ul>
-      {modalState.isOpen && <Modal />}
+      {modalChooseState.isOpen && <Modal />}
     </div>
   );
 }

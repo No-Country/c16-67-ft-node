@@ -13,7 +13,7 @@ const ServerConnect = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
 
 const Login = () => {
   const { setActive } = useNavigateContext();
-  const { openModal, modalState } = useModalContext();
+  const { openModal, modalTextState } = useModalContext();
   const { loginContext } = useUserContext();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -38,11 +38,7 @@ const Login = () => {
             });
             navigate('/');
           } else {
-            console.log('estoy en el else');
             navigate('/create-first-pet');
-            // openModal({
-            //   petModal: true
-            // }); //todo hacer vista a crear PRIMER MASCOTA
           }
         });
       })
@@ -67,7 +63,7 @@ const Login = () => {
   return (
     <>
       {isLoading && <Spinner />}
-      {modalState.isOpen && <Modal />}
+      {modalTextState.isOpen && <Modal />}
       <div id="signInButton">
         <GoogleLogin
           text="signin_with"

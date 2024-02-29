@@ -3,9 +3,10 @@ import { useModalContext } from '../../../context/modalContext';
 import { FiX } from 'react-icons/fi';
 
 const Modal = () => {
-  const { modalState, closeModal } = useModalContext();
-  const { isOpen, description, title, confirmBtn, denyBtn, chooseModal, error, onClick } =
-    modalState;
+  const { modalTextState, modalChooseState, closeModal } = useModalContext();
+  const { isOpen, description, title, chooseModal, confirmBtn, denyBtn, onClick } =
+    modalChooseState;
+  const { error } = modalTextState;
   const [isFadingOut, setIsFadingOut] = useState(false);
 
   useEffect(() => {

@@ -10,7 +10,7 @@ import {
 } from '../../../service/publications/publicationsService';
 
 export default function PetContainer({ tabActive }) {
-  const { modalState, openModal } = useModalContext();
+  const { modalTextState, openModal } = useModalContext();
   const [feedData, setFeedData] = useState([]);
   const [saved, setSaved] = useState([]);
   const [isAutocompleteActive, setIsAutocompleteActive] = useState(false);
@@ -47,7 +47,7 @@ export default function PetContainer({ tabActive }) {
 
   return (
     <>
-      {modalState.isOpen && <Modal />}
+      {modalTextState.isOpen && <Modal />}
       <div
         className={`pt-12 md:pt-4 md:max-h-[calc(100vh-112px)] xl:max-h-[calc(100vh-64px)] ${!isAutocompleteActive ? 'overflow-auto' : 'overflow-hidden'} ${styles.scrollbarCustom}`}
       >

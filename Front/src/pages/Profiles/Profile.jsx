@@ -7,6 +7,7 @@ import { useUserContext } from '../../context/userContext';
 import { useNavigateContext } from '../../context/navigationContext';
 import { MdEdit } from 'react-icons/md';
 import Select from 'react-select';
+import Modal from '../../components/ui/modal/Modal';
 import { getPetById, getPetsByUserId } from '../../service/pets/petService';
 import { getUserById } from '../../service/users/userService';
 import { getPublicationsByPetId } from '../../service/publications/publicationsService';
@@ -16,7 +17,7 @@ export default function Profile() {
   const navigate = useNavigate();
 
   //CONTEXTOS
-  const { modalState, openModal } = useModalContext();
+  const { modalTextState, petModalState, openModal } = useModalContext();
   const { getPet, setActivePet } = useUserContext();
   const { setActive } = useNavigateContext();
   const pet = getPet();
@@ -65,7 +66,6 @@ export default function Profile() {
     } catch (error) {
       openModal({
         description: 'An error has occurred',
-        chooseModal: false,
         error: true
       });
     }
@@ -163,7 +163,8 @@ export default function Profile() {
         <Spinner />
       ) : (
         <>
-          {modalState.isOpen && <PetModal />}
+          {petModalState.isOpen && <PetModal />}
+          {modalTextState.isOpen && <Modal />}
           <div className="px-4">
             <div className="flex flex-col items-center gap-y-4 pt-4 md:pt-0">
               <div className="flex justify-between items-center w-full text-[28px] md:hidden">
