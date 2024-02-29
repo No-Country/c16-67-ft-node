@@ -4,6 +4,7 @@ import commentIcon from '../../../assets/images/comment.svg';
 import saveIcon from '../../../assets/images/save.svg';
 import saveIconFill from '../../../assets/images/saveFill.svg';
 import FollowButton from '../../ui/FollowButton';
+import PetCommentModal from './PetCommentModal';
 import PetLikesModal from './PetLikesModal';
 import { deleteSaved, postSave } from '../../../service/saves/saveService';
 import { useState } from 'react';
@@ -22,6 +23,7 @@ export default function PetCard({
 }) {
   const [seeMore, setSeeMore] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalCommentOpen, setIsModalCommentOpen] = useState(false);
   const [like, setLike] = useState(false);
 
   const savePost = () => {
@@ -50,6 +52,9 @@ export default function PetCard({
   return (
     <>
       {isModalOpen && <PetLikesModal setIsModalOpen={setIsModalOpen} />}
+      {isModalCommentOpen && (
+        <PetCommentModal setIsModalOpen={setIsModalCommentOpen} postId={postId} />
+      )}
       <div className="mb-4 md:grid md:grid-cols-12 md:h-[360px] md:shadow-md md:rounded-2xl auto-rows-fr max-w-[768px] md:border mx-auto">
         <div className="flex px-4 gap-x-3 items-center md:h-fit md:col-[7/13] md:relative md:self-center">
           <img
@@ -132,7 +137,10 @@ export default function PetCard({
                 3 paws
               </p>
             </div>
-            <div className="flex items-center gap-x-1">
+            <div
+              className="flex items-center cursor-pointer gap-x-1 hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-110"
+              onClick={() => setIsModalCommentOpen(true)}
+            >
               <img src={commentIcon} alt="comment-icon" />
               <p>4 growls</p>
             </div>

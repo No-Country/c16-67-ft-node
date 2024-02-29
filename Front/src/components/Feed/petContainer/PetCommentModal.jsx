@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import FollowButton from '../../ui/FollowButton';
-import { getPetSuggestions } from '../../../service/pets/petService';
+import { getPetCommentsById } from '../../../service/pets/petService';
 import { FiX } from 'react-icons/fi';
 import styles from './PetContainer.module.css';
 import Spinner from '../../ui/Spinner';
+import { useUserContext } from '../../../context/userContext';
 
-export default function PetLikesModal({ setIsModalOpen }) {
+export default function PetCommentModal({ setIsModalOpen, postId }) {
   const [pets, setPets] = useState([]);
-  const userId = JSON.parse(localStorage.getItem('userId'));
+  const { getPet } = useUserContext();
+  const pet = getPet();
+
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    getPetSuggestions(userId, 100)
-      .then((response) => {
-        console.log(response.data);
-        setPets(response.data.data);
+    getPetCommentsById(postId)
+      .then((res) => {
+        console.log(res);
+        setPets(res);
         setIsLoading(false);
       })
       .catch((e) => console.error(e));
@@ -31,7 +34,7 @@ export default function PetLikesModal({ setIsModalOpen }) {
         >
           <div className="mt-6 flex flex-col items-center gap-y-8">
             <div className="bg-gradient-to-r from-[#F06900] to-[#C31A02] w-44 h-1 rounded-full" />
-            <h3 className="text-title-lg text-center font-bold">Likes</h3>
+            <h3 className="text-title-lg text-center font-bold">Growls</h3>
           </div>
           <FiX
             onClick={() => setIsModalOpen(false)}
@@ -40,10 +43,12 @@ export default function PetLikesModal({ setIsModalOpen }) {
           <div
             className={`mt-6 relative mx-5 pr-6 left-0 md:left-6 md:mx-32 max-h-[60vh] md:max-h-[560px] overflow-y-auto ${styles.scrollbarCustomLikes}`}
           >
-            {pets.length === 0 ? (
-              <div>0 comments available</div>
+            {pet.length === 0 ? (
+              <div className="flex justify-center w-full items-center h-[100px]">
+                <p className="text-title-md font-semibold">0 comments available</p>
+              </div>
             ) : (
-              pets.map((pet) => (
+              pet.map((pet) => (
                 <div key={pet} className="flex justify-between w-full items-center">
                   <div className="flex py-4 gap-x-2">
                     <img
@@ -54,6 +59,9 @@ export default function PetLikesModal({ setIsModalOpen }) {
                     <div>
                       <p>{pet.name}</p>
                       <p>@{pet.name}</p>
+                    </div>
+                    <div>
+                      <p>{pet.comment}</p>
                     </div>
                   </div>
                   <FollowButton />

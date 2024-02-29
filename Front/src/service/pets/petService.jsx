@@ -7,6 +7,12 @@ export const getPetSuggestions = async (userId, limit) => {
     .catch((err) => console.log(err));
 };
 
+export const getPetCommentsById = async (postId) => {
+  return await axios
+    .get(`${API_URL_BASE}/api/v1/comment/postid/${postId}`)
+    .catch((err) => console.log(err));
+};
+
 export const getPetById = async (petId) => {
   return await axios.get(`${API_URL_BASE}/api/v1/pet/${petId}`).catch((error) => {
     console.log(error);
