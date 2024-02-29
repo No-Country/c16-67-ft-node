@@ -101,7 +101,7 @@ export default function PetCard({
               {type}
             </p>
           )}
-          {tabActive === 'Lost-Adption' && type === 'Adopcion' && (
+          {tabActive === 'Lost-Adption' && type === 'Adoption' && (
             <p className="absolute top-4 right-4 h-6 px-2 grid place-items-center rounded-sm bg-secondary-100 text-primary-700 font-bold uppercase">
               In adoption
             </p>
