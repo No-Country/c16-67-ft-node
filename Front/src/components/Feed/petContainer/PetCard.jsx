@@ -7,8 +7,8 @@ import FollowButton from '../../ui/FollowButton';
 import PetCommentModal from './PetCommentModal';
 import PetLikesModal from './PetLikesModal';
 import { deleteSaved, postSave } from '../../../service/saves/saveService';
-import { useState } from 'react';
-import { createPetComments } from '../../../service/comments/commentsService';
+import { useState, useEffect } from 'react';
+import { createPetComments, getPetCommentsById } from '../../../service/comments/commentsService';
 import Spinner from '../../ui/Spinner';
 import { useModalContext } from '../../../context/modalContext';
 import Modal from '../../ui/modal/Modal';
@@ -21,6 +21,7 @@ export default function PetCard({
   address,
   postId,
   saved,
+  petUsername,
   fetchSaved,
   tabActive,
   type
@@ -32,6 +33,7 @@ export default function PetCard({
   const [isModalCommentOpen, setIsModalCommentOpen] = useState(false);
   const [like, setLike] = useState(false);
   const [comment, setComment] = useState('');
+  const [comments, setComments] = useState([]);
   const { petId } = JSON.parse(localStorage.getItem('pet'));
   const { userId } = JSON.parse(localStorage.getItem('userId'));
 
@@ -63,35 +65,49 @@ export default function PetCard({
       postId: postId,
       userId: userId,
       name: petName,
+      username: petUsername,
       comment: comment,
       image_url: profileImage
     };
 
     setIsLoading(true);
-    createPetComments(body)
-      .then(() => {
-        setIsLoading(false);
-        openModal({
-          description: 'Comment sended successfully',
-          chooseModal: false
-        });
-        setComment('');
-      })
-      .catch(() => {
+    createPetComments(body).then(() => {
+      setIsLoading(false);
+      if (comment === '')
         openModal({
           description: 'An error has occurred',
           chooseModal: false,
           error: true
         });
+      openModal({
+        description: 'Comment sended successfully',
+        chooseModal: false
       });
+      setComment('');
+    });
   };
+
+  useEffect(() => {
+    setIsLoading(true);
+    getPetCommentsById(postId)
+      .then((res) => {
+        console.log(res);
+        setComments(res.data.data);
+        setIsLoading(false);
+      })
+      .catch((e) => console.error(e));
+  }, []);
 
   return (
     <>
       {isLoading && <Spinner />}
       {isModalOpen && <PetLikesModal setIsModalOpen={setIsModalOpen} />}
       {isModalCommentOpen && (
-        <PetCommentModal setIsModalOpen={setIsModalCommentOpen} postId={postId} />
+        <PetCommentModal
+          setIsModalOpen={setIsModalCommentOpen}
+          postId={postId}
+          setComments={setComments}
+        />
       )}
       {modalTextState.isOpen && <Modal />}
       <div className="mb-4 md:grid md:grid-cols-12 md:h-[360px] md:shadow-md md:rounded-2xl auto-rows-fr max-w-[768px] md:border mx-auto">
@@ -102,7 +118,7 @@ export default function PetCard({
           />
           <div className="flex-grow">
             <div>{petName}</div>
-            <div className="text-gray-500">@{petName}</div>
+            <div className="text-gray-500">@{petUsername}</div>
             <div
               className={`text-black md:hidden flex max-w-[calc(100vw-196px)] ${seeMore ? 'flex-col' : 'justify-between'}`}
             >
@@ -181,7 +197,7 @@ export default function PetCard({
               onClick={() => setIsModalCommentOpen(true)}
             >
               <img src={commentIcon} alt="comment-icon" />
-              <p>4 growls</p>
+              <p>{comments.length} Growls</p>
             </div>
           </div>
           <div>

@@ -4,7 +4,7 @@ import { FiX } from 'react-icons/fi';
 import styles from './PetContainer.module.css';
 import Spinner from '../../ui/Spinner';
 
-export default function PetCommentModal({ setIsModalOpen, postId }) {
+export default function PetCommentModal({ setIsModalOpen, postId, setComments }) {
   const [pets, setPets] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +14,7 @@ export default function PetCommentModal({ setIsModalOpen, postId }) {
     getPetCommentsById(postId)
       .then((res) => {
         console.log(res);
+        setComments(res.data.data);
         setPets(res.data.data);
         setIsLoading(false);
       })
@@ -55,7 +56,7 @@ export default function PetCommentModal({ setIsModalOpen, postId }) {
                   <div className="flex flex-col pl-5">
                     <div className="flex items-center">
                       <p className="text-title-md mr-2 font-semibold">{pet['pet.name']}</p>
-                      <p className=" text-title-md text-[#9A9A9A]">@{pet['pet.name']}</p>
+                      <p className=" text-title-md text-[#9A9A9A]">@{pet['pet.username']}</p>
                     </div>
                     <div className="pb-4 pt-2">
                       <div>
