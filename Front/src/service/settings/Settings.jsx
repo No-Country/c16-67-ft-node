@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Privacity from '../settings/Privacity/Privacity';
-import Change from '../settings/Changeaccount/Change'; // Asegúrate de tener el nombre correcto del componente Change
+import Change from '../settings/Changeaccount/change'; // Asegúrate de tener el nombre correcto del componente Change
 import isologo from '../../assets/images/isologo.svg';
 import arrow from '../../assets/images/arrow.svg';
 
