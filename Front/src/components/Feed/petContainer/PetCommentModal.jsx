@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import FollowButton from '../../ui/FollowButton';
-import { getPetCommentsById } from '../../../service/pets/petService';
+import { getPetCommentsById } from '../../../service/comments/commentsService';
 import { FiX } from 'react-icons/fi';
 import styles from './PetContainer.module.css';
 import Spinner from '../../ui/Spinner';
@@ -38,7 +37,7 @@ export default function PetCommentModal({ setIsModalOpen, postId }) {
             className="absolute top-[30px] right-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:text-[25px]"
           />
           <div
-            className={`mt-6 relative mx-5 pr-6 left-0 md:left-6 md:mx-32 max-h-[60vh] md:max-h-[560px] overflow-y-auto ${styles.scrollbarCustomLikes}`}
+            className={`mt-6 relative mx-5 pr-6 left-0 md:left-6 md:mx-10 max-h-[60vh] md:max-h-[560px] overflow-y-auto ${styles.scrollbarCustomLikes}`}
           >
             {pets.length === 0 ? (
               <div className="flex justify-center w-full items-center h-[100px]">
@@ -46,26 +45,25 @@ export default function PetCommentModal({ setIsModalOpen, postId }) {
               </div>
             ) : (
               Array.isArray(pets) &&
-              pets.map((petItem) => (
-                <>
-                  <div key={petItem} className="flex justify-between w-full items-center">
-                    <div className="flex py-4 gap-x-2">
-                      <img
-                        src={petItem.image_url}
-                        alt="image of another pet"
-                        className="w-12 h-12 rounded-full object-cover"
-                      />
+              pets.map((pet) => (
+                <div key={pet.commentId} className="flex w-full">
+                  <img
+                    src={pet['pet.image_url']}
+                    alt={`image of ${pet['pet.name']}`}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div className="flex flex-col pl-5">
+                    <div className="flex items-center">
+                      <p className="text-title-md mr-2 font-semibold">{pet['pet.name']}</p>
+                      <p className=" text-title-md text-[#9A9A9A]">@{pet['pet.name']}</p>
+                    </div>
+                    <div className="pb-4 pt-2">
                       <div>
-                        <p>{petItem.name}</p>
-                        <p>@{petItem.name}</p>
-                      </div>
-                      <div>
-                        <p>{petItem.comment}</p>
+                        <p>{pet.comment}</p>
                       </div>
                     </div>
-                    <FollowButton />
                   </div>
-                </>
+                </div>
               ))
             )}
           </div>
