@@ -5,7 +5,7 @@ import { useModalContext } from '../context/modalContext';
 export const CreateFirstPet = () => {
   const { openModal } = useModalContext();
   useEffect(() => {
-    openModal({ petModal: true, xBtnPetModal: true });
+    openModal({ petModal: true });
   }, []);
   return (
     <main>
