@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { editPet } from '../../service/pets/petService';
 export const PetEditForm = ({ FormPrevData }) => {
   const [formData, setFormData] = useState({});
   const [file, setFile] = useState(null); // Archivo seleccionado por el usuario
@@ -37,9 +38,15 @@ export const PetEditForm = ({ FormPrevData }) => {
     }
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log('estoy en el submit');
+    await editPet(FormPrevData.petId, formData);
+  };
+
   return (
     <>
-      <form className="flex flex-col items-center gap-4 p-4">
+      <form className="flex flex-col items-center gap-4 p-4" onSubmit={handleSubmit}>
         <div className="relative">
           <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-300">
             <img src={formData.image} alt="Profile" className="w-full h-full object-cover" />

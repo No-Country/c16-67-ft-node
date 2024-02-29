@@ -32,3 +32,18 @@ export const getPetsByName = async (name) => {
     throw Error(error.message);
   }
 };
+
+export const editPet = async (petId, formData) => {
+  try {
+    console.log(formData);
+    const petEdited = await axios.put(`${API_URL_BASE}/api/v1/pet/${petId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return petEdited.data;
+  } catch (error) {
+    console.error(error.message);
+    throw Error(error.message);
+  }
+};
