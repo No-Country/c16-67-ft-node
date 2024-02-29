@@ -29,6 +29,7 @@ const Login = () => {
         await loginContext(userId, last_pet);
 
         axios.get(`${ServerConnect}/api/v1/pet/userid/${userId}`).then((res) => {
+          console.log(res.data.data);
           if (res.data.data.length > 0) {
             setActive('feed');
             openModal({
@@ -37,10 +38,11 @@ const Login = () => {
             });
             navigate('/');
           } else {
-            openModal({
-              petModal: true
-            });
-            navigate('/profile');
+            console.log('estoy en el else');
+            navigate('/create-first-pet');
+            // openModal({
+            //   petModal: true
+            // }); //todo hacer vista a crear PRIMER MASCOTA
           }
         });
       })

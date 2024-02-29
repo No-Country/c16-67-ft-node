@@ -12,6 +12,7 @@ import Saved from './pages/Saved';
 import { Search } from './pages/Search';
 import Suggestions from './components/ui/navBar/suggestions/Suggestions';
 import Footer from './components/ui/navBar/Footer';
+import CreateFirstPet from './pages/CreateFirstPet';
 
 export default function App() {
   // Get userId from useUserContext
@@ -35,6 +36,7 @@ export default function App() {
                 <Route exact path="/menu" element={<Menu />} />
                 <Route exact path="/saved" element={<Saved />} />
                 <Route exact path="/search" element={<Search />} />
+                <Route exact path="/create-first-pet" element={<CreateFirstPet />} />
               </Routes>
             </div>
             <div className="hidden xl:flex xl:p-4 xl:pt-2 xl:flex-grow xl:basis-0 min-h-screen border-l border-neutral-300 flex-col justify-between gap-y-4">

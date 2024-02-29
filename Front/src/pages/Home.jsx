@@ -27,7 +27,7 @@ export default function Home() {
         .get(`${ServerConnect}/api/v1/pet/userid/${JSON.parse(userId)}`)
         .then((res) => {
           if (res.data.data.length === 0) {
-            navigate('/profile');
+            navigate('/create-first-pet');
             openModal({
               petModal: true
             });
