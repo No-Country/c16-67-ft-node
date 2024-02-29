@@ -102,21 +102,21 @@ const ModalPost = ({ closeModal }) => {
             <div className="flex mb-4 mx grow mt-4">
               <button
                 onClick={() => setFormData({ ...formData, type: 'Normal' })}
-                className={`${formData.type === 'Normal' ? 'bg-[#B8682A] text-white border border-[#B8682A]' : 'text-yellow-800 border border-[#B8682A]'} cursor-pointer py-1 px-8 rounded-tl-md rounded-bl-md`}
+                className={`${formData.type === 'Normal' ? 'bg-primary-500 text-white border border-primary-500' : 'text-primary-500 border border-primary-500'} cursor-pointer py-1 px-8 rounded-tl-md rounded-bl-md`}
               >
                 Feed
               </button>
 
               <button
                 onClick={() => setFormData({ ...formData, type: 'Lost' })}
-                className={`${formData.type === 'Lost' ? 'bg-[#B8682A] text-white border border-[#B8682A]' : 'text-[#B8682A] border border-[#B8682A]'} cursor-pointer py-1 px-8`}
+                className={`${formData.type === 'Lost' ? 'bg-primary-500 text-white border border-primary-500' : 'text-primary-500 border border-primary-500'} cursor-pointer py-1 px-8`}
               >
                 Lost
               </button>
 
               <button
                 onClick={() => setFormData({ ...formData, type: 'Adoption' })}
-                className={`${formData.type === 'Adoption' ? 'bg-[#B8682A] text-white border border-[#B8682A]' : 'text-[#B8682A] border border-[#B8682A]'} cursor-pointer py-1 px-8 rounded-tr-md rounded-br-md`}
+                className={`${formData.type === 'Adoption' ? 'bg-primary-500 text-white border border-primary-500' : 'text-primary-500 border border-primary-500'} cursor-pointer py-1 px-8 rounded-tr-md rounded-br-md`}
               >
                 Adoption
               </button>

@@ -5,9 +5,9 @@ import { useModalContext } from '../../context/modalContext';
 import PetModal from '../../components/ui/modal/PetModal';
 import { useUserContext } from '../../context/userContext';
 import { useNavigateContext } from '../../context/navigationContext';
-import Suggestions from '../../components/Feed/suggestions/Suggestions';
 import { MdEdit } from 'react-icons/md';
 import Select from 'react-select';
+import Modal from '../../components/ui/modal/Modal';
 import { getPetById, getPetsByUserId } from '../../service/pets/petService';
 import { getUserById } from '../../service/users/userService';
 import { getPublicationsByPetId } from '../../service/publications/publicationsService';
@@ -17,7 +17,7 @@ export default function Profile() {
   const navigate = useNavigate();
 
   //CONTEXTOS
-  const { modalState, openModal } = useModalContext();
+  const { modalTextState, petModalState, openModal } = useModalContext();
   const { getPet, setActivePet } = useUserContext();
   const { setActive } = useNavigateContext();
   const pet = getPet();
@@ -164,7 +164,8 @@ export default function Profile() {
         <Spinner />
       ) : (
         <>
-          {modalState.isOpen && <PetModal />}
+          {petModalState.isOpen && <PetModal />}
+          {modalTextState.isOpen && <Modal />}
           <div className="px-4">
             <div className="flex flex-col items-center gap-y-4 pt-4 md:pt-0">
               <div className="flex justify-between items-center w-full text-[28px] md:hidden">
@@ -199,7 +200,7 @@ export default function Profile() {
               </div>
             </div>
             <div className="xl:flex">
-              <section className="flex flex-col items-center justify-center mt-5 xl:w-[75%] w-full ">
+              <section className="flex flex-col items-center justify-center mt-5 w-full ">
                 <div className="absolute flex flex-row-reverse left-0 right-6 top-[60px] text-[24px] md:text-[35px] md:top-[20px] xl:right-[350px]">
                   <MdEdit className="cursor-pointer" />
                 </div>
@@ -264,7 +265,6 @@ export default function Profile() {
                   )}
                 </div>
               </section>
-              <Suggestions className="xl:ml-auto" />
             </div>
           </div>
         </>

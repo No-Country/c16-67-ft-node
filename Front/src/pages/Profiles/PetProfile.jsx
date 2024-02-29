@@ -4,7 +4,6 @@ import Spinner from '../../components/ui/Spinner';
 import { useModalContext } from '../../context/modalContext';
 import PetModal from '../../components/ui/modal/PetModal';
 import { useNavigateContext } from '../../context/navigationContext';
-import Suggestions from '../../components/Feed/suggestions/Suggestions';
 import { getPetById } from '../../service/pets/petService';
 import { getUserById } from '../../service/users/userService';
 import { getPublicationsByPetId } from '../../service/publications/publicationsService';
@@ -14,7 +13,7 @@ export default function PetProfile() {
   const navigate = useNavigate();
 
   //CONTEXTOS
-  const { modalState, openModal } = useModalContext();
+  const { modalTextState, openModal } = useModalContext();
   const { setActive } = useNavigateContext();
 
   //ESTADOS LOCALES
@@ -64,7 +63,7 @@ export default function PetProfile() {
         <Spinner />
       ) : (
         <>
-          {modalState.isOpen && <PetModal />}
+          {modalTextState.isOpen && <PetModal />}
           <div className="px-4">
             <div className="flex flex-col items-center gap-y-4 pt-4 md:pt-0">
               <div className="flex justify-between items-center w-full text-[28px] md:hidden">
@@ -80,7 +79,7 @@ export default function PetProfile() {
               </div>
             </div>
             <div className="xl:flex">
-              <section className="flex flex-col items-center justify-center mt-5 xl:w-[75%] w-full ">
+              <section className="flex flex-col items-center justify-center mt-5 w-full ">
                 <div className="flex justify-center items-center w-full">
                   <img
                     src={pets.image_url}
@@ -129,7 +128,6 @@ export default function PetProfile() {
                   )}
                 </div>
               </section>
-              <Suggestions className="xl:ml-auto" />
             </div>
           </div>
         </>

@@ -4,12 +4,9 @@ import { getPetCommentsById } from '../../../service/pets/petService';
 import { FiX } from 'react-icons/fi';
 import styles from './PetContainer.module.css';
 import Spinner from '../../ui/Spinner';
-import { useUserContext } from '../../../context/userContext';
 
 export default function PetCommentModal({ setIsModalOpen, postId }) {
   const [pets, setPets] = useState([]);
-  const { getPet } = useUserContext();
-  const pet = getPet();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -18,7 +15,7 @@ export default function PetCommentModal({ setIsModalOpen, postId }) {
     getPetCommentsById(postId)
       .then((res) => {
         console.log(res);
-        setPets(res);
+        setPets(res.data.data);
         setIsLoading(false);
       })
       .catch((e) => console.error(e));
@@ -43,29 +40,32 @@ export default function PetCommentModal({ setIsModalOpen, postId }) {
           <div
             className={`mt-6 relative mx-5 pr-6 left-0 md:left-6 md:mx-32 max-h-[60vh] md:max-h-[560px] overflow-y-auto ${styles.scrollbarCustomLikes}`}
           >
-            {pet.length === 0 ? (
+            {pets.length === 0 ? (
               <div className="flex justify-center w-full items-center h-[100px]">
                 <p className="text-title-md font-semibold">0 comments available</p>
               </div>
             ) : (
-              pet.map((pet) => (
-                <div key={pet} className="flex justify-between w-full items-center">
-                  <div className="flex py-4 gap-x-2">
-                    <img
-                      src={pet.image_url}
-                      alt="image of another pet"
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
-                    <div>
-                      <p>{pet.name}</p>
-                      <p>@{pet.name}</p>
+              Array.isArray(pets) &&
+              pets.map((petItem) => (
+                <>
+                  <div key={petItem} className="flex justify-between w-full items-center">
+                    <div className="flex py-4 gap-x-2">
+                      <img
+                        src={petItem.image_url}
+                        alt="image of another pet"
+                        className="w-12 h-12 rounded-full object-cover"
+                      />
+                      <div>
+                        <p>{petItem.name}</p>
+                        <p>@{petItem.name}</p>
+                      </div>
+                      <div>
+                        <p>{petItem.comment}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p>{pet.comment}</p>
-                    </div>
+                    <FollowButton />
                   </div>
-                  <FollowButton />
-                </div>
+                </>
               ))
             )}
           </div>
