@@ -1,5 +1,6 @@
 
-![Group 196](https://github.com/No-Country/c16-67-ft-node/assets/159343463/16bbc986-5c55-4d38-9d54-aba23abf83bd)
+![Group 196 (1)](https://github.com/No-Country/c16-67-ft-node/assets/159343463/062a0f88-0e25-4997-ab57-aa79e9261778)
+
 
 
 ## Tecnologías Utilizadas
