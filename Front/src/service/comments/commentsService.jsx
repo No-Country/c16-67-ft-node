@@ -7,8 +7,12 @@ export const getPetCommentsById = async (postId) => {
     .catch((err) => console.log(err));
 };
 
-export const createPetComments = async (commentId) => {
+export const createPetComments = async (body) => {
+  return await axios.post(`${API_URL_BASE}/api/v1/comment/`, body).catch((err) => console.log(err));
+};
+
+export const deletePetCommentsById = async (commentId) => {
   return await axios
-    .post(`${API_URL_BASE}/api/v1/comment/`, commentId)
+    .put(`${API_URL_BASE}/api/v1/comment/deleted/${commentId}`)
     .catch((err) => console.log(err));
 };

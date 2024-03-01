@@ -84,10 +84,11 @@ export default function PetCard({
         chooseModal: false
       });
       setComment('');
+      fetchComments();
     });
   };
 
-  useEffect(() => {
+  const fetchComments = () => {
     setIsLoading(true);
     getPetCommentsById(postId)
       .then((res) => {
@@ -95,6 +96,10 @@ export default function PetCard({
         setIsLoading(false);
       })
       .catch((e) => console.error(e));
+  };
+
+  useEffect(() => {
+    fetchComments();
   }, []);
 
   return (
@@ -106,6 +111,10 @@ export default function PetCard({
           setIsModalOpen={setIsModalCommentOpen}
           postId={postId}
           setComments={setComments}
+          petId={petId}
+          petName={petName}
+          petUsername={petUsername}
+          profileImage={profileImage}
         />
       )}
       {modalTextState.isOpen && <Modal />}

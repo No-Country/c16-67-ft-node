@@ -14,7 +14,6 @@ export default function PetLikesModal({ setIsModalOpen }) {
     setIsLoading(true);
     getPetSuggestions(userId, 100)
       .then((response) => {
-        console.log(response.data);
         setPets(response.data.data);
         setIsLoading(false);
       })
@@ -44,7 +43,7 @@ export default function PetLikesModal({ setIsModalOpen }) {
               <div>0 comments available</div>
             ) : (
               pets.map((pet) => (
-                <div key={pet} className="flex justify-between w-full items-center">
+                <div key={pet.petId} className="flex justify-between w-full items-center">
                   <div className="flex py-4 gap-x-2">
                     <img
                       src={pet.image_url}

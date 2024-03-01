@@ -1,15 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import { getPetCommentsById } from '../../../service/comments/commentsService';
+import {
+  createPetComments,
+  deletePetCommentsById,
+  getPetCommentsById
+} from '../../../service/comments/commentsService';
 import { FiX } from 'react-icons/fi';
+import { BiTrash } from 'react-icons/bi';
 import styles from './PetContainer.module.css';
 import Spinner from '../../ui/Spinner';
 
-export default function PetCommentModal({ setIsModalOpen, postId, setComments }) {
+export default function PetCommentModal({
+  setIsModalOpen,
+  postId,
+  setComments,
+  petId,
+  petName,
+  petUsername,
+  profileImage
+}) {
   const [pets, setPets] = useState([]);
-
   const [isLoading, setIsLoading] = useState(false);
+  const [commentsModal, setCommentsModal] = useState('');
+  const userId = JSON.parse(localStorage.getItem('userId'));
 
-  useEffect(() => {
+  const sendComment = () => {
+    const body = {
+      petId: petId,
+      postId: postId,
+      userId: userId,
+      name: petName,
+      username: petUsername,
+      comment: commentsModal,
+      image_url: profileImage
+    };
+
+    createPetComments(body).then(() => {
+      setCommentsModal('');
+      fetchComments();
+    });
+  };
+
+  const deleteComment = (commentId) => {
+    deletePetCommentsById(commentId).then(() => {
+      fetchComments();
+    });
+  };
+
+  const fetchComments = () => {
     setIsLoading(true);
     getPetCommentsById(postId)
       .then((res) => {
@@ -18,6 +55,10 @@ export default function PetCommentModal({ setIsModalOpen, postId, setComments })
         setIsLoading(false);
       })
       .catch((e) => console.error(e));
+  };
+
+  useEffect(() => {
+    fetchComments();
   }, []);
 
   return isLoading ? (
@@ -42,43 +83,60 @@ export default function PetCommentModal({ setIsModalOpen, postId, setComments })
             >
               {pets.length === 0 ? (
                 <div className="flex justify-center w-full items-center h-[100px]">
-                  <p className="text-title-md font-semibold">0 comments available</p>
+                  <p className="text-title-md font-semibold">0 growls to display</p>
                 </div>
               ) : (
                 Array.isArray(pets) &&
                 pets.map((pet) => (
-                  <div key={pet.commentId} className="flex w-full">
-                    <img
-                      src={pet['pet.image_url']}
-                      alt={`image of ${pet['pet.name']}`}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
-                    <div className="flex flex-col pl-5">
-                      <div className="flex items-center">
-                        <p className="text-title-md mr-2 font-semibold">{pet['pet.name']}</p>
-                        <p className=" text-title-md text-[#9A9A9A]">@{pet['pet.username']}</p>
-                      </div>
-                      <div className="pb-4 pt-2">
-                        <div>
-                          <p>{pet.comment}</p>
+                  <div key={pet.commentId} className="relative">
+                    <div className="flex w-full">
+                      <img
+                        src={pet['pet.image_url']}
+                        alt={`image of ${pet['pet.name']}`}
+                        className="w-12 h-12 rounded-full object-cover"
+                      />
+                      <div className="flex flex-col pl-5">
+                        <div className="flex items-center">
+                          <p className="text-title-md mr-2 font-semibold">{pet['pet.name']}</p>
+                          <p className=" text-title-md text-[#9A9A9A]">@{pet['pet.username']}</p>
+                        </div>
+                        <div className="pb-4 pt-2">
+                          <div>
+                            <p>{pet.comment}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
+                    <BiTrash
+                      className="absolute right-0 top-4 text-[20px] md:text-[25px] text-error-800 cursor-pointer hover:bg-[#FBF0E7] hover:rounded-full hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-125"
+                      onClick={() => deleteComment(pet.commentId)}
+                    />
                   </div>
                 ))
               )}
             </div>
-            <div className="relative m-5 ">
+            <div
+              className="relative m-5"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  sendComment();
+                }
+              }}
+            >
               <div className="w-full p-2 rounded-3xl text-body-lg bg-[#FBF0E7]">
                 <input
                   placeholder="Add a growl.."
+                  value={commentsModal}
                   className="min-w-[200px] w-[83%] text-body-lg outline-none bg-transparent"
+                  onChange={(e) => setCommentsModal(e.target.value)}
                 />
               </div>
               <button
                 className="absolute right-4 top-2 text-body-lg text-secondary-800 font-bold hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-110"
                 onClick={(e) => {
                   e.preventDefault();
+                  sendComment();
                 }}
               >
                 Send
