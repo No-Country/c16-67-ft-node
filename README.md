@@ -1,8 +1,5 @@
-# PETGRAM 🐾
 
-
-Una red social exclusiva para mascotas, donde ellos son los protagonistas. Podrán publicar imágenes, videos o reels, comentar (gruñir o growl) las publicaciones de los demás perfiles, lo sigan o no. Además, podrán poner me gusta (dar una patita o paw).
-Habrá una sección del feed destinada a animales perdidos o en adopción, donde esas publicaciones tendrán una etiqueta según su categoría.
+![Group 196](https://github.com/No-Country/c16-67-ft-node/assets/159343463/16bbc986-5c55-4d38-9d54-aba23abf83bd)
 
 
 ## Tecnologías Utilizadas
