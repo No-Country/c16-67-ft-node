@@ -700,6 +700,10 @@ video {
   margin: 0px;
 }
 
+.m-5{
+  margin: 1.25rem;
+}
+
 .m-auto{
   margin: auto;
 }
@@ -707,6 +711,11 @@ video {
 .mx-2{
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+.mx-3{
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
 }
 
 .mx-32{
@@ -1029,6 +1038,10 @@ video {
   max-height: 6rem;
 }
 
+.max-h-\[50vh\]{
+  max-height: 50vh;
+}
+
 .max-h-\[560px\]{
   max-height: 560px;
 }
@@ -1089,6 +1102,10 @@ video {
   width: 273px;
 }
 
+.w-\[275px\]{
+  width: 275px;
+}
+
 .w-\[337px\]{
   width: 337px;
 }
@@ -1121,6 +1138,10 @@ video {
   width: 80px;
 }
 
+.w-\[83\%\]{
+  width: 83%;
+}
+
 .w-\[90\%\]{
   width: 90%;
 }
@@ -1143,6 +1164,10 @@ video {
 
 .min-w-5{
   min-width: 1.25rem;
+}
+
+.min-w-\[200px\]{
+  min-width: 200px;
 }
 
 .max-w-2xl{
@@ -1768,6 +1793,10 @@ video {
   background-color: rgb(100 116 139 / var(--tw-bg-opacity));
 }
 
+.bg-transparent{
+  background-color: transparent;
+}
+
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1919,8 +1948,16 @@ video {
   padding-bottom: 5rem;
 }
 
+.pb-4{
+  padding-bottom: 1rem;
+}
+
 .pl-0{
   padding-left: 0px;
+}
+
+.pl-5{
+  padding-left: 1.25rem;
 }
 
 .pl-6{
@@ -1953,6 +1990,10 @@ video {
 
 .pt-16{
   padding-top: 4rem;
+}
+
+.pt-2{
+  padding-top: 0.5rem;
 }
 
 .pt-20{
@@ -2131,6 +2172,11 @@ video {
 .text-\[\#2D3748\]{
   --tw-text-opacity: 1;
   color: rgb(45 55 72 / var(--tw-text-opacity));
+}
+
+.text-\[\#9A9A9A\]{
+  --tw-text-opacity: 1;
+  color: rgb(154 154 154 / var(--tw-text-opacity));
 }
 
 .text-\[\#FAFAFA\]{
@@ -2425,6 +2471,10 @@ h6{
     grid-row-start: 1;
   }
 
+  .md\:m-auto{
+    margin: auto;
+  }
+
   .md\:mx-0{
     margin-left: 0px;
     margin-right: 0px;
@@ -2435,11 +2485,6 @@ h6{
     margin-right: 8rem;
   }
 
-  .md\:mx-4{
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-
   .md\:mx-8{
     margin-left: 2rem;
     margin-right: 2rem;
@@ -2448,6 +2493,11 @@ h6{
   .md\:my-0{
     margin-top: 0px;
     margin-bottom: 0px;
+  }
+
+  .md\:my-24{
+    margin-top: 6rem;
+    margin-bottom: 6rem;
   }
 
   .md\:mb-0{
