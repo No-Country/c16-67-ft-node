@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { editPet } from '../../service/pets/petService';
 export const PetEditForm = ({ FormPrevData }) => {
-  const [formData, setFormData] = useState({});
+  const [inputsData, setInputsData] = useState({});
   const [file, setFile] = useState(null); // Archivo seleccionado por el usuario
 
   // Carga los datos previos en el estado del formulario
   useEffect(() => {
     if (FormPrevData) {
-      setFormData({
+      setInputsData({
         name: FormPrevData.name || '',
         age: FormPrevData.age || '',
         description: FormPrevData.description || '',
@@ -20,7 +20,7 @@ export const PetEditForm = ({ FormPrevData }) => {
     const property = event.target.name;
     const value = event.target.value;
 
-    setFormData({ ...formData, [property]: value });
+    setInputsData({ ...inputsData, [property]: value });
   };
 
   const handleImageChange = (e) => {
@@ -32,7 +32,7 @@ export const PetEditForm = ({ FormPrevData }) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         // Actualizar el estado con la URL de la imagen para la vista previa
-        setFormData((prevFormData) => ({ ...prevFormData, image: reader.result }));
+        setInputsData((previnputsData) => ({ ...previnputsData, image: reader.result }));
       };
       reader.readAsDataURL(file);
     }
@@ -40,8 +40,8 @@ export const PetEditForm = ({ FormPrevData }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('estoy en el submit');
-    await editPet(FormPrevData.petId, formData);
+    const petEdited = await editPet(FormPrevData.petId, inputsData, file);
+    console.log(petEdited);
   };
 
   return (
@@ -49,7 +49,7 @@ export const PetEditForm = ({ FormPrevData }) => {
       <form className="flex flex-col items-center gap-4 p-4" onSubmit={handleSubmit}>
         <div className="relative">
           <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-300">
-            <img src={formData.image} alt="Profile" className="w-full h-full object-cover" />
+            <img src={inputsData.image} alt="Profile" className="w-full h-full object-cover" />
           </div>
           {/*Para el boton de cambiar imagen*/}
           <label
@@ -85,7 +85,7 @@ export const PetEditForm = ({ FormPrevData }) => {
           placeholder="Nombre"
           className="input input-bordered w-full max-w-xs"
           name="name"
-          value={formData.name}
+          value={inputsData.name}
           onChange={handleChange}
         />
 
@@ -94,7 +94,7 @@ export const PetEditForm = ({ FormPrevData }) => {
           placeholder="Edad"
           className="input input-bordered w-full max-w-xs"
           name="age"
-          value={formData.age}
+          value={inputsData.age}
           onChange={handleChange}
         />
 
@@ -102,7 +102,7 @@ export const PetEditForm = ({ FormPrevData }) => {
           placeholder="Descripción"
           className="textarea textarea-bordered h-24 w-full max-w-xs"
           name="description"
-          value={formData.description}
+          value={inputsData.description}
           onChange={handleChange}
         ></textarea>
 
