@@ -2385,10 +2385,6 @@ h6{
     position: relative;
   }
 
-  .md\:left-6{
-    left: 1.5rem;
-  }
-
   .md\:top-\[20px\]{
     top: 20px;
   }
@@ -2430,9 +2426,9 @@ h6{
     margin-right: 0px;
   }
 
-  .md\:mx-32{
-    margin-left: 8rem;
-    margin-right: 8rem;
+  .md\:mx-20{
+    margin-left: 5rem;
+    margin-right: 5rem;
   }
 
   .md\:mx-4{

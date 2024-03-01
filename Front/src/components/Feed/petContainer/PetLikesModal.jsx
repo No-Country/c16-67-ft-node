@@ -3,9 +3,9 @@ import { getPetSuggestions } from '../../../service/pets/petService';
 import { FiX } from 'react-icons/fi';
 import styles from './PetContainer.module.css';
 import Spinner from '../../ui/Spinner';
-import SuggestionItem from '../../ui/navBar/suggestions/SuggestionItem';
+import FollowButton from '../../ui/FollowButton';
 
-export default function SuggestionsModal({ setIsModalOpen }) {
+export default function PetLikesModal({ setIsModalOpen }) {
   const [pets, setPets] = useState([]);
   const userId = JSON.parse(localStorage.getItem('userId'));
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +14,6 @@ export default function SuggestionsModal({ setIsModalOpen }) {
     setIsLoading(true);
     getPetSuggestions(userId, 100)
       .then((response) => {
-        console.log(response.data);
         setPets(response.data.data);
         setIsLoading(false);
       })
@@ -38,13 +37,28 @@ export default function SuggestionsModal({ setIsModalOpen }) {
             className="absolute top-[30px] right-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:text-[25px]"
           />
           <div
-            className={`mt-6 relative mx-5 pr-6 left-0 md:left-6 md:mx-32 max-h-[60vh] md:max-h-[560px] overflow-y-auto ${styles.scrollbarCustomLikes}`}
+            className={`mt-6 relative mx-5 pr-6 md:mx-20 max-h-[60vh] md:max-h-[560px] overflow-y-auto ${styles.scrollbarCustomLikes}`}
           >
-            {pets.map((pet) => (
-              <>
-                <SuggestionItem pet={pet} key={pet.petId} />
-              </>
-            ))}
+            {pets.length === 0 ? (
+              <div>0 comments available</div>
+            ) : (
+              pets.map((pet) => (
+                <div key={pet.petId} className="flex justify-between w-full items-center">
+                  <div className="flex py-4 gap-x-4">
+                    <img
+                      src={pet.image_url}
+                      alt="image of another pet"
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <p>{pet.name}</p>
+                      <p>@{pet.name}</p>
+                    </div>
+                  </div>
+                  <FollowButton />
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
