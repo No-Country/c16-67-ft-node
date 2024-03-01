@@ -15,7 +15,7 @@ class Reaction extends Model {
 }
 
 const reactionSchema ={
-    reactiontId: {
+    reactionId: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
@@ -32,10 +32,6 @@ const reactionSchema ={
     postId:{
         type:DataTypes.UUID,
         allowNull:true, 
-    },
-    reactions: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: false
     },
     status:{
         allowNull:false,
