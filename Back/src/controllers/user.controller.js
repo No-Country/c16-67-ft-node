@@ -23,8 +23,9 @@ const create = async (req,res) => {
 const update = async (req,res) =>{
     try {
       const {id} = req.params;
-        const imageUrl = await imageUploader(req); //Cloudinary nos devuelve la imagen como url
-        const result = await writeService.update(User,id,{name:req.body.name,image_url:imageUrl},modelIds.userId); //Actualizamos los datos del user
+        if (req.file?.path) req.body.image_url = await imageUploader(req); //Cloudinary nos devuelve la imagen como url
+
+        const result = await writeService.update(User,id,req.body,modelIds.userId); //Actualizamos los datos del user
         res.status(200).json({ success: true, data: result });
     } catch (error) {
         res.status(500).send({success:false,message:error.message});

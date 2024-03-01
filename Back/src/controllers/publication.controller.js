@@ -19,9 +19,9 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
     try {
-        const imageUrl = await uploadImageAndGetUrl(req);
+        if (req.file?.path) req.body.image_url = await uploadImageAndGetUrl(req); //Cloudinary nos devuelve la imagen como url
         const { id } = req.params;    
-        const result = await writeService.update(Publication,id, {...req.body, image_url: imageUrl}, modelIds.postId);
+        const result = await writeService.update(Publication,id, req.body, modelIds.postId);
         res.status(200).json({ success: true, data: result });
     } catch (error) {
         return res.status(500).send({ success: false, message: error.message });
