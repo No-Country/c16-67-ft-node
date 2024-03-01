@@ -107,10 +107,12 @@ export default function PetCommentModal({
                         </div>
                       </div>
                     </div>
-                    <BiTrash
-                      className="absolute right-0 top-4 text-[20px] md:text-[25px] text-error-800 cursor-pointer hover:bg-[#FBF0E7] hover:rounded-full hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-125"
-                      onClick={() => deleteComment(pet.commentId)}
-                    />
+                    {userId === pet.userId && (
+                      <BiTrash
+                        className="absolute right-0 top-4 text-[20px] md:text-[25px] text-error-800 cursor-pointer hover:bg-[#FBF0E7] hover:rounded-full hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-125"
+                        onClick={() => deleteComment(pet.commentId, pet.userId)}
+                      />
+                    )}
                   </div>
                 ))
               )}
