@@ -54,32 +54,34 @@ export default function NavbarMobile({ active, pet }) {
           </div>
           <nav className="fixed bottom-0 z-50 w-full h-20">
             <ul className="flex relative h-full">
-              <li
-                className={`flex-grow flex-col flex-basis-0 flex h-full items-center justify-center`}
-              >
+              <li className={`flex-grow flex-col flex-basis-0 flex items-center justify-center`}>
                 <NavLink
                   to={'/'}
-                  className={`grid place-items-center ${active === 'feed' && 'bg-primary-300 py-1 px-2 rounded-lg'}`}
+                  className={`grid place-items-center px-2 py-1  ${active === 'feed' && 'bg-primary-300 rounded-lg'}`}
                 >
                   <img className="h-6 w-6" src={feedIcon} alt="Feed icon" />
                   <span>Feed</span>
                 </NavLink>
               </li>
               <li className="flex-grow-[2] flex flex-col flex-basis-0 h-full items-center justify-center">
-                <NavLink className="grid place-items-center" to={'/search'}>
+                <NavLink
+                  className={`grid place-items-center px-2 py-1 ${active === 'search' && 'bg-primary-300 rounded-lg'}`}
+                  to={'/search'}
+                >
                   <img className="h-6 w-6" src={searchIcon} alt="Search icon" />
                   Search
                 </NavLink>
               </li>
-              <li className="absolute right-1/2 translate-x-1/2 top-[-28px] p-0 w-12 h-12 bg-accent-300 rounded-full grid place-items-center shadow-lg">
+              <li className="absolute right-1/2 translate-x-1/2 top-[-32px] p-0 w-16 h-16 bg-accent-500 rounded-full grid place-items-center shadow-lg">
                 <NavLink className="grid place-items-center" onClick={() => handleOpenModal()}>
-                  <span className="material-symbols-outlined text-4xl text-white">add</span>
+                  <span className="material-symbols-outlined text-2xl text-black">add</span>
+                  <p>Post</p>
                 </NavLink>
               </li>
               <li className="flex-grow-[2] flex-col flex-basis-0 flex h-full items-center justify-center">
                 <NavLink
                   to={'/profile'}
-                  className={`grid place-items-center ${active === 'profile' && 'bg-primary-300 py-1 px-2 rounded-lg'}`}
+                  className={`grid place-items-center px-2 py-1 ${active === 'profile' && 'bg-primary-300 rounded-lg'}`}
                 >
                   <img className="h-6 w-6" src={footIcon} alt="Profile icon" />
                   Profile
@@ -88,7 +90,7 @@ export default function NavbarMobile({ active, pet }) {
               <li className={`flex-grow flex-basis-0 flex h-full items-center justify-center`}>
                 <NavLink
                   to={'/menu'}
-                  className={`grid place-items-center ${active === 'menu' && 'bg-primary-300 py-1 px-2 rounded-lg'}`}
+                  className={`grid place-items-center px-2 py-1 ${active === 'menu' && 'bg-primary-300 rounded-lg'}`}
                 >
                   <img className="h-6 w-6" src={menuIcon} alt="Menu icon" />
                   More

@@ -11,7 +11,6 @@ export default function SuggestionsModal({ setIsModalOpen }) {
   useEffect(() => {
     getPetSuggestions(userId, 100)
       .then((response) => {
-        console.log(response.data);
         setPets(response.data.data);
       })
       .catch((e) => console.error(e));
@@ -34,9 +33,7 @@ export default function SuggestionsModal({ setIsModalOpen }) {
           className={`mt-6 relative left-6 pr-6 mx-32 max-h-[560px] overflow-y-auto ${styles.scrollbarCustom}`}
         >
           {pets.map((pet) => (
-            <>
-              <SuggestionItems pet={pet} key={pet.petId} />
-            </>
+            <SuggestionItems pet={pet} key={pet.petId} setIsModalOpen={setIsModalOpen} />
           ))}
         </div>
       </div>

@@ -672,6 +672,14 @@ video {
   top: 60px;
 }
 
+.top-\[-24px\]{
+  top: -24px;
+}
+
+.top-\[-32px\]{
+  top: -32px;
+}
+
 .z-30{
   z-index: 30;
 }
@@ -900,6 +908,14 @@ video {
   margin-top: 30px;
 }
 
+.mt-16{
+  margin-top: 4rem;
+}
+
+.mt-12{
+  margin-top: 3rem;
+}
+
 .box-border{
   box-sizing: border-box;
 }
@@ -1037,6 +1053,10 @@ video {
   max-height: 60vh;
 }
 
+.max-h-\[496px\]{
+  max-height: 496px;
+}
+
 .min-h-screen{
   min-height: 100vh;
 }
@@ -1133,6 +1153,10 @@ video {
   width: 100vw;
 }
 
+.w-16{
+  width: 4rem;
+}
+
 .min-w-20{
   min-width: 5rem;
 }
@@ -1175,6 +1199,14 @@ video {
 
 .max-w-md{
   max-width: 28rem;
+}
+
+.max-w-\[496px\]{
+  max-width: 496px;
+}
+
+.max-w-\[640px\]{
+  max-width: 640px;
 }
 
 .flex-1{
@@ -1778,6 +1810,11 @@ video {
   background-color: rgb(242 242 242 / var(--tw-bg-opacity));
 }
 
+.bg-accent-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 153 0 / var(--tw-bg-opacity));
+}
+
 .bg-gradient-to-r{
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
@@ -2076,6 +2113,11 @@ video {
   line-height: 24px;
 }
 
+.text-2xl{
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .font-\[700\]{
   font-weight: 700;
 }
@@ -2270,13 +2312,16 @@ h6{
 }
 
 .scrollbarCustom::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 .scrollbarCustom::-webkit-scrollbar-thumb{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 195 139 / var(--tw-bg-opacity));
-  border-radius: 4px;
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+  --tw-gradient-from: #F06900 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(240 105 0 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  --tw-gradient-to: #C31A02 var(--tw-gradient-to-position);
+  border-radius: 3px;
 }
 
 .hover\:scale-110:hover{
@@ -2448,6 +2493,26 @@ h6{
   .md\:my-0{
     margin-top: 0px;
     margin-bottom: 0px;
+  }
+
+  .md\:mx-16{
+    margin-left: 4rem;
+    margin-right: 4rem;
+  }
+
+  .md\:mx-12{
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
+  .md\:mx-24{
+    margin-left: 6rem;
+    margin-right: 6rem;
+  }
+
+  .md\:mx-auto{
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .md\:mb-0{

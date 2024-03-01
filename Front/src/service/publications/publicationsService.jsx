@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getUserById } from '../users/userService';
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
 export const getPublications = async (activeFeed) => {
@@ -16,11 +17,17 @@ export const getPublications = async (activeFeed) => {
 
 export const getPublicationsSaved = async () => {
   const pet = JSON.parse(localStorage.getItem('pet'));
+  console.log(pet);
+  let petId;
 
   if (pet === null) {
-    return [];
+    const user = await getUserById(JSON.parse(localStorage.getItem('userId')));
+    console.log(user.data);
+    petId = user.data.last_pet;
+  } else {
+    petId = pet.petId;
   }
-  const response = await axios.get(`${API_URL_BASE}/api/v1/save/${pet.petId}`).catch((error) => {
+  const response = await axios.get(`${API_URL_BASE}/api/v1/save/${petId}`).catch((error) => {
     console.error(error);
   });
   return response.data.data;
