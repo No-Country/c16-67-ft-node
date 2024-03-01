@@ -126,7 +126,7 @@ export default function PetCommentModal({
                 }
               }}
             >
-              <div className="w-full p-2 rounded-3xl text-body-lg bg-[#FBF0E7]">
+              <div className="w-full p-2 px-4 rounded-3xl text-body-lg bg-[#FBF0E7]">
                 <input
                   placeholder="Add a growl.."
                   value={commentsModal}

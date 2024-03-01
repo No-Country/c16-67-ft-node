@@ -1,9 +1,14 @@
 import React from 'react';
 import FollowButton from '../../FollowButton';
+import { NavLink } from 'react-router-dom';
 
-export default function SuggestionItem({ pet }) {
+export default function SuggestionItem({ pet, setIsModalOpen }) {
   return (
-    <div className="flex justify-between w-full items-center">
+    <NavLink
+      className="flex justify-between w-full items-center"
+      to={`/profile/${pet.petId}`}
+      onClick={() => setIsModalOpen(false)}
+    >
       <div className="flex py-4 gap-x-2">
         <img
           src={pet.image_url}
@@ -16,6 +21,6 @@ export default function SuggestionItem({ pet }) {
         </div>
       </div>
       <FollowButton />
-    </div>
+    </NavLink>
   );
 }

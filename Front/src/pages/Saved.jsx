@@ -24,8 +24,8 @@ export default function Saved() {
 
   return (
     <main>
-      <div className='mx-4 md:mx-8'>
-        <h1 className="pt-12 text-4xl mb-4">Publications saved</h1>
+      <div className="mx-4 md:mx-auto max-w-[768px]">
+        <h1 className="pt-12 text-headline-sm mb-4">Saved posts</h1>
         <PublicataionSavedContainer
           publications={publications}
           fetchPublications={fetchPublications}
