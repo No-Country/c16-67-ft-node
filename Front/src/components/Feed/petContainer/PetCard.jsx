@@ -205,7 +205,9 @@ export default function PetCard({
               onClick={() => setIsModalCommentOpen(true)}
             >
               <img src={commentIcon} alt="comment-icon" />
-              <p>{comments.length} Growls</p>
+              <p>
+                {comments.length === 1 ? comments.length + ' Growl' : comments.length + ' Growls'}
+              </p>
             </div>
           </div>
           <div>
