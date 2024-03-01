@@ -12,7 +12,7 @@ export default function SuggestionItem({ pet }) {
         />
         <div>
           <p>{pet.name}</p>
-          <p>@{pet.name}</p>
+          <p>@{pet.username}</p>
         </div>
       </div>
       <FollowButton />
