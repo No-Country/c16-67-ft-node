@@ -39,6 +39,7 @@ export const editPet = async (petId, inputsData, file) => {
     formDataToSend.append('name', inputsData.name);
     formDataToSend.append('age', inputsData.age);
     formDataToSend.append('description', inputsData.description);
+    formDataToSend.append('image_url', inputsData.image_url);
 
     if (file) {
       formDataToSend.append('image', file);

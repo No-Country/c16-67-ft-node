@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import { editPet } from '../../service/pets/petService';
+import { useUserContext } from '../../context/userContext';
 export const PetEditForm = ({ FormPrevData }) => {
   const [inputsData, setInputsData] = useState({});
   const [file, setFile] = useState(null); // Archivo seleccionado por el usuario
+  const { setActivePet } = useUserContext();
 
   // Carga los datos previos en el estado del formulario
   useEffect(() => {
     if (FormPrevData) {
+      console.log(FormPrevData);
       setInputsData({
         name: FormPrevData.name || '',
         age: FormPrevData.age || '',
@@ -40,8 +43,11 @@ export const PetEditForm = ({ FormPrevData }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const petEdited = await editPet(FormPrevData.petId, inputsData, file);
+    let { data } = await editPet(FormPrevData.petId, inputsData, file);
+    data.username = FormPrevData.username;
+    const petEdited = data;
     console.log(petEdited);
+    setActivePet(petEdited);
   };
 
   return (
