@@ -66,6 +66,7 @@ export default function Profile() {
     } catch (error) {
       openModal({
         description: 'An error has occurred',
+        chooseModal: false,
         error: true
       });
     }

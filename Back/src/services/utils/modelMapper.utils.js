@@ -9,7 +9,7 @@ class ModelMapper {
             config: {
                 secondaryModel: modelNames.Pet,
                 as: 'pets',
-                attributes: ['name', 'image_url']
+                attributes: ['name', 'image_url', 'username']
             }   
             },
             Comment: {
@@ -17,7 +17,7 @@ class ModelMapper {
             config: {
                 secondaryModel: modelNames.Pet,
                 as: 'pet',  
-                attributes: ['name', 'image_url']
+                attributes: ['name', 'image_url','username']
             }
             }
         };

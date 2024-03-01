@@ -33,7 +33,8 @@ const Login = () => {
             setActive('feed');
             openModal({
               description: 'Login successful',
-              chooseModal: false
+              chooseModal: false,
+              error: false
             });
             navigate('/');
           } else {

@@ -41,11 +41,13 @@ const petSchema = {
     },
     num_seguidos: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: 0
     },
     num_seguidores: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: 0
     },
     description: {
         type: DataTypes.STRING(500),
