@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import FollowButton from '../../ui/FollowButton';
 import { getPetSuggestions } from '../../../service/pets/petService';
 import { FiX } from 'react-icons/fi';
 import styles from './PetContainer.module.css';
 import Spinner from '../../ui/Spinner';
-import FollowButton from '../../ui/FollowButton';
 
 export default function PetLikesModal({ setIsModalOpen }) {
   const [pets, setPets] = useState([]);
