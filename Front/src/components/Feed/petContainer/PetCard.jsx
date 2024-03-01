@@ -35,7 +35,7 @@ export default function PetCard({
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const { petId } = JSON.parse(localStorage.getItem('pet'));
-  const { userId } = JSON.parse(localStorage.getItem('userId'));
+  const userId = JSON.parse(localStorage.getItem('userId'));
 
   const savePost = () => {
     const body = {
@@ -46,6 +46,7 @@ export default function PetCard({
       image_url_pet: profileImage,
       image_url_post: postImage
     };
+    console.log(body);
     postSave(body).then(() => {
       fetchSaved();
     });
