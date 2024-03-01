@@ -6,13 +6,13 @@ class StrategyFactory {
 
     constructor() {
         this.strategyMap = {
-            "Update Strategy": {
+            "Update Strategy": { // Añadimos cambios en la tabla intermedia
                 default: updateStrategy,
             },
-            "Update Normal": {
+            "Update Normal": { // Update tradicional
                 default: update,
             },
-            "Create Normal": {
+            "Create Normal": { // Create tradicional
                 default: create,
             },
         };
@@ -41,7 +41,6 @@ class WriteService {
         let modelStrategy = "Update Strategy";
         const modelName = model.options.name.singular;
         if(modelName !== "Pet" && modelName !== "Publication") modelStrategy = "Update Normal";
-        console.log(modelStrategy, "modelstratergy")
         const strategy = this.factory.createStrategy(modelStrategy);
     return strategy.update(model, id, data, whereId);
     }

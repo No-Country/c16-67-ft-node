@@ -29,7 +29,7 @@ class SaveWriteService {
             const status = result.length > 0 ? result[0].dataValues.status : null;
 
             if(result?.length && status === false) return await this.writeService.update(model,id,{status:true}, "postId")
-            if(!result.length) return await model.create(dataBody)
+            if(!result?.length) return await model.create(dataBody)
             throw new Error("Ninguna condición se cumplió");
         } catch (error) {
             throw new Error(error);
