@@ -53,7 +53,7 @@ export default function NavbarDesktop({ active, pet }) {
                 />
                 <div>
                   <p className="text-headline-sm">{pet.name}</p>
-                  <p className="text-body-lg">@{pet.name}</p>
+                  <p className="text-body-lg">@{pet.username}</p>
                 </div>
               </>
             ) : (
