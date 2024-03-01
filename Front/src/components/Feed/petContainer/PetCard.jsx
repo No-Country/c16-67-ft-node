@@ -73,7 +73,7 @@ export default function PetCard({
     setIsLoading(true);
     createPetComments(body).then(() => {
       setIsLoading(false);
-      if (comment === '')
+      if (comments === '')
         openModal({
           description: 'An error has occurred',
           chooseModal: false,
@@ -91,7 +91,6 @@ export default function PetCard({
     setIsLoading(true);
     getPetCommentsById(postId)
       .then((res) => {
-        console.log(res);
         setComments(res.data.data);
         setIsLoading(false);
       })
@@ -222,7 +221,15 @@ export default function PetCard({
             )}
           </div>
         </div>
-        <div className="hidden md:block relative ml-5 col-[7/13] h-fit md:row-[6/7] mr-5 ">
+        <div
+          className="hidden md:block relative ml-5 col-[7/13] h-fit md:row-[6/7] mr-5"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              sendComment();
+            }
+          }}
+        >
           <div className="w-full p-2 rounded-3xl text-body-lg bg-[#FBF0E7]">
             <input
               placeholder="Add a growl.."
