@@ -25,7 +25,9 @@ export default function PetCommentModal({ setIsModalOpen, postId, setComments })
   ) : (
     <>
       <div className="fixed top-0 left-0 right-0 bottom-0 w-full bg-blackOpacity z-[1000]">
-        <div className={` bg-white m-auto max-w-[700px] overflow-auto my-24 rounded-3xl relative`}>
+        <div
+          className={` bg-white max-w-[700px] overflow-auto my-24 md:m-auto md:my-24 rounded-3xl relative mx-3 `}
+        >
           <div className="mt-6 flex flex-col items-center gap-y-8">
             <div className="bg-gradient-to-r from-[#F06900] to-[#C31A02] w-44 h-1 rounded-full" />
             <h3 className="text-title-lg text-center font-bold">Growls</h3>
@@ -70,7 +72,7 @@ export default function PetCommentModal({ setIsModalOpen, postId, setComments })
               <div className="w-full p-2 rounded-3xl text-body-lg bg-[#FBF0E7]">
                 <input
                   placeholder="Add a growl.."
-                  className="w-[275px] text-body-lg outline-none bg-transparent"
+                  className="min-w-[200px] w-[83%] text-body-lg outline-none bg-transparent"
                 />
               </div>
               <button
