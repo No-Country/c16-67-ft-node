@@ -36,6 +36,7 @@ export default function PetCard({
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalCommentOpen, setIsModalCommentOpen] = useState(false);
+  const [reactionId, setReactionId] = useState(undefined);
   const [like, setLike] = useState(false);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
@@ -97,8 +98,9 @@ export default function PetCard({
 
   const sendReactions = () => {
     if (like) {
-      deletePetReactionsById(postId).then(() => {
+      deletePetReactionsById(reactionId).then(() => {
         setLike(false);
+        fetchData();
       });
     } else {
       const body = {
@@ -110,7 +112,6 @@ export default function PetCard({
         image_url: profileImage
       };
       sendPetReactions(body).then(() => {
-        console.log(body);
         setLike(true);
         fetchData();
       });
@@ -127,6 +128,11 @@ export default function PetCard({
       .catch((e) => console.error(e));
     getPetReactionsById(postId)
       .then((response) => {
+        const reactionRes = response.data.data.find((reaction) => reaction.petId === pet.petId);
+        if (reactionRes !== undefined) {
+          setReactionId(reactionRes.reactionId);
+          setLike(true);
+        }
         setReactions(response.data.data);
         setIsLoading(false);
       })

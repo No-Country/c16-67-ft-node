@@ -22,7 +22,6 @@ export default function PetContainer({ tabActive }) {
   useEffect(() => {
     getPublications(tabActive)
       .then((data) => {
-        console.log(data);
         setFeedData(data);
       })
       .catch(() => {
