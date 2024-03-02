@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import FollowButton from '../../ui/FollowButton';
-import { getPetSuggestions } from '../../../service/pets/petService';
 import { FiX } from 'react-icons/fi';
 import styles from './PetContainer.module.css';
 import Spinner from '../../ui/Spinner';
+import { getPetReactionsById } from '../../../service/reactions/reactionsService';
 
-export default function PetLikesModal({ setIsModalOpen }) {
+export default function PetLikesModal({ setIsModalOpen, postId }) {
   const [pets, setPets] = useState([]);
-  const userId = JSON.parse(localStorage.getItem('userId'));
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    getPetSuggestions(userId, 100)
+    getPetReactionsById(postId)
       .then((response) => {
-        setPets(response.data.data);
+        console.log(response);
+        setPets(response.data.data.filter((reaction) => reaction.status === true));
         setIsLoading(false);
       })
       .catch((e) => console.error(e));
@@ -37,14 +37,14 @@ export default function PetLikesModal({ setIsModalOpen }) {
             className="absolute top-[30px] right-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:text-[25px]"
           />
           <div
-            className={`mt-6 relative mx-5 pr-6 left-0 md:left-6 md:mx-32 max-h-[60vh] md:max-h-[560px] overflow-y-auto ${styles.scrollbarCustomLikes}`}
+            className={`mt-6 relative mx-5 pr-6 md:mx-20 max-h-[60vh] md:max-h-[560px] overflow-y-auto ${styles.scrollbarCustomLikes}`}
           >
             {pets.length === 0 ? (
               <div>0 comments available</div>
             ) : (
               pets.map((pet) => (
                 <div key={pet.petId} className="flex justify-between w-full items-center">
-                  <div className="flex py-4 gap-x-2">
+                  <div className="flex py-4 gap-x-4">
                     <img
                       src={pet.image_url}
                       alt="image of another pet"
@@ -52,7 +52,7 @@ export default function PetLikesModal({ setIsModalOpen }) {
                     />
                     <div>
                       <p>{pet.name}</p>
-                      <p>@{pet.name}</p>
+                      <p>@{pet.username}</p>
                     </div>
                   </div>
                   <FollowButton />

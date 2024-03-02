@@ -17,7 +17,6 @@ export const getPublications = async (activeFeed) => {
 
 export const getPublicationsSaved = async () => {
   const pet = JSON.parse(localStorage.getItem('pet'));
-  console.log(pet);
   let petId;
 
   if (pet === null) {
