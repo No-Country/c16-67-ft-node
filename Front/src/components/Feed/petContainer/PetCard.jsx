@@ -123,7 +123,6 @@ export default function PetCard({
     getPetCommentsById(postId)
       .then((res) => {
         setComments(res.data.data);
-        setIsLoading(false);
       })
       .catch((e) => console.error(e));
     getPetReactionsById(postId)
@@ -134,9 +133,9 @@ export default function PetCard({
           setLike(true);
         }
         setReactions(response.data.data);
-        setIsLoading(false);
       })
       .catch((e) => console.error(e));
+    setIsLoading(false);
   };
 
   useEffect(() => {
