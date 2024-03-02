@@ -12,6 +12,7 @@ export const UserProvider = ({ children }) => {
   const [userId, setUserId] = useState('');
   const [petId, setPetId] = useState('');
   const [petName, setPetName] = useState('');
+  const [petAge, setPetAge] = useState('');
   const [petUserName, setPetUserName] = useState('');
   const [petImage, setPetImage] = useState('');
   const [petDescription, setPetDescription] = useState('');
@@ -48,6 +49,7 @@ export const UserProvider = ({ children }) => {
     setPetId('');
     setPetImage('');
     setPetName('');
+    setPetAge('');
     setPetUserName('');
     setPetDescription('');
     changeLastPet(userId, petId);
@@ -57,6 +59,7 @@ export const UserProvider = ({ children }) => {
     setPetId(pet.petId);
     setPetName(pet.name);
     setPetUserName(pet.username);
+    setPetAge(pet.age);
     setPetImage(pet.image_url);
     setPetDescription(pet.description);
     localStorage.setItem(
@@ -65,6 +68,7 @@ export const UserProvider = ({ children }) => {
         petId: pet.petId,
         name: pet.name,
         username: pet.username,
+        age: pet.age,
         image_url: pet.image_url,
         description: pet.description
       })
@@ -75,6 +79,7 @@ export const UserProvider = ({ children }) => {
     return {
       petId: petId,
       name: petName,
+      age: petAge,
       username: petUserName,
       image_url: petImage,
       description: petDescription
@@ -91,6 +96,7 @@ export const UserProvider = ({ children }) => {
         userId,
         petId,
         petName,
+        petAge,
         petUserName,
         petImage,
         petDescription

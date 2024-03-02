@@ -57,6 +57,8 @@ export default function Profile() {
           .map((pet) => ({
             value: pet.petId,
             label: pet.name,
+            username: pet.username,
+            age: pet.age,
             description: pet.description,
             image: pet.image_url
           }))
@@ -85,6 +87,7 @@ export default function Profile() {
         petId: data.data.petId,
         name: data.data.name,
         username: data.data.username,
+        age: data.data.age,
         description: data.data.description,
         image_url: data.data.image_url
       };
@@ -94,7 +97,6 @@ export default function Profile() {
         ...pet,
         publications: publications.data.image_url
       };
-      console.log(data);
       setActivePet(petWithPublications);
     }
   };
@@ -104,8 +106,8 @@ export default function Profile() {
       ...provided,
       width: '100%',
       height: '32px',
-      borderRadius: '8px 8px 5px 5px',
-      border: '1px solid #E9D0BD',
+      borderRadius: '8px',
+      border: '1px solid #176543',
       boxShadow: 'none',
       outline: 'none',
       fontSize: '16px',
@@ -122,28 +124,27 @@ export default function Profile() {
     option: (provided, state) => ({
       ...provided,
       width: '100%',
-      backgroundColor: state.isSelected ? '#c9b4a4' : '#F8F0EA',
+      backgroundColor: state.isSelected ? '#176543' : '#FFF',
+      borderTop: '1px solid #CACACA',
       fontSize: '16px',
       fontWeight: '600',
-      color: '#000',
+      color: state.isSelected ? '#FAFAFA' : '#000',
       '&:hover': {
-        backgroundColor: state.isSelected ? '#c39f84' : '#ddcbbd',
+        backgroundColor: state.isSelected ? '#176543' : '#1e8357',
         color: '#FFFFFF'
       }
     }),
     menu: (provided) => ({
       ...provided,
       marginTop: '0',
-      border: 'none',
-      backgroundColor: '#F3F4F6',
+      backgroundColor: 'transparent',
       borderRadius: '0 0 8px 8px',
       boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
     }),
     menuList: (provided) => ({
       ...provided,
       paddingBottom: '0',
-      paddingTop: '2px',
-      backgroundColor: '#B8682A'
+      borderRadius: '0 0 8px 8px'
     }),
     indicatorSeparator: (provided) => ({
       ...provided,
@@ -176,7 +177,7 @@ export default function Profile() {
                 ) : (
                   <section>
                     <Select
-                      options={[...options, { value: 'addPet', label: 'Add pet' }]}
+                      options={[...options, { value: 'addPet', username: 'Add a pet' }]}
                       onChange={(selectedOption) => onSelectPet(selectedOption)}
                       value={options.find(
                         (option) =>
@@ -184,7 +185,7 @@ export default function Profile() {
                           options.find((option) => option.value === 'addPet')
                       )}
                       getOptionLabel={(option) =>
-                        option.value === 'addPet' ? option.label : `@${option.label}`
+                        option.value === 'addPet' ? option.username : `@${option.username}`
                       }
                       styles={customStylesSelect}
                     />
@@ -211,8 +212,11 @@ export default function Profile() {
                   alt="Pet-image"
                   className="w-[100px] h-[100px] mb-3 rounded-full shadow-lg object-cover"
                 />
-                <p className=" mt-1 mb-2 text-[24px] text-[#232220] text-center md:mb-0 lg:text-[26px]">
+                <p className=" mt-1 mb-2 text-[24px] text-[#232220] text-center lg:text-[26px]">
                   {pet.name}
+                </p>
+                <p className="mb-2 text-body-md text-[#232220B2] text-center md:mt-1 lg:text-body-lg">
+                  {pet.age} years
                 </p>
                 {options.length === 0 ? (
                   <></>
