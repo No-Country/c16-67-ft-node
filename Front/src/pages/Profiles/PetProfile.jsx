@@ -80,13 +80,14 @@ export default function PetProfile() {
             </div>
             <div className="xl:flex">
               <section className="flex flex-col items-center justify-center mt-5 w-full ">
-                <div className="flex justify-center items-center w-full">
+                <div className="flex justify-center items-center w-full gap-x-6">
+                  <div className="flex-1"></div>
                   <img
                     src={pets.image_url}
                     alt="Pet-image"
-                    className="w-[100px] h-[100px] ml-[100px] md:ml-[120px] mb-3 rounded-full shadow-lg object-cover"
+                    className="w-[100px] h-[100px] mb-3 rounded-full shadow-lg object-cover"
                   />
-                  <div className="pl-[20px] md:pl-[40px]">
+                  <div className=" flex-1">
                     <FollowButton />
                   </div>
                 </div>

@@ -84,6 +84,7 @@ export default function Profile() {
       const pet = {
         petId: data.data.petId,
         name: data.data.name,
+        username: data.data.username,
         description: data.data.description,
         image_url: data.data.image_url
       };
@@ -93,6 +94,7 @@ export default function Profile() {
         ...pet,
         publications: publications.data.image_url
       };
+      console.log(data);
       setActivePet(petWithPublications);
     }
   };

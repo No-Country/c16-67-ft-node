@@ -49,7 +49,7 @@ export default function PetContainer({ tabActive }) {
     <>
       {modalTextState.isOpen && <Modal />}
       <div
-        className={`pt-12 md:pt-4 md:max-h-[calc(100vh-112px)] xl:max-h-[calc(100vh-64px)] ${!isAutocompleteActive ? 'overflow-auto' : 'overflow-hidden'} ${styles.scrollbarCustom}`}
+        className={`pt-12 md:pt-4 md:max-h-[calc(100vh-112px)] xl:max-h-[calc(100vh-64px)] overflow-x-hidden ${!isAutocompleteActive ? 'overflow-y-auto' : 'overflow-hidden'} ${styles.scrollbarCustom}`}
       >
         <CreatePublicationCard
           getDataFeed={getDataFeed}

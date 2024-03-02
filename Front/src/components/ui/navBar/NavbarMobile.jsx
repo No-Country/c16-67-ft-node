@@ -21,7 +21,7 @@ export default function NavbarMobile({ active, pet }) {
     <>
       {active !== 'createFirstPet' && (
         <div className="block md:hidden">
-          {active !== 'profile' && (
+          {active === 'feed' && (
             <>
               <div className="fixed w-full bg-white z-50">
                 <div className="h-16 px-4 flex justify-between items-center">
