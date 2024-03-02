@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigateContext } from '../context/navigationContext';
 import { getPublicationsSaved } from '../service/publications/publicationsService';
 import PublicataionSavedContainer from '../components/saved/PublicataionSavedContainer';
+import backIcon from '../assets/images/back.svg'
 
 export default function Saved() {
   const { setActive } = useNavigateContext();
@@ -24,8 +25,11 @@ export default function Saved() {
 
   return (
     <main>
-      <div className='mx-4 md:mx-8'>
-        <h1 className="pt-12 text-4xl mb-4">Publications saved</h1>
+      <div className="px-4 2xl:px-0 md:mx-auto max-w-[768px]">
+        <div className="flex  items-center gap-x-2">
+          <img src={backIcon} className="w-6 h-6 cursor-pointer md:hidden" alt="Back icon" />
+          <h1 className="pt-4 md:pt-12 text-headline-sm mb-4">Saved posts</h1>
+        </div>
         <PublicataionSavedContainer
           publications={publications}
           fetchPublications={fetchPublications}

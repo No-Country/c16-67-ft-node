@@ -18,7 +18,7 @@ export default function Suggestions() {
     <>
       <div>
         <img src={logo} className="w-full h-12" alt="logo" />
-        <div className="flex mt-6 gap-x-1 justify-between">
+        <div className="flex mt-6 mb-4 gap-x-1 justify-between">
           <p>Suggestions for you</p>
           <p className="font-bold cursor-pointer" onClick={() => setIsModalOpen(true)}>
             See all

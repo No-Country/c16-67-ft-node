@@ -84,6 +84,7 @@ export default function Profile() {
       const pet = {
         petId: data.data.petId,
         name: data.data.name,
+        username: data.data.username,
         description: data.data.description,
         image_url: data.data.image_url
       };
@@ -93,6 +94,7 @@ export default function Profile() {
         ...pet,
         publications: publications.data.image_url
       };
+      console.log(data);
       setActivePet(petWithPublications);
     }
   };
@@ -202,7 +204,7 @@ export default function Profile() {
             <div className="xl:flex">
               <section className="flex flex-col items-center justify-center mt-5 w-full ">
                 <div className="absolute flex flex-row-reverse left-0 right-6 top-[60px] text-[24px] md:text-[35px] md:top-[20px] xl:right-[350px]">
-                  <MdEdit className="cursor-pointer" />
+                  <MdEdit onClick={() => navigate('/edit/profile')} className="cursor-pointer" />
                 </div>
                 <img
                   src={pet.image_url}

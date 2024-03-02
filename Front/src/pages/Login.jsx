@@ -26,10 +26,14 @@ export default function Login() {
           <img src={walkFoots} alt="Cats" className="w-[800px] opacity-10 animate-paws" />
           <img src={walkFoots} alt="Cats" className="w-[800px] opacity-10 animate-paws " />
         </div>
-        <div className="absolute flex justify-between w-[90%] h-full">
-          <div className="flex flex-col justify-between h-[78%] ml-20">
+        <div className="absolute flex justify-evenly w-full h-full md:px-20 xl:px-0">
+          <div className="hidden flex-col justify-between h-[78%] lg:flex">
             <img src={logo} alt="isologo" className="w-[179px] h-[50px]" />
-            <img src={catsLanding} alt="Cats" className=" w-[510px] h-[520px]" />
+            <img
+              src={catsLanding}
+              alt="Cats"
+              className=" w-[510px] aspect-[510/520] object-contain h-[520px]"
+            />
           </div>
           <div className="flex flex-col justify-around items-center mr-20 my-20 ">
             <div className="flex flex-col justify-around items-center h-[35%]">

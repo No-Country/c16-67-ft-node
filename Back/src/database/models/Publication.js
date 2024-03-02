@@ -47,6 +47,11 @@ const publicationSchema = {
         type: DataTypes.TEXT,
         allowNull: false
     },
+    reactionsCount: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        allowNull:true,
+    },
     status:{
         allowNull:false,
         type: DataTypes.BOOLEAN,

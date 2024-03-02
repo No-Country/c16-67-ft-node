@@ -12,7 +12,7 @@
     }
 
     a {
-        @apply flex gap-x-2 items-center;
+        @apply flex gap-x-2 items-center w-full;
     }
 
     span {
