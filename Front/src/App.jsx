@@ -10,6 +10,7 @@ import Menu from './pages/Menu';
 import { useUserContext } from './context/userContext';
 import Saved from './pages/Saved';
 import { Search } from './pages/Search';
+import { ProfileEdit } from './pages/Profiles/ProfileEdit';
 import Suggestions from './components/ui/navBar/suggestions/Suggestions';
 import Footer from './components/ui/navBar/Footer';
 import CreateFirstPet from './pages/CreateFirstPet';
@@ -34,6 +35,7 @@ export default function App() {
               <Route exact path="/publication-create" element={<PublicationForm />} />
               <Route exact path="/profile" element={<Profile />} />
               <Route exact path="/profile/:id" element={<PetProfile />} />
+              <Route exact path="/edit/profile" element={<ProfileEdit />} />
               <Route exact path="/menu" element={<Menu />} />
               <Route exact path="/saved" element={<Saved />} />
               <Route exact path="/search" element={<Search />} />
