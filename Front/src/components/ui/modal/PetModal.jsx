@@ -9,6 +9,7 @@ import defaultProfile from '../../../assets/images/createPet.svg';
 import Modal from './Modal';
 import { useUserContext } from '../../../context/userContext';
 import { createPet } from '../../../service/pets/petCreation';
+import { changeLastPet } from '../../../service/users/userService';
 
 const PetModal = () => {
   const { petModalState, modalTextState, closeModal, openModal } = useModalContext();
@@ -42,11 +43,15 @@ const PetModal = () => {
     createPet(payload)
       .then((response) => {
         setActivePet(response.data.data);
-        openModal({
-          description: 'Pet created successfully',
-          chooseModal: false
-        });
-        navigate('/');
+        changeLastPet(userId, response.data.data.petId)
+          .then(() => {
+            openModal({
+              description: 'Pet created successfully',
+              chooseModal: false
+            });
+            navigate('/');
+          })
+          .catch((error) => console.error(error));
       })
       .catch(() => {
         openModal({
