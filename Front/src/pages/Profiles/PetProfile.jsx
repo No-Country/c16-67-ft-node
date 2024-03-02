@@ -91,10 +91,15 @@ export default function PetProfile() {
                     <FollowButton />
                   </div>
                 </div>
-                <p className=" mt-1 mb-4 text-[24px] text-[#232220] text-center lg:text-[26px]">
+                <p className=" mt-1 mb-2 text-[24px] text-[#232220] text-center lg:text-[26px]">
                   {pets.name}
                 </p>
-
+                <p className="mb-2 text-body-md text-[#232220] text-center lg:text-body-lg">
+                  @{pets.username}
+                </p>
+                <p className="mb-2 text-body-md text-[#232220B2] text-center md:mt-1 lg:text-body-lg">
+                  {pets.age} years
+                </p>
                 <div className="flex justify-center w-[200px] text-[#176543] font-black ">
                   <p className="text-center text-[14px] md:text-[16px] border-r-[1px] border-[#176543] mr-3 pr-3">
                     1000 Followers

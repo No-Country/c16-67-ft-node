@@ -5,7 +5,7 @@ import Spinner from '../Spinner';
 import { FiEdit, FiX } from 'react-icons/fi';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
-import defaultProfile from '../../../assets/images/defaultProfile.jpg';
+import defaultProfile from '../../../assets/images/createPet.svg';
 import Modal from './Modal';
 import { useUserContext } from '../../../context/userContext';
 import { createPet } from '../../../service/pets/petCreation';
