@@ -1,8 +1,0 @@
-.scrollbarCustom::-webkit-scrollbar {
-    width: 8px;
-}
-
-.scrollbarCustom::-webkit-scrollbar-thumb {
-    @apply bg-gradient-to-b from-[#F06900] to-[#C31A02];
-    border-radius: 4px;
-}

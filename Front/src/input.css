@@ -25,6 +25,11 @@ h6 {
   position: relative;
 }
 
-main {
-  @apply md:pl-56 lg:pl-72 pb-20 md:pb-0 pt-16 md:pt-0;
+.scrollbarCustom::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbarCustom::-webkit-scrollbar-thumb {
+  @apply bg-gradient-to-b from-[#F06900] to-[#C31A02];
+  border-radius: 3px;
 }

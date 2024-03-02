@@ -1,6 +1,6 @@
 .desktop {
     li {
-        @apply px-6 h-[56px] flex items-center rounded-full;
+        @apply px-6 h-[56px] flex items-center rounded-full mr-2;
 
         p {
             @apply sm:text-title-md;
@@ -8,11 +8,11 @@
     }
 
     .activeText {
-        @apply md:text-title-lg;
+        @apply md:text-title-lg text-white;
     }
 
     a {
-        @apply flex gap-x-2 items-center;
+        @apply flex gap-x-2 items-center w-full;
     }
 
     span {
@@ -25,5 +25,5 @@
 }
 
 .active {
-    @apply bg-secondary-50;
+    @apply bg-secondary-700;
 }

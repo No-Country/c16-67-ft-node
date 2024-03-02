@@ -32,3 +32,26 @@ export const getPetsByName = async (name) => {
     throw Error(error.message);
   }
 };
+
+export const editPet = async (petId, inputsData, file) => {
+  try {
+    const formDataToSend = new FormData();
+    formDataToSend.append('name', inputsData.name);
+    formDataToSend.append('age', inputsData.age);
+    formDataToSend.append('description', inputsData.description);
+    formDataToSend.append('image_url', inputsData.image_url);
+
+    if (file) {
+      formDataToSend.append('image', file);
+    }
+    const petEdited = await axios.put(`${API_URL_BASE}/api/v1/pet/${petId}`, formDataToSend, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return petEdited.data;
+  } catch (error) {
+    console.error(error.message);
+    throw Error(error.message);
+  }
+};

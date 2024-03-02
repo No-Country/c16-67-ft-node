@@ -4,7 +4,7 @@ const publicationRouter = require('./publication.router');
 const petRouter = require('./pet.router');
 const commentRouter = require('./comment.router');
 const saveRouter = require('./save.router')
-
+const reactionRouter = require('./reaction.router');
 function routerApi(app){
     const router = express.Router();
     app.use('/api/v1', router);
@@ -13,6 +13,7 @@ function routerApi(app){
     router.use('/pet',petRouter);
     router.use('/comment',commentRouter);
     router.use('/save', saveRouter);
+    router.use('/reaction', reactionRouter);
 }
 
 
