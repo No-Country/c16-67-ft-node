@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import FollowButton from '../../ui/FollowButton';
-import { getPetSuggestions } from '../../../service/pets/petService';
 import { FiX } from 'react-icons/fi';
 import styles from './PetContainer.module.css';
 import Spinner from '../../ui/Spinner';
+import { getPetReactionsById } from '../../../service/reactions/reactionsService';
 
-export default function PetLikesModal({ setIsModalOpen }) {
+export default function PetLikesModal({ setIsModalOpen, postId }) {
   const [pets, setPets] = useState([]);
-  const userId = JSON.parse(localStorage.getItem('userId'));
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    getPetSuggestions(userId, 100)
+    getPetReactionsById(postId)
       .then((response) => {
+        console.log(response);
         setPets(response.data.data);
         setIsLoading(false);
       })
@@ -52,7 +52,7 @@ export default function PetLikesModal({ setIsModalOpen }) {
                     />
                     <div>
                       <p>{pet.name}</p>
-                      <p>@{pet.name}</p>
+                      <p>@{pet.username}</p>
                     </div>
                   </div>
                   <FollowButton />

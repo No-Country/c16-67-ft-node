@@ -22,6 +22,7 @@ export default function PetContainer({ tabActive }) {
   useEffect(() => {
     getPublications(tabActive)
       .then((data) => {
+        console.log(data);
         setFeedData(data);
       })
       .catch(() => {
@@ -65,6 +66,7 @@ export default function PetContainer({ tabActive }) {
             type={publication.type}
             petName={publication['pets.name']}
             profileImage={publication['pets.image_url']}
+            reactionsCount={publication.reactionsCount}
             address={publication.address}
             saved={saved.find((savedPublication) => savedPublication.postId === publication.postId)}
             fetchSaved={fetchSaved}
