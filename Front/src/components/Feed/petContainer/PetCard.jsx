@@ -107,7 +107,6 @@ export default function PetCard({
         userId: userId,
         name: petName,
         username: pet.username,
-        reactionId: reactions,
         image_url: profileImage
       };
       sendPetReactions(body).then(() => {
