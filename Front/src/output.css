@@ -2539,6 +2539,11 @@ h6{
     margin-bottom: 6rem;
   }
 
+  .md\:my-4{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
   .md\:mb-0{
     margin-bottom: 0px;
   }
@@ -2704,10 +2709,6 @@ h6{
     align-self: center;
   }
 
-  .md\:overflow-y-hidden{
-    overflow-y: hidden;
-  }
-
   .md\:rounded-2xl{
     border-radius: 1rem;
   }
@@ -2751,6 +2752,11 @@ h6{
   .md\:px-20{
     padding-left: 5rem;
     padding-right: 5rem;
+  }
+
+  .md\:px-4{
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .md\:pb-0{

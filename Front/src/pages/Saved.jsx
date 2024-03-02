@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigateContext } from '../context/navigationContext';
 import { getPublicationsSaved } from '../service/publications/publicationsService';
 import PublicataionSavedContainer from '../components/saved/PublicataionSavedContainer';
-import backIcon from '../assets/images/back.svg'
+import backIcon from '../assets/images/back.svg';
 
 export default function Saved() {
   const { setActive } = useNavigateContext();
