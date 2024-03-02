@@ -34,19 +34,19 @@ export default function PetCard({
   const [like, setLike] = useState(false);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
-  const { petId } = JSON.parse(localStorage.getItem('pet'));
   const userId = JSON.parse(localStorage.getItem('userId'));
+  const pet = JSON.parse(localStorage.getItem('pet'));
 
   const savePost = () => {
     const body = {
-      petId: petId,
+      petId: pet.petId,
       postId: postId,
       userId: userId,
       name_pet: petName,
       image_url_pet: profileImage,
       image_url_post: postImage
     };
-    console.log(body);
+
     postSave(body).then(() => {
       fetchSaved();
     });
@@ -62,7 +62,7 @@ export default function PetCard({
     const userId = JSON.parse(localStorage.getItem('userId'));
 
     const body = {
-      petId: petId,
+      petId: pet.petId,
       postId: postId,
       userId: userId,
       name: petName,
@@ -112,7 +112,7 @@ export default function PetCard({
           setIsModalOpen={setIsModalCommentOpen}
           postId={postId}
           setComments={setComments}
-          petId={petId}
+          petId={pet.petId}
           petName={petName}
           petUsername={petUsername}
           profileImage={profileImage}

@@ -18,5 +18,5 @@ export const ProfileEdit = () => {
     setPet(pet.data);
     setIsLoading(false);
   };
-  return <main>{isLoading ? <Spinner /> : <PetEditForm FormPrevData={pet} />}</main>;
+  return <main>{isLoading ? <Spinner /> : <PetEditForm formPrevData={pet} />}</main>;
 };
