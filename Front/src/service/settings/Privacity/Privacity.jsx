@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './styleprivacity.css'; 
 
 const Privacy = () => {
+  const [selectedCheckbox, setSelectedCheckbox] = useState(null);
+
+  const handleCheckboxChange = (checkboxId) => {
+    setSelectedCheckbox(checkboxId);
+  };
+
   return (
     <div className="max-w-[567px] w-full bg-white p-8 mx-auto">
       <p className="text-3xl leading-9">Privacy of your account</p>
@@ -9,7 +16,10 @@ const Privacy = () => {
         <input
           type="checkbox"
           id="publicCheckbox"
+          name="privacyCheckbox"
           className="form-checkbox h-6 w-6 rounded-full border-2 border-gray-400 cursor-pointer"
+          checked={selectedCheckbox === 'publicCheckbox'}
+          onChange={() => handleCheckboxChange('publicCheckbox')}
         />
         <label htmlFor="publicCheckbox" className="text-lg ml-2 whitespace-nowrap">
           Public
@@ -23,7 +33,10 @@ const Privacy = () => {
         <input
           type="checkbox"
           id="privateCheckbox"
+          name="privacyCheckbox"
           className="form-checkbox h-6 w-6 rounded-full border-2 border-gray-400 cursor-pointer"
+          checked={selectedCheckbox === 'privateCheckbox'}
+          onChange={() => handleCheckboxChange('privateCheckbox')}
         />
         <label htmlFor="privateCheckbox" className="text-lg ml-2 whitespace-nowrap">
           Private
@@ -37,3 +50,4 @@ const Privacy = () => {
 };
 
 export default Privacy;
+
