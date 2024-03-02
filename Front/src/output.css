@@ -1052,10 +1052,6 @@ video {
   max-height: 60vh;
 }
 
-.max-h-\[500px\]{
-  max-height: 500px;
-}
-
 .min-h-\[calc\(100vh-80px\)\]{
   min-height: calc(100vh - 80px);
 }
@@ -1511,10 +1507,6 @@ video {
 
 .overflow-x-hidden{
   overflow-x: hidden;
-}
-
-.overflow-y-hidden{
-  overflow-y: hidden;
 }
 
 .truncate{
@@ -2719,14 +2711,6 @@ h6{
 
   .md\:self-center{
     align-self: center;
-  }
-
-  .md\:overflow-auto{
-    overflow: auto;
-  }
-
-  .md\:overflow-y-hidden{
-    overflow-y: hidden;
   }
 
   .md\:rounded-2xl{
