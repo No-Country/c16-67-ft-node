@@ -18,6 +18,7 @@ class create {
         } 
 
         let result =  await model.create(dataBody)
+        console.log("ESTOY ACAAAAAAAAAAAAAA")
         if(model === modelNames.Reaction) await modelNames.Publication.increment('reactionsCount',{where:{postId:dataBody.postId}})
 
         return result

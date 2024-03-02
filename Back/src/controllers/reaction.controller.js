@@ -51,7 +51,6 @@ const getByFkpostId = async (req, res) => {
 const _deleted = async (req, res) => {
     try {
         const { id } = req.params;
-        console.log(Reaction)
         const result = await writeService.update(Reaction, id,{ status: false }, modelIds.reactionId);
         res.status(200).json({ success: true, data: result });
     } catch (error) {

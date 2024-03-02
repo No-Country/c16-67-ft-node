@@ -32,7 +32,6 @@ const saveSchema ={
     postId:{
         type:DataTypes.UUID,
         allowNull:true,
-        unique: true
     },
     image_url_post:{
         type: DataTypes.TEXT,
