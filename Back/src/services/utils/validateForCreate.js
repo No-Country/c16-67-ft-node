@@ -8,13 +8,8 @@ async function validateCreation(model,dataBody) {
         return data.dataValues
     }
     if(model === modelNames.Save){
-        console.log("ENTREEEEEEE",dataBody)
-        let information = await model.findOne({ where: {
-            postId: dataBody.postId,
-            petId: dataBody.petId 
-        }});
+        let information = await model.findOne({ where: { postId: dataBody.postId, petId: dataBody.petId }});
         if(!information || !information?.saveId) return false 
-
         return { model, id: information.dataValues.postId, data:{status:true}, whereId: "postId"}
     }
     if(model === modelNames.Reaction){

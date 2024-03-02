@@ -12,13 +12,10 @@ class create {
             const whereCondition = {};
             whereCondition[information.whereId] = information.id;
             await information.model.update(information.data, { where: whereCondition });
-            
             return await modelNames.Publication.increment('reactionsCount',{where:{postId: dataBody.postId}})
-
         } 
 
         let result =  await model.create(dataBody)
-        console.log("ESTOY ACAAAAAAAAAAAAAA")
         if(model === modelNames.Reaction) await modelNames.Publication.increment('reactionsCount',{where:{postId:dataBody.postId}})
 
         return result
