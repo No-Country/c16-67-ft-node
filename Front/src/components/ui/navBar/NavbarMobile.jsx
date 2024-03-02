@@ -55,20 +55,22 @@ export default function NavbarMobile({ active, pet }) {
           <nav className="fixed bottom-0 z-50 w-full h-20">
             <ul className="flex relative h-full">
               <li className={`flex-grow flex-col flex-basis-0 flex items-center justify-center`}>
-                <NavLink
-                  to={'/'}
-                  className={`grid place-items-center px-2 py-1  ${active === 'feed' && 'bg-primary-300 rounded-lg'}`}
-                >
-                  <img className="h-6 w-6" src={feedIcon} alt="Feed icon" />
+                <NavLink to={'/'} className={`grid place-items-center w-auto px-2 py-1`}>
+                  <img
+                    className={`h-6 w-10 ${active === 'feed' && 'bg-primary-300 rounded-lg'}`}
+                    src={feedIcon}
+                    alt="Feed icon"
+                  />
                   <span>Feed</span>
                 </NavLink>
               </li>
               <li className="flex-grow-[2] flex flex-col flex-basis-0 h-full items-center justify-center">
-                <NavLink
-                  className={`grid place-items-center px-2 py-1 ${active === 'search' && 'bg-primary-300 rounded-lg'}`}
-                  to={'/search'}
-                >
-                  <img className="h-6 w-6" src={searchIcon} alt="Search icon" />
+                <NavLink className={`grid place-items-center px-2 py-1}`} to={'/search'}>
+                  <img
+                    className={`h-6 w-10 ${active === 'search' && 'bg-primary-300 rounded-lg'}`}
+                    src={searchIcon}
+                    alt="Search icon"
+                  />
                   Search
                 </NavLink>
               </li>
@@ -79,20 +81,22 @@ export default function NavbarMobile({ active, pet }) {
                 </NavLink>
               </li>
               <li className="flex-grow-[2] flex-col flex-basis-0 flex h-full items-center justify-center">
-                <NavLink
-                  to={'/profile'}
-                  className={`grid place-items-center px-2 py-1 ${active === 'profile' && 'bg-primary-300 rounded-lg'}`}
-                >
-                  <img className="h-6 w-6" src={footIcon} alt="Profile icon" />
+                <NavLink to={'/profile'} className={`grid place-items-center px-2 py-1'}`}>
+                  <img
+                    className={`h-6 w-10 ${active === 'profile' && 'bg-primary-300 rounded-lg'}`}
+                    src={footIcon}
+                    alt="Profile icon"
+                  />
                   Profile
                 </NavLink>
               </li>
               <li className={`flex-grow flex-basis-0 flex h-full items-center justify-center`}>
-                <NavLink
-                  to={'/menu'}
-                  className={`grid place-items-center px-2 py-1 ${active === 'menu' && 'bg-primary-300 rounded-lg'}`}
-                >
-                  <img className="h-6 w-6" src={menuIcon} alt="Menu icon" />
+                <NavLink to={'/menu'} className={`grid place-items-center px-2 py-1`}>
+                  <img
+                    className={`h-6 w-10 ${active === 'menu' && 'bg-primary-300 rounded-lg'}`}
+                    src={menuIcon}
+                    alt="Menu icon"
+                  />
                   More
                 </NavLink>
               </li>

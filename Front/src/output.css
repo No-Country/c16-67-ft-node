@@ -722,6 +722,11 @@ video {
   margin-right: 8rem;
 }
 
+.mx-4{
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .mx-5{
   margin-left: 1.25rem;
   margin-right: 1.25rem;
@@ -1040,6 +1045,10 @@ video {
   max-height: 6rem;
 }
 
+.max-h-36{
+  max-height: 9rem;
+}
+
 .max-h-\[50vh\]{
   max-height: 50vh;
 }
@@ -1052,8 +1061,8 @@ video {
   max-height: 60vh;
 }
 
-.max-h-\[500px\]{
-  max-height: 500px;
+.min-h-24{
+  min-height: 6rem;
 }
 
 .min-h-\[calc\(100vh-80px\)\]{
@@ -1062,6 +1071,10 @@ video {
 
 .min-h-screen{
   min-height: 100vh;
+}
+
+.w-10{
+  width: 2.5rem;
 }
 
 .w-12{
@@ -1156,6 +1169,10 @@ video {
   width: 83%;
 }
 
+.w-auto{
+  width: auto;
+}
+
 .w-fit{
   width: -moz-fit-content;
   width: fit-content;
@@ -1211,10 +1228,6 @@ video {
 
 .max-w-md{
   max-width: 28rem;
-}
-
-.max-w-xs{
-  max-width: 20rem;
 }
 
 .flex-1{
@@ -1513,10 +1526,6 @@ video {
   overflow-x: hidden;
 }
 
-.overflow-y-hidden{
-  overflow-y: hidden;
-}
-
 .truncate{
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1766,11 +1775,6 @@ video {
   background-color: #0000007A;
 }
 
-.bg-blue-500{
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-}
-
 .bg-error-400{
   --tw-bg-opacity: 1;
   background-color: rgb(230 51 51 / var(--tw-bg-opacity));
@@ -1988,6 +1992,10 @@ video {
   padding-left: 0px;
 }
 
+.pl-4{
+  padding-left: 1rem;
+}
+
 .pl-5{
   padding-left: 1.25rem;
 }
@@ -2182,6 +2190,10 @@ video {
 .text-\[\#1A202C\]{
   --tw-text-opacity: 1;
   color: rgb(26 32 44 / var(--tw-text-opacity));
+}
+
+.text-\[\#232220B2\]{
+  color: #232220B2;
 }
 
 .text-\[\#232220CC\]{
@@ -2418,6 +2430,11 @@ h6{
   line-height: 2rem;
 }
 
+.hover\:text-gray-800:hover{
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+
 .hover\:opacity-100:hover{
   opacity: 1;
 }
@@ -2478,10 +2495,6 @@ h6{
     position: relative;
   }
 
-  .md\:left-6{
-    left: 1.5rem;
-  }
-
   .md\:right-6{
     right: 1.5rem;
   }
@@ -2531,9 +2544,14 @@ h6{
     margin-right: 0px;
   }
 
-  .md\:mx-32{
-    margin-left: 8rem;
-    margin-right: 8rem;
+  .md\:mx-12{
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
+  .md\:mx-20{
+    margin-left: 5rem;
+    margin-right: 5rem;
   }
 
   .md\:mx-auto{
@@ -2546,6 +2564,11 @@ h6{
     margin-bottom: 0px;
   }
 
+  .md\:my-12{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
   .md\:my-24{
     margin-top: 6rem;
     margin-bottom: 6rem;
@@ -2556,21 +2579,16 @@ h6{
     margin-bottom: 1rem;
   }
 
-  .md\:mx-20{
-    margin-left: 5rem;
-    margin-right: 5rem;
-  }
-
-  .md\:mb-0{
-    margin-bottom: 0px;
-  }
-
   .md\:mb-4{
     margin-bottom: 1rem;
   }
 
   .md\:mr-0{
     margin-right: 0px;
+  }
+
+  .md\:mt-1{
+    margin-top: 0.25rem;
   }
 
   .md\:mt-10{
@@ -2726,14 +2744,6 @@ h6{
     align-self: center;
   }
 
-  .md\:overflow-auto{
-    overflow: auto;
-  }
-
-  .md\:overflow-y-hidden{
-    overflow-y: hidden;
-  }
-
   .md\:rounded-2xl{
     border-radius: 1rem;
   }
@@ -2837,6 +2847,11 @@ h6{
     line-height: 52px;
   }
 
+  .md\:text-headline-lg{
+    font-size: 32px;
+    line-height: 40px;
+  }
+
   .md\:text-headline-sm{
     font-size: 24px;
     line-height: 32px;
@@ -2898,6 +2913,11 @@ h6{
 
   .lg\:text-\[26px\]{
     font-size: 26px;
+  }
+
+  .lg\:text-body-lg{
+    font-size: 16px;
+    line-height: 24px;
   }
 }
 
