@@ -119,7 +119,7 @@ export default function PetCard({
         />
       )}
       {modalTextState.isOpen && <Modal />}
-      <div className="grid place-items-center px-4">
+      <div className="grid place-items-center md:px-4">
         <div className="mb-4 md:grid md:grid-cols-12 md:h-[360px] md:shadow-md md:rounded-2xl auto-rows-fr max-w-[768px] md:border mx-auto w-full">
           <div className="flex px-4 gap-x-3 items-center md:h-fit md:col-[7/13] md:relative md:self-center">
             <img
