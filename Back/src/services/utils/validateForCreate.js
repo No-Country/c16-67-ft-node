@@ -8,21 +8,20 @@ async function validateCreation(model,dataBody) {
         return data.dataValues
     }
     if(model === modelNames.Save){
-        let data = await model.findOne({ where: { postId: dataBody.postId } });
-        if(!data || !data?.saveId) return false 
-
-        return {model: model, id: dataBody.postId, date:{status:true}, whereId: "postId"}
+        let information = await model.findOne({ where: { postId: dataBody.postId, petId: dataBody.petId }});
+        if(!information || !information?.saveId) return false 
+        return { model, id: information.dataValues.postId, data:{status:true}, whereId: "postId"}
     }
     if(model === modelNames.Reaction){
-        let {dataValues} = await model.findOne({ where: {
+        let information = await model.findOne({ where: {
             postId: dataBody.postId,
             petId: dataBody.petId 
         }});
-        if(!dataValues || !dataValues?.reactionId) return false 
+        if(!information || !information?.reactionId) return false 
         return {
             model, 
             whereId: "reactionId",
-            id: dataValues.reactionId,
+            id: information.dataValues.reactionId,
             data: {
             status: true 
             }

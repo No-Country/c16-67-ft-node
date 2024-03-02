@@ -7,7 +7,7 @@ const Save = modelNames.Save;
 
 const create = async (req,res) => {
     try {
-        const result = await saveWriteService.create(Save, req.body);
+        const result = await writeService.create(Save, req.body);
         res.status(200).json({ success: true, data: result });
     } catch (error) {
         res.status(500).send({ success: false, message: error.message });
