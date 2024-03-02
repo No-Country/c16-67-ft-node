@@ -88,7 +88,7 @@ const ModalPost = ({ closeModal }) => {
       {isLoading && <Spinner />}
       <section className="fixed  flex flex-col-reverse  left-0 right-0 top-0 bg-blackOpacity w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full">
         <form
-          className={`container mx-auto max-w-2xl py-6 overflow-y-auto md:overflow-y-hidden bg-white  md:rounded-2xl animate-petModalOpen`}
+          className={`container mx-auto max-w-2xl py-6 md:my-4 overflow-y-auto bg-white  md:rounded-2xl animate-petModalOpen`}
           onSubmit={handleSubmit}
           onClick={(e) => e.stopPropagation()}
         >
@@ -100,7 +100,7 @@ const ModalPost = ({ closeModal }) => {
             />
           </div>
           <hr className="border-t border-black w-full my-0 opacity-30" />
-          <div className="px-4 md:px-16">
+          <div className="px-4 md:px-16 h-auto">
             <p className="grow mt-4 text-title-md md:text-headline-sm leading-8 text-neutral-800">
               Choose the type of post
             </p>
@@ -142,7 +142,7 @@ const ModalPost = ({ closeModal }) => {
               <p className="  text-[20px]">Location</p>
               <Location setAddress={setAddress} />
             </div>
-            <p className="mb-3  text-secondary-800  font-bold text-[22px]">Attach</p>
+            <p className="mb-3 text-secondary-800  font-bold text-[22px]">Attach</p>
             <label
               htmlFor="file-upload"
               className="rounded-ml aspect-square mb-6 cursor-pointer border flex items-center justify-center gap-x-2 md:w-[200px] md:h-[164px] bg-secondary-50 rounded-md"
@@ -160,7 +160,7 @@ const ModalPost = ({ closeModal }) => {
                   src={addPet}
                   alt="icono"
                   ref={inputFileRef}
-                  className="w-full object-cover md:aspect-[200/164]"
+                  className={`object-cover aspect-square md:aspect-[200/164] 'w-full' ${formData.image === null ? 'w-24 h-24' : 'w-full'}`}
                 />
               </div>
             </label>
