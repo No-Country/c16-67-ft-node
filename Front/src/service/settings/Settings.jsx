@@ -25,10 +25,7 @@ export default function ConfiguracionPage() {
   return (
     <div className="flex max-md:flex-col bg-white h-screen   ml-[-20px] ">
       {/* Logo en la vista de escritorio */}
-      <div className="hidden md:block absolute top-5 right-[-70px] ">
-        <img src={isologo} alt="icono" />
-      </div>
-
+      
       {/* Contenedores principales */}
       <div className="border-stone-400  px-8 mt-40 overflow-y-auto">
         <p className="text-3xl leading-9 mb-8">Account Center</p>
