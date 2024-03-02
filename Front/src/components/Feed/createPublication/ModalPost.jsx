@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useModalContext } from '../../../context/modalContext';
 import Location from './Location';
 import Spinner from '../../ui/Spinner';
@@ -15,6 +15,13 @@ const ModalPost = ({ closeModal }) => {
     image: null,
     type: 'Normal'
   });
+
+  const inputFileRef = useRef(null);
+
+  useEffect(() => {
+    inputFileRef.current.focus();
+  }, []);
+
   const userId = JSON.parse(localStorage.getItem('userId'));
   const { petId } = JSON.parse(localStorage.getItem('pet'));
 
@@ -23,7 +30,19 @@ const ModalPost = ({ closeModal }) => {
   };
 
   const handleImageChange = (event) => {
+    if (event.target.files[0].type === 'image/png' || event.target.files[0].type === 'image/jpeg') {
+      console.log('Valid file type.');
+    } else {
+      console.error('Invalid file type.');
+      return;
+    }
     setFormData({ ...formData, image: event.target.files[0] });
+    console.log(event.target.files[0]);
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      inputFileRef.current.src = e.target.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
   };
 
   //Manejador del boton PUBLICAR
@@ -63,20 +82,6 @@ const ModalPost = ({ closeModal }) => {
         });
       });
   };
-
-  // const handleClickOutside = (event) => {
-  //   const form = event.target.closest('form');
-  //   if (!form) {
-  //     closeModal();
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener('click', handleClickOutside);
-  //   return () => {
-  //     window.removeEventListener('click', handleClickOutside);
-  //   };
-  // }, []);
 
   return (
     <>
@@ -135,18 +140,28 @@ const ModalPost = ({ closeModal }) => {
             </div>
             <div className="mb-8 ">
               <p className="  text-[20px]">Location</p>
-              {/* Agrega tu componente Location aquí */}
               <Location setAddress={setAddress} />
             </div>
             <p className="mb-3  text-secondary-800  font-bold text-[22px]">Attach</p>
             <label
               htmlFor="file-upload"
-              className="rounded-ml aspect-square mb-6 cursor-pointer border  py-2 px-6 flex items-center justify-center gap-x-2 md:w-[200px] md:h-[164px] bg-secondary-50 rounded-md"
+              className="rounded-ml aspect-square mb-6 cursor-pointer border flex items-center justify-center gap-x-2 md:w-[200px] md:h-[164px] bg-secondary-50 rounded-md"
             >
-              <input id="file-upload" type="file" onChange={handleImageChange} className="hidden" />
+              <input
+                id="file-upload"
+                type="file"
+                onChange={handleImageChange}
+                className="hidden"
+                accept="image/png, image/jpeg"
+              />
 
-              <div className="flex justify-center  items-center  max-w-full">
-                <img src={addPet} alt="icono" />
+              <div className="grid w-full h-full place-items-center">
+                <img
+                  src={addPet}
+                  alt="icono"
+                  ref={inputFileRef}
+                  className="w-full object-cover md:aspect-[200/164]"
+                />
               </div>
             </label>
             <div className="mb-10"></div>
