@@ -5,7 +5,7 @@ import Spinner from '../Spinner';
 import { FiEdit, FiX } from 'react-icons/fi';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
-import defaultProfile from '../../../assets/images/defaultProfile.jpg';
+import defaultProfile from '../../../assets/images/createPet.svg';
 import Modal from './Modal';
 import { useUserContext } from '../../../context/userContext';
 import { createPet } from '../../../service/pets/petCreation';
@@ -81,7 +81,7 @@ const PetModal = () => {
       <main className="p-0">
         <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full ">
           <form
-            className={`p-6 bg-[#FAFAFA] rounded-t-[40px] md:rounded-[24px] md:w-[50%] ${!petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
+            className={`p-8 bg-[#FAFAFA] rounded-t-[40px] md:rounded-[24px] md:w-[50%] ${!petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
             onSubmit={onSubmit}
           >
             {xBtnPetModal ? (
@@ -148,7 +148,7 @@ const PetModal = () => {
                 setDescriptions(e.target.value);
               }}
             />
-            <button className="block w-full p-2 mb-3 mx-auto text-white text-[18px] bg-[#B8682A] rounded-[8px] md:text-[28px]">
+            <button className="block w-full p-4 mt-4 mb-3 mx-auto text-white text-[18px] bg-[#B8682A] rounded-[8px] md:text-[28px]">
               Create
             </button>
           </form>
