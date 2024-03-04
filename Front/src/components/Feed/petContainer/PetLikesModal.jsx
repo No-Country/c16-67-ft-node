@@ -13,8 +13,7 @@ export default function PetLikesModal({ setIsModalOpen, postId }) {
     setIsLoading(true);
     getPetReactionsById(postId)
       .then((response) => {
-        console.log(response);
-        setPets(response.data.data.filter((reaction) => reaction.status === true));
+        setPets(response.data.data);
         setIsLoading(false);
       })
       .catch((e) => console.error(e));

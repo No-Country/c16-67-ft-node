@@ -52,16 +52,14 @@ export default function Profile() {
       ]);
 
       setOptions(
-        petsResponse.data
-          .filter((pet) => pet.status)
-          .map((pet) => ({
-            value: pet.petId,
-            label: pet.name,
-            username: pet.username,
-            age: pet.age,
-            description: pet.description,
-            image: pet.image_url
-          }))
+        petsResponse.data.map((pet) => ({
+          value: pet.petId,
+          label: pet.username,
+          username: pet.username,
+          age: pet.age,
+          description: pet.description,
+          image: pet.image_url
+        }))
       );
       setPublications(publicationsResponse.data);
       setUser(userResponse.data);
