@@ -92,7 +92,7 @@ export const PetEditForm = ({ formPrevData }) => {
             <div className="relative">
               <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-300">
                 <img
-                  src={inputsData.image_url}
+                  src={inputsData.image ? inputsData.image : inputsData.image_url}
                   alt="Profile"
                   className="w-full h-full object-cover"
                 />

@@ -64,6 +64,7 @@ export default function PetContainer({ tabActive }) {
             postId={publication.postId}
             type={publication.type}
             petName={publication['pets.name']}
+            petUserName={publication['pets.username']}
             profileImage={publication['pets.image_url']}
             reactionsCount={publication.reactionsCount}
             address={publication.address}

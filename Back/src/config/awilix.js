@@ -32,15 +32,12 @@ container.register({
 const PetService = require("../services/extends-service/pet");
 const ReadService = require('../services/read-service');
 const WriteService = require('../services/write-service');
-const {SaveReadService,SaveWriteService} = require("../services/extends-service/save");
 
 // Ahora registramos los servicios:
 container.register({
     petService:          asClass(PetService).singleton(),
     readService:         asClass(ReadService).singleton(),
     writeService:        asClass(WriteService).singleton(),
-    saveReadService:     asClass(SaveReadService).singleton(),
-    saveWriteService:    asClass(SaveWriteService).singleton()
 });
 
 

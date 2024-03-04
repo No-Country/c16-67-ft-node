@@ -50,7 +50,6 @@ export default function PetCommentModal({
     setIsLoading(true);
     getPetCommentsById(postId)
       .then((res) => {
-        console.log(res);
         setComments(res.data.data);
         setPets(res.data.data);
         setIsLoading(false);
