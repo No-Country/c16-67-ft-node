@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { deletePetById, editPet } from '../../service/pets/petService';
+import { deletePetById, editPet, getPetsByUserId } from '../../service/pets/petService';
 import { useUserContext } from '../../context/userContext';
 import Spinner from '../ui/Spinner';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -14,6 +14,7 @@ export const PetEditForm = ({ formPrevData }) => {
   const [file, setFile] = useState(null); // Archivo seleccionado por el usuario
   const { setActivePet } = useUserContext();
   const [isLoading, setIsLoading] = useState(false);
+  const userId = JSON.parse(localStorage.getItem('userId'));
   const navigate = useNavigate();
 
   // Carga los datos previos en el estado del formulario
@@ -51,40 +52,52 @@ export const PetEditForm = ({ formPrevData }) => {
   };
 
   const deletePet = () => {
-    openModal({
-      title: 'Delete pet',
-      description: (
-        <div className="inline md:flex md:flex-row items-center">
-          <p className="inline text-[16px] text-[#2D3748] mr-1">Are you sure? </p>
-          <p className="inline text-[16px] text-error-800">
-            You can’t undo this action afterwards.
-          </p>
-        </div>
-      ),
-      confirmBtn: 'Delete',
-      denyBtn: 'Cancel',
-      onClick: () => {
-        setIsLoading(true);
-        deletePetById(formPrevData.petId)
-          .then((res) => {
-            setIsLoading(false);
-            console.log(res);
-            closeModal();
-            openModal({
-              description: 'Pet deleted successfully',
-              chooseModal: false
-            });
-            navigate('/profile');
-          })
-          .catch(() => {
-            openModal({
-              description: 'An error has occurred',
-              error: true,
-              chooseModal: false
-            });
-          });
-      },
-      chooseModal: true
+    setIsLoading(true);
+    getPetsByUserId(userId).then((res) => {
+      setIsLoading(false);
+      if (res.data.length === 1) {
+        res.data[0];
+        openModal({
+          description: 'You can´t delete your last pet!',
+          error: true,
+          chooseModal: false
+        });
+      } else {
+        openModal({
+          title: 'Delete pet',
+          description: (
+            <div className="inline md:flex md:flex-row items-center">
+              <p className="inline text-[16px] text-[#2D3748] mr-1">Are you sure? </p>
+              <p className="inline text-[16px] text-error-800">
+                You can’t undo this action afterwards.
+              </p>
+            </div>
+          ),
+          confirmBtn: 'Delete',
+          denyBtn: 'Cancel',
+          onClick: () => {
+            setIsLoading(true);
+            deletePetById(formPrevData.petId)
+              .then(() => {
+                setIsLoading(false);
+                closeModal();
+                openModal({
+                  description: 'Pet deleted successfully',
+                  chooseModal: false
+                });
+                navigate('/profile');
+              })
+              .catch(() => {
+                openModal({
+                  description: 'An error has occurred',
+                  error: true,
+                  chooseModal: false
+                });
+              });
+          },
+          chooseModal: true
+        });
+      }
     });
   };
 
@@ -102,11 +115,19 @@ export const PetEditForm = ({ formPrevData }) => {
       inputsData.description === '' ||
       inputsData.image_url === ''
     ) {
-      console.error('Complete todos los datos');
+      openModal({
+        description: 'Please, complete all the fields.',
+        error: true,
+        chooseModal: false
+      });
       return;
     }
     if (i === Object.keys(inputsData).length) {
-      console.error('no se cambio nada');
+      openModal({
+        description: 'You have to make a change.',
+        error: true,
+        chooseModal: false
+      });
       return;
     }
     setIsLoading(true);
