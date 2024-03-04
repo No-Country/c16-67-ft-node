@@ -36,6 +36,7 @@ export default function NavbarDesktop({ active, pet }) {
   };
   return (
     <>
+      {modalChooseState.isOpen && <Modal />}
       {active !== 'createFirstPet' && (
         <div
           className={`hidden md:block absolute left-0 ml-4 lg:ml-8 pt-4 min-h-screen md:w-52 lg:w-64 border-r border-neutral-300 ${styles.desktop}`}
@@ -117,7 +118,6 @@ export default function NavbarDesktop({ active, pet }) {
               <p>Logout</p>
             </li>
           </ul>
-          {modalChooseState.isOpen && <Modal />}
         </div>
       )}
     </>

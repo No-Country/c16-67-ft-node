@@ -29,25 +29,25 @@ const Modal = () => {
   return isOpen ? (
     chooseModal ? (
       <div className="flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-[#0000007A] z-[1000]">
-        <div className="fixed w-[71%] max-w-[448px] mx-5 p-5 px-5 rounded-[6px] bg-white shadow-[#FFECAA66]">
+        <div className="fixed w-[71%] max-w-[448px] mx-5 p-5 px-5 rounded-[6px] bg-white shadow-[#FFECAA66] animate-appear">
           <div className="flex justify-between w-full">
-            <div className="py-[10px] font-bold text-[1.4rem]">{title}</div>
+            <div className="py-[10px] font-bold text-[18px]">{title}</div>
             <FiX
               className="hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
               onClick={closeModal}
             />
           </div>
-          <div className="my-[10px] text-[1.2rem] text-[#2D3748]">{description}</div>
-          <div className="flex justify-end mt-[30px]">
+          <div className="my-[10px] text-[16px] text-[#2D3748]">{description}</div>
+          <div className="flex justify-between md:justify-end mt-[30px]">
             <button
-              className="px-8 py-[5px] mr-[20px] w-[134px] text-[16px] bg-[#EAF8F2] text-[#1A202C] rounded-[6px] shadow-md font-semibold hover:bg-[#cce7db] hover:transition-all hover:duration-[0.5s] hover:ease-in-out "
+              className="px-8 py-[5px] md:mr-[20px] w-[110px] md:w-[134px] text-[14px] md:text-[16px] bg-[#EAF8F2] text-[#1A202C] rounded-[6px] shadow-md font-semibold hover:bg-[#cce7db] hover:transition-all hover:duration-[0.5s] hover:ease-in-out"
               type="cancel"
               onClick={closeModal}
             >
               {denyBtn}
             </button>
             <button
-              className="px-8 py-[5px] w-[134px] text-[16px] bg-[#B8682A] text-[#FAFAFA] rounded-[6px] shadow-md font-semibold hover:bg-[#9e673c] hover:transition-all hover:duration-[0.5s] hover:ease-in-out "
+              className="px-8 py-[5px] w-[110px] md:w-[134px] text-[14px] md:text-[16px] bg-[#D7640B] text-[#FAFAFA] rounded-[6px] shadow-md font-semibold hover:bg-[#9e673c] hover:transition-all hover:duration-[0.5s] hover:ease-in-out"
               type="submit"
               onClick={onClick}
             >

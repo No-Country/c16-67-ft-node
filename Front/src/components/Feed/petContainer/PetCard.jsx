@@ -125,7 +125,14 @@ export default function PetCard({
   const deletePublication = () => {
     openModal({
       title: 'Delete publication',
-      description: 'Are you sure? You can’t undo this action afterwards.',
+      description: (
+        <div className="inline md:flex md:flex-row items-center">
+          <p className="inline text-[16px] text-[#2D3748] mr-1">Are you sure? </p>
+          <p className="inline text-[16px] text-error-800">
+            You can’t undo this action afterwards.
+          </p>
+        </div>
+      ),
       confirmBtn: 'Delete',
       denyBtn: 'Cancel',
       onClick: () => {

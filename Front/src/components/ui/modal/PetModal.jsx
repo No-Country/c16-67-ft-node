@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import defaultProfile from '../../../assets/images/createPet.svg';
 import Modal from './Modal';
 import { useUserContext } from '../../../context/userContext';
-import { createPet } from '../../../service/pets/petCreation';
+import { createPet } from '../../../service/pets/petService';
 import { changeLastPet } from '../../../service/users/userService';
 
 const PetModal = () => {
