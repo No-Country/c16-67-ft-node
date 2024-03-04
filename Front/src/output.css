@@ -948,6 +948,10 @@ video {
   height: 3rem;
 }
 
+.h-14{
+  height: 3.5rem;
+}
+
 .h-16{
   height: 4rem;
 }
@@ -2149,6 +2153,16 @@ video {
   line-height: 24px;
 }
 
+.text-title-sm{
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.text-body-sm{
+  font-size: 12px;
+  line-height: 16px;
+}
+
 .font-\[700\]{
   font-weight: 700;
 }
@@ -2623,6 +2637,10 @@ h6{
     height: 3rem;
   }
 
+  .md\:h-14{
+    height: 3.5rem;
+  }
+
   .md\:h-16{
     height: 4rem;
   }
@@ -2686,6 +2704,10 @@ h6{
 
   .md\:w-12{
     width: 3rem;
+  }
+
+  .md\:w-14{
+    width: 3.5rem;
   }
 
   .md\:w-52{
@@ -2865,6 +2887,11 @@ h6{
   .md\:text-xl{
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-title-sm{
+    font-size: 14px;
+    line-height: 20px;
   }
 
   .md\:shadow-md{
