@@ -81,11 +81,17 @@ export const PetEditForm = ({ formPrevData }) => {
               .then(() => {
                 setIsLoading(false);
                 closeModal();
-                openModal({
-                  description: 'Pet deleted successfully',
-                  chooseModal: false
+                getPetsByUserId(userId).then((updatedRes) => {
+                  if (updatedRes.data.length > 0) {
+                    const newActivePet = updatedRes.data[0];
+                    setActivePet(newActivePet);
+                    openModal({
+                      description: 'Pet deleted successfully',
+                      chooseModal: false
+                    });
+                    navigate('/profile');
+                  }
                 });
-                navigate('/profile');
               })
               .catch(() => {
                 openModal({
