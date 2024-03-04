@@ -8,8 +8,8 @@ export default {
         roboto: ['Roboto', 'sans-serif']
       },
       colors: {
-        'blackOpacity': '#0000007A',
-        'whiteSmoke': '#F2F2F2',
+        blackOpacity: '#0000007A',
+        whiteSmoke: '#F2F2F2',
         primary: {
           50: '#fff2e6',
           100: '#ffd6b1',
@@ -90,6 +90,20 @@ export default {
             transform: 'translateY(-100%) rotate(23deg)'
           }
         },
+        appear: {
+          '0%': {
+            transform: 'scale(0.5)',
+            opacity: ' 0'
+          },
+          '50% ': {
+            transform: 'scale(0.7)',
+            opacity: '0.5'
+          },
+          '100%': {
+            transform: 'scale(1)',
+            opacity: '1'
+          }
+        },
         petModalOpen: {
           '0%': { transform: 'translateY(100%)' },
           '100%': { transform: 'translateY(0)' }
@@ -122,6 +136,7 @@ export default {
       animation: {
         spin: 'spin 1.2s infinite linear',
         increment: 'increment 1.2s infinite linear',
+        appear: 'appear 0.3s linear',
         paws: 'paws 5s linear infinite',
         petModalOpen: 'petModalOpen 0.5s linear',
         petModalClose: 'petModalClose 0.5s linear',
