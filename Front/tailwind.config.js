@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{html,jsx, js}'],
+  content: ['./src/**/*.{html,jsx, js}', 'node_modules/flowbite-react/lib/esm/**/*.js'],
   theme: {
     extend: {
       fontFamily: {
@@ -8,8 +8,8 @@ export default {
         roboto: ['Roboto', 'sans-serif']
       },
       colors: {
-        'blackOpacity': '#0000007A',
-        'whiteSmoke': '#F2F2F2',
+        blackOpacity: '#0000007A',
+        whiteSmoke: '#F2F2F2',
         primary: {
           50: '#fff2e6',
           100: '#ffd6b1',
@@ -147,5 +147,5 @@ export default {
       }
     }
   },
-  plugins: []
+  plugins: [require('flowbite/plugin')]
 };
