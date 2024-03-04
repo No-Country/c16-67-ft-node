@@ -26,7 +26,7 @@ export default function PetCard({
   address,
   postId,
   saved,
-  petUsername,
+  petUserName,
   fetchSaved,
   tabActive,
   type
@@ -73,7 +73,7 @@ export default function PetCard({
       postId: postId,
       userId: userId,
       name: petName,
-      username: petUsername,
+      username: petUserName,
       comment: comment,
       image_url: profileImage
     };
@@ -153,7 +153,7 @@ export default function PetCard({
           setComments={setComments}
           petId={pet.petId}
           petName={petName}
-          petUsername={petUsername}
+          petUserName={petUserName}
           profileImage={profileImage}
         />
       )}
@@ -167,7 +167,7 @@ export default function PetCard({
             />
             <div className="flex-grow">
               <div>{petName}</div>
-              <div className="text-gray-500">@{petName}</div>
+              <div className="text-gray-500">@{petUserName}</div>
               <div
                 className={`text-black md:hidden flex max-w-[calc(100vw-196px)] ${seeMore ? 'flex-col' : 'justify-between'}`}
               >

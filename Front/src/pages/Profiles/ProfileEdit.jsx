@@ -9,11 +9,11 @@ export const ProfileEdit = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     fetchProfileData(petId);
   }, []);
 
   const fetchProfileData = async () => {
-    setIsLoading(true);
     const pet = (await getPetById(petId)).data;
     setPet(pet.data);
     setIsLoading(false);

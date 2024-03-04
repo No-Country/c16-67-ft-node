@@ -50,7 +50,6 @@ export default function PetCommentModal({
     setIsLoading(true);
     getPetCommentsById(postId)
       .then((res) => {
-        console.log(res);
         setComments(res.data.data);
         setPets(res.data.data);
         setIsLoading(false);
@@ -78,9 +77,9 @@ export default function PetCommentModal({
             onClick={() => setIsModalOpen(false)}
             className="absolute top-[30px] right-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:text-[25px]"
           />
-          <div className="relative flex flex-col justify-between px-2 min-h-[calc(100vh-80px)] md:min-h-0">
+          <div className="relative flex flex-col justify-between px-2 min-h-[calc(100dvh-80px)] md:min-h-0">
             <div
-              className={`mt-6 relative mx-5 pr-6 max-h-[50vh] md:max-h-[560px]  overflow-y-auto ${styles.scrollbarCustomLikes}`}
+              className={`mt-6 relative mx-5 pr-6 max-h-[50dvh] md:max-h-[560px]  overflow-y-auto ${styles.scrollbarCustomLikes}`}
             >
               {pets.length === 0 ? (
                 <div className="flex justify-center w-full items-center h-[100px]">

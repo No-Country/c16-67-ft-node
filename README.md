@@ -45,14 +45,16 @@ cd Front
 npm install
 npm run dev
 ```
+
+## Base de datos
+Necesitas crear una base de datos en PostgreSQL para usar tu datos en la variable de entorno y permitir conectarte
+
 ## Variables de Entorno
 
 Para que la aplicación funcione correctamente, es necesario configurar algunas variables de entorno. A continuación, se detallan las variables necesarias para el backend y el frontend.
 Crea un archivo `.env` en el directorio raíz de cada parte del proyecto (Back y Front) y añade las siguientes variables con los valores correspondientes.
 
-### Backend
-
-Crea un archivo `.env` en el directorio `Back` con las siguientes variables:
+en el directorio `Back`:
 
 ```plaintext
 DB_USER= tuusuario
@@ -65,10 +67,13 @@ CLOUDINARY_URL=tuurlclodinary
 
 ### Frontend
 
-Crea un archivo `.env` en el directorio `Front` con las siguientes variables:
+en el directorio `Front`:
 
 ```plaintext
-VITE_APP_ID = http://localhost:3001
+VITE_USER_ID=tuIddeGoogleApi
+VITE_SERVER_PRODUCTION=turServerDeProduccion
+VITE_SERVER_LOCAL= http://localhost:3001
+VITE_LOCATION_IQ_API_KEY = tuKeyDeLocationApi
 ```
 
 ## Deploys
