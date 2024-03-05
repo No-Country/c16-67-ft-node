@@ -8,16 +8,16 @@ const HowItWorks = () => {
       <div className="mb-4">
         <h2 className="text-2xl font-bold mb-2">1. Create Your Pet Profile</h2>
         <p>
-          Start by creating a profile for your pet. Add their adorable pictures, name, breed,
-          and any other details you'd like to share with the Petgram community.
+          Start by creating a profile for your pet. Add their adorable pictures, name, breed, and
+          any other details you`d like to share with the Petgram community.
         </p>
       </div>
 
       <div className="mb-4">
         <h2 className="text-2xl font-bold mb-2">2. Connect with Other Pet Owners</h2>
         <p>
-          Explore the Petgram community and connect with fellow pet owners. Follow other pets,
-          make friends, and share your pet's adventures with a like-minded audience.
+          Explore the Petgram community and connect with fellow pet owners. Follow other pets, make
+          friends, and share your pet`s adventures with a like-minded audience.
         </p>
       </div>
 
@@ -32,7 +32,7 @@ const HowItWorks = () => {
       <div className="mb-4">
         <h2 className="text-2xl font-bold mb-2">4. Share and Enjoy</h2>
         <p>
-          Share your pet's adorable moments, funny antics, and special milestones with the Petgram
+          Share your pet`s adorable moments, funny antics, and special milestones with the Petgram
           community. Enjoy the love and support of fellow pet enthusiasts.
         </p>
       </div>

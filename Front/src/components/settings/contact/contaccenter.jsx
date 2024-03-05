@@ -61,7 +61,9 @@ const ContactCenter = ({ onCancelClick }) => {
 
       <form className="mt-8">
         <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-bold mb-2">Your E-mail</label>
+          <label htmlFor="email" className="block text-sm font-bold mb-2">
+            Your E-mail
+          </label>
           <input
             type="text"
             id="email"
@@ -70,7 +72,9 @@ const ContactCenter = ({ onCancelClick }) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="title" className="block text-sm font-bold mb-2">Title</label>
+          <label htmlFor="title" className="block text-sm font-bold mb-2">
+            Title
+          </label>
           <input
             type="text"
             id="title"
@@ -79,7 +83,9 @@ const ContactCenter = ({ onCancelClick }) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="text" className="block text-sm font-bold mb-2">Description</label>
+          <label htmlFor="text" className="block text-sm font-bold mb-2">
+            Description
+          </label>
           <input
             id="text"
             type="text"
@@ -89,22 +95,22 @@ const ContactCenter = ({ onCancelClick }) => {
         </div>
 
         <div className={`flex mt-10 ${isMobile ? 'flex-col' : 'space-x-4'} buttons-container`}>
-        {!isMobile && (
+          {!isMobile && (
+            <button
+              type="button"
+              onClick={onCancelClick}
+              className="ccancel-button md:inline-block bg-white text-[#1E8357] border border-[#1E8357] px-36 py-2 rounded-lg"
+            >
+              Cancel
+            </button>
+          )}
           <button
             type="button"
-            onClick={onCancelClick}
-            className="ccancel-button md:inline-block bg-white text-[#1E8357] border border-[#1E8357] px-36 py-2 rounded-lg"
+            className={`save-button w-full ${isMobile ? 'md:w-[100%]' : 'md:w-[50%]'} bg-[#1E8357] text-white px-4 py-2 rounded-lg`}
           >
-            Cancel
+            Save
           </button>
-        )}
-        <button
-          type="button"
-          className={`save-button w-full ${isMobile ? 'md:w-[100%]' : 'md:w-[50%]'} bg-[#1E8357] text-white px-4 py-2 rounded-lg`}
-        >
-          Save
-        </button>
-      </div>
+        </div>
       </form>
     </div>
   );
