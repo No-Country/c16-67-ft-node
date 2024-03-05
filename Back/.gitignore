@@ -3,7 +3,7 @@ node_modules
 
 # Ignorar archivos de configuración
 .env
-
+.vercel
 # Ignorar archivos de logs
 npm-debug.log
 

@@ -5,37 +5,20 @@ import footIcon from '../../../assets/images/footIcon.svg';
 import notificationsIcon from '../../../assets/images/notifications.svg';
 import saveIcon from '../../../assets/images/save.svg';
 import settingsIcon from '../../../assets/images/settings.svg';
-import logoutIcon from '../../../assets/images/logout.svg';
 import defaultProfile from '../../../assets/images/defaultProfile.jpg';
 import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './NavbarDesktop.module.css';
 import Modal from '../modal/Modal';
 import { useModalContext } from '../../../context/modalContext';
-import { useUserContext } from '../../../context/userContext';
-import { googleLogout } from '@react-oauth/google';
+import Logout from '../../authentication/Logout';
 
 export default function NavbarDesktop({ active, pet }) {
   const navigate = useNavigate();
-  const { openModal, modalChooseState, closeModal } = useModalContext();
-  const { logoutContext } = useUserContext();
+  const { modalChooseState } = useModalContext();
 
-  const handleLogout = () => {
-    openModal({
-      title: 'Exit',
-      description: 'Are you sure you want to leave?',
-      confirmBtn: 'Yes',
-      denyBtn: 'No',
-      onClick: async () => {
-        googleLogout();
-        navigate('/');
-        await logoutContext();
-        closeModal();
-      },
-      chooseModal: true
-    });
-  };
   return (
     <>
+      {modalChooseState.isOpen && <Modal />}
       {active !== 'createFirstPet' && (
         <div
           className={`hidden md:block absolute left-0 ml-4 lg:ml-8 pt-4 min-h-screen md:w-52 lg:w-64 border-r border-neutral-300 ${styles.desktop}`}
@@ -106,18 +89,16 @@ export default function NavbarDesktop({ active, pet }) {
               </NavLink>
             </li>
             <li className={`${active === 'menu' ? `${styles.active}` : ''}`}>
-              <NavLink to={'/menu'}>
+              <NavLink>
                 <img src={settingsIcon} className={`${styles.navImg}`} alt="Settings icon" />
                 <p className={`${active === 'menu' && `${styles.activeText}`}`}>Settings</p>
               </NavLink>
             </li>
             <div className="border-b border-neutral-300 mt-4" />
-            <li className="mt-4 flex gap-x-2 cursor-pointer" onClick={handleLogout}>
-              <img src={logoutIcon} className={`${styles.navImg}`} alt="Logout icon" />
-              <p>Logout</p>
+            <li className="mt-4">
+              <Logout />
             </li>
           </ul>
-          {modalChooseState.isOpen && <Modal />}
         </div>
       )}
     </>

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import FollowButton from '../ui/FollowButton';
 
-export const PetProfileCard = ({ name, image, altText, petId }) => {
+export const PetProfileCard = ({ name, image, altText, petId, username }) => {
   return (
     <section className="relative mb-4 md:shadow-md md:rounded-2xl w-full hover:bg-primary-50 hover:transition-all hover:duration-[0.4s] hover:ease-in-out md:border">
       <NavLink
@@ -16,7 +16,7 @@ export const PetProfileCard = ({ name, image, altText, petId }) => {
           />
           <div className="flex flex-col">
             <span>{name}</span>
-            <span>@{name}</span>
+            <span>@{username}</span>
           </div>
         </div>
         <div className="">

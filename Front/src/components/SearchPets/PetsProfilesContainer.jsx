@@ -35,6 +35,7 @@ export const PetsProfilesContainer = ({ inputName }) => {
                 <PetProfileCard
                   key={pet.petId}
                   name={pet.name}
+                  username={pet.username}
                   image={pet.image_url}
                   altText={`Image of ${pet.name}`}
                   petId={pet.petId}

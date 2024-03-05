@@ -12,6 +12,11 @@ import { createPetComments, getPetCommentsById } from '../../../service/comments
 import Spinner from '../../ui/Spinner';
 import { useModalContext } from '../../../context/modalContext';
 import Modal from '../../ui/modal/Modal';
+import {
+  deletePetReactionsById,
+  getPetReactionsById,
+  sendPetReactions
+} from '../../../service/reactions/reactionsService';
 
 export default function PetCard({
   postImage,
@@ -21,7 +26,7 @@ export default function PetCard({
   address,
   postId,
   saved,
-  petUsername,
+  petUserName,
   fetchSaved,
   tabActive,
   type
@@ -31,9 +36,11 @@ export default function PetCard({
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalCommentOpen, setIsModalCommentOpen] = useState(false);
+  const [reactionId, setReactionId] = useState(undefined);
   const [like, setLike] = useState(false);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
+  const [reactions, setReactions] = useState([]);
   const userId = JSON.parse(localStorage.getItem('userId'));
   const pet = JSON.parse(localStorage.getItem('pet'));
 
@@ -66,7 +73,7 @@ export default function PetCard({
       postId: postId,
       userId: userId,
       name: petName,
-      username: petUsername,
+      username: petUserName,
       comment: comment,
       image_url: profileImage
     };
@@ -85,28 +92,60 @@ export default function PetCard({
         chooseModal: false
       });
       setComment('');
-      fetchComments();
+      fetchData();
     });
   };
 
-  const fetchComments = () => {
+  const sendReactions = () => {
+    if (like) {
+      deletePetReactionsById(reactionId).then(() => {
+        setLike(false);
+        fetchData();
+      });
+    } else {
+      const body = {
+        petId: pet.petId,
+        postId: postId,
+        userId: userId,
+        name: petName,
+        username: pet.username,
+        image_url: profileImage
+      };
+      sendPetReactions(body).then(() => {
+        setLike(true);
+        fetchData();
+      });
+    }
+  };
+
+  const fetchData = () => {
     setIsLoading(true);
     getPetCommentsById(postId)
       .then((res) => {
         setComments(res.data.data);
-        setIsLoading(false);
       })
       .catch((e) => console.error(e));
+    getPetReactionsById(postId)
+      .then((response) => {
+        const reactionRes = response.data.data.find((reaction) => reaction.petId === pet.petId);
+        if (reactionRes !== undefined) {
+          setReactionId(reactionRes.reactionId);
+          setLike(true);
+        }
+        setReactions(response.data.data);
+      })
+      .catch((e) => console.error(e));
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    fetchComments();
+    fetchData();
   }, []);
 
   return (
     <>
       {isLoading && <Spinner />}
-      {isModalOpen && <PetLikesModal setIsModalOpen={setIsModalOpen} />}
+      {isModalOpen && <PetLikesModal setIsModalOpen={setIsModalOpen} postId={postId} />}
       {isModalCommentOpen && (
         <PetCommentModal
           setIsModalOpen={setIsModalCommentOpen}
@@ -114,12 +153,12 @@ export default function PetCard({
           setComments={setComments}
           petId={pet.petId}
           petName={petName}
-          petUsername={petUsername}
+          petUserName={petUserName}
           profileImage={profileImage}
         />
       )}
       {modalTextState.isOpen && <Modal />}
-      <div className="grid place-items-center px-4">
+      <div className="grid place-items-center md:px-4">
         <div className="mb-4 md:grid md:grid-cols-12 md:h-[360px] md:shadow-md md:rounded-2xl auto-rows-fr max-w-[768px] md:border mx-auto w-full">
           <div className="flex px-4 gap-x-3 items-center md:h-fit md:col-[7/13] md:relative md:self-center">
             <img
@@ -128,7 +167,7 @@ export default function PetCard({
             />
             <div className="flex-grow">
               <div>{petName}</div>
-              <div className="text-gray-500">@{petName}</div>
+              <div className="text-gray-500">@{petUserName}</div>
               <div
                 className={`text-black md:hidden flex max-w-[calc(100vw-196px)] ${seeMore ? 'flex-col' : 'justify-between'}`}
               >
@@ -185,21 +224,21 @@ export default function PetCard({
                     src={likeIconFill}
                     alt="like-icon"
                     className="cursor-pointer"
-                    onClick={() => setLike(false)}
+                    onClick={() => sendReactions()}
                   />
                 ) : (
                   <img
                     src={likeIcon}
                     alt="like-icon"
                     className="cursor-pointer"
-                    onClick={() => setLike(true)}
+                    onClick={() => sendReactions()}
                   />
                 )}
                 <p
                   className="text-[14px] cursor-pointer hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-110"
                   onClick={() => setIsModalOpen(true)}
                 >
-                  3 paws
+                  {reactions.length === 1 ? reactions.length + ' Paw' : reactions.length + ' Paws'}
                 </p>
               </div>
               <div

@@ -1,6 +1,6 @@
 .desktop {
     li {
-        @apply px-6 h-[56px] flex items-center rounded-full mr-2;
+        @apply px-6 h-[56px] flex items-center rounded-full mr-2 hover:bg-secondary-100;
 
         p {
             @apply sm:text-title-md;
@@ -25,5 +25,5 @@
 }
 
 .active {
-    @apply bg-secondary-700;
+    @apply bg-secondary-700 hover:bg-secondary-700 !important;
 }
