@@ -13,7 +13,7 @@ export default function Menu() {
     setActive('menu');
   }, []);
   return (
-    <main className="bg-gray-100 min-h-screen">
+    <main>
       <div className="py-8">
         <div className="px-4 flex flex-col gap-y-8 pb-8 border-b border-gray-500">
           <NavLink className={`flex gap-x-2 items-center`}>
@@ -24,7 +24,7 @@ export default function Menu() {
             <img src={savedIcon} className="w-6 h-6" alt="Save icon" />
             <p>Save</p>
           </NavLink>
-          <NavLink className={`flex gap-x-2 items-center`} to={'/menu/settings'}>
+          <NavLink className={`flex gap-x-2 items-center`} to="/menu/settings">
             <img src={settingsIcon} className="w-6 h-6" alt="Settings icon" />
             <p>Settings</p>
           </NavLink>
