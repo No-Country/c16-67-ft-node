@@ -10,7 +10,7 @@ import arrowleft from '../../assets/images/arrowleft.svg';
 // Define un componente de botón de menú
 const MenuButton = ({ label, onClick, isActive }) => (
   <button
-    className={`text-lg font-medium px-8 py-4 w-full flex items-center justify-between ${
+    className={`text-sm font-bold font-medium px-8 py-4 w-full flex items-center justify-between ${
       isActive ? 'bg-gradient-to-b from-white to-[#FBF0E7]' : 'hover:bg-gradient-to-b hover:from-white hover:to-[#FBF0E7]'
     }`}
     onClick={onClick}
