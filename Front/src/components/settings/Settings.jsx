@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Change from '../settings/Changeaccount/change';
+import Change from '../settings/ChangeAccount/change';
 import Privacity from '../settings/Privacity/Privacity';
 import ReportAnIssue from '../settings/ReportAnIssue/ReportAnIssue';
-import HowItWorks from '../settings/Howuse/how';
-import Contaccenter from '../settings/contac/contaccenter';
+import HowItWorks from '../settings/HowUse/how';
+import Contaccenter from '../settings/contact/contaccenter';
 import arrow from '../../assets/images/arrow.svg';
 import arrowleft from '../../assets/images/arrowleft.svg';
 

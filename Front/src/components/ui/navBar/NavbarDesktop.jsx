@@ -88,10 +88,12 @@ export default function NavbarDesktop({ active, pet }) {
                 <p className={`${active === 'saved' && `${styles.activeText}`}`}>Saved</p>
               </NavLink>
             </li>
-            <li className={`${active === 'menu' ? `${styles.active}` : ''}`}>
-              <NavLink to={'/menu/settings'}>
+            <li className={`${active === 'menu/settings' ? `${styles.active}` : ''}`}>
+              <NavLink to="/menu/settings">
                 <img src={settingsIcon} className={`${styles.navImg}`} alt="Settings icon" />
-                <p className={`${active === 'menu' && `${styles.activeText}`}`}>Settings</p>
+                <p className={`${active === 'menu/settings' && `${styles.activeText}`}`}>
+                  Settings
+                </p>
               </NavLink>
             </li>
             <div className="border-b border-neutral-300 mt-4" />
