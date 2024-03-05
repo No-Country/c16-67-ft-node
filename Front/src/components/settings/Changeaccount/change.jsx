@@ -53,7 +53,9 @@ const Change = ({ onCancelClick }) => {
 
       <form className="mt-8">
         <div className="mb-4">
-          <label htmlFor="currentGoogle" className="block text-lg mb-2">Current Google account</label>
+          <label htmlFor="currentGoogle" className="block text-lg mb-2">
+            Current Google account
+          </label>
           <input
             type="text"
             id="currentGoogle"
@@ -63,7 +65,9 @@ const Change = ({ onCancelClick }) => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="newGoogle" className="block text-lg mb-2">New Google</label>
+          <label htmlFor="newGoogle" className="block text-lg mb-2">
+            New Google
+          </label>
           <input
             type="text"
             id="newGoogle"
@@ -92,6 +96,6 @@ const Change = ({ onCancelClick }) => {
       </form>
     </div>
   );
-}
+};
 
 export default Change;

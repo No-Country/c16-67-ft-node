@@ -45,7 +45,9 @@ const ReportAnIssue = ({ onCancelClick }) => {
 
       <form className="mt-8">
         <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-bold mb-2">Your E-mail</label>
+          <label htmlFor="email" className="block text-sm font-bold mb-2">
+            Your E-mail
+          </label>
           <input
             type="text"
             id="email"
@@ -54,7 +56,9 @@ const ReportAnIssue = ({ onCancelClick }) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="title" className="block text-sm font-bold mb-2">Title</label>
+          <label htmlFor="title" className="block text-sm font-bold mb-2">
+            Title
+          </label>
           <input
             type="text"
             id="title"
@@ -63,7 +67,9 @@ const ReportAnIssue = ({ onCancelClick }) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="text" className="block text-sm font-bold mb-2">Description</label>
+          <label htmlFor="text" className="block text-sm font-bold mb-2">
+            Description
+          </label>
           <input
             id="text"
             type="text"

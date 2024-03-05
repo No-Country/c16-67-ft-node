@@ -84,7 +84,8 @@ const Privacy = ({ onCancelClick }) => {
         </label>
       </div>
       <p className="text-sm mt-2">
-        If your account is public, any person inside and outside Petgram will be able to see your profile.
+        If your account is public, any person inside and outside Petgram will be able to see your
+        profile.
       </p>
 
       <div className="form-checkbox-container flex items-center mt-4">
@@ -101,7 +102,7 @@ const Privacy = ({ onCancelClick }) => {
         </label>
       </div>
       <p className="text-sm mt-2">
-      If your account is private, only your followers will be able to see your profile.
+        If your account is private, only your followers will be able to see your profile.
       </p>
       <div className={`flex mt-10 ${isMobile ? 'flex-col' : 'space-x-4'} buttons-container`}>
         {!isMobile && (

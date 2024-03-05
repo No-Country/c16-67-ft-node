@@ -1,22 +1,32 @@
 import React, { useState } from 'react';
-import Change from '../settings/Changeaccount/change';
+import Change from '../settings/ChangeAccount/change';
 import Privacity from '../settings/Privacity/Privacity';
 import ReportAnIssue from '../settings/ReportAnIssue/ReportAnIssue';
-import HowItWorks from '../settings/Howuse/how'
-import Contaccenter from '../settings/contac/contaccenter'
+import HowItWorks from '../settings/HowUse/how';
+import Contaccenter from '../settings/contac/contaccenter';
 import arrow from '../../assets/images/arrow.svg';
 import arrowleft from '../../assets/images/arrowleft.svg';
 
 // Define un componente de botón de menú
 const MenuButton = ({ label, onClick, isActive }) => (
   <button
-    className={`text-sm font-bold font-medium px-8 py-4 w-full flex items-center justify-between ${
-      isActive ? 'bg-gradient-to-b from-white to-[#FBF0E7]' : 'hover:bg-gradient-to-b hover:from-white hover:to-[#FBF0E7]'
+    className={`text-sm font-bold md:font-medium px-8 py-4 w-full flex items-center justify-between ${
+      isActive
+        ? 'bg-gradient-to-b from-white to-[#FBF0E7]'
+        : 'hover:bg-gradient-to-b hover:from-white hover:to-[#FBF0E7]'
     }`}
     onClick={onClick}
   >
-    <span className={label === 'Delete your account' || label === 'Pause your account' ? 'text-[#994708]' : ''}>{label}</span>
-    {label !== 'Delete your account' && label !== 'Pause your account' && <img src={arrow} alt="" className="w-6 h-6" />}
+    <span
+      className={
+        label === 'Delete your account' || label === 'Pause your account' ? 'text-[#994708]' : ''
+      }
+    >
+      {label}
+    </span>
+    {label !== 'Delete your account' && label !== 'Pause your account' && (
+      <img src={arrow} alt="" className="w-6 h-6" />
+    )}
   </button>
 );
 
@@ -46,17 +56,17 @@ export default function ConfiguracionPage() {
       case 'privacy':
         return <Privacity onCancelClick={handleCancelClick} />;
       case 'change':
-        return <Change onCancelClick={handleCancelClick}/>;
+        return <Change onCancelClick={handleCancelClick} />;
       case 'delete':
         return <p>Content for Delete your account</p>;
       case 'pause':
         return <p>Content for Pause your account</p>;
       case 'Report an issue':
-        return <ReportAnIssue onCancelClick={handleCancelClick}/>;
+        return <ReportAnIssue onCancelClick={handleCancelClick} />;
       case 'How to use app':
-        return <HowItWorks onCancelClick={handleCancelClick}/>;
+        return <HowItWorks onCancelClick={handleCancelClick} />;
       case 'Contact center':
-        return <Contaccenter onCancelClick={handleCancelClick}/>;
+        return <Contaccenter onCancelClick={handleCancelClick} />;
       default:
         return null;
     }
@@ -114,15 +124,13 @@ export default function ConfiguracionPage() {
 
       {currentPage && (
         <div className="flex md:hidden justify-end md:justify-start mt-4 p-4  left-0 fixed top-10 ">
-        <button
-          className="hover:underline flex items-center ml-2"
-          onClick={handleBackButtonClick}
-        >
-          <img src={arrowleft} alt="" className="w-6 h-6 mb-10" />
-        </button>
-      </div>
-      
-      
+          <button
+            className="hover:underline flex items-center ml-2"
+            onClick={handleBackButtonClick}
+          >
+            <img src={arrowleft} alt="" className="w-6 h-6 mb-10" />
+          </button>
+        </div>
       )}
     </div>
   );
@@ -138,12 +146,12 @@ const renderContent = (currentPage) => {
       return <p>Content for Delete your account</p>;
     case 'pause':
       return <p>Content for Pause your account</p>;
-      case 'Report an issue':
-        return <ReportAnIssue />;
-        case 'How to use app':
-          return <HowItWorks />;
-          case 'Contact center':
-          return <Contaccenter />;
+    case 'Report an issue':
+      return <ReportAnIssue />;
+    case 'How to use app':
+      return <HowItWorks />;
+    case 'Contact center':
+      return <Contaccenter />;
     default:
       return null;
   }
