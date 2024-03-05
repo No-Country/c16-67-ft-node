@@ -24,7 +24,7 @@ export default function Menu() {
             <img src={savedIcon} className="w-6 h-6" alt="Save icon" />
             <p>Save</p>
           </NavLink>
-          <NavLink className={`flex gap-x-2 items-center`} to="/menu/settings">
+          <NavLink className={`flex gap-x-2 items-center`}>
             <img src={settingsIcon} className="w-6 h-6" alt="Settings icon" />
             <p>Settings</p>
           </NavLink>
