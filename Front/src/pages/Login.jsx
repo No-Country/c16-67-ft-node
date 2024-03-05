@@ -24,7 +24,7 @@ export default function Login() {
       <main className="fixed flex pl-0 top-0 bottom-0 right-0 left-0 justify-start items-center bg-primary-50">
         <div className="relative">
           <img src={walkFoots} alt="Cats" className="w-[800px] opacity-10 animate-paws" />
-          <img src={walkFoots} alt="Cats" className="w-[800px] opacity-10 animate-paws " />
+          <img src={walkFoots} alt="Cats" className="w-[800px] opacity-10 animate-paws" />
         </div>
         <div className="absolute flex justify-evenly w-full h-full md:px-20 xl:px-0">
           <div className="hidden flex-col justify-between h-[78%] lg:flex">
