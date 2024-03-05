@@ -1,18 +1,31 @@
-
 import arrow from '../../../assets/images/arrow.svg';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 //  componente Change
 const Change = ({ onCancelClick }) => {
-  
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const isMobile = windowWidth <= 767;
+
   return (
     <div className="max-w-[767px] w-full bg-white p-8 mx-auto">
       <style>
         {`
           @media (max-width: 767px) {
             .cancel-button {
-              display: none;
-              
+              ${isMobile ? 'display: none;' : ''}
             }
           }
 
@@ -28,11 +41,13 @@ const Change = ({ onCancelClick }) => {
 
       <div className="max-w-[767px] w-full mx-auto">
         <p className="text-3xl text-headline-small mb-10 flex items-center">
-          <span className="mr-0">Settings</span>
-          <span className="flex items-center">
-            <img src={arrow} alt="Arrow Icon" className="w-4 h-4 ml-2" />
+          <span className="hidden md:flex items-center">
+            <span className="mr-0">Settings</span>
+            <span className="flex items-center">
+              <img src={arrow} alt="Arrow Icon" className="w-4 h-4 ml-2" />
+            </span>
           </span>
-          <span className="ml-2  font-roboto">Current Google account </span>
+          <span className="ml-2 font-roboto">Current Google account </span>
         </p>
       </div>
 
@@ -57,21 +72,23 @@ const Change = ({ onCancelClick }) => {
           />
         </div>
 
-        <div className="flex  mt-10 space-x-4">
-        <button
-          type="button"
-          onClick={onCancelClick}
-          className="cancel-button md:inline-block bg-white text-[#1E8357] border border-[#1E8357] px-36 py-2 rounded-lg"
-        >
-          Cancel
-        </button>
-        <button
-          type="button"
-          className="flex bg-[#1E8357] text-white px-36 py-2 rounded-lg"
-        >
-          Save
-        </button>
-      </div>
+        <div className={`flex mt-10 ${isMobile ? 'flex-col' : 'space-x-4'}`}>
+          {!isMobile && (
+            <button
+              type="button"
+              onClick={onCancelClick}
+              className="cancel-button md:inline-block bg-white text-[#1E8357] border border-[#1E8357] px-36 py-2 rounded-lg"
+            >
+              Cancel
+            </button>
+          )}
+          <button
+            type="button"
+            className={`form-button w-full ${isMobile ? 'md:w-[100%]' : 'md:w-[50%]'} bg-[#1E8357] text-white px-4 py-2 rounded-lg`}
+          >
+            Save
+          </button>
+        </div>
       </form>
     </div>
   );
