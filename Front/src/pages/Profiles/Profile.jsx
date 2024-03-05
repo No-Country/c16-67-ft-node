@@ -189,15 +189,16 @@ export default function Profile() {
                     />
                   </section>
                 )}
-                {!user.image_url ? (
-                  <></>
-                ) : (
-                  <img
-                    src={user.image_url}
-                    alt="User image"
-                    className="w-[35px] h-[35px] rounded-full xl:hidden"
-                  />
-                )}
+                {user && user.image_url ? (
+  <img
+    src={user.image_url}
+    alt="User image"
+    className="w-[35px] h-[35px] rounded-full xl:hidden"
+  />
+) : (
+  <></>
+)}
+
               </div>
             </div>
             <div className="xl:flex">
