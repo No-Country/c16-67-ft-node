@@ -12,23 +12,25 @@ import { createPet } from '../../../service/pets/petCreation';
 import { changeLastPet } from '../../../service/users/userService';
 
 const PetModal = () => {
+  const navigate = useNavigate();
   const { petModalState, modalTextState, closeModal, openModal } = useModalContext();
+  const { setActivePet } = useUserContext();
   const { isOpen, xBtnPetModal } = petModalState;
   const [petModalOpen, setPetModalOpen] = useState(false);
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [descriptions, setDescriptions] = useState('');
   const [username, setUsername] = useState('');
   const [profilePhoto, setProfilePhoto] = useState(null);
-  const { setActivePet } = useUserContext();
+  const [errors, setErrors] = useState({ profilePhoto: '' });
 
   const onSubmit = (e) => {
     e.preventDefault();
+
     const fileInput = document.getElementById('fileInput');
-    fileInput.files[0];
     const userId = JSON.parse(localStorage.getItem('userId'));
+    fileInput.files[0];
 
     const payload = new FormData();
     payload.append('name', name);
@@ -43,19 +45,17 @@ const PetModal = () => {
     createPet(payload)
       .then((response) => {
         setActivePet(response.data.data);
-        changeLastPet(userId, response.data.data.petId)
-          .then(() => {
-            openModal({
-              description: 'Pet created successfully',
-              chooseModal: false
-            });
-            navigate('/');
-          })
-          .catch((error) => console.error(error));
+        changeLastPet(userId, response.data.data.petId).then(() => {
+          openModal({
+            description: 'Pet created successfully',
+            chooseModal: false
+          });
+          navigate('/');
+        });
       })
-      .catch(() => {
+      .catch((error) => {
         openModal({
-          description: 'An error has occurred',
+          description: `${error.response.data.message}`,
           chooseModal: false,
           error: true
         });
@@ -70,6 +70,7 @@ const PetModal = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    validateImages(file);
     const imgElement = document.getElementById('profilePhoto');
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -77,6 +78,18 @@ const PetModal = () => {
     };
     reader.readAsDataURL(file);
     setProfilePhoto(file);
+  };
+
+  const validateImages = (file) => {
+    let errorMessage = '';
+    const validImagesTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!validImagesTypes.includes(file.type)) {
+      errorMessage = 'Invalid image format';
+    }
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      profilePhoto: errorMessage
+    }));
   };
 
   return isOpen ? (
@@ -124,6 +137,7 @@ const PetModal = () => {
                 id="profilePhoto"
               />
             </div>
+            <p className="h-[5px] mb-[20px] mt-[-5px]">{errors.profilePhoto}</p>
             <div className="px-6 pb-6">
               <TextInput
                 placeholderText={'Pet´s name'}
@@ -144,7 +158,7 @@ const PetModal = () => {
               <TextInput
                 placeholderText={'Age'}
                 input={'input'}
-                val={age}
+                value={age}
                 onChange={(e) => {
                   setAge(e.target.value);
                 }}
