@@ -1121,6 +1121,10 @@ video {
   width: 1.5rem;
 }
 
+.w-9{
+  width: 2.25rem;
+}
+
 .w-\[100px\]{
   width: 100px;
 }
@@ -1198,10 +1202,6 @@ video {
   width: 100vw;
 }
 
-.w-9{
-  width: 2.25rem;
-}
-
 .min-w-20{
   min-width: 5rem;
 }
@@ -1275,27 +1275,6 @@ video {
 
 .transform{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-@keyframes appear{
-  0%{
-    transform: scale(0.5);
-    opacity:  0;
-  }
-
-  50% {
-    transform: scale(0.7);
-    opacity: 0.5;
-  }
-
-  100%{
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.animate-appear{
-  animation: appear 0.3s linear;
 }
 
 @keyframes fadeInSelfClose{
@@ -1373,7 +1352,7 @@ video {
 }
 
 .animate-petModalClose{
-  animation: petModalClose 0.5s linear;
+  animation: petModalClose 0.4s linear;
 }
 
 @keyframes petModalOpen{
@@ -1387,7 +1366,7 @@ video {
 }
 
 .animate-petModalOpen{
-  animation: petModalOpen 0.5s linear;
+  animation: petModalOpen 0.4s linear;
 }
 
 @keyframes spin{
@@ -1410,6 +1389,27 @@ video {
 
 .animate-spin{
   animation: spin 1.2s infinite linear;
+}
+
+@keyframes appearOpen{
+  0%{
+    transform: scale(0.5);
+    opacity:  0;
+  }
+
+  50% {
+    transform: scale(0.7);
+    opacity: 0.5;
+  }
+
+  100%{
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-appearOpen{
+  animation: appearOpen 0.4s linear;
 }
 
 .cursor-pointer{
@@ -1806,11 +1806,6 @@ video {
 .bg-error-400{
   --tw-bg-opacity: 1;
   background-color: rgb(230 51 51 / var(--tw-bg-opacity));
-}
-
-.bg-primary-300{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 167 85 / var(--tw-bg-opacity));
 }
 
 .bg-primary-50{
@@ -2760,10 +2755,6 @@ h6{
     height: 100%;
   }
 
-  .md\:h-11{
-    height: 2.75rem;
-  }
-
   .md\:max-h-\[55dvh\]{
     max-height: 55dvh;
   }
@@ -2786,6 +2777,10 @@ h6{
 
   .md\:min-h-\[calc\(70dvh-80px\)\]{
     min-height: calc(70dvh - 80px);
+  }
+
+  .md\:w-10{
+    width: 2.5rem;
   }
 
   .md\:w-12{
@@ -2832,14 +2827,6 @@ h6{
     width: 100%;
   }
 
-  .md\:w-11{
-    width: 2.75rem;
-  }
-
-  .md\:w-10{
-    width: 2.5rem;
-  }
-
   .md\:min-w-24{
     min-width: 6rem;
   }
@@ -2854,6 +2841,48 @@ h6{
 
   .md\:flex-grow{
     flex-grow: 1;
+  }
+
+  @keyframes appearClose{
+    0%{
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    75% {
+      transform: scale(0.7);
+      opacity: 0.5;
+    }
+
+    100%{
+      transform: scale(0);
+      opacity: 0;
+    }
+  }
+
+  .md\:animate-appearClose{
+    animation: appearClose 0.4s linear;
+  }
+
+  @keyframes appearOpen{
+    0%{
+      transform: scale(0.5);
+      opacity:  0;
+    }
+
+    50% {
+      transform: scale(0.7);
+      opacity: 0.5;
+    }
+
+    100%{
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .md\:animate-appearOpen{
+    animation: appearOpen 0.4s linear;
   }
 
   .md\:grid-cols-12{
@@ -3016,11 +3045,6 @@ h6{
   .md\:text-xl{
     font-size: 1.25rem;
     line-height: 1.75rem;
-  }
-
-  .md\:text-title-md{
-    font-size: 16px;
-    line-height: 24px;
   }
 
   .md\:shadow-md{

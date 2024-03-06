@@ -87,7 +87,7 @@ const ModalPost = ({ closeModal }) => {
       {isLoading && <Spinner />}
       <section className="fixed flex flex-col-reverse left-0 right-0 top-0 bg-blackOpacity w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full">
         <form
-          className={`container mx-auto max-w-[848px] py-6 md:my-4 overflow-y-auto bg-white md:rounded-2xl animate-petModalOpen`}
+          className={`container mx-auto max-w-[848px] py-6 md:my-4 overflow-y-auto bg-white md:rounded-2xl animate-petModalOpen md:animate-appearOpen`}
           onSubmit={handleSubmit}
           onClick={(e) => e.stopPropagation()}
         >

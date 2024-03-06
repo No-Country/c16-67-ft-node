@@ -86,7 +86,7 @@ const PetModal = () => {
       <main className="p-0">
         <section className="fixed flex flex-col-reverse left-0 right-0 bottom-0 md:px-16 bg-[#0000007A] w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full ">
           <form
-            className={` bg-[#FAFAFA] rounded-t-[40px] md:rounded-[24px] md:max-w-[900px] md:w-full ${!petModalOpen ? 'animate-petModalOpen' : 'animate-petModalClose'} `}
+            className={` bg-[#FAFAFA] rounded-t-[40px] md:rounded-[24px] md:max-w-[900px] md:w-full ${!petModalOpen ? 'animate-petModalOpen md:animate-appearOpen' : 'animate-petModalClose md:animate-appearClose'} `}
             onSubmit={onSubmit}
           >
             <div className="relative">
@@ -97,7 +97,7 @@ const PetModal = () => {
                     onClick={() => {
                       setTimeout(() => {
                         closeModal();
-                      }, 480);
+                      }, 400);
                       setPetModalOpen(true);
                     }}
                   />

@@ -28,7 +28,7 @@ const Modal = () => {
   return isOpen ? (
     chooseModal ? (
       <div className="flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-[#0000007A] z-[1000]">
-        <div className="fixed w-[71%] max-w-[448px] mx-5 p-5 px-5 rounded-[6px] bg-white shadow-[#FFECAA66] animate-appear">
+        <div className="fixed w-[71%] max-w-[448px] mx-5 p-5 px-5 rounded-[6px] bg-white shadow-[#FFECAA66] animate-appearOpen">
           <div className="flex justify-between w-full">
             <div className="py-[10px] font-bold text-[18px]">{title}</div>
             <FiX

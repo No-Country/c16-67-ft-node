@@ -67,7 +67,7 @@ export default function PetCommentModal({
     <>
       <div className="fixed top-0 left-0 right-0 bottom-0 w-full bg-blackOpacity z-[1000]">
         <div
-          className={` bg-white md:max-w-[700px] min-h-screen overflow-auto md:min-h-0 md:m-auto md:my-24 md:rounded-3xl relative`}
+          className={` bg-white md:max-w-[700px] min-h-screen overflow-auto md:min-h-0 md:m-auto md:my-24 md:rounded-3xl relative animate-petModalOpen md:animate-appearOpen`}
         >
           <div className="mt-6 flex flex-col items-center gap-y-8">
             <div className="bg-gradient-to-r from-[#F06900] to-[#C31A02] w-44 h-1 rounded-full" />

@@ -90,7 +90,7 @@ export default {
             transform: 'translateY(-100%) rotate(23deg)'
           }
         },
-        appear: {
+        appearOpen: {
           '0%': {
             transform: 'scale(0.5)',
             opacity: ' 0'
@@ -102,6 +102,20 @@ export default {
           '100%': {
             transform: 'scale(1)',
             opacity: '1'
+          }
+        },
+        appearClose: {
+          '0%': {
+            transform: 'scale(1)',
+            opacity: '1'
+          },
+          '75% ': {
+            transform: 'scale(0.7)',
+            opacity: '0.5'
+          },
+          '100%': {
+            transform: 'scale(0)',
+            opacity: '0'
           }
         },
         petModalOpen: {
@@ -136,10 +150,11 @@ export default {
       animation: {
         spin: 'spin 1.2s infinite linear',
         increment: 'increment 1.2s infinite linear',
-        appear: 'appear 0.3s linear',
+        appearOpen: 'appearOpen 0.4s linear',
+        appearClose: 'appearClose 0.4s linear',
         paws: 'paws 5s linear infinite',
-        petModalOpen: 'petModalOpen 0.5s linear',
-        petModalClose: 'petModalClose 0.5s linear',
+        petModalOpen: 'petModalOpen 0.4s linear',
+        petModalClose: 'petModalClose 0.4s linear',
         fadeInSelfClose: 'fadeInSelfClose 0.5s ease-in forwards',
         fadeOutSelfClose: 'fadeOutSelfClose 0.5s ease-in forwards'
       },
