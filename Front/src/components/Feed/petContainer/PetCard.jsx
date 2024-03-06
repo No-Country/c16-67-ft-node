@@ -281,16 +281,16 @@ export default function PetCard({
               }
             }}
           >
-            <div className="w-full p-2 px-4 rounded-3xl text-body-lg bg-[#FBF0E7]">
+            <div className="w-full p-2 px-4 rounded-3xl text-body-lg bg-[#EAEAEA]">
               <input
                 placeholder="Add a growl.."
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                className="w-[275px] text-body-lg outline-none bg-transparent"
+                className="w-[275px] text-body-lg outline-none bg-transparent placeholder:text-[#00000090] placeholder:font-semibold"
               />
             </div>
             <button
-              className="absolute right-4 top-2 text-body-lg text-secondary-800 font-bold hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-110"
+              className="absolute right-4 top-2 text-body-lg text-secondary-700 font-bold hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-110"
               onClick={(e) => {
                 e.preventDefault();
                 sendComment();
