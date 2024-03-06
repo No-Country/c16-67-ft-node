@@ -28,7 +28,6 @@ export default function PetCard({
   saved,
   petUserName,
   fetchSaved,
-  tabActive,
   type
 }) {
   const { openModal, modalTextState } = useModalContext();
@@ -205,12 +204,12 @@ export default function PetCard({
               className="md:h-[360px] w-full aspect-square object-cover md:rounded-s-2xl"
               alt=""
             />
-            {tabActive === 'Lost-Adption' && type === 'Lost' && (
+            {type === 'Lost' && (
               <p className="absolute top-4 right-4 h-6 w-14 grid place-items-center rounded-sm bg-secondary-700 text-white font-bold uppercase">
                 {type}
               </p>
             )}
-            {tabActive === 'Lost-Adption' && type === 'Adoption' && (
+            {type === 'Adoption' && (
               <p className="absolute top-4 right-4 h-6 px-2 grid place-items-center rounded-sm bg-secondary-100 text-primary-700 font-bold uppercase">
                 In adoption
               </p>

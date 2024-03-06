@@ -124,7 +124,7 @@ const PetModal = () => {
                 id="profilePhoto"
               />
             </div>
-            <div className="px-6 pb-6">
+            <div className="px-6 md:px-14 pb-6">
               <TextInput
                 placeholderText={'Pet´s name'}
                 input={'input'}
@@ -156,7 +156,7 @@ const PetModal = () => {
                   setDescriptions(e.target.value);
                 }}
               />
-              <button className="block w-full mb-3 mx-auto h-auto md:h-16 text-white text-headline-md bg-primary-500 rounded-lg md:text-[28px]">
+              <button className="block w-full mb-3 mx-auto h-10 md:h-14 text-white  bg-primary-700 rounded-lg text-title-lg md:text-[28px]">
                 Create
               </button>
             </div>
