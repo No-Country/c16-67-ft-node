@@ -1198,6 +1198,10 @@ video {
   width: 100vw;
 }
 
+.w-9{
+  width: 2.25rem;
+}
+
 .min-w-20{
   min-width: 5rem;
 }
@@ -2756,6 +2760,10 @@ h6{
     height: 100%;
   }
 
+  .md\:h-11{
+    height: 2.75rem;
+  }
+
   .md\:max-h-\[55dvh\]{
     max-height: 55dvh;
   }
@@ -2822,6 +2830,14 @@ h6{
 
   .md\:w-full{
     width: 100%;
+  }
+
+  .md\:w-11{
+    width: 2.75rem;
+  }
+
+  .md\:w-10{
+    width: 2.5rem;
   }
 
   .md\:min-w-24{
@@ -3000,6 +3016,11 @@ h6{
   .md\:text-xl{
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-title-md{
+    font-size: 16px;
+    line-height: 24px;
   }
 
   .md\:shadow-md{
