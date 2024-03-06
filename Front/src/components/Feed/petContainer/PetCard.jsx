@@ -28,7 +28,6 @@ export default function PetCard({
   saved,
   petUserName,
   fetchSaved,
-  tabActive,
   type
 }) {
   const { openModal, modalTextState } = useModalContext();
@@ -205,12 +204,12 @@ export default function PetCard({
               className="md:h-[360px] w-full aspect-square object-cover md:rounded-s-2xl"
               alt=""
             />
-            {tabActive === 'Lost-Adption' && type === 'Lost' && (
+            {type === 'Lost' && (
               <p className="absolute top-4 right-4 h-6 w-14 grid place-items-center rounded-sm bg-secondary-700 text-white font-bold uppercase">
                 {type}
               </p>
             )}
-            {tabActive === 'Lost-Adption' && type === 'Adoption' && (
+            {type === 'Adoption' && (
               <p className="absolute top-4 right-4 h-6 px-2 grid place-items-center rounded-sm bg-secondary-100 text-primary-700 font-bold uppercase">
                 In adoption
               </p>
@@ -282,16 +281,16 @@ export default function PetCard({
               }
             }}
           >
-            <div className="w-full p-2 px-4 rounded-3xl text-body-lg bg-[#FBF0E7]">
+            <div className="w-full p-2 px-4 rounded-3xl text-body-lg bg-[#EAEAEA]">
               <input
                 placeholder="Add a growl.."
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                className="w-[275px] text-body-lg outline-none bg-transparent"
+                className="w-[275px] text-body-lg outline-none bg-transparent placeholder:text-[#00000090] placeholder:font-semibold"
               />
             </div>
             <button
-              className="absolute right-4 top-2 text-body-lg text-secondary-800 font-bold hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-110"
+              className="absolute right-4 top-2 text-body-lg text-secondary-700 font-bold hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-110"
               onClick={(e) => {
                 e.preventDefault();
                 sendComment();

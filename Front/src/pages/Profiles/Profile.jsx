@@ -11,6 +11,7 @@ import Modal from '../../components/ui/modal/Modal';
 import { getPetById, getPetsByUserId } from '../../service/pets/petService';
 import { getUserById } from '../../service/users/userService';
 import { getPublicationsByPetId } from '../../service/publications/publicationsService';
+import sadCat from '../../assets/images/sadCat.svg';
 
 export default function Profile() {
   //INSTANCIAS
@@ -190,15 +191,14 @@ export default function Profile() {
                   </section>
                 )}
                 {user && user.image_url ? (
-  <img
-    src={user.image_url}
-    alt="User image"
-    className="w-[35px] h-[35px] rounded-full xl:hidden"
-  />
-) : (
-  <></>
-)}
-
+                  <img
+                    src={user.image_url}
+                    alt="User image"
+                    className="w-[35px] h-[35px] rounded-full xl:hidden"
+                  />
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className="xl:flex">
@@ -245,8 +245,11 @@ export default function Profile() {
                 <p className="mt-4 text-[16px]">{pet.description}</p>
                 <div className="flex flex-col items-center mt-8 w-full">
                   {publications.length === 0 ? (
-                    <section className="flex justify-center h-[200px] p-4 shadow-lg bg-[#fafafa] font-semibold">
-                      <div className="flex items-center">There´s no publication yet</div>
+                    <section className="flex flex-col items-center justify-center p-4">
+                      <img src={sadCat} alt="sad-cat" className="w-9 h-9 md:w-10 md:h-10" />
+                      <div className="flex items-center text-title-md mt-2 md:text-title-lg">
+                        You don´t have any posts yet.
+                      </div>
                     </section>
                   ) : (
                     <div className="grid grid-cols-2 gap-4 mb-[120px] justify-center lg:grid-cols-3">

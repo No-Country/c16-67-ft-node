@@ -70,7 +70,6 @@ export default function PetContainer({ tabActive }) {
             address={publication.address}
             saved={saved.find((savedPublication) => savedPublication.postId === publication.postId)}
             fetchSaved={fetchSaved}
-            tabActive={tabActive}
           />
         ))}
       </div>
