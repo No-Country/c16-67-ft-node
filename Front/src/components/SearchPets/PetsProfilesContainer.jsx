@@ -35,6 +35,7 @@ export const PetsProfilesContainer = ({ inputName }) => {
                 <PetProfileCard
                   key={pet.petId}
                   name={pet.name}
+                  username={pet.username}
                   image={pet.image_url}
                   altText={`Image of ${pet.name}`}
                   petId={pet.petId}
@@ -42,7 +43,9 @@ export const PetsProfilesContainer = ({ inputName }) => {
               ))}
             </div>
           ) : (
-            <div className="text-center text-headline-sm">0 pets founded with that word</div>
+            <div className="text-center text-body-lg font-semibold md:text-headline-sm">
+              0 pets founded with that word
+            </div>
           )}
         </>
       )}

@@ -18,9 +18,9 @@ class PetService extends ReadService {
         }
         if (userId) {
             conditions.where.userId = {
-              [Op.ne]: userId 
+                [Op.ne]: userId 
             };
-          }
+        }
         // Si no hay condiciones de búsqueda específicas, elimina el 'where' para devolver todos los registros
         if (Object.keys(conditions.where).length === 0) {
             delete conditions.where;

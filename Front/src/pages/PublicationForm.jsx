@@ -74,7 +74,7 @@ function PublicationForm() {
     <>
       {isLoading && <Spinner />}
       {modalTextState.isOpen && <Modal />}
-      <main className="bg-slate-100 h-[100vh]">
+      <main className="bg-slate-100 h-[100dvh]">
         <form className="space-y-4 max-w-md mx-auto">
           <div className="pt-20">
             <div className="flex justify-center">

@@ -26,7 +26,7 @@ export default function SuggestionsModal({ setIsModalOpen }) {
     <>
       <div className="fixed w-screen bg-blackOpacity left-0 top-0">
         <div
-          className={`bg-white m-auto max-w-[648px] h-[calc(100vh-192px)] overflow-auto my-24 rounded-3xl relative`}
+          className={`bg-white m-auto max-w-[648px] h-[calc(100dvh-192px)] overflow-auto my-24 rounded-3xl relative animate-appearOpen`}
         >
           <div className="mt-6 flex flex-col items-center gap-y-8">
             <div className="bg-gradient-to-r from-[#F06900] to-[#C31A02] w-44 h-1 rounded-full" />

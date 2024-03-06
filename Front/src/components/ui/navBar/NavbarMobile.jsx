@@ -57,7 +57,7 @@ export default function NavbarMobile({ active, pet }) {
               <li className={`flex-grow flex-col flex-basis-0 flex items-center justify-center`}>
                 <NavLink to={'/'} className={`grid place-items-center w-auto px-2 py-1`}>
                   <img
-                    className={`h-6 w-10 ${active === 'feed' && 'bg-primary-300 rounded-lg'}`}
+                    className={`h-6 w-10 ${active === 'feed' && 'bg-primary-700 rounded-lg'}`}
                     src={feedIcon}
                     alt="Feed icon"
                   />
@@ -67,7 +67,7 @@ export default function NavbarMobile({ active, pet }) {
               <li className="flex-grow-[2] flex flex-col flex-basis-0 h-full items-center justify-center">
                 <NavLink className={`grid place-items-center px-2 py-1}`} to={'/search'}>
                   <img
-                    className={`h-6 w-10 ${active === 'search' && 'bg-primary-300 rounded-lg'}`}
+                    className={`h-6 w-10 ${active === 'search' && 'bg-primary-700 rounded-lg'}`}
                     src={searchIcon}
                     alt="Search icon"
                   />
@@ -83,7 +83,7 @@ export default function NavbarMobile({ active, pet }) {
               <li className="flex-grow-[2] flex-col flex-basis-0 flex h-full items-center justify-center">
                 <NavLink to={'/profile'} className={`grid place-items-center px-2 py-1'}`}>
                   <img
-                    className={`h-6 w-10 ${active === 'profile' && 'bg-primary-300 rounded-lg'}`}
+                    className={`h-6 w-10 ${active === 'profile' && 'bg-primary-700 rounded-lg'}`}
                     src={footIcon}
                     alt="Profile icon"
                   />
@@ -93,7 +93,7 @@ export default function NavbarMobile({ active, pet }) {
               <li className={`flex-grow flex-basis-0 flex h-full items-center justify-center`}>
                 <NavLink to={'/menu'} className={`grid place-items-center px-2 py-1`}>
                   <img
-                    className={`h-6 w-10 ${active === 'menu' && 'bg-primary-300 rounded-lg'}`}
+                    className={`h-6 w-10 ${active === 'menu' && 'bg-primary-700 rounded-lg'}`}
                     src={menuIcon}
                     alt="Menu icon"
                   />
