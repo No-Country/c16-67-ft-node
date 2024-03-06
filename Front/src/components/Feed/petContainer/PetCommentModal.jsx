@@ -77,9 +77,9 @@ export default function PetCommentModal({
             onClick={() => setIsModalOpen(false)}
             className="absolute top-[30px] right-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:text-[25px]"
           />
-          <div className="relative flex flex-col justify-between px-2 min-h-[calc(100dvh-80px)] md:min-h-0">
+          <div className="relative flex flex-col justify-between px-2 min-h-[calc(100dvh-80px)] md:min-h-[calc(70dvh-80px)]">
             <div
-              className={`mt-6 relative mx-5 pr-6 max-h-[50dvh] md:max-h-[560px]  overflow-y-auto ${styles.scrollbarCustomLikes}`}
+              className={`mt-6 relative mx-5 pr-6 max-h-[75dvh] md:max-h-[55dvh]  overflow-y-auto ${styles.scrollbarCustomLikes}`}
             >
               {pets.length === 0 ? (
                 <div className="flex justify-center w-full items-center h-[100px]">
@@ -130,7 +130,7 @@ export default function PetCommentModal({
                 <input
                   placeholder="Add a growl.."
                   value={commentsModal}
-                  className="min-w-[200px] w-[83%] text-body-lg outline-none bg-transparent"
+                  className="min-w-[200px] w-[83%] text-body-lg outline-none bg-transparent placeholder:text-[#00000090] placeholder:font-semibold"
                   onChange={(e) => setCommentsModal(e.target.value)}
                 />
               </div>

@@ -59,11 +59,10 @@ const ModalPost = ({ closeModal }) => {
     formDataReq.append('address', address);
 
     if (formData.description === '' || formData.image === null || formData.address === '') {
-      console.log('Faltan datos');
       setIsLoading(false);
+      console.log('holis');
       return;
     }
-    console.log(userId);
 
     postPublication(formDataReq)
       .then((response) => {
@@ -74,11 +73,11 @@ const ModalPost = ({ closeModal }) => {
           chooseModal: false
         });
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
         openModal({
-          description: error,
-          chooseModal: false
+          description: 'An error has occurred',
+          chooseModal: false,
+          error: true
         });
       });
   };
@@ -86,14 +85,14 @@ const ModalPost = ({ closeModal }) => {
   return (
     <>
       {isLoading && <Spinner />}
-      <section className="fixed  flex flex-col-reverse  left-0 right-0 top-0 bg-blackOpacity w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full">
+      <section className="fixed flex flex-col-reverse left-0 right-0 top-0 bg-blackOpacity w-full h-full z-[100] md:flex md:flex-col md:items-center md:justify-center md:h-full">
         <form
-          className={`container mx-auto max-w-2xl py-6 md:my-4 overflow-y-auto bg-white  md:rounded-2xl animate-petModalOpen`}
+          className={`container mx-auto max-w-[848px] py-6 md:my-4 overflow-y-auto bg-white md:rounded-2xl animate-petModalOpen`}
           onSubmit={handleSubmit}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="relative mb-4">
-            <p className="text-center text-headline-md ">Create Post</p>
+            <p className="text-center text-headline-md font-semibold">New Post</p>
             <FiX
               className="absolute top-0 right-4 mr-6 text-[20px] border-[2px] border-solid border-black rounded-full hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:mr-0 md:text-[25px]"
               onClick={() => closeModal()}
@@ -107,28 +106,24 @@ const ModalPost = ({ closeModal }) => {
             <div className="flex mb-4 mx grow mt-4">
               <button
                 onClick={() => setFormData({ ...formData, type: 'Normal' })}
-                className={`${formData.type === 'Normal' ? 'bg-primary-500 text-white border border-primary-500' : 'text-primary-500 border border-primary-500'} cursor-pointer py-1 px-8 rounded-tl-md rounded-bl-md`}
+                className={`${formData.type === 'Normal' ? 'bg-primary-700 text-white border border-primary-700' : 'text-primary-700 border border-primary-700'} cursor-pointer py-1 px-8 rounded-tl-md rounded-bl-md`}
               >
                 Feed
               </button>
-
               <button
                 onClick={() => setFormData({ ...formData, type: 'Lost' })}
-                className={`${formData.type === 'Lost' ? 'bg-primary-500 text-white border border-primary-500' : 'text-primary-500 border border-primary-500'} cursor-pointer py-1 px-8`}
+                className={`${formData.type === 'Lost' ? 'bg-primary-700 text-white border border-primary-700' : 'text-primary-700 border border-primary-700'} cursor-pointer py-1 px-8`}
               >
                 Lost
               </button>
-
               <button
                 onClick={() => setFormData({ ...formData, type: 'Adoption' })}
-                className={`${formData.type === 'Adoption' ? 'bg-primary-500 text-white border border-primary-500' : 'text-primary-500 border border-primary-500'} cursor-pointer py-1 px-8 rounded-tr-md rounded-br-md`}
+                className={`${formData.type === 'Adoption' ? 'bg-primary-700 text-white border border-primary-700' : 'text-primary-700 border border-primary-700'} cursor-pointer py-1 px-8 rounded-tr-md rounded-br-md`}
               >
                 Adoption
               </button>
             </div>
-
-            <div className="relative mb-10 ">
-              <label className="block text-gray-700 font-bold mb-2">Description</label>
+            <div className="relative mb-10 mt-8">
               <textarea
                 className="block w-full border border-gray-500 rounded-md shadow-sm py-3 px-4 text-lg text-gray-700 resize-none"
                 rows="4"
@@ -138,11 +133,11 @@ const ModalPost = ({ closeModal }) => {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <div className="mb-8 ">
-              <p className="  text-[20px]">Location</p>
+            <div className="relative w-full mb-8">
+              <p className="text-[20px]">Location</p>
               <Location setAddress={setAddress} />
             </div>
-            <p className="mb-3 text-secondary-800  font-bold text-[22px]">Attach</p>
+            <p className="mb-3 text-secondary-800 font-bold text-[22px]">Attach</p>
             <label
               htmlFor="file-upload"
               className="rounded-ml aspect-square mb-6 cursor-pointer border flex items-center justify-center gap-x-2 md:w-[200px] md:h-[164px] bg-secondary-50 rounded-md"
@@ -154,7 +149,6 @@ const ModalPost = ({ closeModal }) => {
                 className="hidden"
                 accept="image/png, image/jpeg"
               />
-
               <div className="grid w-full h-full place-items-center">
                 <img
                   src={addPet}
@@ -164,10 +158,9 @@ const ModalPost = ({ closeModal }) => {
                 />
               </div>
             </label>
-            <div className="mb-10"></div>
             <button
               type="submit"
-              className="block w-full p-2  mx-auto text-white text-[28px] bg-[#E29900] rounded-[8px]"
+              className="block w-full p-1 mt-10 mx-auto text-white text-title-lg md:text-headline-md bg-primary-700 rounded-[8px]"
             >
               Post
             </button>

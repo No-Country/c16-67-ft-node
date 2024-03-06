@@ -1,12 +1,11 @@
 import { googleLogout } from '@react-oauth/google';
 import { useNavigate } from 'react-router';
 import { useModalContext } from '../../context/modalContext';
-import Modal from '../ui/modal/Modal';
 import { useUserContext } from '../../context/userContext';
 import logoutIcon from '../../assets/images/logout.svg';
 
 export default function Logout() {
-  const { openModal, modalChooseState, closeModal } = useModalContext();
+  const { openModal, closeModal } = useModalContext();
   const navigate = useNavigate();
   const { logoutContext } = useUserContext();
 
@@ -28,7 +27,6 @@ export default function Logout() {
 
   return (
     <>
-      {modalChooseState.isOpen && <Modal />}
       <div className="flex gap-x-2 cursor-pointer items-center w-full" onClick={handleOnClick}>
         <img src={logoutIcon} className="sm:w-6 sm:h-6 md:w-[30px] md:h-[30px]" alt="Logout icon" />
         <p>Logout</p>
