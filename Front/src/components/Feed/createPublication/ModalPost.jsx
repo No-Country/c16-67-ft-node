@@ -125,7 +125,7 @@ const ModalPost = ({ closeModal }) => {
             </div>
             <div className="relative mb-10 mt-8">
               <textarea
-                className="block w-full border border-gray-500 rounded-md shadow-sm py-3 px-4 text-lg text-gray-700 resize-none"
+                className="block w-full border border-gray-500 rounded-md shadow-sm py-3 px-4 text-lg text-gray-700 outline-primary-700 resize-none"
                 rows="4"
                 placeholder="Enter the description..."
                 name="description"

@@ -43,7 +43,9 @@ export const PetsProfilesContainer = ({ inputName }) => {
               ))}
             </div>
           ) : (
-            <div className="text-center text-headline-sm">0 pets founded with that word</div>
+            <div className="text-center text-body-lg font-semibold md:text-headline-sm">
+              0 pets founded with that word
+            </div>
           )}
         </>
       )}
