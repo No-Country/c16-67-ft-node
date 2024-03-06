@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{html,jsx, js}'],
+  content: ['./src/**/*.{html,jsx, js}', 'node_modules/flowbite-react/lib/esm/**/*.js'],
   theme: {
     extend: {
       fontFamily: {
@@ -149,6 +149,7 @@ export default {
       },
       animation: {
         spin: 'spin 1.2s infinite linear',
+        appear: 'appear 0.3s linear',
         increment: 'increment 1.2s infinite linear',
         appearOpen: 'appearOpen 0.4s linear',
         appearClose: 'appearClose 0.4s linear',
@@ -177,5 +178,5 @@ export default {
       }
     }
   },
-  plugins: []
+  plugins: [require('flowbite/plugin')]
 };
