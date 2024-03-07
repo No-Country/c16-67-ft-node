@@ -151,13 +151,13 @@ export default {
         spin: 'spin 1.2s infinite linear',
         appear: 'appear 0.3s linear',
         increment: 'increment 1.2s infinite linear',
-        appearOpen: 'appearOpen 0.4s linear',
-        appearClose: 'appearClose 0.4s linear',
+        appearOpen: 'appearOpen 0.2s linear',
+        appearClose: 'appearClose 0.2s linear',
         paws: 'paws 5s linear infinite',
-        petModalOpen: 'petModalOpen 0.4s linear',
-        petModalClose: 'petModalClose 0.4s linear',
-        fadeInSelfClose: 'fadeInSelfClose 0.5s ease-in forwards',
-        fadeOutSelfClose: 'fadeOutSelfClose 0.5s ease-in forwards'
+        petModalOpen: 'petModalOpen 0.2s linear',
+        petModalClose: 'petModalClose 0.2s linear',
+        fadeInSelfClose: 'fadeInSelfClose 0.2s ease-in forwards',
+        fadeOutSelfClose: 'fadeOutSelfClose 0.2s ease-in forwards'
       },
       fontSize: {
         'body-lg': ['16px', '24px'],

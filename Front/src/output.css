@@ -1434,6 +1434,10 @@ input:checked + .toggle-bg{
   margin-bottom: 120px;
 }
 
+.mb-\[20px\]{
+  margin-bottom: 20px;
+}
+
 .me-4{
   margin-inline-end: 1rem;
 }
@@ -1552,6 +1556,10 @@ input:checked + .toggle-bg{
 
 .mt-8{
   margin-top: 2rem;
+}
+
+.mt-\[-5px\]{
+  margin-top: -5px;
 }
 
 .mt-\[10px\]{
@@ -1682,6 +1690,10 @@ input:checked + .toggle-bg{
   height: 1rem;
 }
 
+.h-40{
+  height: 10rem;
+}
+
 .h-5{
   height: 1.25rem;
 }
@@ -1710,6 +1722,10 @@ input:checked + .toggle-bg{
   height: 24rem;
 }
 
+.h-\[0px\]{
+  height: 0px;
+}
+
 .h-\[100\%\]{
   height: 100%;
 }
@@ -1728,10 +1744,6 @@ input:checked + .toggle-bg{
 
 .h-\[160px\]{
   height: 160px;
-}
-
-.h-\[200px\]{
-  height: 200px;
 }
 
 .h-\[25\%\]{
@@ -1891,6 +1903,10 @@ input:checked + .toggle-bg{
   width: 1rem;
 }
 
+.w-40{
+  width: 10rem;
+}
+
 .w-44{
   width: 11rem;
 }
@@ -1943,8 +1959,8 @@ input:checked + .toggle-bg{
   width: 200px;
 }
 
-.w-\[25px\]{
-  width: 25px;
+.w-\[20px\]{
+  width: 20px;
 }
 
 .w-\[273px\]{
@@ -2187,7 +2203,7 @@ input:checked + .toggle-bg{
 }
 
 .animate-appearOpen{
-  animation: appearOpen 0.4s linear;
+  animation: appearOpen 0.2s linear;
 }
 
 @keyframes fadeInSelfClose{
@@ -2203,7 +2219,7 @@ input:checked + .toggle-bg{
 }
 
 .animate-fadeInSelfClose{
-  animation: fadeInSelfClose 0.5s ease-in forwards;
+  animation: fadeInSelfClose 0.2s ease-in forwards;
 }
 
 @keyframes fadeOutSelfClose{
@@ -2219,7 +2235,7 @@ input:checked + .toggle-bg{
 }
 
 .animate-fadeOutSelfClose{
-  animation: fadeOutSelfClose 0.5s ease-in forwards;
+  animation: fadeOutSelfClose 0.2s ease-in forwards;
 }
 
 @keyframes increment{
@@ -2265,7 +2281,7 @@ input:checked + .toggle-bg{
 }
 
 .animate-petModalClose{
-  animation: petModalClose 0.4s linear;
+  animation: petModalClose 0.2s linear;
 }
 
 @keyframes petModalOpen{
@@ -2279,7 +2295,7 @@ input:checked + .toggle-bg{
 }
 
 .animate-petModalOpen{
-  animation: petModalOpen 0.4s linear;
+  animation: petModalOpen 0.2s linear;
 }
 
 @keyframes spin{
@@ -3104,16 +3120,6 @@ input:checked + .toggle-bg{
 }
 
 .bg-\[\#FAFAFA\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(250 250 250 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#FBF0E7\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(251 240 231 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#fafafa\]{
   --tw-bg-opacity: 1;
   background-color: rgb(250 250 250 / var(--tw-bg-opacity));
 }
@@ -4219,6 +4225,11 @@ input:checked + .toggle-bg{
 .text-\[\#FAFAFA\]{
   --tw-text-opacity: 1;
   color: rgb(250 250 250 / var(--tw-text-opacity));
+}
+
+.text-\[\#ea3354\]{
+  --tw-text-opacity: 1;
+  color: rgb(234 51 84 / var(--tw-text-opacity));
 }
 
 .text-black{
@@ -7280,6 +7291,10 @@ h6{
     height: 6rem;
   }
 
+  .md\:h-60{
+    height: 15rem;
+  }
+
   .md\:h-8{
     height: 2rem;
   }
@@ -7353,10 +7368,6 @@ h6{
     min-height: calc(70dvh - 80px);
   }
 
-  .md\:w-10{
-    width: 2.5rem;
-  }
-
   .md\:w-12{
     width: 3rem;
   }
@@ -7375,6 +7386,10 @@ h6{
 
   .md\:w-52{
     width: 13rem;
+  }
+
+  .md\:w-60{
+    width: 15rem;
   }
 
   .md\:w-8{
@@ -7399,6 +7414,10 @@ h6{
 
   .md\:w-\[204px\]{
     width: 204px;
+  }
+
+  .md\:w-\[23px\]{
+    width: 23px;
   }
 
   .md\:w-\[30px\]{
@@ -7455,7 +7474,7 @@ h6{
   }
 
   .md\:animate-appearClose{
-    animation: appearClose 0.4s linear;
+    animation: appearClose 0.2s linear;
   }
 
   @keyframes appearOpen{
@@ -7476,7 +7495,7 @@ h6{
   }
 
   .md\:animate-appearOpen{
-    animation: appearOpen 0.4s linear;
+    animation: appearOpen 0.2s linear;
   }
 
   .md\:grid-cols-12{
