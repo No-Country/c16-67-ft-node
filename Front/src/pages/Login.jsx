@@ -35,19 +35,19 @@ export default function Login() {
               className=" w-[510px] aspect-[510/520] object-contain h-[520px]"
             />
           </div>
-          <div className="flex flex-col justify-around items-center mr-20 my-20 ">
+          <div className="flex flex-col justify-around items-start mr-10 my-36">
+            <span>
+              <p className="ml-[20px] text-[45px] text-primary-800">Paws to everyone!</p>
+            </span>
             <div className="flex flex-col justify-around items-center h-[35%]">
-              <span>
-                <p className="text-[45px] text-primary-700">Paws to everyone!</p>
-              </span>
-              <p className="font-walter text-[30px] mt-14">Welcome to</p>
+              <p className="font-walter text-[30px] mt-10">Welcome to</p>
               <img src={logo} alt="isologo" className="w-[413px] h-[100px]" />
+              <div className="flex flex-col mt-[20px]">
+                <h3 className="mb-5 text-[#232220CC] text-[16px] font-semibold">By PetDevs</h3>
+              </div>
             </div>
-            <div className="flex flex-col mt-[20px]">
-              <h3 className="mb-5 text-[#232220CC] text-[16px] font-semibold">By PetDevs</h3>
-            </div>
-            <div className="flex flex-col justify-evenly h-[50%] items-center">
-              <p className="w-[560px] text-[22px] text-center">
+            <div className="flex flex-col justify-between h-[25%] items-start ml-[20px]">
+              <p className="w-[560px] text-[22px]">
                 The social media for pets, where they are the main characters.
               </p>
               <LoginContent />

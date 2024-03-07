@@ -67,7 +67,7 @@ export default function PetCommentModal({
     <>
       <div className="fixed top-0 left-0 right-0 bottom-0 w-full bg-blackOpacity z-[1000]">
         <div
-          className={` bg-white md:max-w-[700px] min-h-screen overflow-auto md:min-h-0 md:m-auto md:my-24 md:rounded-3xl relative`}
+          className={` bg-white md:max-w-[700px] min-h-screen overflow-auto md:min-h-0 md:m-auto md:my-24 md:rounded-3xl relative animate-petModalOpen md:animate-appearOpen`}
         >
           <div className="mt-6 flex flex-col items-center gap-y-8">
             <div className="bg-gradient-to-r from-[#F06900] to-[#C31A02] w-44 h-1 rounded-full" />
@@ -77,9 +77,9 @@ export default function PetCommentModal({
             onClick={() => setIsModalOpen(false)}
             className="absolute top-[30px] right-6 text-[20px] border-[2px] border-solid border-black rounded-[50%] hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-150 cursor-pointer md:text-[25px]"
           />
-          <div className="relative flex flex-col justify-between px-2 min-h-[calc(100dvh-80px)] md:min-h-0">
+          <div className="relative flex flex-col justify-between px-2 min-h-[calc(100dvh-80px)] md:min-h-[calc(70dvh-80px)]">
             <div
-              className={`mt-6 relative mx-5 pr-6 max-h-[50dvh] md:max-h-[560px]  overflow-y-auto ${styles.scrollbarCustomLikes}`}
+              className={`mt-6 relative mx-5 pr-6 max-h-[75dvh] md:max-h-[55dvh]  overflow-y-auto ${styles.scrollbarCustomLikes}`}
             >
               {pets.length === 0 ? (
                 <div className="flex justify-center w-full items-center h-[100px]">
@@ -126,16 +126,16 @@ export default function PetCommentModal({
                 }
               }}
             >
-              <div className="w-full p-2 px-4 rounded-3xl text-body-lg bg-[#FBF0E7]">
+              <div className="w-full p-2 px-4 rounded-3xl text-body-lg bg-[#EAEAEA]">
                 <input
                   placeholder="Add a growl.."
                   value={commentsModal}
-                  className="min-w-[200px] w-[83%] text-body-lg outline-none bg-transparent"
+                  className="min-w-[200px] w-[83%] text-body-lg outline-none bg-transparent placeholder:text-[#00000090] placeholder:font-semibold"
                   onChange={(e) => setCommentsModal(e.target.value)}
                 />
               </div>
               <button
-                className="absolute right-4 top-2 text-body-lg text-secondary-800 font-bold hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-110"
+                className="absolute right-4 top-2 text-body-lg text-secondary-700 font-bold hover:transition-all hover:duration-[0.4s] hover:ease-in-out hover:scale-110"
                 onClick={(e) => {
                   e.preventDefault();
                   sendComment();

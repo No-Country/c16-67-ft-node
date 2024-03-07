@@ -50,3 +50,9 @@ export const getPublicationsByPetId = async (petId) => {
     throw Error(error.message);
   }
 };
+
+export const deletePetPublicationsById = async (petId) => {
+  return await axios
+    .put(`${API_URL_BASE}/api/v1/publication/deleted/${petId}`)
+    .catch((err) => console.log(err));
+};

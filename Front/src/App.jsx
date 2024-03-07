@@ -15,6 +15,7 @@ import Suggestions from './components/ui/navBar/suggestions/Suggestions';
 import Footer from './components/ui/navBar/Footer';
 import CreateFirstPet from './pages/CreateFirstPet';
 import { useNavigateContext } from './context/navigationContext';
+import Settings from './pages/Settings/Settings';
 
 export default function App() {
   // Get userId from useUserContext
@@ -37,6 +38,7 @@ export default function App() {
               <Route exact path="/profile/:id" element={<PetProfile />} />
               <Route exact path="/edit/profile" element={<ProfileEdit />} />
               <Route exact path="/menu" element={<Menu />} />
+              <Route exact path="/menu/settings" element={<Settings />} />
               <Route exact path="/saved" element={<Saved />} />
               <Route exact path="/search" element={<Search />} />
               <Route path="/create-first-pet" element={<CreateFirstPet />} />

@@ -58,6 +58,7 @@ export default function PetContainer({ tabActive }) {
         {feedData.map((publication, index) => (
           <PetCard
             key={index}
+            userIdDelete={publication.userId}
             postImage={publication.image_url}
             description={publication.description}
             petId={publication.petId}
@@ -70,7 +71,6 @@ export default function PetContainer({ tabActive }) {
             address={publication.address}
             saved={saved.find((savedPublication) => savedPublication.postId === publication.postId)}
             fetchSaved={fetchSaved}
-            tabActive={tabActive}
           />
         ))}
       </div>
