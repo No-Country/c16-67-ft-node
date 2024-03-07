@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useModalContext } from '../../../context/modalContext';
-import TextInput from '../TextInput';
-import Spinner from '../Spinner';
 import { FiEdit, FiX } from 'react-icons/fi';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
-import defaultProfile from '../../../assets/images/createPet.svg';
-import Modal from './Modal';
 import { useUserContext } from '../../../context/userContext';
-import { createPet } from '../../../service/pets/petCreation';
+import { setFormAndPostPet } from '../../../service/pets/petCreation';
 import { changeLastPet } from '../../../service/users/userService';
 import { validateImages } from '../../../service/utils/utilsService';
 import { ErrorMessage } from '../ErrorMessage';
+import Spinner from '../Spinner';
+import defaultProfile from '../../../assets/images/createPet.svg';
+import Modal from './Modal';
+import TextInput from '../TextInput';
 
 const PetModal = () => {
   const navigate = useNavigate();
@@ -27,42 +27,26 @@ const PetModal = () => {
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [errors, setErrors] = useState({ profilePhoto: '' });
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (event) => {
+    event.preventDefault();
 
-    const fileInput = document.getElementById('fileInput');
-    const userId = JSON.parse(localStorage.getItem('userId'));
-    fileInput.files[0];
     if (errors.profilePhoto === '') {
-      const payload = new FormData();
-      payload.append('name', name);
-      payload.append('username', username);
-      payload.append('age', age);
-      payload.append('description', descriptions);
-      payload.append('image', profilePhoto);
-      payload.append('userId', userId);
-
-      setIsLoading(true);
-
-      createPet(payload)
-        .then((response) => {
-          setActivePet(response.data.data);
-          changeLastPet(userId, response.data.data.petId).then(() => {
-            openModal({
-              description: 'Pet created successfully',
-              chooseModal: false
-            });
-            navigate('/');
-          });
-        })
-        .catch((error) => {
-          openModal({
-            description: `${error.response.data.message}`,
-            chooseModal: false,
-            error: true
-          });
-          setIsLoading(false);
-        });
+      setFormAndPostPet({
+        navigate,
+        changeLastPet,
+        setIsLoading,
+        setErrors,
+        setUsername,
+        setPetModalOpen,
+        setActivePet,
+        openModal,
+        username,
+        name,
+        age,
+        descriptions,
+        profilePhoto,
+        closeModal
+      });
     }
   };
 
