@@ -8,6 +8,7 @@ import { getPetById } from '../../service/pets/petService';
 import { getUserById } from '../../service/users/userService';
 import { getPublicationsByPetId } from '../../service/publications/publicationsService';
 import FollowButton from '../../components/ui/FollowButton';
+import noPostCat from '../../assets/images/noPostCat.png';
 
 export default function PetProfile() {
   const navigate = useNavigate();
@@ -109,8 +110,11 @@ export default function PetProfile() {
                 <p className="mt-4 text-[16px]">{pets.description}</p>
                 <div className="flex flex-col items-center mt-8 w-full">
                   {publications.length === 0 ? (
-                    <section className="flex justify-center h-[200px] p-4 shadow-lg bg-[#fafafa] font-semibold">
-                      <div className="flex items-center">There´s no publication yet</div>
+                    <section className="flex flex-col items-center justify-center p-4">
+                      <img src={noPostCat} alt="sad-cat" className="w-40 h-40 md:w-60 md:h-60" />
+                      <div className="flex items-center text-title-md mt-2 md:text-title-lg">
+                        You don´t have any posts yet.
+                      </div>
                     </section>
                   ) : (
                     <div className="grid grid-cols-2 gap-4 mb-[120px] justify-center lg:grid-cols-3">

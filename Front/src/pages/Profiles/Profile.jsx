@@ -11,7 +11,7 @@ import Modal from '../../components/ui/modal/Modal';
 import { getPetById, getPetsByUserId } from '../../service/pets/petService';
 import { getUserById } from '../../service/users/userService';
 import { getPublicationsByPetId } from '../../service/publications/publicationsService';
-import sadCat from '../../assets/images/sadCat.svg';
+import noPostCat from '../../assets/images/noPostCat.png';
 
 export default function Profile() {
   //INSTANCIAS
@@ -246,7 +246,7 @@ export default function Profile() {
                 <div className="flex flex-col items-center mt-8 w-full">
                   {publications.length === 0 ? (
                     <section className="flex flex-col items-center justify-center p-4">
-                      <img src={sadCat} alt="sad-cat" className="w-9 h-9 md:w-10 md:h-10" />
+                      <img src={noPostCat} alt="sad-cat" className="w-40 h-40 md:w-60 md:h-60" />
                       <div className="flex items-center text-title-md mt-2 md:text-title-lg">
                         You don´t have any posts yet.
                       </div>
