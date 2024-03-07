@@ -1,7 +1,6 @@
 import feedIcon from '../../../assets/images/feedIcon.svg';
 import chatIcon from '../../../assets/images/chat.svg';
 import searchIcon from '../../../assets/images/search.svg';
-import footIcon from '../../../assets/images/footIcon.svg';
 import notificationsIcon from '../../../assets/images/notifications.svg';
 import saveIcon from '../../../assets/images/save.svg';
 import settingsIcon from '../../../assets/images/settings.svg';
@@ -11,6 +10,11 @@ import styles from './NavbarDesktop.module.css';
 import Modal from '../modal/Modal';
 import { useModalContext } from '../../../context/modalContext';
 import Logout from '../../authentication/Logout';
+import FeedIcon from '../../../assets/components/FeedIcon';
+import SearchIcon from '../../../assets/components/SearchIcon';
+import FootIcon from '../../../assets/components/FootIcon';
+import SaveIcon from '../../../assets/components/SaveIcon';
+import SettingsIcon from '../../../assets/components/SettingsIcon';
 
 export default function NavbarDesktop({ active, pet }) {
   const navigate = useNavigate();
@@ -46,19 +50,19 @@ export default function NavbarDesktop({ active, pet }) {
           <ul className="mt-8">
             <li className={`${active === 'feed' ? `${styles.active}` : ''}`}>
               <NavLink to={'/'}>
-                <img src={feedIcon} className={`${styles.navImg}`} alt="Feed icon" />
+                <FeedIcon fill={`${active === 'feed' ? '#fff' : '#000'}`} />
                 <p className={`${active === 'feed' && `${styles.activeText}`}`}>Feed</p>
               </NavLink>
             </li>
             <li className={`${active === 'search' ? `${styles.active}` : ''}`}>
               <NavLink to={'/search'}>
-                <img src={searchIcon} className={`${styles.navImg}`} alt="Search icon" />
+                <SearchIcon fill={`${active === 'search' ? '#fff' : '#000'}`} />
                 <p className={`${active === 'search' && `${styles.activeText}`}`}>Search</p>
               </NavLink>
             </li>
             <li className={`${active === 'profile' ? `${styles.active}` : ''}`}>
               <NavLink to={'/profile'}>
-                <img src={footIcon} className={`${styles.navImg}`} alt="Profile icon" />
+                <FootIcon fill={`${active === 'profile' ? '#fff' : '#000'}`} />
                 <p className={`${active === 'profile' && `${styles.activeText}`}`}>Profile</p>
               </NavLink>
             </li>
@@ -84,16 +88,15 @@ export default function NavbarDesktop({ active, pet }) {
             </li>
             <li className={`${active === 'saved' ? `${styles.active}` : ''}`}>
               <NavLink to="/saved">
-                <img src={saveIcon} className={`${styles.navImg}`} alt="Saved icon" />
+                <SaveIcon fill={`${active === 'saved' ? '#fff' : '#000'}`} />
                 <p className={`${active === 'saved' && `${styles.activeText}`}`}>Saved</p>
               </NavLink>
             </li>
-            <li className={`${active === 'menu/settings' ? `${styles.active}` : ''}`}>
+            <li className={`${active === 'settings' ? `${styles.active}` : ''}`}>
               <NavLink to="/menu/settings">
-                <img src={settingsIcon} className={`${styles.navImg}`} alt="Settings icon" />
-                <p className={`${active === 'menu/settings' && `${styles.activeText}`}`}>
-                  Settings
-                </p>
+                {/* <img src={settingsIcon} className={`${styles.navImg}`} alt="Settings icon" /> */}
+                <SettingsIcon fill={`${active === 'settings' ? '#fff' : '#000'}`} />
+                <p className={`${active === 'settings' && `${styles.activeText}`}`}>Settings</p>
               </NavLink>
             </li>
             <div className="border-b border-neutral-300 mt-4" />
