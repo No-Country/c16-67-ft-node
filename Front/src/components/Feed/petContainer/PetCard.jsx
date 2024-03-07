@@ -11,14 +11,14 @@ import { useState, useEffect } from 'react';
 import { createPetComments, getPetCommentsById } from '../../../service/comments/commentsService';
 import Spinner from '../../ui/Spinner';
 import { useModalContext } from '../../../context/modalContext';
-import { Dropdown } from 'flowbite-react';
-import dropDown from '../../../assets/images/dropDown.png';
+
 import {
   deletePetReactionsById,
   getPetReactionsById,
   sendPetReactions
 } from '../../../service/reactions/reactionsService';
 import { deletePetPublicationsById } from '../../../service/publications/publicationsService';
+import DropDownMenu from '../../ui/DropdownMenu/DropDownMenu';
 
 export default function PetCard({
   postImage,
@@ -26,8 +26,8 @@ export default function PetCard({
   petName,
   profileImage,
   address,
-  userIdDelete,
   postId,
+  userIdDelete,
   saved,
   petUserName,
   fetchSaved,
@@ -219,26 +219,7 @@ export default function PetCard({
                 </div>
               </div>
               <FollowButton />
-              <Dropdown
-                label=""
-                dismissOnClick={false}
-                renderTrigger={() => (
-                  <img
-                    src={dropDown}
-                    alt="drop-down"
-                    className="cursor-pointer w-[20px] md:w-[23px]"
-                  />
-                )}
-              >
-                {userId === userIdDelete ? (
-                  <>
-                    <Dropdown.Item onClick={() => deletePublication()}>Delete</Dropdown.Item>
-                    <Dropdown.Item>Details</Dropdown.Item>
-                  </>
-                ) : (
-                  <Dropdown.Item>Details</Dropdown.Item>
-                )}
-              </Dropdown>
+              <DropDownMenu deletePublication={deletePublication} userIdDelete={userIdDelete} />
             </div>
             <div className="px-4 my-3 flex gap-x-2 md:col-[7/13] md:row-[2/3] h-full md:my-0 md:mb-4 items-center self-center md:border-b md:border-[#D7640B]">
               <span className="material-symbols-outlined">location_on</span>

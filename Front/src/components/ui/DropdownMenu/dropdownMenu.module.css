@@ -1,0 +1,15 @@
+.dropdown {
+  @apply rounded-lg;
+}
+
+.errorItem {
+  @apply text-[18px] md:text-[23px] text-black hover:bg-error-600 hover:text-white;
+}
+
+.detailsItem {
+  @apply text-[18px] md:text-[23px] text-black hover:bg-[#EAEAEA];
+}
+
+.editItem {
+  @apply text-[18px] md:text-[23px] text-black hover:bg-secondary-100;
+}
