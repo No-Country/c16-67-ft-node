@@ -4,7 +4,7 @@ import { FiEdit, FiX } from 'react-icons/fi';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../../context/userContext';
-import { setFormAndPostPet } from '../../../service/pets/petCreation';
+import { setFormAndPostPet } from '../../../service/pets/petService';
 import { changeLastPet } from '../../../service/users/userService';
 import { validateImages } from '../../../service/utils/utilsService';
 import { ErrorMessage } from '../ErrorMessage';
