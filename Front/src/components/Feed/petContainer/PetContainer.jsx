@@ -16,10 +16,6 @@ export default function PetContainer({ tabActive }) {
   const [isAutocompleteActive, setIsAutocompleteActive] = useState(false);
 
   const getDataFeed = () => {
-    getPublications(tabActive);
-  };
-
-  useEffect(() => {
     getPublications(tabActive)
       .then((data) => {
         setFeedData(data);
@@ -31,6 +27,10 @@ export default function PetContainer({ tabActive }) {
           error: true
         });
       });
+  };
+
+  useEffect(() => {
+    getDataFeed();
   }, [tabActive]);
 
   useEffect(() => {
