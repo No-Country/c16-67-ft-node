@@ -72,6 +72,7 @@ const ModalPost = ({ closeModal }) => {
           description: 'Publication created successfully',
           chooseModal: false
         });
+        closeModal();
       })
       .catch(() => {
         openModal({

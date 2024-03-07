@@ -11,7 +11,6 @@ import { useState, useEffect } from 'react';
 import { createPetComments, getPetCommentsById } from '../../../service/comments/commentsService';
 import Spinner from '../../ui/Spinner';
 import { useModalContext } from '../../../context/modalContext';
-import Modal from '../../ui/modal/Modal';
 import { Dropdown } from 'flowbite-react';
 import dropDown from '../../../assets/images/dropDown.png';
 import {
@@ -27,13 +26,14 @@ export default function PetCard({
   petName,
   profileImage,
   address,
+  userIdDelete,
   postId,
   saved,
   petUserName,
   fetchSaved,
   type
 }) {
-  const { openModal, closeModal, modalTextState } = useModalContext();
+  const { openModal, closeModal } = useModalContext();
   const [seeMore, setSeeMore] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -185,7 +185,6 @@ export default function PetCard({
           profileImage={profileImage}
         />
       )}
-      {modalTextState.isOpen && <Modal />}
       {isVisible && (
         <div className="grid place-items-center md:px-4">
           <div className="mb-4 md:grid md:grid-cols-12 md:h-[360px] md:shadow-md md:rounded-2xl auto-rows-fr max-w-[768px] md:border mx-auto w-full">
@@ -220,17 +219,26 @@ export default function PetCard({
                 </div>
               </div>
               <FollowButton />
-              {userId && (
-                <Dropdown
-                  label=""
-                  dismissOnClick={false}
-                  renderTrigger={() => (
-                    <img src={dropDown} alt="drop-down" className="cursor-pointer w-[25px]" />
-                  )}
-                >
-                  <Dropdown.Item onClick={() => deletePublication()}>Delete</Dropdown.Item>
-                </Dropdown>
-              )}
+              <Dropdown
+                label=""
+                dismissOnClick={false}
+                renderTrigger={() => (
+                  <img
+                    src={dropDown}
+                    alt="drop-down"
+                    className="cursor-pointer w-[20px] md:w-[23px]"
+                  />
+                )}
+              >
+                {userId === userIdDelete ? (
+                  <>
+                    <Dropdown.Item onClick={() => deletePublication()}>Delete</Dropdown.Item>
+                    <Dropdown.Item>Details</Dropdown.Item>
+                  </>
+                ) : (
+                  <Dropdown.Item>Details</Dropdown.Item>
+                )}
+              </Dropdown>
             </div>
             <div className="px-4 my-3 flex gap-x-2 md:col-[7/13] md:row-[2/3] h-full md:my-0 md:mb-4 items-center self-center md:border-b md:border-[#D7640B]">
               <span className="material-symbols-outlined">location_on</span>
