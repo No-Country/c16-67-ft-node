@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Change from '../Settings/ChangeAccount';
 import Privacy from '../Settings/Privacy';
 import ReportAnIssue from '../Settings/ReportAnIssue';
@@ -6,15 +6,12 @@ import HowItWorks from '../Settings/HowItWorks';
 import Contaccenter from '../Settings/Contact';
 import arrow from '../../assets/images/arrow.svg';
 import arrowleft from '../../assets/images/arrowleft.svg';
+import { useNavigateContext } from '../../context/navigationContext';
 
 // Define un componente de botón de menú
 const MenuButton = ({ label, onClick, isActive }) => (
   <button
-    className={`text-sm font-bold md:font-medium px-8 py-4 w-full flex items-center justify-between ${
-      isActive
-        ? 'bg-gradient-to-b from-white to-[#FBF0E7]'
-        : 'hover:bg-gradient-to-b hover:from-white hover:to-[#FBF0E7]'
-    }`}
+    className={`text-sm font-bold md:font-medium px-8 py-4 w-full flex items-center justify-between ${isActive ? 'bg-gradient-to-b from-white to-[#FBF0E7]' : 'hover:bg-gradient-to-b hover:from-white hover:to-[#FBF0E7]'}`}
     onClick={onClick}
   >
     <span
@@ -32,6 +29,12 @@ const MenuButton = ({ label, onClick, isActive }) => (
 
 // Define el componente principal de Configuración
 export default function Settings() {
+  const { setActive } = useNavigateContext();
+
+  useEffect(() => {
+    setActive('settings');
+  }, []);
+
   const [currentPage, setCurrentPage] = useState(null);
 
   const handleButtonClick = (page) => {
@@ -135,24 +138,3 @@ export default function Settings() {
     </div>
   );
 }
-
-const renderContent = (currentPage) => {
-  switch (currentPage) {
-    case 'privacy':
-      return <Privacy />;
-    case 'change':
-      return <Change />;
-    case 'delete':
-      return <p>Content for Delete your account</p>;
-    case 'pause':
-      return <p>Content for Pause your account</p>;
-    case 'Report an issue':
-      return <ReportAnIssue />;
-    case 'How to use app':
-      return <HowItWorks />;
-    case 'Contact center':
-      return <Contaccenter />;
-    default:
-      return null;
-  }
-};
