@@ -1,66 +1,53 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useModalContext } from '../../../context/modalContext';
-import TextInput from '../TextInput';
-import Spinner from '../Spinner';
 import { FiEdit, FiX } from 'react-icons/fi';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
+import { useUserContext } from '../../../context/userContext';
+import { setFormAndPostPet } from '../../../service/pets/petService';
+import { changeLastPet } from '../../../service/users/userService';
+import { validateImages } from '../../../service/utils/utilsService';
+import { ErrorMessage } from '../ErrorMessage';
+import Spinner from '../Spinner';
 import defaultProfile from '../../../assets/images/createPet.svg';
 import Modal from './Modal';
-import { useUserContext } from '../../../context/userContext';
-import { createPet } from '../../../service/pets/petService';
-import { changeLastPet } from '../../../service/users/userService';
+import TextInput from '../TextInput';
 
 const PetModal = () => {
+  const navigate = useNavigate();
   const { petModalState, modalTextState, closeModal, openModal } = useModalContext();
+  const { setActivePet } = useUserContext();
   const { isOpen, xBtnPetModal } = petModalState;
   const [petModalOpen, setPetModalOpen] = useState(false);
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [descriptions, setDescriptions] = useState('');
   const [username, setUsername] = useState('');
   const [profilePhoto, setProfilePhoto] = useState(null);
-  const { setActivePet } = useUserContext();
+  const [errors, setErrors] = useState({ profilePhoto: '' });
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const fileInput = document.getElementById('fileInput');
-    fileInput.files[0];
-    const userId = JSON.parse(localStorage.getItem('userId'));
+  const onSubmit = (event) => {
+    event.preventDefault();
 
-    const payload = new FormData();
-    payload.append('name', name);
-    payload.append('username', username);
-    payload.append('age', age);
-    payload.append('description', descriptions);
-    payload.append('image', profilePhoto);
-    payload.append('userId', userId);
-
-    setIsLoading(true);
-
-    createPet(payload)
-      .then((response) => {
-        setActivePet(response.data.data);
-        changeLastPet(userId, response.data.data.petId)
-          .then(() => {
-            openModal({
-              description: 'Pet created successfully',
-              chooseModal: false
-            });
-            navigate('/');
-          })
-          .catch((error) => console.error(error));
-      })
-      .catch(() => {
-        openModal({
-          description: 'An error has occurred',
-          chooseModal: false,
-          error: true
-        });
-        setIsLoading(false);
+    if (errors.profilePhoto === '') {
+      setFormAndPostPet({
+        navigate,
+        changeLastPet,
+        setIsLoading,
+        setErrors,
+        setUsername,
+        setPetModalOpen,
+        setActivePet,
+        openModal,
+        username,
+        name,
+        age,
+        descriptions,
+        profilePhoto,
+        closeModal
       });
+    }
   };
 
   const handleUploadButtonClick = () => {
@@ -70,6 +57,7 @@ const PetModal = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    validateImages(file, setErrors);
     const imgElement = document.getElementById('profilePhoto');
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -124,6 +112,7 @@ const PetModal = () => {
                 id="profilePhoto"
               />
             </div>
+            <ErrorMessage message={errors.profilePhoto}></ErrorMessage>
             <div className="px-6 md:px-14 pb-6">
               <TextInput
                 placeholderText={'Pet´s name'}
@@ -144,7 +133,7 @@ const PetModal = () => {
               <TextInput
                 placeholderText={'Age'}
                 input={'input'}
-                val={age}
+                value={age}
                 onChange={(e) => {
                   setAge(e.target.value);
                 }}
