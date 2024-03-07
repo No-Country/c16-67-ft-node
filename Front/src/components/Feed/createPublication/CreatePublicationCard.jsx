@@ -3,7 +3,7 @@ import ModalPost from './ModalPost';
 import defaultProfile from '../../../assets/images/defaultProfile.jpg';
 import { useUserContext } from '../../../context/userContext';
 
-const CreatePublicationCard = ({ pet }) => {
+const CreatePublicationCard = ({ pet, getDataFeed }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const { getPet } = useUserContext();
 
@@ -64,7 +64,7 @@ const CreatePublicationCard = ({ pet }) => {
       </div>
 
       {/* Renderiza el modal si isModalOpen es true */}
-      {isModalOpen && <ModalPost closeModal={handleCloseModal} />}
+      {isModalOpen && <ModalPost closeModal={handleCloseModal} getDataFeed={getDataFeed} />}
     </div>
   );
 };
