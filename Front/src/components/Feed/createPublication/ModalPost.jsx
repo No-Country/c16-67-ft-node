@@ -6,7 +6,7 @@ import addPet from '../../../assets/images/addPet.svg';
 import { FiX } from 'react-icons/fi';
 import { postPublication } from '../../../service/publications/publicationsService';
 
-const ModalPost = ({ closeModal }) => {
+const ModalPost = ({ closeModal, getDataFeed }) => {
   const { openModal } = useModalContext();
   const [isLoading, setIsLoading] = useState(false);
   const [address, setAddress] = useState(false);
@@ -30,14 +30,11 @@ const ModalPost = ({ closeModal }) => {
   };
 
   const handleImageChange = (event) => {
-    if (event.target.files[0].type === 'image/png' || event.target.files[0].type === 'image/jpeg') {
-      console.log('Valid file type.');
-    } else {
+    if (event.target.files[0].type !== 'image/png' && event.target.files[0].type !== 'image/jpeg') {
       console.error('Invalid file type.');
       return;
     }
     setFormData({ ...formData, image: event.target.files[0] });
-    console.log(event.target.files[0]);
     const reader = new FileReader();
     reader.onload = (e) => {
       inputFileRef.current.src = e.target.result;
@@ -60,18 +57,17 @@ const ModalPost = ({ closeModal }) => {
 
     if (formData.description === '' || formData.image === null || formData.address === '') {
       setIsLoading(false);
-      console.log('holis');
       return;
     }
 
     postPublication(formDataReq)
-      .then((response) => {
-        console.log(response);
+      .then(async () => {
         setIsLoading(false);
         openModal({
           description: 'Publication created successfully',
           chooseModal: false
         });
+        await getDataFeed();
         closeModal();
       })
       .catch(() => {
