@@ -42,6 +42,7 @@ export const createPet = async (formData) => {
 };
 
 export const setFormAndPostPet = ({
+  name,
   username,
   age,
   descriptions,
