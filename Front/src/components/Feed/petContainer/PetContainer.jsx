@@ -55,9 +55,9 @@ export default function PetContainer({ tabActive }) {
           getDataFeed={getDataFeed}
           setIsAutocompleteActive={setIsAutocompleteActive}
         />
-        {feedData.map((publication, index) => (
+        {feedData.map((publication) => (
           <PetCard
-            key={index}
+            key={publication.postId}
             userIdDelete={publication.userId}
             postImage={publication.image_url}
             description={publication.description}
