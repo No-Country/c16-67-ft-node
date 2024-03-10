@@ -1,0 +1,17 @@
+.scrollbarCustom::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbarCustom::-webkit-scrollbar-thumb {
+  @apply bg-gradient-to-b from-[#F06900] to-[#C31A02];
+  border-radius: 3px;
+}
+
+.scrollbarCustomLikes::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbarCustomLikes::-webkit-scrollbar-thumb {
+  @apply bg-gradient-to-b from-[#F06900] to-[#C31A02];
+  border-radius: 4px;
+}

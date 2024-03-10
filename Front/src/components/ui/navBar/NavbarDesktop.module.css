@@ -1,0 +1,29 @@
+.desktop {
+  li {
+    @apply px-6 h-[56px] flex items-center rounded-full mr-2 hover:bg-primary-100;
+
+    p {
+      @apply sm:text-title-md;
+    }
+  }
+
+  .activeText {
+    @apply md:text-title-lg text-white;
+  }
+
+  a {
+    @apply flex gap-x-2 items-center w-full;
+  }
+
+  span {
+    @apply sm:text-2xl lg:text-5xl;
+  }
+}
+
+.navImg {
+  @apply sm:w-6 sm:h-6 md:w-[30px] md:h-[30px];
+}
+
+.active {
+  @apply bg-primary-700 hover:bg-primary-700 !important;
+}

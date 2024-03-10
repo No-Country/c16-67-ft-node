@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
-const API_URL_BASE = `${import.meta.env.VITE_SERVER_PRODUCTION}`;
+import { getPetById } from '../service/pets/petService';
+import { changeLastPet } from '../service/users/userService';
 
 const UserContext = createContext();
 
@@ -12,7 +12,10 @@ export const UserProvider = ({ children }) => {
   const [userId, setUserId] = useState('');
   const [petId, setPetId] = useState('');
   const [petName, setPetName] = useState('');
+  const [petAge, setPetAge] = useState('');
+  const [petUserName, setPetUserName] = useState('');
   const [petImage, setPetImage] = useState('');
+  const [petDescription, setPetDescription] = useState('');
 
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem('userId'));
@@ -26,22 +29,16 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const loginContext = (userId, last_pet) => {
-    console.log(userId);
     setUserId(userId);
     localStorage.setItem('userId', JSON.stringify(userId));
-    console.log(last_pet);
     if (last_pet === null) {
       console.log('No pet');
+      localStorage.setItem('pet', JSON.stringify(last_pet));
       return;
     } else {
-      axios
-        .get(`${API_URL_BASE}/api/v1/pet/${last_pet}`)
-        .then((response) => {
-          setActivePet(response.data.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      getPetById(last_pet).then((response) => {
+        setActivePet(response.data.data);
+      });
     }
   };
 
@@ -52,23 +49,41 @@ export const UserProvider = ({ children }) => {
     setPetId('');
     setPetImage('');
     setPetName('');
-    axios.put(`${API_URL_BASE}/api/v1/user/lastpet/${userId}`, { petId: petId }).catch((error) => {
-      console.log(error);
-    });
+    setPetAge('');
+    setPetUserName('');
+    setPetDescription('');
+    changeLastPet(userId, petId);
   };
 
   const setActivePet = (pet) => {
     setPetId(pet.petId);
     setPetName(pet.name);
+    setPetUserName(pet.username);
+    setPetAge(pet.age);
     setPetImage(pet.image_url);
+    setPetDescription(pet.description);
     localStorage.setItem(
       'pet',
-      JSON.stringify({ petId: pet.petId, name: pet.name, image_url: pet.image_url })
+      JSON.stringify({
+        petId: pet.petId,
+        name: pet.name,
+        username: pet.username,
+        age: pet.age,
+        image_url: pet.image_url,
+        description: pet.description
+      })
     );
   };
 
   const getPet = () => {
-    return { petId: petId, name: petName, image_url: petImage };
+    return {
+      petId: petId,
+      name: petName,
+      age: petAge,
+      username: petUserName,
+      image_url: petImage,
+      description: petDescription
+    };
   };
 
   return (
@@ -81,7 +96,10 @@ export const UserProvider = ({ children }) => {
         userId,
         petId,
         petName,
-        petImage
+        petAge,
+        petUserName,
+        petImage,
+        petDescription
       }}
     >
       {children}

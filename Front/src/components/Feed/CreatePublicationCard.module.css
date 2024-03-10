@@ -1,9 +1,0 @@
-.form {
-    li {
-        @apply px-6 cursor-pointer;
-    }
-}
-
-.active {
-    @apply bg-primary-200 text-white;
-}

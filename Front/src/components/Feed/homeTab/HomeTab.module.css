@@ -1,0 +1,11 @@
+.active {
+  @apply border-primary-600 border-b-2 font-semibold text-primary-700;
+}
+
+.inactive {
+  @apply border-gray-300 border-b-2 opacity-60;
+}
+
+.tab {
+  @apply flex-grow basis-0 text-center h-full flex items-center justify-center cursor-pointer text-body-md md:text-headline-sm;
+}

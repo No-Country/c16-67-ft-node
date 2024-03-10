@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/ui/Spinner';
 import { useModalContext } from '../context/modalContext';
-import Modal from '../components/Modal';
+import Modal from '../components/ui/modal/Modal';
 import { useUserContext } from '../context/userContext';
 import { useNavigateContext } from '../context/navigationContext';
 
 const API_URL_BASE = import.meta.env.VITE_SERVER_PRODUCTION;
 
 function PublicationForm() {
-  const { openModal, modalState } = useModalContext();
+  const { openModal, modalTextState } = useModalContext();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   //Obtengo id de usuario y mascota de local storage
@@ -73,8 +73,8 @@ function PublicationForm() {
   return (
     <>
       {isLoading && <Spinner />}
-      {modalState.isOpen && <Modal />}
-      <main className="bg-slate-100 h-[100vh]">
+      {modalTextState.isOpen && <Modal />}
+      <main className="bg-slate-100 h-[100dvh]">
         <form className="space-y-4 max-w-md mx-auto">
           <div className="pt-20">
             <div className="flex justify-center">
