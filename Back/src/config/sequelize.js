@@ -11,9 +11,12 @@ const sequelize = new Sequelize(
     host: config.dbHost,
     dialect: 'postgres',
     logging: false, // set to console.log to see the raw SQL queries,
-    ssl: {
-      rejectUnauthorized: false, // This is required if you're using a self-signed certificate
-    },
+    dialectOptions: {
+      ssl: {
+        require: true,
+      }
+    }
+
   }
 )
 
