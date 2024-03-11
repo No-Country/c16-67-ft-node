@@ -26,4 +26,6 @@ sequelize.sync({ alter: true }).then(() => {
   });
 });
 
-module.exports = { app };
+module.exports = (req, res) => {
+  res.status(200).send("¡Hola, mundo!");
+};
