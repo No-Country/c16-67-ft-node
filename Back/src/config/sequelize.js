@@ -4,14 +4,15 @@ const setupModels = require('../database/index');
 
 
 const sequelize = new Sequelize(
-  config.dbName,
-  config.dbUser,
-  config.dbPassword,
-  {
-    host: config.dbHost,
-    dialect: 'postgres',
-    logging: false, // set to console.log to see the raw SQL queries,
-  }
+    config.dbName,
+    config.dbUser,
+    config.dbPassword,
+    {
+        host: config.dbHost,
+        port: config.dbPort,
+        dialect: 'postgres',
+        logging: false, // set to console.log to see the raw SQL queries,
+    }
 )
 
 setupModels(sequelize)
