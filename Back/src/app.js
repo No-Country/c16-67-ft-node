@@ -7,7 +7,10 @@ const routerApi = require('./routes');
 const documentation = require("./utils/documentation.json");
 
 //MIDDLEWARES
-app.use(cors());
+app.use(cors({
+    "Access-Control-Allow-Credentials": true,
+    "Access-Control-Allow-Headers": "['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']"
+}));
 app.use(express.json());
 app.use(morgan('dev'));
 
@@ -19,4 +22,4 @@ app.get('/', (req, res) => {
 });
 
 
-module.exports = {app}
+module.exports = { app }
