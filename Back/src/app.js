@@ -7,13 +7,7 @@ const routerApi = require('./routes');
 const documentation = require("./utils/documentation.json");
 
 //MIDDLEWARES
-app.use(cors({
-    "origin": "*",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
-    "optionsSuccessStatus": 204,
-    "credentials": true
-}));
+app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
