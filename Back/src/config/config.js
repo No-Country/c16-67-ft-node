@@ -7,7 +7,6 @@ const config = {
     dbHost: process.env.DB_HOST,
     dbName: process.env.DB_NAME,
     dbPort: process.env.DB_PORT,
-    urlDb: process.env.URL_DB,
     // redis
     urlRedis: process.env.REDIS_URL || 'redis://localhost:6379',
 
