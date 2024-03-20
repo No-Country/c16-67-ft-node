@@ -1,4 +1,3 @@
-
 ![Group 196 (2)](https://github.com/No-Country/c16-67-ft-node/assets/159343463/f309e830-5659-4c6b-9ef4-1c566987b905)
 
 ## Tecnologías Utilizadas
@@ -33,13 +32,17 @@ Instrucciones paso a paso sobre cómo ejecutar el proyecto localmente.
 git clone <URL del repositorio>
 cd <nombre del directorio del proyecto>
 ```
+
 ### Backend
+
 ```bash
 cd Back
 npm install
 npm start
-````
+```
+
 ### Frontend
+
 ```bash
 cd Front
 npm install
@@ -47,6 +50,7 @@ npm run dev
 ```
 
 ## Base de datos
+
 Necesitas crear una base de datos en PostgreSQL para usar tu datos en la variable de entorno y permitir conectarte
 
 ## Variables de Entorno
@@ -77,6 +81,6 @@ VITE_LOCATION_IQ_API_KEY = tuKeyDeLocationApi
 ```
 
 ## Deploys
-- Server deploy: [Render + ElephantSQL](https://server-petgram.onrender.com/)
-- App deploy: [Vercel](https://pet-gram.vercel.app/)
 
+- Server deploy: [Koyeb + ElephantSQL](https://petgram-petgram.koyeb.app/)
+- App deploy: [Vercel](https://pet-gram.vercel.app/)
