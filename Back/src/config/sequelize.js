@@ -9,8 +9,9 @@ const sequelize = new Sequelize(
     config.dbPassword,
     {
         host: config.dbHost,
+        post: config.dbPort,
         dialect: 'postgres',
-        logging: false, // set to console.log to see the raw SQL queries
+        logging: false, // set to console.log to see the raw SQL queries,
     }
 )
 

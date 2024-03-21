@@ -11,10 +11,10 @@ const config = {
     urlRedis: process.env.REDIS_URL || 'redis://localhost:6379',
 
     //Cloudinary
-    cloud_name:process.env.CLOUD_NAME,
-    api_key:process.env.API_KEY,
-    api_secret:process.env.API_SECRET,
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
 }
 
 
-module.exports = {config};
+module.exports = { config };
